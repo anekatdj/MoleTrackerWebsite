@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-
-namespace DTO.LoginDTOS
+namespace MoleTrackerWebsite.Models
 {
-    public class LoginInfoDTO
+    public class LogInInfo
     {
         public string Username { get; set; }
         public string Password { get; set; }
