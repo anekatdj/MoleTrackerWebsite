@@ -2,7 +2,7 @@
 
 namespace LogicLayer
 {
-    public class Class1
+    public class LogInController : ILogInController
     {
     }
 }
