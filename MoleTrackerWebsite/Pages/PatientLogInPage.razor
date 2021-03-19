@@ -1,4 +1,19 @@
-﻿<h3>PatientLogInPage</h3>
+﻿@page "/patientlogin"
+@using DTO
+
+@inject 
+
+<div class="wrapper fadeInDown" style="margin-top: 10%">
+    <div id="formContent">
+        <h1>Mole Watcher</h1>
+        <h2>Patient login</h2>
+        
+        <EditForm Model="@LoginInfoDTO"></EditForm>
+
+    </div>
+    </div>
+
+
 
 @code {
 
