@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DTO.CollectionDTOS;
+using DTO.LoginDTOS;
 
-namespace DataClasses.DTO.MISCDTOS
+namespace DTO.MISCDTOS
 {
     public class PatientDataDTO
     {
