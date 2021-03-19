@@ -1,0 +1,75 @@
+﻿@page "/login"
+@*@using LogicLayer*@
+@using DTO
+
+@inject NavigationManager NavManager
+@inject ILoginManager login
+@inject LoginData loginData
+@inject sessionData SesData;
+
+@layout EmptyLayout
+
+<link href="css/Lasse.css" rel="stylesheet" />
+
+
+
+<div class="wrapper fadeInDown" style="margin-top: 10%;">
+    <div id="formContent">
+        <h3>Login</h3>
+
+        <EditForm Model="@loginData" OnValidSubmit="@HandleValidSubmit">
+
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <InputText id="name" @bind-Value="loginData.UserName" />
+            <InputText id="pass" @bind-Value="loginData.password" />
+
+            <button style="margin-top: 20px; margin-bottom: 10px;" type="submit">Submit</button>
+        </EditForm>
+    </div>
+
+    @if (loginFail)
+    {
+        <div>
+            <span style="margin: 100px; color: red;">
+                Loginet var ugyldigt prøv igen.
+            </span>
+        </div>
+        @foreach (var VARIABLE in errors)
+        {
+            <div>
+                <span style="margin: 100px; color: red;">
+                    @VARIABLE
+                </span>
+            </div>
+        }
+
+    }
+
+</div>
+
+
+@code {
+    private List<string> errors = new List<string>();
+
+    private bool loginFail = false;
+
+    private void HandleValidSubmit()
+    {
+
+        if (login.login(loginData))
+        {
+            SesData.LoggedIn = true;
+            SesData.UseID = 1;
+
+
+            NavManager.NavigateTo("/");
+        }
+        else
+        {
+            loginFail = true;
+            errors.Add("YOOOOOO");
+        }
+    }
+}
