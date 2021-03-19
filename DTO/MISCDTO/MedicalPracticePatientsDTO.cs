@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DTO.LoginDTO;
 
-namespace DataClasses.DTO
+namespace DTO.MISCDTO
 {
     public class MedicalPracticePatientsDTO
     {

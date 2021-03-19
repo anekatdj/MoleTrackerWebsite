@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataClasses.DTO
+namespace DTO.PictureDTO
 {
     public class PostPictureDTO
     {
