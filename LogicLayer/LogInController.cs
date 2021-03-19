@@ -1,4 +1,5 @@
 ﻿using System;
+using LogicLayer.Interfaces;
 
 namespace LogicLayer
 {
