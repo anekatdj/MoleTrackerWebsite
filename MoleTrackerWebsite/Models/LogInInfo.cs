@@ -10,11 +10,11 @@ namespace MoleTrackerWebsite.Models
     {
         [Required]
         [MinLength(1, ErrorMessage = "Username is too short")]
-        [StringLength(10, ErrorMessage = "Name is too long.")]
+        [StringLength(10, ErrorMessage = "Username is too long.")]
         public string Username { get; set; }
 
         [Required]
-        [MinLength(1, ErrorMessage = "password is too short")]
+        [MinLength(1, ErrorMessage = "Password is too short")]
         public string Password { get; set; }
     }
 }
