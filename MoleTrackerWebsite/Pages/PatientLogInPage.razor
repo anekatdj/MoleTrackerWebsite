@@ -1,14 +1,25 @@
 ﻿@page "/patientlogin"
-@using DTO
 
-@inject 
+@using DTO.LoginDTOS
+
+@inject LoginInfoDTO loginInfoDTO
 
 <div class="wrapper fadeInDown" style="margin-top: 10%">
     <div id="formContent">
         <h1>Mole Watcher</h1>
         <h2>Patient login</h2>
         
-        <EditForm Model="@LoginInfoDTO"></EditForm>
+        <EditForm Model="@loginInfoDTO">
+            
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
+            
+            <InputText id="Name" @bind-Value="loginInfoDTO.Username"/>
+            <InputText id="Password" @bind-Value="loginInfoDTO.Password"/>
+            
+            <button style="margin-top: 20px; margin-bottom: 10px; color: green" type="submit">Log på</button>
+
+        </EditForm>
 
     </div>
     </div>
@@ -16,5 +27,6 @@
 
 
 @code {
+    private bool LoginFailed = false;
 
 }
