@@ -1,28 +1,32 @@
 ﻿@page "/patientlogin"
 
-@using DTO.LoginDTOS
+@using Models
 
-@inject LoginInfoDTO loginInfoDTO
+@inject LogInInfo loginInfo
 
-<div class="wrapper fadeInDown" style="margin-top: 10%">
+<div class="align-content-center" style="margin-top: 10%">
     <div id="formContent">
         <h1>Mole Watcher</h1>
         <h2>Patient login</h2>
-        
-        <EditForm Model="@loginInfoDTO">
-            
-            <DataAnnotationsValidator/>
-            <ValidationSummary/>
-            
-            <InputText id="Name" @bind-Value="loginInfoDTO.Username"/>
-            <InputText id="Password" @bind-Value="loginInfoDTO.Password"/>
-            
-            <button style="margin-top: 20px; margin-bottom: 10px; color: green" type="submit">Log på</button>
+
+        <EditForm Model="@loginInfo">
+
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div>
+                <InputText id="Name" @bind-Value="loginInfo.Username" />
+            </div>
+            <div>
+                <InputText id="Password" @bind-Value="loginInfo.Password" />
+            </div>
+
+            <button style="margin-top: 20px; margin-bottom: 10px; background-color: greenyellow" type="submit">Log på</button>
 
         </EditForm>
 
     </div>
-    </div>
+</div>
 
 
 
