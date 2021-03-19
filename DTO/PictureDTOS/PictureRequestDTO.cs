@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataClasses.DTO
+namespace DTO.PictureDTOs
 {
     public class PictureRequestDTO
     {
