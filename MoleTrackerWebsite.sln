@@ -5,13 +5,11 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoleTrackerWebsite", "MoleTrackerWebsite\MoleTrackerWebsite.csproj", "{8375AF9A-946C-4B9E-A959-62FBA487DF12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{300FD9E0-CA3F-4AD0-B1E5-52F904E8C6DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{300FD9E0-CA3F-4AD0-B1E5-52F904E8C6DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{E93447DD-D9F8-41E6-AD6D-2353C02CA0C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{E93447DD-D9F8-41E6-AD6D-2353C02CA0C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationLayer", "PresentationLayer\PresentationLayer.csproj", "{D2D53262-DB82-4872-95F7-B5DB2805CF8C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{6890EA9C-0A0B-4EBE-9E0C-2481AE45EDC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{6890EA9C-0A0B-4EBE-9E0C-2481AE45EDC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +29,6 @@ Global
 		{E93447DD-D9F8-41E6-AD6D-2353C02CA0C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E93447DD-D9F8-41E6-AD6D-2353C02CA0C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E93447DD-D9F8-41E6-AD6D-2353C02CA0C1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D2D53262-DB82-4872-95F7-B5DB2805CF8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D2D53262-DB82-4872-95F7-B5DB2805CF8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D2D53262-DB82-4872-95F7-B5DB2805CF8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D2D53262-DB82-4872-95F7-B5DB2805CF8C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6890EA9C-0A0B-4EBE-9E0C-2481AE45EDC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6890EA9C-0A0B-4EBE-9E0C-2481AE45EDC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6890EA9C-0A0B-4EBE-9E0C-2481AE45EDC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
