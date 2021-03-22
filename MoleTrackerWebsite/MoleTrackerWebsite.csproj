@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\css\CenterAreaStyle.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataAccessLayer.csproj" />
     <ProjectReference Include="..\DTO\DTO.csproj" />
     <ProjectReference Include="..\LogicLayer\BusinessLogicLayer.csproj" />

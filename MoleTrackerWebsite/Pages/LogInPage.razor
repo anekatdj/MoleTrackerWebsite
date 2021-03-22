@@ -4,24 +4,54 @@
 
 @inject NavigationManager NavManager
 
-    <link href="CenterAreaStyle.css" rel="stylesheet" />
+<link href="css/CenterAreaStyle.css" rel="stylesheet" />
 
 
-    <div class="wrapper fadeInDown">
-        <div id="formContent">
-            <h3>LoginPortal</h3>
-
-            <button @onclick="NavigateToPatientLogInPage" style="background-color: cornflowerblue; border-radius: 8px; margin-top: 20px; margin-bottom: 10px" type="submit">
+<div class="wrapper fadeInDown" style="margin-top: 10%">
+    <div id="formContent">
+        <h1>LoginPortal</h1>
+        <div>
+            <button @onclick="NavigateToPatientLogInPage" style="background-color: cornflowerblue;
+        color: white;
+        border-radius: 8px;
+        font-size: 20px;
+        margin-top: 20px;
+        margin-bottom: 10px" type="submit">
                 Patient Login
             </button>
         </div>
+        
+        <div>
+            <button @onclick="NavigateToMedLogInPage" style="background-color: firebrick;
+        color: white;
+        border-radius: 8px;
+        font-size: 20px;
+        margin-top: 20px;
+        margin-bottom: 10px" type="submit">
+                Medical Login
+            </button>
+        </div>
+        
+
+        <div class="checkbox d-inline-block">
+            <label ></label>
+
+
+
+        </div>
+
     </div>
-    @*<button style="margin-top: 20px; margin-bottom: 10px; background-color: greenyellow" type="submit">Log på</button>*@
+</div>
+@*<button style="margin-top: 20px; margin-bottom: 10px; background-color: greenyellow" type="submit">Log på</button>*@
 
-    @code {
+@code {
 
-        private void NavigateToPatientLogInPage()
-        {
-            NavManager.NavigateTo("/patientLogin");
-        }
+    private void NavigateToPatientLogInPage()
+    {
+        NavManager.NavigateTo("/patientLogin");
     }
+
+    private void NavigateToMedLogInPage()
+    {
+    }
+}
