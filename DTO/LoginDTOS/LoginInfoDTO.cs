@@ -9,5 +9,14 @@ namespace DTO.LoginDTOS
     {
         public string Username { get; set; }
         public string Password { get; set; }
+
+        /// <summary>
+        /// TEST
+        /// </summary>
+        public LoginInfoDTO()
+        {
+            Username = "121212-1212";
+            Password = "kodeord";
+        }
     }
 }
