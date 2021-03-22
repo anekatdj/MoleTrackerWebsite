@@ -3,6 +3,13 @@
     display: inline-block;
 }
 
+.form-group {
+    display: block !important;
+    margin: 0 auto !important;
+    max-width: 90% !important;
+    margin-bottom: 1% !important;
+}
+
 
 /* BASIC */
 
