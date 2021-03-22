@@ -1,8 +1,38 @@
-﻿@page "/patLogin"
+﻿@page "/patientlogin"
 
-<h3>PatientLogInPage</h3>
+@using Models
+
+@inject LogInInfo loginInfo
+
+<div class="align-content-center" style="margin-top: 10%">
+    <div id="formContent">
+        <h1>Mole Watcher</h1>
+        <h2>Patient login</h2>
+
+        <EditForm Model="@loginInfo">
+
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div>
+                <InputText id="Name" @bind-Value="loginInfo.Username"/>
+            </div>
+
+            <div>
+                <InputText id="Password" @bind-Value="loginInfo.Password" />
+            </div>
+
+            <button style="margin-top: 20px; margin-bottom: 10px; background-color: greenyellow" type="submit">Log på</button>
+
+        </EditForm>
+
+    </div>
+</div>
+
+
 
 
 @code {
+    private bool LoginFailed = false;
 
 }

@@ -1,11 +1,14 @@
 ﻿@page "/login"
 
-@layout EmptyLayout
-
+@inject NavigationManager NavManager
 
 <h3>LoginPortal</h3>
-<p>dette er en test</p>
+<button @onclick="NavigateToPatientLogInPage"></button>
 
 @code {
 
+    private void NavigateToPatientLogInPage()
+    {
+        NavManager.NavigateTo("/patLogin");
+    }
 }
