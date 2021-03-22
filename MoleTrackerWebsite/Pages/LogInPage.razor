@@ -4,19 +4,24 @@
 
 @inject NavigationManager NavManager
 
-<h3>LoginPortal</h3>
-<div class="align-content-center">
-<button @onclick="NavigateToPatientLogInPage" style="background-color: cornflowerblue;
-        border-radius: 8px;
-        margin-top: 20px;
-        margin-bottom: 10px" type="submit">Patient Login</button>
-</div>
-@*<button style="margin-top: 20px; margin-bottom: 10px; background-color: greenyellow" type="submit">Log på</button>*@
+    <link href="CenterAreaStyle.css" rel="stylesheet" />
 
-@code {
 
-    private void NavigateToPatientLogInPage()
-    {
-        NavManager.NavigateTo("/patientLogin");
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <h3>LoginPortal</h3>
+
+            <button @onclick="NavigateToPatientLogInPage" style="background-color: cornflowerblue; border-radius: 8px; margin-top: 20px; margin-bottom: 10px" type="submit">
+                Patient Login
+            </button>
+        </div>
+    </div>
+    @*<button style="margin-top: 20px; margin-bottom: 10px; background-color: greenyellow" type="submit">Log på</button>*@
+
+    @code {
+
+        private void NavigateToPatientLogInPage()
+        {
+            NavManager.NavigateTo("/patientLogin");
+        }
     }
-}
