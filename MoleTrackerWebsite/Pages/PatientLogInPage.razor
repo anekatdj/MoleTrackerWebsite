@@ -1,11 +1,15 @@
 ﻿@page "/patientLogin"
 
 @using Models
+@using LogicLayer
 
 @inject LogInInfo loginInfo
+@inject LogInController LogInController
+@inject NavigationManager NavManager
+
 @layout EmptyLayout
 
-    <link href="css/CenterAreaStyle.css" rel="stylesheet" />
+<link href="css/CenterAreaStyle.css" rel="stylesheet" />
 
 <div class="wrapper fadeInDown" style="margin-top:10%">
     <div id="formContent">
@@ -39,7 +43,7 @@
 
             </div>
 
-            <button style="background-color: greenyellow; border-radius: 8px; color: white; margin-top: 20px; margin-bottom: 10px;" type="submit">Log på</button>
+            <button @onclick="NavigateToMainPatientPage" style="background-color: greenyellow; border-radius: 8px; color: white; margin-top: 20px; margin-bottom: 10px;" type="submit">Log på</button>
 
         </EditForm>
         <div>
@@ -54,5 +58,13 @@
 
 @code {
     private bool LoginFailed = false;
+
+    private void NavigateToMainPatientPage()
+    {
+        //if (LogInController.HandleLogin(loginInfo))
+        //{
+        NavManager.NavigateTo("/");
+        //}
+}
 
 }
