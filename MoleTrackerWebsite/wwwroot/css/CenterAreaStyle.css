@@ -2,6 +2,10 @@
 .d-inline-block {
     display: inline-block;
 }
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color:lightgray;
+    opacity: 1; /* Firefox */
+}
 
 
 /* BASIC */

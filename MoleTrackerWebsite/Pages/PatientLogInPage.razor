@@ -5,27 +5,34 @@
 @inject LogInInfo loginInfo
 @layout EmptyLayout
 
-<div>
+    <link href="css/CenterAreaStyle.css" rel="stylesheet" />
+
+<div class="wrapper fadeInDown" style="margin-top:10%">
     <div id="formContent">
-        <h1>Mole Watcher</h1>
-        <h2>Patient login</h2>
+        
+            <h1>Mole Tracker</h1>
+            <h2 style="margin-top:2px">Patient Login</h2>
 
-        <EditForm Model="@loginInfo">
+            <EditForm Model="@loginInfo">
 
-            <DataAnnotationsValidator />
-            <ValidationSummary />
+                <DataAnnotationsValidator />
+                <ValidationSummary />
 
-            <div>
-                <InputText id="Name" @bind-Value="loginInfo.Username"/>
-            </div>
 
-            <div>
-                <InputText id="Password" @bind-Value="loginInfo.Password" />
-            </div>
+                <div style="margin-left:-22%"><b>CPR-nummer</b></div>
 
-            <button style="margin-top: 20px; margin-bottom: 10px; background-color: greenyellow" type="submit">Log på</button>
+                <div style="margin-bottom: 8px">
+                    <InputText id="Name" placeholder="DDMMÅÅ-XXXX" @bind-Value="loginInfo.Username" style="border-radius: 5px" />
+                </div>
 
-        </EditForm>
+                <div style="margin-left:-30%"><b>Kodeord</b></div>
+                <div>
+                    <InputText id="Password" @bind-Value="loginInfo.Password" type="password" placeholder="Adgangskode" style="border-radius: 5px"/>
+                </div>
+
+                <button style="background-color: greenyellow; border-radius: 8px; color: white; margin-top: 20px; margin-bottom: 10px;" type="submit">Log på</button>
+
+            </EditForm>
 
     </div>
 </div>
