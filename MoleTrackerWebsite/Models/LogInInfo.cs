@@ -9,12 +9,12 @@ namespace MoleTrackerWebsite.Models
     public class LogInInfo
     {
         [Required]
-        [MinLength(1, ErrorMessage = "Username is too short")]
-        [StringLength(10, ErrorMessage = "Username is too long.")]
+        [MinLength(1, ErrorMessage = "CPR-nummer er for kort")]
+        [StringLength(10, ErrorMessage = "CPR-nummer er for langt")]
         public string Username { get; set; }
 
         [Required]
-        [MinLength(1, ErrorMessage = "Password is too short")]
+        [MinLength(1, ErrorMessage = "Adgangskode er for kort")]
         public string Password { get; set; }
     }
 }
