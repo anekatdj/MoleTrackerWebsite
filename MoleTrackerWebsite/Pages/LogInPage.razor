@@ -5,7 +5,13 @@
 @inject NavigationManager NavManager
 
 <h3>LoginPortal</h3>
-<button @onclick="NavigateToPatientLogInPage"></button>
+<div class="align-content-center">
+<button @onclick="NavigateToPatientLogInPage" style="background-color: cornflowerblue;
+        border-radius: 8px;
+        margin-top: 20px;
+        margin-bottom: 10px" type="submit">Patient Login</button>
+</div>
+@*<button style="margin-top: 20px; margin-bottom: 10px; background-color: greenyellow" type="submit">Log på</button>*@
 
 @code {
 
