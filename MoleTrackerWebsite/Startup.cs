@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicLayer;
+using BusinessLogicLayer.BusinessLogicLayerInterfaces;
 
 namespace MoleTrackerWebsite
 {
@@ -29,6 +31,7 @@ namespace MoleTrackerWebsite
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton(ILogInController, LogInController)
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

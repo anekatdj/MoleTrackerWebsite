@@ -1,13 +1,15 @@
 ﻿@page "/MedLogIn"
 @using BusinessLogicLayer.BusinessLogicLayerInterfaces
 @using BusinessLogicLayer
+@using MoleTrackerWebsite.Models
 
 
 @inject NavigationManager NavManager
 @inject ILogInController LogInController
+@inject LogInInfo loginInfo
 
 
-@layout EmptyLayout
+@*@layout EmptyLayout*@
 
 <link href="css/CenterAreaStyle.css" rel="stylesheet" />
 
@@ -23,7 +25,7 @@
             <ValidationSummary />
 
 
-            <div style="margin-left:-22%"><b>CPR-nummer</b></div>
+            <div style="margin-left:-22%"><b>Brugernavn</b></div>
 
             <div style="margin-bottom: 8px">
                 <InputText id="Name" placeholder="DDMMÅÅ-XXXX" @bind-Value="loginInfo.Username" style="border-radius: 5px" />
