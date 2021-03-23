@@ -6,6 +6,11 @@ namespace DTO.LoginDTO
 {
     public class PatientInfoDTO
     {
+        public PatientInfoDTO(string CPR, string name)
+        {
+            this.CPR = CPR;
+            this.Name = name;
+        }
         public int PatientID { get; set; }
 
         public string CPR { get; set; }

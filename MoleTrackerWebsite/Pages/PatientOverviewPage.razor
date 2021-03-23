@@ -1,6 +1,7 @@
 ﻿@page "/PatientOverviewPage"
 
 @using DTO.LoginDTO
+@using Microsoft.AspNetCore.Mvc.Diagnostics
 
 <h3>PatientOverviewPage</h3>
 
@@ -21,12 +22,9 @@
 
     protected override async Task OnInitializedAsync()
     {
-        patientInfo = new List<PatientInfoDTO>()
-        {
-            patientInfo.Add(new PatientInfoDTO())
-            Name = "Hans Hansen",
-            CPR = "1234567890";
-        }
+        patientInfo = new List<PatientInfoDTO>();
+        
+        patientInfo.Add(new PatientInfoDTO("123456-7890", "Hans Hansen"));
     }
 
 }
