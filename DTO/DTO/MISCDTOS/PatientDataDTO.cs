@@ -4,7 +4,7 @@ using System.Text;
 using DTO.CollectionDTOS;
 using DTO.LoginDTOS;
 
-namespace DTO.MISCDTOS
+namespace DataClasses.DTO.MISCDTOS
 {
     public class PatientDataDTO
     {

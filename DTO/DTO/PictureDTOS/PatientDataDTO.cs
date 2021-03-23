@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTO.PictureDTOs
+namespace DataClasses.DTO.PictureDTOs
 {
     class PatientDataDTO
     {

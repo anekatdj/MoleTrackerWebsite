@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using DTO.PictureDTOs;
+using DataClasses.DTO.PictureDTOs;
+using DTO.CollectionDTOS;
 
-namespace DTO.CollectionDTOS
+namespace DataClasses.DTO.CollectionDTOS
 {
     public class CollectionDTO
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using DTO.LoginDTOS;
 
-namespace DTO.MISCDTOS
+namespace DataClasses.DTO.MISCDTOS
 {
     public class MedicalPracticePatientsDTO
     {

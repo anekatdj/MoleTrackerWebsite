@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTO.CollectionDTOS
+namespace DataClasses.DTO.CollectionDTOS
 {
     public class ChangeNotificationsDTO
     {

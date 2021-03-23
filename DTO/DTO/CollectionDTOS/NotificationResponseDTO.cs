@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTO.CollectionDTOS
+namespace DataClasses.DTO.CollectionDTOS
 {
     //Todo denne skal lige laves til en ordentlig datatype
     public enum Noticationtype

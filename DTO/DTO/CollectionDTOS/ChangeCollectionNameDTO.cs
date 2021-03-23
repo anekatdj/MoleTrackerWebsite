@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTO.CollectionDTOS
+namespace DataClasses.DTO.CollectionDTOS
 {
-    public class CollectionRequestDTO
+    public class ChangeCollectionNameDTO
     {
         public int CollectionID { get; set; }
-        public int PatientID { get; set; }
-
+        public string CollectionName { get; set; }
     }
 }

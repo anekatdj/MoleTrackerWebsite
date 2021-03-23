@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTO.CollectionDTOS
+namespace DataClasses.DTO.MISCDTOS
 {
-    public class NotificationRequestDTO
+    public class PatientInfoRequestDTO
     {
         public int PatientID { get; set; }
     }

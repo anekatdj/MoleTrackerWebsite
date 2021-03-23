@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTO.LoginDTOS
+namespace DataClasses.DTO.LoginDTOS
 {
     public class DoctorInfoDTO
     {

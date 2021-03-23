@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTO.MISCDTOS
+namespace DataClasses.DTO.MISCDTOS
 {
     public class DoctorContactInfoRequestDTO
     {
