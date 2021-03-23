@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using DataClasses.DTO.PictureDTOs;
-using DTO.CollectionDTOS;
+using DataClasses.DTO.CollectionDTOS;
 
 namespace DataClasses.DTO.CollectionDTOS
 {

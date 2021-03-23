@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using DTO.LoginDTOS;
+using DataClasses.DTO.LoginDTOS;
 
 namespace DataClasses.DTO.MISCDTOS
 {
