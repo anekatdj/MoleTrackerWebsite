@@ -6,9 +6,9 @@ namespace LogicLayer
 {
     public class LogInController : ILogInController
     {
-        //public bool HandleLogin(LoginInfoDTO loginInfo)
-        //{
-            //return true;
+        public bool HandleLogin(LoginInfoDTO loginInfo)
+        {
+            return true;
             //{
             //    if (loginInfo.Username == "121212-1212" && loginInfo.Password == "kodeord")
             //    {
@@ -19,6 +19,6 @@ namespace LogicLayer
             //        return false;
             //    }
             //}
-        //}
+        }
     }
 }
