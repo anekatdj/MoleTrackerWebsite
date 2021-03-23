@@ -18,7 +18,7 @@
     <div id="formContent">
 
         <h1>Mole Tracker</h1>
-        <h2 style="margin-top:2px">Patient Login</h2>
+        <h2 style="margin-top:2px">Medical professional login</h2>
 
         <EditForm Model="@loginInfo">
 
@@ -29,7 +29,7 @@
             <div style="margin-left:-22%"><b>Brugernavn</b></div>
 
             <div style="margin-bottom: 8px">
-                <InputText id="Name" placeholder="DDMMÅÅ-XXXX" @bind-Value="loginInfo.Username" style="border-radius: 5px" />
+                <InputText id="Name" placeholder="Brugernavn" @bind-Value="loginInfo.Username" style="border-radius: 5px" />
             </div>
 
             <div style="margin-left:-30%"><b>Kodeord</b></div>
@@ -70,16 +70,16 @@
 }
 
 
-<div class="wrapper fadeInDown" style="margin-top: 10%;">
+@*<div class="wrapper fadeInDown" style="margin-top: 10%;">
     <div id="formContent">
         <h3>Login</h3>
-        <EditForm Model="@login" OnValidSubmit="@HandleValidSubmit">
+        <EditForm Model="@loginInfo" OnValidSubmit="@HandleValidSubmit">
 
             <DataAnnotationsValidator />
             <ValidationSummary />
 
-            <InputText id="name" @bind-Value="login.Username" />
-            <InputText id="pass" @bind-Value="login.password" />
+            <InputText id="name" @bind-Value="loginInfo.Username" />
+            <InputText id="pass" @bind-Value="loginInfo.Password" />
 
             <button style="margin-top: 20px; margin-bottom: 10px;" type="submit">Submit</button>
         </EditForm>
@@ -109,5 +109,5 @@
             loginFail = true;
             errors.Add("YOOOOOO");
         }
-    }
+    }*@
 }
