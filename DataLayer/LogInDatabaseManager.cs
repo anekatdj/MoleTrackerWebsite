@@ -2,6 +2,6 @@
 {
     class LogInDatabaseManager : ILogInDatabaseManager
     {
-        public bool GetPatientInfo(LoginInfo)
+        //public bool GetPatientInfo(LoginInfo)
     }
 }
