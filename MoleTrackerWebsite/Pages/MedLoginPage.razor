@@ -2,6 +2,7 @@
 @using BusinessLogicLayer.BusinessLogicLayerInterfaces
 @using BusinessLogicLayer
 @using MoleTrackerWebsite.Models
+@using DTO.LoginDTO
 
 
 @inject NavigationManager NavManager
@@ -72,20 +73,41 @@
 <div class="wrapper fadeInDown" style="margin-top: 10%;">
     <div id="formContent">
         <h3>Login</h3>
+        <EditForm Model="@login" OnValidSubmit="@HandleValidSubmit">
 
+            <DataAnnotationsValidator />
+            <ValidationSummary />
 
-        <DataAnnotationsValidator />
-        <ValidationSummary />
+            <InputText id="name" @bind-Value="login.Username" />
+            <InputText id="pass" @bind-Value="login.password" />
 
-        <InputText id="name" />
-        <InputText id="pass" />
-
-        <button id="LoginButton" style="margin-top: 20px; margin-bottom: 10px;" type="submit">Submit</button>
+            <button style="margin-top: 20px; margin-bottom: 10px;" type="submit">Submit</button>
+        </EditForm>
     </div>
 
 </div>
 
 
 @code {
+    private List<string> errors = new List<string>();
 
+    private bool loginFail = false;
+
+    private void HandleValidSubmit()
+    {
+
+        if (login.login(loginData))
+        {
+            SesData.LoggedIn = true;
+            SesData.UseID = 1;
+
+
+            NavManager.NavigateTo("/");
+        }
+        else
+        {
+            loginFail = true;
+            errors.Add("YOOOOOO");
+        }
+    }
 }
