@@ -1,12 +1,12 @@
 ﻿using System;
-using DTO.LoginDTOS;
+using DataClasses.Domain;
 using LogicLayer.Interfaces;
 
 namespace LogicLayer
 {
     public class LogInController : ILogInController
     {
-        public bool HandleLogin(LoginInfoDTO loginInfo)
+        public bool HandleLogin(LogInInfo loginInfo)
         {
             return true;
             //{
