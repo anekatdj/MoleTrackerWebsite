@@ -5,7 +5,7 @@ using BusinessLogicLayer.BusinessLogicLayerInterfaces;
 
 namespace BusinessLogicLayer
 {
-    class LogInController: ILogInController
+    public class LogInController: ILogInController
     {
     }
 }
