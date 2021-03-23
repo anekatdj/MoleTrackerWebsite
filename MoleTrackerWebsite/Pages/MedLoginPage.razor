@@ -1,9 +1,12 @@
-﻿@page "/login"
+﻿@page "/MedicalLogin"
+@using BusinessLogicLayer.BusinessLogicLayerInterfaces
+@using BusinessLogicLayer
+
 
 @inject NavigationManager NavManager
 @inject ILogInController login
-@inject LoginData loginData
-@inject sessionData SesData;
+@inject LogInController login;
+
 
 
 
@@ -18,11 +21,12 @@
             <InputText id="name" />
             <InputText id="pass" />
 
-            <button style="margin-top: 20px; margin-bottom: 10px;" type="submit">Submit</button>
+            <button id="LoginButton" style="margin-top: 20px; margin-bottom: 10px;" type="submit">Submit</button>
     </div>
 
 </div>
 
 
 @code {
+    
 }
