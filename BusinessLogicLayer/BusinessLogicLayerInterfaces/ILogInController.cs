@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
 {
-    interface ILogInController
+    public interface ILogInController
     {
     }
 }
