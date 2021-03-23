@@ -1,13 +1,70 @@
-﻿@page "/MedicalLogin"
+﻿@page "/MedLogIn"
 @using BusinessLogicLayer.BusinessLogicLayerInterfaces
 @using BusinessLogicLayer
 
 
 @inject NavigationManager NavManager
-@inject ILogInController login
-@inject LogInController login;
+@inject ILogInController LogInController
 
 
+@layout EmptyLayout
+
+<link href="css/CenterAreaStyle.css" rel="stylesheet" />
+
+<div class="wrapper fadeInDown" style="margin-top:10%">
+    <div id="formContent">
+
+        <h1>Mole Tracker</h1>
+        <h2 style="margin-top:2px">Patient Login</h2>
+
+        <EditForm Model="@loginInfo">
+
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+
+            <div style="margin-left:-22%"><b>CPR-nummer</b></div>
+
+            <div style="margin-bottom: 8px">
+                <InputText id="Name" placeholder="DDMMÅÅ-XXXX" @bind-Value="loginInfo.Username" style="border-radius: 5px" />
+            </div>
+
+            <div style="margin-left:-30%"><b>Kodeord</b></div>
+            <div>
+
+                <InputText id="Password" @bind-Value="loginInfo.Password" class="border-none flex-1 p-2" type="password" placeholder="Adgangskode" style="border-radius: 5px" />
+                <button class="p-2" id="toggle">
+                    <svg viewBox="0 0 24 24"
+                         style="fill: none; height: 24px; stroke: rgba(0, 0, 0, 0.4); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1; width: 20px;">
+                        <path d="M23.5,12c0,0-5.148,6.5-11.5,6.5S0.5,12,0.5,12S5.648,5.5,12,5.5S23.5,12,23.5,12z M12,8c2.209,0,4,1.791,4,4 s-1.791,4-4,4s-4-1.791-4-4S9.791,8,12,8z M12,10c1.105,0,2,0.895,2,2s-0.895,2-2,2s-2-0.895-2-2" />
+                    </svg>
+                </button>
+                @*https://htmldom.dev/toggle-password-visibility/*@
+
+            </div>
+
+            <button @onclick="NavigateToPatientOverviewPage" style="background-color: greenyellow; border-radius: 8px; color: white; margin-top: 20px; margin-bottom: 10px;" type="submit">Log på</button>
+
+        </EditForm>
+        <div>
+            <input type="checkbox" />
+            <label>Husk mig</label>
+
+        </div>
+    </div>
+
+</div>
+
+
+@code {
+    private bool LoginFailed = false;
+
+    private void NavigateToPatientOverviewPage()
+    {
+        NavManager.NavigateTo("/PatientOverviewPage");
+    }
+
+}
 
 
 <div class="wrapper fadeInDown" style="margin-top: 10%;">
@@ -15,18 +72,18 @@
         <h3>Login</h3>
 
 
-            <DataAnnotationsValidator />
-            <ValidationSummary />
+        <DataAnnotationsValidator />
+        <ValidationSummary />
 
-            <InputText id="name" />
-            <InputText id="pass" />
+        <InputText id="name" />
+        <InputText id="pass" />
 
-            <button id="LoginButton" style="margin-top: 20px; margin-bottom: 10px;" type="submit">Submit</button>
+        <button id="LoginButton" style="margin-top: 20px; margin-bottom: 10px;" type="submit">Submit</button>
     </div>
 
 </div>
 
 
 @code {
-    
+
 }
