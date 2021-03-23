@@ -1,0 +1,26 @@
+﻿@page "/PatientOverviewPage"
+
+@using DTO.LoginDTO
+
+<h3>PatientOverviewPage</h3>
+
+<div>
+    <h2>Table under here plz</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Navn</th>
+                <th>CPR-Nummer</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@code {
+    private List<PatientInfoDTO> patientInfo;
+    protected override async Task OnInitializedAsync()
+    {
+        patientInfo = new PatientInfoDTO() { Name = "Hans Hansen",
+            CPR = "1234567890"; }
+}
+}
