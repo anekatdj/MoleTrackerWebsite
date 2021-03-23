@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LogicLayer;
+using LogicLayer.Interfaces;
 using MoleTrackerWebsite.Models;
 
 namespace MoleTrackerWebsite
@@ -32,6 +34,7 @@ namespace MoleTrackerWebsite
             services.AddSingleton<WeatherForecastService>();
 
             services.AddTransient<LogInInfo>();
+            services.AddSingleton<ILogInController, LogInController>();
 
         }
 

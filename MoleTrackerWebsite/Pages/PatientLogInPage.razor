@@ -2,9 +2,10 @@
 
 @using Models
 @using LogicLayer
+@using LogicLayer.Interfaces
 
 @inject LogInInfo loginInfo
-@inject LogInController LogInController
+@inject ILogInController LogInController
 @inject NavigationManager NavManager
 
 @layout EmptyLayout
@@ -49,10 +50,7 @@
 
     private void NavigateToMainPatientPage()
     {
-        //if (LogInController.HandleLogin(loginInfo))
-        //{
         NavManager.NavigateTo("/");
-        //}
 }
 
 }
