@@ -1,5 +1,7 @@
-﻿@inherits LayoutComponentBase
+﻿@using DataClasses.Domain
+@inherits LayoutComponentBase
 @inject NavigationManager NavManager
+@inject SessionInfo SessionInfo 
 
     <div class="page">
         <div class="sidebar">
@@ -21,9 +23,10 @@
 
         protected override void OnAfterRender(bool firstRender)
         {
-
-            NavManager.NavigateTo("/login");
-
+            if (!SessionInfo.LoggedIn)
+            {
+                NavManager.NavigateTo("/login");    
+            }
         }
 
     }

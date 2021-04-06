@@ -1,8 +1,16 @@
 ﻿@page "/login"
+@using DataClasses.Domain
 
 @layout EmptyLayout
 
 @inject NavigationManager NavManager
+@inject SessionInfo SessionInfo
+
+@*Forsøg af AK - som den ikke kan lide*@
+@*@if (!SessionInfo.LoggedIn)
+{
+    NavManager.NavigateTo("/mainPage");
+}*@
 
 <link href="css/CenterAreaStyle.css" rel="stylesheet" />
 
@@ -17,11 +25,11 @@
         font-size: 20px;
         margin-bottom: 10px;
         margin-top: 20px"
-        type="submit">
+                    type="submit">
                 Patient Login
             </button>
         </div>
-        
+
         <div>
             <button @onclick="NavigateToMedLogInPage" style="background-color: firebrick;
         color: white;
@@ -29,7 +37,7 @@
         font-size: 20px;
         margin-bottom: 10px;
         margin-top: 20px"
-        type="submit">
+                    type="submit">
                 Medical Login
             </button>
         </div>

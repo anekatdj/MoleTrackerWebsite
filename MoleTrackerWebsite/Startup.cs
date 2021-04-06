@@ -32,6 +32,7 @@ namespace MoleTrackerWebsite
             services.AddServerSideBlazor();
 
             services.AddTransient<LogInInfo>();
+            services.AddTransient<SessionInfo>();
             services.AddSingleton<ILogInController, LogInController>();
 
         }

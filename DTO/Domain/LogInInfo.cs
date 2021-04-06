@@ -17,13 +17,13 @@ namespace DataClasses.Domain
         [MinLength(1, ErrorMessage = "Adgangskode er for kort")]
         public string Password { get; set; }
 
-        /// <summary>
-        /// TEST
-        /// </summary>
-        public LogInInfo()
-        {
-            Username = "1212121212";
-            Password = "kodeord";
-        }
+        ///// <summary>
+        ///// TEST
+        ///// </summary>
+        //public LogInInfo()
+        //{
+        //    Username = "1212121212";
+        //    Password = "kodeord";
+        //}
     }
 }
