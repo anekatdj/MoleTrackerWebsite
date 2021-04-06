@@ -6,8 +6,8 @@ using DTO.MISCDTO;
 
 namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
 {
-    public interface ILoadPatients
+    public interface ISelectPatient
     {
-        void LoadPatientList(MedicalPracticePatientsDTO patients);
+        void GetPatientData(PatientInfoRequestDTO patientInfoRequest);
     }
 }

@@ -7,9 +7,9 @@ using DTO.MISCDTO;
 
 namespace BusinessLogicLayer
 {
-    public class LoadPatients : ILoadPatients
+    public class SelectPatient : ISelectPatient
     {
-        public void LoadPatientList(MedicalPracticePatientsDTO patients)
+        public void GetPatientData(PatientInfoRequestDTO patientInfoRequest)
         {
             throw new NotImplementedException();
         }
