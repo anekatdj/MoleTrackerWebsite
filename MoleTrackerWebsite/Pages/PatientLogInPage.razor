@@ -24,7 +24,7 @@
         <h1>Mole Tracker</h1>
         <h2 style="margin-top:2px">Patient Login</h2>
 
-        <EditForm Model="@loginInfo">
+        <EditForm Model="@loginInfo" OnValidSubmit="ValidateLogIn">
 
             <DataAnnotationsValidator />
             <ValidationSummary />
@@ -54,7 +54,7 @@
 
             </div>
 
-            <button @onclick="NavigateToMainPatientPage" style="background-color: forestgreen; border-radius: 8px; color: white; margin-top: 20px; margin-bottom: 10px;" type="submit">Log på</button>
+            <button id="Login" style="background-color: forestgreen; border-radius: 8px; color: white; margin-top: 20px; margin-bottom: 10px;" type="submit">Log på</button>
 
         </EditForm>
         <div>
@@ -70,11 +70,29 @@
 @code {
     private bool LoginFailed = false;
 
-    private void NavigateToMainPatientPage()
+    //Login function
+    private void ValidateLogIn()
     {
-        NavManager.NavigateTo("/");
+        if (LogInController.HandleLogin(loginInfo))
+        {
+            NavManager.NavigateTo("/mainPage");
+            //NavigateToMainPatientPage();
+        }
+        else
+        {
+            LoginFailed = true;
+        }
     }
 
+
+    //Navigate to MainPage
+    private void NavigateToMainPatientPage()
+    {
+        NavManager.NavigateTo("/mainPage");
+    }
+
+
+    //Show Password Eye
     public string TxtType = "password";
     public string Eye = "fa fa-eye";
 
