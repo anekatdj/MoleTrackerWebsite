@@ -12,7 +12,7 @@
 
 @layout EmptyLayout
 
-<link href="css/CenterAreaStyle.css" rel="stylesheet" />
+<link href="css/CenterAreaStylet.css" rel="stylesheet" />
 
 <div class="wrapper fadeInDown" style="margin-top:10%">
     <div id="formContent">
@@ -46,7 +46,7 @@
 
             </div>
 
-            <button @onclick="NavigateToPatientOverviewPage" style="background-color: greenyellow; border-radius: 8px; color: white; margin-top: 20px; margin-bottom: 10px;" type="submit">Log på</button>
+            <button @onclick="Login" style="background-color: greenyellow; border-radius: 8px; color: white; margin-top: 20px; margin-bottom: 10px;" type="submit">Log på</button>
 
         </EditForm>
         <div>
@@ -61,6 +61,23 @@
 
 @code {
     private bool LoginFailed = false;
+
+    private void Login()
+    {
+        LoginInfoDTO logindata = new LoginInfoDTO()
+        {
+            Username = loginInfo.Username, 
+            password = loginInfo.Password
+        };
+        if (LogInController.login(logindata))
+        {
+            NavigateToPatientOverviewPage();
+        }
+        else
+        {
+            
+        }
+    }
 
     private void NavigateToPatientOverviewPage()
     {
