@@ -1,5 +1,51 @@
-﻿<h3>LogInPage</h3>
+﻿@page "/login"
+
+@layout EmptyLayout
+
+@inject NavigationManager NavManager
+
+<link href="css/CenterAreaStyle.css" rel="stylesheet" />
+
+
+<div class="wrapper fadeInDown" style="margin-top: 10%">
+    <div id="formContent">
+        <h1>LoginPortal</h1>
+        <div>
+            <button @onclick="NavigateToPatientLogInPage" style="background-color: cornflowerblue;
+                                                                                                                  color: white;
+                                                                                                                  border-radius: 8px;
+                                                                                                                  font-size: 20px;
+                                                                                                                  margin-bottom: 10px;
+                                                                                                                  margin-top: 20px"
+                     type="submit">
+                Patient Login
+            </button>
+        </div>
+        
+        <div>
+            <button @onclick="NavigateToMedLogInPage" style="background-color: firebrick;
+                                                                                                                                                                           color: white;
+                                                                                                                                                                           border-radius: 8px;
+                                                                                                                                                                           font-size: 20px;
+                                                                                                                                                                           margin-bottom: 10px;
+                                                                                                                                                                           margin-top: 20px"
+                     type="submit">
+                Medical Login
+            </button>
+        </div>
+
+    </div>
+
+</div>
 
 @code {
 
+    private void NavigateToPatientLogInPage()
+    {
+        NavManager.NavigateTo("/patientLogin");
+    }
+
+    private void NavigateToMedLogInPage()
+    {
+    }
 }
