@@ -18,4 +18,8 @@
     <Folder Include="Data\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="APIWebServiesConnector" Version="20210226.1.0" />
+  </ItemGroup>
+
 </Project>

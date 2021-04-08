@@ -1,16 +1,18 @@
 ﻿using System;
 using DataClasses.Domain;
+using DataLayer;
 using LogicLayer.Interfaces;
 
 namespace LogicLayer
 {
     public class LogInController : ILogInController
     {
-        private DataLayer.ILogInDatabaseManager logInDatabaseManager;
+        private ILogInDatabaseManager logInDatabaseManager;
         public bool HandleLogin(LogInInfo loginInfo)
         {
+            logInDatabaseManager = new LogInDatabaseManager();
             //AK leger
-            //return logInDatabaseManager.GetPatientInfo(loginInfo);
+            return logInDatabaseManager.GetPatientInfo(loginInfo);
             //return true;
 
 
