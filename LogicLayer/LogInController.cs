@@ -10,12 +10,12 @@ namespace LogicLayer
         private ILogInDatabaseManager logInDatabaseManager;
         public bool HandleLogin(LogInInfo loginInfo)
         {
-            logInDatabaseManager = new LogInDatabaseManager();
             //AK leger
+            logInDatabaseManager = new LogInDatabaseManager();
             return logInDatabaseManager.GetPatientInfo(loginInfo);
             //return true;
 
-
+            //Fra tidligere
             {
                 if (loginInfo.Username == "1212121212" && loginInfo.Password == "kodeord")
                 {
