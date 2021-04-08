@@ -1,4 +1,5 @@
-﻿using APIWebServiesConnector;
+﻿using System;
+using APIWebServiesConnector;
 using DataClasses.Domain;
 using DataClasses.DTO.LoginDTOS;
 
@@ -21,9 +22,25 @@ namespace DataLayer
             loginInfoDTO.Username = loginInfo.Username;
             loginInfoDTO.Password = loginInfo.Password;
 
-            patientInfoDTO = API.GetObject<PatientInfoDTO, LoginInfoDTO>("PostLoginPatient", loginInfoDTO);
+            try
+            {
+                patientInfoDTO = API.GetObject<PatientInfoDTO, LoginInfoDTO>("PostLoginPatient", loginInfoDTO);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
 
-            return true;
+            if (patientInfoDTO != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
         }
     }
 }
