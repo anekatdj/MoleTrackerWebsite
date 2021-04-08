@@ -6,8 +6,11 @@ namespace LogicLayer
 {
     public class LogInController : ILogInController
     {
+        private DataLayer.ILogInDatabaseManager logInDatabaseManager;
         public bool HandleLogin(LogInInfo loginInfo)
         {
+            //AK leger
+            //return logInDatabaseManager.GetPatientInfo(loginInfo);
             //return true;
 
 

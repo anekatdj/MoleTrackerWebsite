@@ -1,6 +1,11 @@
-﻿namespace DataLayer
+﻿using DataClasses.Domain;
+
+namespace DataLayer
 {
-    public interface ILogInDatabaseManager{}
+    public interface ILogInDatabaseManager
+    {
+        bool GetPatientInfo(LogInInfo loginInfo);
+    }
 
     
 }
