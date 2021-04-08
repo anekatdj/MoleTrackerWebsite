@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\css\CenterAreaStyle.css" />
+    <None Include="wwwroot\css\CSSStyles.css" />
   </ItemGroup>
 
   <ItemGroup>
