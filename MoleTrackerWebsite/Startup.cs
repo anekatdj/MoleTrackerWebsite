@@ -9,6 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataClasses.Domain;
+using LogicLayer;
+using LogicLayer.Interfaces;
 
 namespace MoleTrackerWebsite
 {
@@ -27,6 +30,11 @@ namespace MoleTrackerWebsite
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+
+            services.AddTransient<LogInInfo>();
+            services.AddSingleton<SessionInfo>();
+            services.AddSingleton<ILogInController, LogInController>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,127 @@
+﻿@page "/patientLogin"
+
+@using LogicLayer
+@using LogicLayer.Interfaces
+@using DataClasses.Domain
+
+@inject LogInInfo loginInfo
+@inject ILogInController LogInController
+@inject NavigationManager NavManager
+@inject SessionInfo SessionInfo
+
+@layout EmptyLayout
+
+
+<link href="css/CSSStyles.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> @*EYE*@
+
+
+
+
+
+
+<div class="wrapper fadeInDown" style="margin-top: 10%">
+    <div id="formContent">
+
+        <h1>Mole Tracker</h1>
+        <h2 style="margin-top:2px">Patient Login</h2>
+        <div>
+            <EditForm Model="@loginInfo" OnValidSubmit="HandleValidSubmit">
+
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+
+                <div style="margin-left:-22%"><b>CPR-nummer</b></div>
+
+                <div style="margin-bottom: 8px">
+                    <InputText id="Name" placeholder="DDMMÅÅ-XXXX" @bind-Value="loginInfo.Username" style="border-radius: 5px" />
+                </div>
+
+                <div style="margin-left:-30%"><b>Kodeord</b></div>
+                <div>
+
+                    <InputText id="Password" @bind-Value="loginInfo.Password" type="@TxtType" placeholder="Adgangskode" style="border-radius: 5px" />
+
+                    <span class="@Eye" @onclick="ShowPassword"></span>
+
+                </div>
+
+                <button id="Login" style="background-color: forestgreen; border-radius: 8px; color: white; margin-top: 20px; margin-bottom: 10px;" type="submit">Log på</button>
+
+            </EditForm>
+        </div>
+        <div>
+            <input type="checkbox" />
+            <label>Husk mig</label>
+
+        </div>
+        @if (LoginFailed)
+        {
+            <div>
+                <span style="margin: 100px; color: red;">
+                    Login ugyldigt, prøv igen.
+                </span>
+            </div>
+            @foreach (var error in errors)
+            {
+                <div>
+                    <span style="margin: 100px; color: red;">
+                        @error
+                    </span>
+                </div>
+            }
+        }
+    </div>
+    
+</div>
+
+
+@code {
+    private List<string> errors = new List<string>();
+    private bool LoginFailed = false;
+
+    //Login function
+    private void HandleValidSubmit()
+    {
+        if (LogInController.HandleLogin(loginInfo))
+        {
+            SessionInfo.LoggedIn = true;
+
+            NavigateToMainPatientPage();
+
+        }
+        else
+        {
+            LoginFailed = true;
+            errors.Add("Forkert login!");
+        }
+
+    }
+
+    //Navigate to MainPage
+    private void NavigateToMainPatientPage()
+    {
+        NavManager.NavigateTo("/mainPage");
+    }
+
+
+    //Show Password Eye
+    public string TxtType = "password";
+    public string Eye = "fa fa-eye";
+
+    public void ShowPassword()
+    {
+        if (this.TxtType == "password")
+        {
+            this.TxtType = "text";
+            this.Eye = "fa fa-eye-slash";
+        }
+        else
+        {
+            this.TxtType = "password";
+            this.Eye = "fa fa-eye";
+        }
+    }
+}
+

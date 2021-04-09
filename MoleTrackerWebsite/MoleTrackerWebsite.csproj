@@ -4,4 +4,22 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\css\CSSStyles.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataLayer\DataAccessLayer.csproj" />
+    <ProjectReference Include="..\DTO\DataClasses.csproj" />
+    <ProjectReference Include="..\LogicLayer\BusinessLogicLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="APIWebServiesConnector" Version="20210226.1.0" />
+  </ItemGroup>
+
 </Project>

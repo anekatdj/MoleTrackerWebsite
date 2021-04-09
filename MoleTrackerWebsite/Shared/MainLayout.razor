@@ -1,27 +1,33 @@
-﻿@inherits LayoutComponentBase
-@inject NavigationManager NavManager;
+﻿@using DataClasses.Domain
+@inherits LayoutComponentBase
+@inject NavigationManager NavManager
+@inject SessionInfo SessionInfo
 
-<div class="sidebar">
-    <NavMenu />
-</div>
+<div class="page">
+        <div class="sidebar">
+            <NavMenu />
 
-<div class="main">
-    <div class="top-row px-4">
-        <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+    
+        <div class="main">
+            <div class="top-row px-4">
+                <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+            </div>
+
+            <div class="content px-4">
+                @Body
+            </div>
+        </div>
     </div>
 
-    <div class="content px-4">
-        @Body
-    </div>
-</div>
+    @code{
 
-@code{
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-
-        NavManager.NavigateTo("/login");
+        protected override void OnAfterRender(bool firstRender)
+        {
+            if (!SessionInfo.LoggedIn)
+            {
+                NavManager.NavigateTo("/login");
+            }
+        }
 
     }
-
-}

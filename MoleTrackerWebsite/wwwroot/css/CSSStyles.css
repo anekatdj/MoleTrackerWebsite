@@ -2,9 +2,8 @@
 .d-inline-block {
     display: inline-block;
 }
-
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: lightgray;
+    color:lightgray;
     opacity: 1; /* Firefox */
 }
 
@@ -24,10 +23,10 @@
 }
 
 /*.show,.hide {*/
-/*position: absolute;*/
-/*right: 15px;
+    /*position: absolute;*/
+    /*right: 15px;
     top: 10px;*/
-/*font-size: 28px;
+    /*font-size: 28px;
     color: #333;
 }*/
 /*.hide {
