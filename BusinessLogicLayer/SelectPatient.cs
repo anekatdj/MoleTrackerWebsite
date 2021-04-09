@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using BusinessLogicLayer.BusinessLogicLayerInterfaces;
-using DataClasses.LoginDTO;
+using DTO.LoginDTO;
+using DTO.MISCDTO;
 
 namespace BusinessLogicLayer
 {
-    public class LoadPatients : ILoadPatients
+    public class SelectPatient : ISelectPatient
     {
-        public void LoadPatientList(MedicalPracticePatientsDTO patients)
+        public void GetPatientData(PatientInfoRequestDTO patientInfoRequest)
         {
             throw new NotImplementedException();
         }

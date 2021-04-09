@@ -7,6 +7,6 @@ namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
 {
     public interface ILoadPatients
     {
-        void LoadPatientList(DoctorInfoDTO doctorInfo);
+        void LoadPatientList(MedicalPracticePatientsDTO patients);
     }
 }
