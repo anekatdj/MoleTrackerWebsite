@@ -33,7 +33,7 @@ namespace DataLayer
                 throw;
             }
 
-            if (patientInfoDTO != null)
+            if (patientInfoDTO.CPR != null)
             {
                 return true;
             }

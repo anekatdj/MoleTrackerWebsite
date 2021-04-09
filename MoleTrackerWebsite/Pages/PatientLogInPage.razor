@@ -47,7 +47,7 @@
 
                 </div>
 
-                <button @onclick="HandleValidSubmit" id="Login" style="background-color: forestgreen; border-radius: 8px; color: white; margin-top: 20px; margin-bottom: 10px;" type="submit">Log på</button>
+                <button id="Login" style="background-color: forestgreen; border-radius: 8px; color: white; margin-top: 20px; margin-bottom: 10px;" type="submit">Log på</button>
 
             </EditForm>
         </div>
@@ -56,12 +56,29 @@
             <label>Husk mig</label>
 
         </div>
+        @if (LoginFailed)
+        {
+            <div>
+                <span style="margin: 100px; color: red;">
+                    Login ugyldigt, prøv igen.
+                </span>
+            </div>
+            @foreach (var error in errors)
+            {
+                <div>
+                    <span style="margin: 100px; color: red;">
+                        @error
+                    </span>
+                </div>
+            }
+        }
     </div>
-
+    
 </div>
 
 
 @code {
+    private List<string> errors = new List<string>();
     private bool LoginFailed = false;
 
     //Login function
@@ -77,6 +94,7 @@
         else
         {
             LoginFailed = true;
+            errors.Add("Forkert login!");
         }
 
     }
@@ -86,17 +104,6 @@
     {
         NavManager.NavigateTo("/mainPage");
     }
-
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    NavManager.NavigateTo("/mainPage");
-    //}
-
-    //protected override Task OnInitializedAsync()
-    //{
-    //    NavManager.NavigateTo("/mainPage");
-    //    return Task.CompletedTask;
-    //}
 
 
     //Show Password Eye
