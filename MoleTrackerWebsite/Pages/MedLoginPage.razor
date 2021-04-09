@@ -1,13 +1,13 @@
 ﻿@page "/MedLogIn"
 @using BusinessLogicLayer.BusinessLogicLayerInterfaces
 @using BusinessLogicLayer
+@using DataClasses.Domain
 @using DataClasses.LoginDTO
-@using MoleTrackerWebsite.Models
 
 
 @inject NavigationManager NavManager
 @inject ILogInController LogInController
-@inject LogInInfo loginInfo
+@inject LoginInfoDomain loginInfo
 
 
 @layout EmptyLayout
@@ -64,12 +64,13 @@
 
     private void Login()
     {
-        LoginInfoDTO logindata = new LoginInfoDTO()
+        LoginInfoDomain loginData = new LoginInfoDomain()
         {
             Username = loginInfo.Username, 
-            password = loginInfo.Password
+            Password = loginInfo.Password
         };
-        if (LogInController.login(logindata))
+
+        if (LogInController.login(loginData))
         {
             NavigateToPatientOverviewPage();
         }

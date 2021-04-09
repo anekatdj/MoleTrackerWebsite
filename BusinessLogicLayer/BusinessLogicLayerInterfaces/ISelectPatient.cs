@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using DTO.LoginDTO;
-using DTO.MISCDTO;
+using DataClasses.MISCDTO;
+using DataClasses.LoginDTO;
+
 
 namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
 {
