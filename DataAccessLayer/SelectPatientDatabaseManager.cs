@@ -5,13 +5,14 @@ using DataAccessLayer.DataAccessLayerInterfaces;
 using APIWebServiesConnector;
 using DataClasses.MISCDTO;
 using DataClasses.Domain;
+using DataClasses.LoginDTO;
 
 namespace DataAccessLayer
 {
     public class SelectPatientDatabaseManager : ISelectPatientDatabaseManager
     {
         private PatientInfoRequestDTO patientInfoRequestDTO;
-        private PatientData patientData;
+        private PatientDataDomain patientDataDomain;
         private IAPIService API;
 
         public SelectPatientDatabaseManager()
@@ -19,10 +20,10 @@ namespace DataAccessLayer
             API = new StubApiService();
         }
 
-        public PatientData GetPatientDate(PatientInfoRequestDTO patientInfoRequestDTO)
+        public PatientDataDomain GetPatientData(PatientInfoDomain patientInfoDomain)
         {
             PatientDataDTO patientDataDTO = new PatientDataDTO();
-            
+            PatientInfoRequestDTO patientInfoRequestDTO = new PatientInfoRequestDTO() { PatientID = patientInfoDomain.PatientID };
             try
             {
                 patientDataDTO = API.GetObject<PatientDataDTO, PatientInfoRequestDTO>("GetPatientData", patientInfoRequestDTO);
@@ -32,12 +33,17 @@ namespace DataAccessLayer
 
                 throw;
             }
-            patientData = new PatientData()
+            patientDataDomain = new PatientDataDomain()
             {
                 PatientID = patientDataDTO.PatientID,
                 CollectionList = patientDataDTO.CollectionList
             };
-            return patientData;
+            return patientDataDomain;
         }
+        //public PatientInfoDomain GetPatientInfo()
+        //{
+        //    PatientInfoDTO patientInfoDTO = new PatientInfoDTO();
+
+        //}
     }
 }

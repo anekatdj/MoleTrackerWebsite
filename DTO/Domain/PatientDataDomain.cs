@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataClasses.Domain
 {
-    public class PatientData
+    public class PatientDataDomain
     {
         public int PatientID { get; set; }
         public List<CollectionDTO.CollectionDTO> CollectionList { get; set; }

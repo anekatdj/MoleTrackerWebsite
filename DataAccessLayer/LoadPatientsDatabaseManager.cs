@@ -10,7 +10,7 @@ namespace DataAccessLayer
 {
     public class LoadPatientsDatabaseManager : ILoadPatientsDatabaseManager
     {
-        private MedicalPracticePatients medicalPracticePatients;
+        private MedicalPracticePatientsDomain medicalPracticePatientsDomain;
         private IAPIService API;
 
         public LoadPatientsDatabaseManager()
@@ -18,10 +18,10 @@ namespace DataAccessLayer
             API = new StubApiService();
         }
 
-        public MedicalPracticePatients GetMedicalPracticePatients(DoctorInfoDTO doctorInfoDTO)
+        public MedicalPracticePatientsDomain GetMedicalPracticePatients(DoctorInfoDomain doctorInfoDomain)
         {
             MedicalPracticePatientsDTO medicalPracticePatientsDTO = new MedicalPracticePatientsDTO();
-
+            DoctorInfoDTO doctorInfoDTO = new DoctorInfoDTO() { DoctorInfo = doctorInfoDomain.DoctorID };
             try
             {
                 medicalPracticePatientsDTO = API.GetObject<MedicalPracticePatientsDTO, DoctorInfoDTO>("GetMedicalPracticePatients", doctorInfoDTO);
@@ -31,12 +31,12 @@ namespace DataAccessLayer
 
                 throw;
             }
-            medicalPracticePatients = new MedicalPracticePatients()
+            medicalPracticePatientsDomain = new MedicalPracticePatientsDomain()
             {
                 MedicalPracticeID = medicalPracticePatientsDTO.MedicalPracticeID,
                 PatientList = medicalPracticePatientsDTO.PatientList
             };
-            return medicalPracticePatients;
+            return medicalPracticePatientsDomain;
         }
     }
 }
