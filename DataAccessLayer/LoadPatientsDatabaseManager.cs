@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using DataAccessLayer.DataAccessLayerInterfaces;
 using APIWebServiesConnector;
-using DTO.MISCDTO;
-using DTO.LoginDTO;
-
+using DataClasses.Domain;
+using DataClasses.LoginDTO;
+using DataClasses.MISCDTO;
 namespace DataAccessLayer
 {
     public class LoadPatientsDatabaseManager : ILoadPatientsDatabaseManager
@@ -18,7 +18,7 @@ namespace DataAccessLayer
             API = new StubApiService();
         }
 
-        public MedicalPracticePatients GetMedicalPracticePatients()
+        public MedicalPracticePatientsDTO GetMedicalPracticePatients()
         {
             DoctorInfoDTO doctorInfoDTO = new DoctorInfoDTO();
             try
