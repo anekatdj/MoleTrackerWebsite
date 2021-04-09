@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DTO\DTO.csproj" />
+    <PackageReference Include="APIWebServiesConnector" Version="20210226.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DTO\DataClasses.csproj" />
   </ItemGroup>
 
 </Project>

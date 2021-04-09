@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using DTO.LoginDTO;
+using DataClasses.LoginDTO;
 
 namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
 {

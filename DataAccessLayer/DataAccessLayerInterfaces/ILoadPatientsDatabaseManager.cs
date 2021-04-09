@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataAccessLayer.DataAccessLayerInterfaces
 {
-    public interface ILogInDatabaseManager
+    public interface ILoadPatientsDatabaseManager
     {
     }
 }

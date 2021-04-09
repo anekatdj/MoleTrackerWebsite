@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace DTO.PictureDTO
+namespace DataClasses.PictureDTO
 {
     public class PictureInfoDTO
     {

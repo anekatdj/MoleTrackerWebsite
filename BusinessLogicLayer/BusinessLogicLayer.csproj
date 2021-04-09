@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
-    <ProjectReference Include="..\DTO\DTO.csproj" />
+    <ProjectReference Include="..\DTO\DataClasses.csproj" />
   </ItemGroup>
 
 </Project>
