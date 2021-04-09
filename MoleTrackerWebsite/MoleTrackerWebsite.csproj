@@ -4,10 +4,4 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Pages - MedWeb\" />
-    <Folder Include="Pages - PatWeb\" />
-  </ItemGroup>
-
 </Project>
