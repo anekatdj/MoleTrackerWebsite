@@ -26,7 +26,8 @@
         <h1>Mole Tracker</h1>
         <h2 style="margin-top:2px">Patient Login</h2>
 
-        <EditForm Model="@loginInfo" OnValidSubmit="HandleValidSubmit">
+        <EditForm Model="@loginInfo">
+            @*OnValidSubmit="HandleValidSubmit"*@
 
             <DataAnnotationsValidator />
             <ValidationSummary />
@@ -42,7 +43,7 @@
             <div>
 
                 <InputText id="Password" @bind-Value="loginInfo.Password" type="@TxtType" placeholder="Adgangskode" style="border-radius: 5px" />
-                
+
                 <span class="@Eye" @onclick="ShowPassword"></span>
 
             </div>
