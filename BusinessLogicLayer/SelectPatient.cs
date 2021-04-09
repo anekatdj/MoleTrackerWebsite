@@ -3,14 +3,26 @@ using System.Collections.Generic;
 using System.Text;
 using BusinessLogicLayer.BusinessLogicLayerInterfaces;
 using DataClasses.MISCDTO;
+using DataAccessLayer.DataAccessLayerInterfaces;
+using DataAccessLayer;
+using DataClasses.Domain;
 
 namespace BusinessLogicLayer
 {
     public class SelectPatient : ISelectPatient
     {
-        public void GetPatientData(PatientInfoRequestDTO patientInfoRequest)
+        private ISelectPatientDatabaseManager selectPatientDatabaseManager;
+        public SelectPatient()
         {
-            throw new NotImplementedException();
+            selectPatientDatabaseManager = new SelectPatientDatabaseManager();
+        }
+        public void GetPatientData(PatientInfoDomain patientInfoDomain)
+        {
+            selectPatientDatabaseManager.GetPatientData(patientInfoDomain);
+        }
+        public void GetPatientInfo(PatientInfoDomain patientInfo)
+        {
+            selectPatientDatabaseManager.GetPatientInfo(patientInfo);
         }
     }
 }

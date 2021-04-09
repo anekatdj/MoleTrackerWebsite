@@ -34,8 +34,13 @@ namespace DataAccessLayer
             PatientDataDomain patientDataDomain = new PatientDataDomain()
             {
                 PatientID = patientDataDTO.PatientID,
-                CollectionList = patientDataDTO.CollectionList
+                //CollectionList = patientDataDTO.CollectionList,
+                //PatientInfo = patientDataDTO.PatientInfo
             };
+            //foreach (PatientInfoDomain item in collection)
+            //{
+
+            //}
             return patientDataDomain;
         }
         public PatientInfoDomain GetPatientInfo(PatientInfoDomain patientInfoDomain)

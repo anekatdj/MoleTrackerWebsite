@@ -6,6 +6,6 @@ namespace DataClasses.Domain
     public class MedicalPracticePatientsDomain
     {
         public int MedicalPracticeID { get; set; }
-        public List<PatientInfoDTO> PatientList { get; set; }
+        public List<PatientInfoDomain> PatientList { get; set; }
     }
 }
