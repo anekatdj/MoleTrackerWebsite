@@ -1,4 +1,7 @@
-﻿@inherits LayoutComponentBase
+﻿@using DataClasses.Domain
+@inherits LayoutComponentBase
+@inject NavigationManager NavManager
+@*@inject SessionInfoDomain SessionInfo*@
 
 <div class="sidebar">
     <NavMenu />
@@ -13,3 +16,11 @@
         @Body
     </div>
 </div>
+
+@code
+{
+    protected override void OnAfterRender(bool firstRender)
+    {
+        NavManager.NavigateTo("/login");
+    }
+}
