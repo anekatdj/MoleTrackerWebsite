@@ -4,7 +4,7 @@ namespace DataLayer
 {
     public interface ILogInDatabaseManager
     {
-        bool GetPatientInfo(LogInInfo loginInfo);
+        bool ValidateLogin(LogInInfo loginInfo);
     }
 
     

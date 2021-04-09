@@ -26,8 +26,7 @@
         <h1>Mole Tracker</h1>
         <h2 style="margin-top:2px">Patient Login</h2>
         <div>
-            <EditForm Model="@loginInfo">
-                @*OnValidSubmit="HandleValidSubmit"*@
+            <EditForm Model="@loginInfo" OnValidSubmit="HandleValidSubmit">
 
                 <DataAnnotationsValidator />
                 <ValidationSummary />
@@ -36,7 +35,7 @@
                 <div style="margin-left:-22%"><b>CPR-nummer</b></div>
 
                 <div style="margin-bottom: 8px">
-                    <InputText id="Name" placeholder="DDMMÅÅ-XXXX" @bind-Value="loginInfo.Username" style="border-radius: 5px" />
+                    <InputText id="Name" placeholder="DDMMÅÅXXXX" @bind-Value="loginInfo.Username" style="border-radius: 5px" />
                 </div>
 
                 <div style="margin-left:-30%"><b>Kodeord</b></div>
@@ -71,10 +70,12 @@
         if (LogInController.HandleLogin(loginInfo))
         {
             SessionInfo.LoggedIn = true;
-            
-            //NavManager.NavigateTo("/mainPage");
 
             NavigateToMainPatientPage();
+
+    //NavManager.NavigateTo("/mainPage");
+
+    //OnInitializedAsync();
         }
         else
         {
@@ -83,12 +84,22 @@
 
     }
 
-
     //Navigate to MainPage
     private void NavigateToMainPatientPage()
     {
         NavManager.NavigateTo("/mainPage");
     }
+
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    NavManager.NavigateTo("/mainPage");
+    //}
+
+    //protected override Task OnInitializedAsync()
+    //{
+    //    NavManager.NavigateTo("/mainPage");
+    //    return Task.CompletedTask;
+    //}
 
 
     //Show Password Eye

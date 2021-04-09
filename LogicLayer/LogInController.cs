@@ -10,9 +10,9 @@ namespace LogicLayer
         private ILogInDatabaseManager logInDatabaseManager;
         public bool HandleLogin(LogInInfo loginInfo)
         {
-            ////AK leger
-            //logInDatabaseManager = new LogInDatabaseManager();
-            //return logInDatabaseManager.GetPatientInfo(loginInfo);
+            //AK leger
+            logInDatabaseManager = new LogInDatabaseManager();
+            return logInDatabaseManager.ValidateLogin(loginInfo);
             //return true;
 
             //Fra tidligere
