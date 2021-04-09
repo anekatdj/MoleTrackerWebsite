@@ -21,12 +21,13 @@ Welcome to your new app.
                                       width: 212px;
                                       height: 477px;
                                   " />
-<span style="float:right" class="fa-arrow-circle-o-up" @onclick="TurnAroundModel"></span>
+<button style="float:right" class="@Arrow" @onclick="TurnAroundModel"></button>
 <button> </button>
 @*636*1431 billedstørrelse*@
 
 @code {
     public string FrontOrBack = "/Images/FemaleBackCrop.png";
+    public string Arrow = "fa fa-music";
     public string TurnAround { get; set; }
 
     public void TurnAroundModel()
