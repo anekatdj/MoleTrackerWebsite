@@ -3,11 +3,13 @@
 @using BusinessLogicLayer
 @using DataClasses.Domain
 @using DataClasses.LoginDTO
+@using System.Diagnostics
 
 
 @inject NavigationManager NavManager
 @inject ILogInController LogInController
 @inject LoginInfoDomain loginInfo
+@inject SessionInfoDomain SesInfo;
 
 
 @layout EmptyLayout
@@ -54,29 +56,57 @@
             <label>Husk mig</label>
 
         </div>
-    </div>
+        @if (LoginFailed)
+        {
+            <div>
+                <span style="margin: 100px; color: red;">
+                    Login var ugyldigt. Prøv igen.
+                </span>
+            </div>
+            @foreach (string VARIABLE in errors)
+            {
+                <div>
+                    <span style="margin: 100px; color: red;">
+                        @VARIABLE
+                    </span>
+                </div>
+            }
 
+        }
+    </div>
+   
 </div>
 
 
+
 @code {
+    private List<string> errors = new List<string>();
     private bool LoginFailed = false;
+    private int errorCounter = 0;
 
     private void Login()
     {
+
         LoginInfoDomain loginData = new LoginInfoDomain()
         {
-            Username = loginInfo.Username, 
+            Username = loginInfo.Username,
             Password = loginInfo.Password
         };
 
         if (LogInController.login(loginData))
         {
+            SesInfo.LoggedIn = true;
+            SesInfo.UseID = 1;
+
             NavigateToPatientOverviewPage();
         }
         else
         {
-            
+            LoginFailed = true;
+
+            errorCounter++;
+
+            errors.Add("fejl nr: " + errorCounter);
         }
     }
 

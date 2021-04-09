@@ -1,7 +1,7 @@
 ﻿@using DataClasses.Domain
 @inherits LayoutComponentBase
 @inject NavigationManager NavManager
-@*@inject SessionInfoDomain SessionInfo*@
+@inject SessionInfoDomain SesInfo;
 
 <div class="sidebar">
     <NavMenu />
@@ -21,6 +21,9 @@
 {
     protected override void OnAfterRender(bool firstRender)
     {
-        NavManager.NavigateTo("/login");
+        if (!SesInfo.LoggedIn)
+        {
+            NavManager.NavigateTo("/login");
+        }
     }
 }

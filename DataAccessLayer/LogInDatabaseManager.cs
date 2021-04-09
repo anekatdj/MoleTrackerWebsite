@@ -10,7 +10,7 @@ using DataClasses.LoginDTO;
 
 namespace DataAccessLayer
 {
-    public class LogInDatabaseManager: ILogInDatabaseManager
+    public class LogInDatabaseManager : ILogInDatabaseManager
     {
         private DoctorInfoDTO doctorInfo;
         private IAPIService API;
@@ -44,9 +44,9 @@ namespace DataAccessLayer
             //}
             //else
             //{
-            //    return false; 
+            //    return false;
             //}
-            return true;
+            return false; 
         }
     }
 }
