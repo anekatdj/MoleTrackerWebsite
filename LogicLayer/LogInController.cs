@@ -8,11 +8,17 @@ namespace LogicLayer
     public class LogInController : ILogInController
     {
         private ILogInDatabaseManager logInDatabaseManager;
-        public bool HandleLogin(LogInInfo loginInfo)
+
+        public LogInController()
         {
             //AK leger
             logInDatabaseManager = new LogInDatabaseManager();
-            return logInDatabaseManager.GetPatientInfo(loginInfo);
+        }
+
+        public bool HandleLogin(LogInInfo loginInfo)
+        {
+            
+            return logInDatabaseManager.ValidateLogin(loginInfo);
             //return true;
 
             //Fra tidligere
