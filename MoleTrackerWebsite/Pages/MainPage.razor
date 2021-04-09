@@ -4,6 +4,8 @@
 @inject NavigationManager NavManager
 @inject SessionInfo SessionInfo
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> @*EYE*@
+
 @if (!SessionInfo.LoggedIn)
 {
     NavManager.NavigateTo("/mainPage");
@@ -15,10 +17,27 @@ Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 
-<img src="/Images/FemaleBackCrop.png" style="        margin-left: 140%; margin-top:-160%;
+<img src="@FrontOrBack" style="float: right;
                                       width: 212px;
                                       height: 477px;
                                   " />
+<span style="float:right" class="fa-arrow-circle-o-up" @onclick="TurnAroundModel"></span>
 <button> </button>
 @*636*1431*@
 
+@code {
+    public string FrontOrBack = "/Images/FemaleBackCrop.png";
+    public string TurnAround { get; set; }
+
+    public void TurnAroundModel()
+    {
+        if (this.FrontOrBack == "/Images/FemaleBackCrop.png")
+        {
+            this.FrontOrBack = "/Images/FemaleFrontcrop.png";
+        }
+        else
+        {
+            this.FrontOrBack = "/Images/FemaleBackCrop.png";
+        }
+    }
+}
