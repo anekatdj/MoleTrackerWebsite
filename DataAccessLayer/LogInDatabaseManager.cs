@@ -4,8 +4,9 @@ using System.Reflection;
 using System.Text;
 using DataAccessLayer.DataAccessLayerInterfaces;
 using APIWebServiesConnector;
+using DataClasses;
+using DataClasses.Domain;
 using DataClasses.LoginDTO;
-using 
 
 namespace DataAccessLayer
 {
@@ -20,31 +21,32 @@ namespace DataAccessLayer
             API = new StubApiService();
         }
 
-        public bool VerifyLoginWithAPI(LogInInfo loginInfo)
+        public bool VerifyLoginWithAPI(LoginInfoDomain loginInfo)
         {
             LoginInfoDTO newLogin = new LoginInfoDTO();
 
             newLogin.Username = loginInfo.Username;
             newLogin.Password = loginInfo.Password;
 
-            try
-            {
-                doctorInfo = API.GetObject<DoctorInfoDTO, LoginInfoDTO>("PostLoginDoctor", newLogin);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            //try
+            //{
+            //    doctorInfo = API.GetObject<DoctorInfoDTO, LoginInfoDTO>("PostLoginDoctor", newLogin);
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e);
+            //    throw;
+            //}
 
-            if (doctorInfo != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false; 
-            }
+            //if (doctorInfo != null)
+            //{
+            //    return true;
+            //}
+            //else
+            //{
+            //    return false; 
+            //}
+            return true;
         }
     }
 }

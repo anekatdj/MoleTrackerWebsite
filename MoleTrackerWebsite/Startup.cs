@@ -12,7 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer;
 using BusinessLogicLayer.BusinessLogicLayerInterfaces;
-using MoleTrackerWebsite.Models;
+using DataClasses.Domain;
 
 namespace MoleTrackerWebsite
 {
@@ -33,7 +33,7 @@ namespace MoleTrackerWebsite
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
 
-            services.AddTransient<LogInInfo>();
+            services.AddTransient<LoginInfoDomain>();
             services.AddSingleton<ILogInController, LogInController>();
         }
 

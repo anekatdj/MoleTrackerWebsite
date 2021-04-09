@@ -2,26 +2,25 @@
 using System.Collections.Generic;
 using System.Text;
 using BusinessLogicLayer.BusinessLogicLayerInterfaces;
+using DataAccessLayer;
+using DataAccessLayer.DataAccessLayerInterfaces;
+using DataClasses.Domain;
 using DataClasses.LoginDTO;
 
 namespace BusinessLogicLayer
 {
     public class LogInController: ILogInController
     {
-        public bool login(LoginInfoDTO data)
+        private ILogInDatabaseManager loginDBM;
+
+        public LogInController()
         {
-            if (data.Username == "hej" && data.password == "hej")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            loginDBM = new LogInDatabaseManager();
         }
-        public bool loginManager(LoginInfoDTO data)
+        public bool login(LoginInfoDomain loginData)
         {
-            return false;
+            return loginDBM.VerifyLoginWithAPI(loginData);
         }
+
     }
 }
