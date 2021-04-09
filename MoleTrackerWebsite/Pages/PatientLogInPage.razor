@@ -12,7 +12,7 @@
 @layout EmptyLayout
 
 
-<link href="css/CenterAreaStyle.css" rel="stylesheet" />
+<link href="css/CSSStyles.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> @*EYE*@
 
 
@@ -25,32 +25,33 @@
 
         <h1>Mole Tracker</h1>
         <h2 style="margin-top:2px">Patient Login</h2>
+        <div>
+            <EditForm Model="@loginInfo">
+                @*OnValidSubmit="HandleValidSubmit"*@
 
-        <EditForm Model="@loginInfo">
-            @*OnValidSubmit="HandleValidSubmit"*@
-
-            <DataAnnotationsValidator />
-            <ValidationSummary />
+                <DataAnnotationsValidator />
+                <ValidationSummary />
 
 
-            <div style="margin-left:-22%"><b>CPR-nummer</b></div>
+                <div style="margin-left:-22%"><b>CPR-nummer</b></div>
 
-            <div style="margin-bottom: 8px">
-                <InputText id="Name" placeholder="DDMMÅÅ-XXXX" @bind-Value="loginInfo.Username" style="border-radius: 5px" />
-            </div>
+                <div style="margin-bottom: 8px">
+                    <InputText id="Name" placeholder="DDMMÅÅ-XXXX" @bind-Value="loginInfo.Username" style="border-radius: 5px" />
+                </div>
 
-            <div style="margin-left:-30%"><b>Kodeord</b></div>
-            <div>
+                <div style="margin-left:-30%"><b>Kodeord</b></div>
+                <div>
 
-                <InputText id="Password" @bind-Value="loginInfo.Password" type="@TxtType" placeholder="Adgangskode" style="border-radius: 5px" />
+                    <InputText id="Password" @bind-Value="loginInfo.Password" type="@TxtType" placeholder="Adgangskode" style="border-radius: 5px" />
 
-                <span class="@Eye" @onclick="ShowPassword"></span>
+                    <span class="@Eye" @onclick="ShowPassword"></span>
 
-            </div>
+                </div>
 
-            <button @onclick="HandleValidSubmit" id="Login" style="background-color: forestgreen; border-radius: 8px; color: white; margin-top: 20px; margin-bottom: 10px;" type="submit">Log på</button>
+                <button @onclick="HandleValidSubmit" id="Login" style="background-color: forestgreen; border-radius: 8px; color: white; margin-top: 20px; margin-bottom: 10px;" type="submit">Log på</button>
 
-        </EditForm>
+            </EditForm>
+        </div>
         <div>
             <input type="checkbox" />
             <label>Husk mig</label>
@@ -69,10 +70,11 @@
     {
         if (LogInController.HandleLogin(loginInfo))
         {
-            //SessionInfo.LoggedIn = true;
-            NavManager.NavigateTo("/mainPage");
+            SessionInfo.LoggedIn = true;
+            
+            //NavManager.NavigateTo("/mainPage");
 
-            //NavigateToMainPatientPage();
+            NavigateToMainPatientPage();
         }
         else
         {
