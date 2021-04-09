@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using DataAccessLayer.DataAccessLayerInterfaces;
 using APIWebServiesConnector;
-using DataClasses.MISCDTO;
-using DataClasses.LoginDTO;
-using DataClasses.Domain;
+using DTO.MISCDTO;
+using DTO.LoginDTO;
 
 namespace DataAccessLayer
 {
     public class LoadPatientsDatabaseManager : ILoadPatientsDatabaseManager
     {
-        private MedicalPracticePatientsDTO medicalPracticePatientsDTO;
+        private MedicalPracticePatientsDTO medicalPracticePatients;
         private IAPIService API;
 
         public LoadPatientsDatabaseManager()
@@ -24,18 +23,13 @@ namespace DataAccessLayer
             DoctorInfoDTO doctorInfoDTO = new DoctorInfoDTO();
             try
             {
-                medicalPracticePatientsDTO = API.GetObject<MedicalPracticePatientsDTO, DoctorInfoDTO>("GetMedicalPracticePatients", doctorInfoDTO);
+                medicalPracticePatients = API.GetObject<MedicalPracticePatientsDTO, DoctorInfoDTO>("GetMedicalPracticePatients", doctorInfoDTO);
             }
             catch (Exception)
             {
 
                 throw;
             }
-            MedicalPracticePatients medicalPracticePatients = new MedicalPracticePatients()
-            {
-                MedicalPracticeID = medicalPracticePatientsDTO.MedicalPracticeID,
-                PatientList = medicalPracticePatientsDTO.PatientList
-            };
             return medicalPracticePatients;
         }
     }
