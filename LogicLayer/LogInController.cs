@@ -18,8 +18,8 @@ namespace LogicLayer
         public bool HandleLogin(LogInInfo loginInfo)
         {
             
-            return logInDatabaseManager.ValidateLogin(loginInfo);
-            //return true;
+            //return logInDatabaseManager.ValidateLogin(loginInfo);
+            return true;
 
             //Fra tidligere
             {
