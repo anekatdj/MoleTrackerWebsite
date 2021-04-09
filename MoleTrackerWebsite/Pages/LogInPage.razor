@@ -4,7 +4,7 @@
 @layout EmptyLayout
 
 @inject NavigationManager NavManager
-@inject SessionInfo SessionInfo
+@inject SessionInfoDomain SessionInfo
 
 @*Forsøg af AK - som den ikke kan lide*@
 @*@if (!SessionInfo.LoggedIn)
@@ -50,11 +50,11 @@
 
     private void NavigateToPatientLogInPage()
     {
-        NavManager.NavigateTo("/patientLogin");
+        //NavManager.NavigateTo("/patientLogin");
     }
 
     private void NavigateToMedLogInPage()
     {
-    //NavManager.NavigateTo("/medicalLogin");
+    NavManager.NavigateTo("/MedLogIn");
     }
 }
