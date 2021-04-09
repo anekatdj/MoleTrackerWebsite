@@ -47,7 +47,7 @@
 
             </div>
 
-            <button id="Login" style="background-color: forestgreen; border-radius: 8px; color: white; margin-top: 20px; margin-bottom: 10px;" type="submit">Log på</button>
+            <button @onclick="HandleValidSubmit" id="Login" style="background-color: forestgreen; border-radius: 8px; color: white; margin-top: 20px; margin-bottom: 10px;" type="submit">Log på</button>
 
         </EditForm>
         <div>
@@ -68,7 +68,7 @@
     {
         if (LogInController.HandleLogin(loginInfo))
         {
-            SessionInfo.LoggedIn = true;
+            //SessionInfo.LoggedIn = true;
             NavManager.NavigateTo("/mainPage");
 
             //NavigateToMainPatientPage();
