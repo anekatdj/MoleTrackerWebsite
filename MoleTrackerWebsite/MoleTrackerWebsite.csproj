@@ -9,8 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataLayer\DataAccessLayer.csproj" />
     <ProjectReference Include="..\DTO\DataClasses.csproj" />
+    <ProjectReference Include="..\MW_BusinessLogicLayer\MW_BusinessLogicLayer.csproj" />
+    <ProjectReference Include="..\MW_DataAccessLayer\MW_DataAccessLayer.csproj" />
+    <ProjectReference Include="..\PW_BusinessLogicLayer\PW_BusinessLogicLayer.csproj" />
+    <ProjectReference Include="..\PW_DataAccessLayer\PW_DataAccessLayer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
