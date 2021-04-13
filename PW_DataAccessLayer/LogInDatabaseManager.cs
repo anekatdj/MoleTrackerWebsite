@@ -26,7 +26,7 @@ namespace PW_DataAccessLayer
             //TODO Mangler at teste med testbrugeren
             try
             {
-                patientInfoDTO = API.GetObject<PatientInfoDTO, LoginInfoDTO>("PostLoginPatient", loginInfoDTO);
+                patientInfoDTO = API.GetObject<PatientInfoDTO, LoginInfoDTO>("PatientLogin", loginInfoDTO);
             }
             catch (Exception e)
             {
