@@ -4,7 +4,7 @@ using PW_BusinessLogicLayer.Interfaces;
 using PW_DataAccessLayer;
 using PW_DataAccessLayer.Interfaces;
 
-namespace LogicLayer
+namespace PW_BusinessLogicLayer
 {
     public class LogInController : ILogInController
     {
