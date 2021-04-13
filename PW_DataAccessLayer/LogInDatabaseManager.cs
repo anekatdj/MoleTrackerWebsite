@@ -2,8 +2,9 @@
 using APIWebServiesConnector;
 using DataClasses.Domain;
 using DataClasses.DTO.LoginDTOS;
+using PW_DataAccessLayer.Interfaces;
 
-namespace DataLayer
+namespace PW_DataAccessLayer
 {
     public class LogInDatabaseManager : ILogInDatabaseManager
     {

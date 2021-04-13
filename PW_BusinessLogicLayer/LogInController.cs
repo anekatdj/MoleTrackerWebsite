@@ -1,7 +1,7 @@
 ﻿using System;
 using DataClasses.Domain;
 using DataLayer;
-using LogicLayer.Interfaces;
+using PW_BusinessLogicLayer.Interfaces;
 
 namespace LogicLayer
 {

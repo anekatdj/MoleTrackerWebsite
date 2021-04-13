@@ -1,4 +1,6 @@
-﻿namespace DataLayer
+﻿using PW_DataAccessLayer.Interfaces;
+
+namespace PW_DataAccessLayer
 {
     class UploadPictureDatabaseManager : IUploadPictureDatabaseManager
     {

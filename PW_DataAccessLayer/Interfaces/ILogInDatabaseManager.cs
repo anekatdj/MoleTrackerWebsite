@@ -1,6 +1,6 @@
 ﻿using DataClasses.Domain;
 
-namespace DataLayer
+namespace PW_DataAccessLayer.Interfaces
 {
     public interface ILogInDatabaseManager
     {

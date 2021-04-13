@@ -3,7 +3,7 @@
 using System.Diagnostics;
 using DataClasses.Domain;
 
-namespace LogicLayer.Interfaces
+namespace PW_BusinessLogicLayer.Interfaces
 {
     public interface ILogInController
     {

@@ -1,4 +1,4 @@
-﻿namespace LogicLayer.Interfaces
+﻿namespace PW_BusinessLogicLayer.Interfaces
 {
     public interface IMarkCollectionController
     {

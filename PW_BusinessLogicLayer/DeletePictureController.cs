@@ -1,4 +1,4 @@
-﻿using LogicLayer.Interfaces;
+﻿using PW_BusinessLogicLayer.Interfaces;
 
 namespace LogicLayer
 {
