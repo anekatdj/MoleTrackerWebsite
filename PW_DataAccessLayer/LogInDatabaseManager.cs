@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using APIWebServiesConnector;
 using DataClasses.Domain;
 using DataClasses.DTO.LoginDTOS;
@@ -13,7 +14,7 @@ namespace PW_DataAccessLayer
 
         public LogInDatabaseManager()
         {
-            //API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
+            API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
             
             //API = new StubApiService();
         }
@@ -25,12 +26,11 @@ namespace PW_DataAccessLayer
             loginInfoDTO.Username = loginInfo.Username;
             loginInfoDTO.Password = loginInfo.Password;
 
-            //TODO Mangler at teste med testbrugeren
             try
             {
                 patientInfoDTO = API.GetObject<PatientInfoDTO, LoginInfoDTO>("PatientLogin", loginInfoDTO);
             }
-            catch (Exception e)
+            catch (WebException e) when ((e.Response as HttpWebResponse)?.StatusCode==HttpStatusCode.NotFound)
             {
                 Console.WriteLine(e);
             }
