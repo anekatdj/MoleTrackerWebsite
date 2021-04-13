@@ -2,7 +2,7 @@
 
 namespace PW_DataAccessLayer
 {
-    class MarkCollectionDatabaseManager : IMarkCollectionDatabaseManager
+    public class MarkCollectionDatabaseManager : IMarkCollectionDatabaseManager
     {
     }
 }
