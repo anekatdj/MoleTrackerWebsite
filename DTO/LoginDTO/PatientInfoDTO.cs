@@ -1,4 +1,6 @@
-﻿namespace DataClasses.LoginDTO
+﻿using DataClasses.Domain;
+
+namespace DataClasses.LoginDTO
 {
     public class PatientInfoDTO
     {
@@ -15,5 +17,19 @@
         public string Gender { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
+
+        public PatientInfoDomain ToDomain()
+        {
+            PatientInfoDomain patientInfoDomain = new PatientInfoDomain()
+            {
+                CPR = CPR,
+                Email = Email,
+                Gender = Gender,
+                Name = Name,
+                PhoneNumber = PhoneNumber,
+                PatientID = PatientID
+            };
+            return patientInfoDomain;
+        }
     }
 }

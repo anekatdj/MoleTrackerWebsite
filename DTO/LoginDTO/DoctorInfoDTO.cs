@@ -4,11 +4,8 @@ namespace DataClasses.LoginDTO
 {
     public class DoctorInfoDTO
     {
-        public DoctorInfoDTO()
-        {
-
-        }
         public int DoctorID { get; set; }
+
         public DoctorInfoDomain ToDomain()
         {
             DoctorInfoDomain doctorInfoDomain = new DoctorInfoDomain() { DoctorID = DoctorID };

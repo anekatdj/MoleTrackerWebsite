@@ -23,10 +23,7 @@ namespace DataAccessLayer
 
         public bool VerifyLoginWithAPI(LoginInfoDomain loginInfo)
         {
-            LoginInfoDTO newLogin = new LoginInfoDTO();
-
-            newLogin.Username = loginInfo.Username;
-            newLogin.Password = loginInfo.Password;
+            LoginInfoDTO newLogin = loginInfo.ToDTO();
 
             //try
             //{

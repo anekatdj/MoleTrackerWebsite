@@ -31,16 +31,9 @@ namespace DataAccessLayer
 
                 throw;
             }
-            PatientDataDomain patientDataDomain = new PatientDataDomain()
-            {
-                PatientID = patientDataDTO.PatientID,
-                //CollectionList = patientDataDTO.CollectionList,
-                //PatientInfo = patientDataDTO.PatientInfo
-            };
-            //foreach (PatientInfoDomain item in collection)
-            //{
 
-            //}
+            PatientDataDomain patientDataDomain = patientDataDTO.ToDomain();
+
             return patientDataDomain;
         }
         public PatientInfoDomain GetPatientInfo(PatientInfoDomain patientInfoDomain)
@@ -56,15 +49,9 @@ namespace DataAccessLayer
 
                 throw;
             }
-            PatientInfoDomain newpatientInfoDomain = new PatientInfoDomain()
-            {
-                CPR = patientInfoDTO.CPR,
-                Email = patientInfoDTO.Email,
-                Gender = patientInfoDTO.Gender,
-                Name = patientInfoDTO.Name,
-                PhoneNumber = patientInfoDTO.PhoneNumber,
-                PatientID = patientInfoDTO.PatientID
-            };
+
+            PatientInfoDomain newpatientInfoDomain = patientInfoDTO.ToDomain();
+
             return newpatientInfoDomain;
         }
     }
