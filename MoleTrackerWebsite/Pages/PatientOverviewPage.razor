@@ -1,22 +1,54 @@
 ﻿@page "/PatientOverviewPage"
 @using Microsoft.AspNetCore.Mvc.Diagnostics
 @using DataClasses.LoginDTO
+@using DataClasses.Domain
 
-<h3>PatientOverviewPage</h3>
+@*@inject PatientDataDomain PatientData*@
+@inject MedicalPracticePatientsDomain MedicalPracticePatients;
+@*<h3>PatientOverviewPage</h3>*@
 
-<div>
-    <h2>Table under here plz</h2>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Navn</th>
-            <th>CPR-Nummer</th>
-        </tr>
-        </thead>
-    </table>
+
+<div class="wrapper fadeInDown" style="margin-top:10%">
+    <div id="formContent">
+        <EditForm Model="@MedicalPracticePatients">
+
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <h2>Patientoversigt</h2>
+            <table class="table table-striped">
+                <tbody>
+                <thead>
+                    <tr>
+                        <th>Navn</th>
+                        <th>CPR-Nummer</th>
+                    </tr>
+
+                    @foreach (var item in MedicalPracticePatients.PatientList)
+                    {
+                        <tr>
+                            <td>
+                                <a href="#" class="row-link">
+                                    @item.Name
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#" tabindex="-1" class="row-link">
+                                    @item.CPR
+                                </a>
+                            </td>
+                        </tr>
+                    }
+
+
+                </thead>
+                </tbody>
+            </table>
+        </EditForm>
+    </div>
 </div>
 
 @code {
+    
     private List<PatientInfoDTO> patientInfo;
 
     protected override async Task OnInitializedAsync()
@@ -27,4 +59,4 @@
     }
 
 }
-}
+

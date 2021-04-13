@@ -34,6 +34,8 @@ namespace MoleTrackerWebsite
             services.AddSingleton<WeatherForecastService>();
 
             services.AddTransient<LoginInfoDomain>();
+            //er ikke sikker på om denne skal være singleton eller transient
+            services.AddSingleton<MedicalPracticePatientsDomain>();
             services.AddSingleton<SessionInfoDomain>();
             services.AddSingleton<ILogInController, LogInController>();
         }

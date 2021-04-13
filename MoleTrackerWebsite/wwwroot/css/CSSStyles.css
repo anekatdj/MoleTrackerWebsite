@@ -89,6 +89,45 @@ h2 {
     border-radius: 0 0 10px 10px;
 }
 
+/* Belinda */
+body {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    color: #37559d;
+}
+
+a {
+    color: #5165ff;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    border: 2px solid #ccd2ff;
+    position: relative;
+}
+
+tr:hover,
+tr:focus {
+    background: #f2f3ff;
+    outline: none;
+}
+
+td > a:first-child {
+    display: flex;
+    padding: 18px;
+    text-decoration: none;
+    color: inherit;
+    z-index: 0;
+}
+
+    &:focus{
+    outline: 0;
+    }
+
 
 
 /* TABS */

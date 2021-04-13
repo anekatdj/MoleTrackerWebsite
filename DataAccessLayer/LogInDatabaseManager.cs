@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Text;
 using DataAccessLayer.DataAccessLayerInterfaces;
 using APIWebServiesConnector;
+using APIWebServiesConnector.APIStringFabrics;
 using DataClasses;
 using DataClasses.Domain;
 using DataClasses.LoginDTO;
@@ -18,7 +19,7 @@ namespace DataAccessLayer
 
         public LogInDatabaseManager()
         {
-            API = new StubApiService();
+            API = new ApiService(APIStringFabric.GetDeveloperAPIString());
         }
 
         public bool VerifyLoginWithAPI(LoginInfoDomain loginInfo)
@@ -28,25 +29,24 @@ namespace DataAccessLayer
             newLogin.Username = loginInfo.Username;
             newLogin.Password = loginInfo.Password;
 
-            //try
-            //{
-            //    doctorInfo = API.GetObject<DoctorInfoDTO, LoginInfoDTO>("PostLoginDoctor", newLogin);
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e);
-            //    throw;
-            //}
+            try
+            {
+                doctorInfo = API.GetObject<DoctorInfoDTO, LoginInfoDTO>("MedLogin", newLogin);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
 
-            //if (doctorInfo != null)
-            //{
-            //    return true;
-            //}
-            //else
-            //{
-            //    return false;
-            //}
-            return false; 
+            if (doctorInfo != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }
