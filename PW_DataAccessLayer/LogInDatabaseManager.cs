@@ -13,7 +13,9 @@ namespace PW_DataAccessLayer
 
         public LogInDatabaseManager()
         {
-            API = new StubApiService();
+            //API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
+            
+            //API = new StubApiService();
         }
 
         public bool ValidateLogin(LogInInfo loginInfo)
@@ -31,7 +33,6 @@ namespace PW_DataAccessLayer
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
             }
 
             if (patientInfoDTO.CPR != null)
