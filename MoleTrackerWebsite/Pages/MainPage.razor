@@ -46,36 +46,6 @@
 };
 }
 
-<h1>Velkommen, @PatientInfo.Name</h1>
-
-<div class="container">
-    <table class="table table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>Personlige samlinger</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (Collection collection in collections)
-        {
-            <tr>
-                <td>@collection.CollectionName</td>
-            </tr>
-        }
-        </tbody>
-    </table>
-</div>
-
-@code {
-
-    private IEnumerable<Collection> collections = new[]
-    {
-        new Collection()
-    };
-
-};
-}
-
 
 
 
