@@ -8,7 +8,7 @@
 @inject PatientInfo PatientInfo
 
 
-
+<link href="css/CSSStyles.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> @*EYE*@
 
 @if (!SessionInfo.LoggedIn)
@@ -18,50 +18,90 @@
 
 <h1>Velkommen, @PatientInfo.Name</h1>
 
-<div class="container">
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Personlige samlinger</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (Collection collection in collections)
-            {
-                <tr>
-                    <td>@collection.CollectionName</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="row align-items-start" style="height: auto; width: auto">
+
+    <div class="col">
+        <div class="tabelcontainer" style="overflow: scroll; height: 500px; width: 400px">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Personlige samlinger</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Collection collection in collections)
+                    {
+                        <tr>
+                            <td>@collection.CollectionName</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="col">
+        @*padding og sticky*@
+        <div style="width: 400px">
+
+            <img src="@FrontOrBack" style="float: right; width: 212px; height: 477px;" /> @*onmousewheel="@MouseWheel"*@
+            <button style="float:right" class="@Arrow" @onclick="TurnAroundModel"></button>
+
+        </div>
+    </div>
+
+    @*636*1431 billedstørrelse*@
+    
+    <div>
+        <button style="float: bottom; border-radius: 28px; margin-bottom: 10px" class="@AddCollectionButton"></button>
+    </div>
+
 </div>
 
-@code {
 
+
+
+
+
+@code {
     private IEnumerable<Collection> collections = new[]
     {
-        new Collection()
+        new Collection {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Venstre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
     };
 
-};
-}
 
-
-
-
-@*padding og sticky*@
-
-<img src="@FrontOrBack" style="float: right; width: 212px; height: 477px;" /> @*onmousewheel="@MouseWheel"*@
-<button style="float:right" class="@Arrow" @onclick="TurnAroundModel"></button>
-<button> </button>
-
-@*636*1431 billedstørrelse*@
-
-
-
-@code {
     public string FrontOrBack = "/Images/FemaleBackCrop.png";
     public string Arrow = "fa fa-refresh";
+    public string AddCollectionButton = "fa fa-plus";
     public string TurnAround { get; set; }
     public string Gender { get; set; }
 
