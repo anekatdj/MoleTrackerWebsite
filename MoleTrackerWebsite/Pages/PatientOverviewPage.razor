@@ -2,11 +2,11 @@
 @using Microsoft.AspNetCore.Mvc.Diagnostics
 @using DataClasses.LoginDTO
 @using DataClasses.Domain
+@using System.Reflection.Metadata
 
 @*@inject PatientDataDomain PatientData*@
 @inject MedicalPracticePatientsDomain MedicalPracticePatients;
 @*<h3>PatientOverviewPage</h3>*@
-
 
 <div class="wrapper fadeInDown" style="margin-top:10%">
     <div id="formContent">
@@ -15,14 +15,24 @@
             <DataAnnotationsValidator />
             <ValidationSummary />
             <h2>Patientoversigt</h2>
-            <table class="table table-striped">
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for patients..">
+            <tbody>
+            <ul id="myUL">
+                @foreach (var item in MedicalPracticePatients.PatientList)
+                {
+                    <li><a href="#" class="row-link"> @item.Name @item.CPR</a></li>
+                }
+
+            </ul>
+            </tbody>
+
+            @*<table class="table table-striped">
                 <tbody>
                 <thead>
                     <tr>
                         <th>Navn</th>
                         <th>CPR-Nummer</th>
                     </tr>
-
                     @foreach (var item in MedicalPracticePatients.PatientList)
                     {
                         <tr>
@@ -38,14 +48,13 @@
                             </td>
                         </tr>
                     }
-
-
                 </thead>
                 </tbody>
-            </table>
+            </table>*@
         </EditForm>
     </div>
 </div>
+
 
 @code {
     
@@ -58,5 +67,9 @@
         patientInfo.Add(new PatientInfoDTO("123456-7890", "Hans Hansen"));
     }
 
+    protected void myFunction()
+    {
+      
+    }
 }
 

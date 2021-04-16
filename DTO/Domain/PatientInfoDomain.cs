@@ -5,7 +5,18 @@ using System.Text;
 namespace DataClasses.Domain
 {
     public class PatientInfoDomain
+
     {
+        public PatientInfoDomain(string CPR, string name)
+        {
+            this.CPR = CPR;
+            this.Name = name;
+        }
+
+        public PatientInfoDomain()
+        {
+            
+        }
         public int PatientID { get; set; }
         public string CPR { get; set; }
         public string Name { get; set; }
