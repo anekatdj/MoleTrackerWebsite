@@ -1,6 +1,6 @@
 ﻿using PW_BusinessLogicLayer.Interfaces;
 
-namespace LogicLayer
+namespace PW_BusinessLogicLayer
 {
     public class DeletePictureController : IDeletePictureController
     {
