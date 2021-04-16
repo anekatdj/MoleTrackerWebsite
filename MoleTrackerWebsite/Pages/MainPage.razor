@@ -3,21 +3,52 @@
 
 @inject NavigationManager NavManager
 @inject SessionInfo SessionInfo
+@inject PatientInfo PatientInfo
+
+@layout MainLayout
+
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> @*EYE*@
 
 @if (!SessionInfo.LoggedIn)
 {
-    NavManager.NavigateTo("/mainPage");
+    NavManager.NavigateTo("/patientLogin");
 }
 
-<h1>Hello, world!</h1>
+<h1>Velkommen, @PatientInfo.Name</h1>
 
-Welcome to your new app.
+<div class="container">
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>Personlige samlinger</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (Collection collection in collections)
+        {
+            <tr>
+                <td>@collection.CollectionName</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code {
 
-<img src="@FrontOrBack" style="float: right;
+    private IEnumerable<Collection> collections = new[]
+    {
+        new Collection()
+    };
+
+};
+}
+
+
+
+
+<img src="@FrontOrBack" style="float: left;
                                       width: 212px;
                                       height: 477px;
                                   " />

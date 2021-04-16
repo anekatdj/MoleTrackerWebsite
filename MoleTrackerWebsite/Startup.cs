@@ -34,6 +34,8 @@ namespace MoleTrackerWebsite
             services.AddTransient<LogInInfo>();
             services.AddSingleton<SessionInfo>();
             services.AddSingleton<ILogInController, LogInController>();
+            services.AddSingleton<PatientInfo>();
+            services.AddSingleton<Collection>();
 
         }
 
