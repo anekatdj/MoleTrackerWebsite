@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataClasses.Domain;
-using LogicLayer;
+using PW_BusinessLogicLayer;
 using PW_BusinessLogicLayer.Interfaces;
 
 namespace MoleTrackerWebsite
@@ -34,6 +34,8 @@ namespace MoleTrackerWebsite
             services.AddTransient<LogInInfo>();
             services.AddSingleton<SessionInfo>();
             services.AddSingleton<ILogInController, LogInController>();
+            services.AddSingleton<PatientInfo>();
+            services.AddSingleton<Collection>();
 
         }
 
