@@ -36,6 +36,7 @@ namespace MoleTrackerWebsite
             services.AddSingleton<ILogInController, LogInController>();
             services.AddSingleton<PatientInfo>();
             services.AddSingleton<Collection>();
+            services.AddSingleton<DoctorInfo>();
 
         }
 

@@ -1,6 +1,57 @@
 ﻿@page "/doctorinformation"
+@using DataClasses.Domain
+@inject DoctorInfo DoctorInfo
 
-<h3>DoctorContactInformation</h3>
+
+
+
+<div class="container">
+    <h3>Kontakt din læge</h3>
+    <hr />
+    <div class="row" style=" border:thin">
+        <div class="col-sm">
+            <div class="font-weight-bold">Lægepraksis</div>
+        </div>
+        <div class="col-sm">
+            @DoctorInfo.MedicalPracticeName
+        </div>
+    </div>
+    <div class="row" style="background-color: lightgray; border: thin; border-left:thin">
+        <div class="col-sm">
+            <div class="font-weight-bold">Træffetider</div>
+        </div>
+        <div class="col-sm">
+            @DoctorInfo.OpeningHours
+        </div>
+    </div>
+    <div class="row" style="border: thin; border-left: thin">
+        <div class="col-sm">
+            <div class="font-weight-bold">Adresse</div>
+        </div>
+        <div class="col-sm">
+            @DoctorInfo.Adress
+        </div>
+    </div>
+    <div class="row" style="        background-color: lightgray;
+                                                                                                                                                                                                                                                                                      border: thin;
+                                                                                                                                                                                                                                                                                      border-left: thin
+                                                                                                                                                                                                                                                                                  ">
+        <div class="col-sm">
+            <div class="font-weight-bold">Telefon</div>
+        </div>
+        <div class="col-sm">
+            @DoctorInfo.PhoneNumber
+        </div>
+    </div>
+    <div class="row" style="border: thin; border-left: thin;" >
+        <div class="col-sm">
+            <div class="font-weight-bold" >Hjemmeside</div>
+        </div>
+        <div class="col-sm">
+            <a href="#" class="text-decoration-none">https://www.google.dk/</a>
+        </div>
+    </div>
+</div>
 
 @code {
 

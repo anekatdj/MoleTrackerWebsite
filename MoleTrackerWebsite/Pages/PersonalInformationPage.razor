@@ -2,10 +2,38 @@
 
 @layout MainLayout
 
-<h3>Personlige oplysninger</h3>
-<hr/>
 
-<div class="row">
+
+<div>
+    <h3>Personlige oplysninger</h3>
+    <hr />
+    <div class="row mb-3">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Navn</label>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Fornavn" aria-label="First name">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Efternavn" aria-label="Last name">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">CPR-nummer</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="colFormLabel" placeholder="email@mail.com">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="colFormLabel" placeholder="email@mail.com">
+        </div>
+    </div>
+</div>
+
+
+
+
+@*<div class="row">
     <div class="col-sm-3">
         <p>Navn</p>
     </div>
@@ -13,7 +41,7 @@
         <p>@name</p>
     </div>
 </div>
-    
+
 <div class="row">
     <div class="col-sm-3">
         <p>Fødselsdato</p>
@@ -22,7 +50,7 @@
         <p>@birthdate</p>
     </div>
 </div>
-    
+
 <div class="row">
     <div class="col-sm-3">
         <p>Køn</p>
@@ -31,7 +59,7 @@
         <p>@gender</p>
     </div>
 </div>
-    
+
 <div class="row">
     <div class="col-sm-3">
         <p>Adgangskode</p>
@@ -40,7 +68,7 @@
         <p>@password</p>
     </div>
 </div>
-    
+
 <div class="row">
     <div class="col-sm-3">
         <p>E-mail</p>
@@ -49,7 +77,7 @@
         <p>@email</p>
     </div>
 </div>
-    
+
 <div class="row">
     <div class="col-sm-3">
         <p>CPR-nummer</p>
@@ -72,4 +100,4 @@
     private string password = "*********";
     private string email = "laura.birch@hotmail.dk";
     private string cpr = "200798-xxxx";
-}
+}*@
