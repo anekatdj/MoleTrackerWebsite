@@ -20,11 +20,12 @@ Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 
-
+@*padding og sticky*@
 
 <img src="@FrontOrBack" style="float: right; width: 212px; height: 477px;" onmousewheel="@MouseWheel" />
 <button style="float:right" class="@Arrow" @onclick="TurnAroundModel"></button>
 <button> </button>
+
 @*636*1431 billedstørrelse*@
 
 
@@ -49,6 +50,7 @@ Welcome to your new app.
 
     //Zoom forsøg - virker ikke helt med event
     //https://stackoverflow.com/questions/54222913/scrollable-image-stack-using-blazor-component/54227687
+
     int imgNumber = 0;
     string img => $"/Images/FemaleBackCrop {imgNumber}.png";
 
