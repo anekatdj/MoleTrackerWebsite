@@ -1,8 +1,11 @@
 ﻿@page "/mainPage"
+
 @using DataClasses.Domain
 
 @inject NavigationManager NavManager
 @inject SessionInfo SessionInfo
+@inject PatientInfo PatientInfo
+
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> @*EYE*@
 
@@ -17,13 +20,14 @@ Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 
-<img src="@FrontOrBack" style="float: right;
-                                      width: 212px;
-                                      height: 477px;
-                                  " />
+
+
+<img src="@FrontOrBack" style="float: right; width: 212px; height: 477px;" onmousewheel="@MouseWheel" />
 <button style="float:right" class="@Arrow" @onclick="TurnAroundModel"></button>
 <button> </button>
 @*636*1431 billedstørrelse*@
+
+
 
 @code {
     public string FrontOrBack = "/Images/FemaleBackCrop.png";
@@ -41,4 +45,23 @@ Welcome to your new app.
             this.FrontOrBack = "/Images/FemaleBackCrop.png";
         }
     }
+
+
+    //Zoom forsøg - virker ikke helt med event
+    //https://stackoverflow.com/questions/54222913/scrollable-image-stack-using-blazor-component/54227687
+    int imgNumber = 0;
+    string img => $"/Images/FemaleBackCrop {imgNumber}.png";
+
+    public class WheelEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs{ public int DeltaY { get; }}
+
+
+
+    Task MouseWheel(WheelEventArgs args)
+    {
+        imgNumber += Math.Sign(args.DeltaY);
+        if (imgNumber == 43) imgNumber = 0;
+        if (imgNumber == -1) imgNumber = 42;
+        return Task.CompletedTask;
+    }
+
 }
