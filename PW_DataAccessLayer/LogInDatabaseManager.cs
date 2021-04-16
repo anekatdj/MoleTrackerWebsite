@@ -10,6 +10,7 @@ namespace PW_DataAccessLayer
     public class LogInDatabaseManager : ILogInDatabaseManager
     {
         private PatientInfoDTO patientInfoDTO;
+
         private IAPIService API;
 
         public LogInDatabaseManager()
