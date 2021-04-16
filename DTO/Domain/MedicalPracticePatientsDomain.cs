@@ -15,6 +15,6 @@ namespace DataClasses.Domain
             PatientList.Add(new PatientInfoDTO("456789-0124", "Laura"));
         }
         public int MedicalPracticeID { get; set; }
-        public List<PatientInfoDTO> PatientList { get; set; }
+        public List<PatientInfoDomain> PatientList { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace DataClasses.Domain
     public class PatientDataDomain
     {
         public int PatientID { get; set; }
-        public List<CollectionDTO.CollectionDTO> CollectionList { get; set; }
-        public PatientInfoDTO PatientInfo { get; set; }
+        public List<CollectionDomain> CollectionList { get; set; }
+        public PatientInfoDomain PatientInfo { get; set; }
     }
 }

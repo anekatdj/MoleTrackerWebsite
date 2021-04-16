@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using DataClasses.LoginDTO;
 
 namespace DataClasses.Domain
 {
@@ -15,5 +16,15 @@ namespace DataClasses.Domain
         [Required]
         [MinLength(1, ErrorMessage = "Adgangskode er for kort")]
         public string Password { get; set; }
+
+        public LoginInfoDTO ToDTO()
+        {
+            LoginInfoDTO loginInfoDto = new LoginInfoDTO()
+            {
+                Username = Username,
+                Password = Password
+            };
+            return loginInfoDto;
+        }
     }
 }

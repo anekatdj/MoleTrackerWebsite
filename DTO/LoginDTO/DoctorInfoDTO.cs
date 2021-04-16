@@ -1,8 +1,15 @@
-﻿namespace DataClasses.LoginDTO
+﻿using DataClasses.Domain;
+
+namespace DataClasses.LoginDTO
 {
     public class DoctorInfoDTO
-    { 
-        //TODO Ændr dette til DoctorID og sig det til Lasse
-        public int DoctorInfo { get; set; }
+    {
+        public int DoctorID { get; set; }
+
+        public DoctorInfoDomain ToDomain()
+        {
+            DoctorInfoDomain doctorInfoDomain = new DoctorInfoDomain() { DoctorID = DoctorID };
+            return doctorInfoDomain;
+        }
     }
 }

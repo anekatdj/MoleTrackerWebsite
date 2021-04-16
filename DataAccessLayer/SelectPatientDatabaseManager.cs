@@ -11,8 +11,6 @@ namespace DataAccessLayer
 {
     public class SelectPatientDatabaseManager : ISelectPatientDatabaseManager
     {
-        private PatientInfoRequestDTO patientInfoRequestDTO;
-        private PatientDataDomain patientDataDomain;
         private IAPIService API;
 
         public SelectPatientDatabaseManager()
@@ -33,17 +31,28 @@ namespace DataAccessLayer
 
                 throw;
             }
-            patientDataDomain = new PatientDataDomain()
-            {
-                PatientID = patientDataDTO.PatientID,
-                CollectionList = patientDataDTO.CollectionList
-            };
+
+            PatientDataDomain patientDataDomain = patientDataDTO.ToDomain();
+
             return patientDataDomain;
         }
-        //public PatientInfoDomain GetPatientInfo()
-        //{
-        //    PatientInfoDTO patientInfoDTO = new PatientInfoDTO();
+        public PatientInfoDomain GetPatientInfo(PatientInfoDomain patientInfoDomain)
+        {
+            PatientInfoDTO patientInfoDTO = new PatientInfoDTO();
+            PatientInfoRequestDTO patientInfoRequestDTO = new PatientInfoRequestDTO() { PatientID = patientInfoDomain.PatientID };
+            try
+            {
+                patientInfoDTO = API.GetObject<PatientInfoDTO, PatientInfoRequestDTO>("GetPatientInfo", patientInfoRequestDTO);
+            }
+            catch (Exception)
+            {
 
-        //}
+                throw;
+            }
+
+            PatientInfoDomain newpatientInfoDomain = patientInfoDTO.ToDomain();
+
+            return newpatientInfoDomain;
+        }
     }
 }

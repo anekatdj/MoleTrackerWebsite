@@ -6,6 +6,7 @@ using APIWebServiesConnector;
 using DataClasses.Domain;
 using DataClasses.LoginDTO;
 using DataClasses.MISCDTO;
+
 namespace DataAccessLayer
 {
     public class LoadPatientsDatabaseManager : ILoadPatientsDatabaseManager
@@ -21,7 +22,7 @@ namespace DataAccessLayer
         public MedicalPracticePatientsDomain GetMedicalPracticePatients(DoctorInfoDomain doctorInfoDomain)
         {
             MedicalPracticePatientsDTO medicalPracticePatientsDTO = new MedicalPracticePatientsDTO();
-            DoctorInfoDTO doctorInfoDTO = new DoctorInfoDTO() { DoctorInfo = doctorInfoDomain.DoctorID };
+            DoctorInfoDTO doctorInfoDTO = doctorInfoDomain.ToDTO();
             try
             {
                 medicalPracticePatientsDTO = API.GetObject<MedicalPracticePatientsDTO, DoctorInfoDTO>("GetMedicalPracticePatients", doctorInfoDTO);
@@ -31,11 +32,8 @@ namespace DataAccessLayer
 
                 throw;
             }
-            medicalPracticePatientsDomain = new MedicalPracticePatientsDomain()
-            {
-                MedicalPracticeID = medicalPracticePatientsDTO.MedicalPracticeID,
-                PatientList = medicalPracticePatientsDTO.PatientList
-            };
+
+            medicalPracticePatientsDomain = medicalPracticePatientsDTO.ToDomain();
             return medicalPracticePatientsDomain;
         }
     }
