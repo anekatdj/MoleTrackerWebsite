@@ -1,10 +1,13 @@
 ﻿@page "/mainPage"
 
+@using PW_BusinessLogicLayer.Interfaces
 @using DataClasses.Domain
 
 @inject NavigationManager NavManager
 @inject SessionInfo SessionInfo
 @inject PatientInfo PatientInfo
+
+
 
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> @*EYE*@
@@ -34,6 +37,7 @@ Welcome to your new app.
     public string FrontOrBack = "/Images/FemaleBackCrop.png";
     public string Arrow = "fa fa-refresh";
     public string TurnAround { get; set; }
+    public string Gender { get; set; }
 
     public void TurnAroundModel()
     {
@@ -47,6 +51,12 @@ Welcome to your new app.
         }
     }
 
+    public void GetGender()
+    {
+
+    }
+
+
 
     //Zoom forsøg - virker ikke helt med event
     //https://stackoverflow.com/questions/54222913/scrollable-image-stack-using-blazor-component/54227687
@@ -54,7 +64,7 @@ Welcome to your new app.
     int imgNumber = 0;
     string img => $"/Images/FemaleBackCrop {imgNumber}.png";
 
-    public class WheelEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs{ public int DeltaY { get; }}
+    public class WheelEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs { public int DeltaY { get; } }
 
 
 
