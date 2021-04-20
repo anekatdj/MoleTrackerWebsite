@@ -12,7 +12,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Samlingtag</th>
+                <th>@NameOfPatient</th>
             </tr>
         </thead>
     </table>
@@ -21,11 +21,13 @@
 @code {
 
     private PatientInfoDomain patientInfo;
+    public string NameOfPatient { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         patientInfo = SelectPatientController.SelectedPatient;
-         
+        NameOfPatient = patientInfo.Name;
+
     }
 
 }

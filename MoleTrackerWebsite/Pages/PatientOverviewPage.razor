@@ -30,16 +30,12 @@
                     </tr>
                     @foreach (var item in filteredPatientList)
                     {
-                        <tr>
+                        <tr @onclick="@((e) => NavigateToSpecificPatientPage(e, item.Name))">
                             <td>
-                                <select @onchange="(e)=>NavigateToSpecificPatientPage(e, item)">
                                 @item.Name
-                                </select>
                             </td>
                             <td>
-                                <a href="#" class="row-link">
-                                    @item.CPR
-                                </a>
+                                @item.CPR
                             </td>
                         </tr>
                     }
@@ -54,11 +50,13 @@
 
     public string SearchInput { get; set; }
     public List<PatientInfoDomain> filteredPatientList { get; set; }
+    public bool IsDisabled { get; set; }
 
     public string LinkToSpecifikPatientPage { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
+        IsDisabled = true;
         filteredPatientList = MedicalPracticePatients.PatientList;
         SearchInput = "";
     }
@@ -81,9 +79,9 @@
 
     }
 
-    private void NavigateToSpecificPatientPage(ChangeEventArgs e, PatientInfoDomain patient)
+    private void NavigateToSpecificPatientPage(MouseEventArgs e, string patientName)
     {
-        string selectedPatientName = e.Value.ToString();
+        string selectedPatientName = patientName;
 
         var selectedPatientsInfo = filteredPatientList.Where(x => x.Name.Contains(selectedPatientName)).ToList();
 
