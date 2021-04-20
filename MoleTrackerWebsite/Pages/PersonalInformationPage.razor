@@ -3,8 +3,11 @@
 @layout MainLayout
 
 @using DataClasses.Domain
-@inject PatientInfo PatientInfo
+@using PW_BusinessLogicLayer
+@using PW_BusinessLogicLayer.Interfaces
 
+@inject PatientInfo PatientInfo
+@inject ILogInController LogInController
 
 <div>
     <h3>Personlige oplysninger</h3>
@@ -12,7 +15,7 @@
     <div class="row mb-3">
         <label for="colFormLabel" class="col-sm-2 col-form-label">Navn</label>
         <div class="col">
-            <input  disabled="@IsDisabled" type="text" class="form-control" placeholder="Fornavn Efternavn" aria-label="First name">
+            <input disabled="@IsDisabled" type="text" class="form-control" placeholder=@PatientInfo.Name aria-label="First name">
         </div>
     </div>
     <div class="row mb-3">
@@ -24,25 +27,25 @@
     <div class="row mb-3">
         <label for="colFormLabel" class="col-sm-2 col-form-label">Køn</label>
         <div class="col-sm-10">
-            <input disabled="@IsDisabled" type="text" class="form-control" id="colFormLabel" placeholder="Mand/Kvinde">
+            <input disabled="@IsDisabled" type="text" class="form-control" id="colFormLabel" placeholder=@PatientInfo.Gender>
         </div>
     </div>
     <div class="row mb-3">
         <label for="colFormLabel" class="col-sm-2 col-form-label">Adgangskode</label>
         <div class="col-sm-10">
-            <input disabled="@IsDisabled" type="password" class="form-control" id="colFormLabel" placeholder="Adgangskode" >
+            <input disabled="@IsDisabled" type="password" class="form-control" id="colFormLabel" placeholder="Adgangskode">
         </div>
     </div>
     <div class="row mb-3 ">
         <label for="colFormLabel" class="col-sm-2 col-form-label">CPR-nummer</label>
         <div class="col-sm-10">
-            <input disabled="@IsDisabled" type="text" class="form-control" id="colFormLabel" placeholder="01011900XXXX">
+            <input disabled="@IsDisabled" type="text" class="form-control" id="colFormLabel" placeholder=@PatientInfo.CPR>
         </div>
     </div>
     <div class="row mb-3">
         <label for="colFormLabel" class="col-sm-2 col-form-label">Email</label>
         <div class="col-sm-10">
-            <input disabled="@IsDisabled" type="email" class="form-control" id="colFormLabel" placeholder="email@mail.com">
+            <input disabled="@IsDisabled" type="email" class="form-control" id="colFormLabel" placeholder=@PatientInfo.Email>
         </div>
     </div>
 
@@ -69,6 +72,22 @@
         }
     }
 
+    //Run this when page is loaded
+    public void DisplayPatientInfo()
+    {
+        PatientInfo = LogInController.HandlePatientInfo();
+    }
+
+    Task StartupTask()
+    {
+        return Task.CompletedTask;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        DisplayPatientInfo();
+        await StartupTask();
+    }
 }
 
 

@@ -20,5 +20,10 @@ namespace PW_BusinessLogicLayer
         {
             return logInDatabaseManager.ValidateLogin(loginInfo);
         }
+
+        public PatientInfo HandlePatientInfo()
+        {
+            return logInDatabaseManager.GetPatientInfo();
+        }
     }
 }
