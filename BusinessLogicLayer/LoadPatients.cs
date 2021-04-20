@@ -5,8 +5,6 @@ using BusinessLogicLayer.BusinessLogicLayerInterfaces;
 using DataAccessLayer;
 using DataAccessLayer.DataAccessLayerInterfaces;
 using DataClasses.Domain;
-using DataClasses.LoginDTO;
-using DataClasses.MISCDTO;
 
 namespace BusinessLogicLayer
 {
@@ -18,9 +16,9 @@ namespace BusinessLogicLayer
         {
             loadPatientsDatabase = new LoadPatientsDatabaseManager();
         }
-        public void LoadPatientList(MedicalPracticePatientsDomain patients)
+        public MedicalPracticePatientsDomain LoadPatientList(DoctorInfoDomain doctorInfoDomain)
         {
-            loadPatientsDatabase.GetMedicalPracticePatients(/*Skal ændres senere*/new DoctorInfoDomain());
+            return loadPatientsDatabase.GetMedicalPracticePatients(doctorInfoDomain);
         }
 
 

@@ -10,6 +10,6 @@ namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
 {
     public interface ILoadPatients
     {
-        void LoadPatientList(MedicalPracticePatientsDomain patients);
+         MedicalPracticePatientsDomain LoadPatientList(DoctorInfoDomain doctorInfoDomain);
     }
 }

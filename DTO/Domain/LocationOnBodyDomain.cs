@@ -1,6 +1,8 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Text;
+using DataClasses.DTO;
 
 namespace DataClasses.Domain
 {
@@ -12,5 +14,17 @@ namespace DataClasses.Domain
         public bool IsFrontFacing { get; set; }
         public string BodyPart { get; set; }
         public string BodyPartSide { get; set; }
+        public LocationOnBodyDTO ToDTO()
+        {
+            LocationOnBodyDTO locationOnBodyDTO = new LocationOnBodyDTO()
+            {
+                xCoordinate = xCoordinate,
+                yCoordinate = yCoordinate,
+                IsFrontFacing = IsFrontFacing,
+                BodyPart = BodyPart,
+                BodyPartSide = BodyPartSide
+            };
+            return locationOnBodyDTO;
+        }
     }
 }

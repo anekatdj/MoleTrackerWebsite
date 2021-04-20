@@ -7,7 +7,7 @@ namespace DataAccessLayer.DataAccessLayerInterfaces
 {
     public interface ISelectPatientDatabaseManager
     {
-        public PatientDataDomain GetPatientData(PatientInfoDomain patientInfoDomain);
-        public PatientInfoDomain GetPatientInfo(PatientInfoDomain patientInfoDomain);
+        PatientDataDomain GetPatientData(PatientInfoDomain patientInfoDomain);
+        PatientInfoDomain GetPatientInfo(PatientInfoDomain patientInfoDomain);
     }
 }
