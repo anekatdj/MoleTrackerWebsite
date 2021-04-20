@@ -13,11 +13,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoleTrackerWebsite_MW.UnitT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PW_BusinessLogicLayer", "PW_BusinessLogicLayer\PW_BusinessLogicLayer.csproj", "{B97E2277-DAD2-470F-A878-0C5C628DB337}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PW_DataAccessLayer", "PW_DataAccessLayer\PW_DataAccessLayer.csproj", "{D369E85B-BBE3-4762-AED6-CF39197032CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PW_DataAccessLayer", "PW_DataAccessLayer\PW_DataAccessLayer.csproj", "{D369E85B-BBE3-4762-AED6-CF39197032CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MW_BusinessLogicLayer", "MW_BusinessLogicLayer\MW_BusinessLogicLayer.csproj", "{D501B1C8-33F9-42F9-87E6-730DF6D96AD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MW_BusinessLogicLayer", "MW_BusinessLogicLayer\MW_BusinessLogicLayer.csproj", "{D501B1C8-33F9-42F9-87E6-730DF6D96AD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MW_DataAccessLayer", "MW_DataAccessLayer\MW_DataAccessLayer.csproj", "{8E18C772-DAD3-441A-BD12-B62A8F99714A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MW_DataAccessLayer", "MW_DataAccessLayer\MW_DataAccessLayer.csproj", "{8E18C772-DAD3-441A-BD12-B62A8F99714A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1A46C724-5C1E-49D0-912E-20A6B50EF2F2}"
+	ProjectSection(SolutionItems) = preProject
+		Pin.cur = Pin.cur
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

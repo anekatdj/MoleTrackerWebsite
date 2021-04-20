@@ -2,6 +2,9 @@
 
 @using PW_BusinessLogicLayer.Interfaces
 @using DataClasses.Domain
+@using System.Drawing
+@using System.Net.Mime
+@using System.Diagnostics
 
 @inject NavigationManager NavManager
 @inject SessionInfo SessionInfo
@@ -44,7 +47,6 @@
     <div class="col">
         @*padding og sticky*@
         <div style="width: 400px">
-
             <img src="@FrontOrBack" style="float: right; width: 212px; height: 477px;" /> @*onmousewheel="@MouseWheel"*@
             <button style="float:right" class="@Arrow" @onclick="TurnAroundModel"></button>
 
@@ -52,10 +54,13 @@
     </div>
 
     @*636*1431 billedstørrelse*@
-    
-    <div>
-        <button style="float: bottom; border-radius: 28px; margin-bottom: 10px" class="@AddCollectionButton"></button>
-    </div>
+
+
+
+</div>
+
+<div class="col align-self-end">
+    <button style="float: right; border-radius: 28px;" class="@AddCollectionButton" @onclick="AddNewCollection"></button>
 
 </div>
 
@@ -65,63 +70,65 @@
 
 
 @code {
-    private IEnumerable<Collection> collections = new[]
-    {
-        new Collection {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Venstre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
-    };
-
-
-    public string FrontOrBack = "/Images/FemaleBackCrop.png";
+    public string FrontOrBack = "/Images/MaleFrontCrop.png";
     public string Arrow = "fa fa-refresh";
     public string AddCollectionButton = "fa fa-plus";
     public string TurnAround { get; set; }
     public string Gender { get; set; }
 
+    private IEnumerable<Collection> collections = new[]
+    {
+        new Collection {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Venstre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
+    };
+
+
     public void TurnAroundModel()
     {
-        if (this.FrontOrBack == "/Images/FemaleBackCrop.png")
+        GetGender();
+
+        if (Gender == "G")
         {
-            this.FrontOrBack = "/Images/FemaleFrontcrop.png";
+
+            if (this.FrontOrBack == "/Images/FemaleBackCrop.png")
+            {
+                this.FrontOrBack = "/Images/FemaleFrontcrop.png";
+            }
+            else
+            {
+                this.FrontOrBack = "/Images/FemaleBackCrop.png";
+            }
         }
-        else
+
+        else if (Gender == "Mand")
         {
-            this.FrontOrBack = "/Images/FemaleBackCrop.png";
+            if (this.FrontOrBack == "/Images/MaleBackCrop.png")
+            {
+                this.FrontOrBack = "/Images/MaleFrontCrop.png";
+            }
+            else
+            {
+                this.FrontOrBack = "/Images/MaleBackCrop.png";
+            }
         }
     }
 
     public void GetGender()
     {
+        Gender = PatientInfo.Gender;
 
+        //if (Gender == "Kvinde")
+        //{
+        //    FrontOrBack = "/Images/FemaleFrontcrop.png";
+        //}
+
+        //else if (Gender == "Mand")
+        //{
+        //    FrontOrBack = "/Images/MaleFrontCrop.png";
+        //}
     }
-
 
 
     //Zoom forsøg - virker ikke helt med event
@@ -129,6 +136,7 @@
 
     int imgNumber = 0;
     string img => $"/Images/FemaleBackCrop {imgNumber}.png";
+    string img2 => $"/Images/pin.png";
 
     public class WheelEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs { public int DeltaY { get; } }
 
@@ -142,4 +150,30 @@
         return Task.CompletedTask;
     }
 
+
+    public string NewPinAdded { get; set; }
+
+    private void AddNewCollection(MouseEventArgs e)
+    {
+        NewPinAdded = "pin.png";
+
+        NavigateToCollectionPage();
+    }
+
+    private void GetCoordinates(MouseEventArgs e)
+    {
+        double x = e.ScreenX;
+        double y = e.ScreenY;
+
+        //if (obj.ScreenX > 1000 && obj.ScreenX < 1200)
+        //{
+        //    Point mousePoint = new Point((int)obj.ScreenX, (int)obj.ScreenY);
+        //    Debug.WriteLine("Koordinaterne er {0}, {1}", obj.ScreenX, obj.ScreenY);
+        //}
+    }
+
+    private void NavigateToCollectionPage()
+    {
+        NavManager.NavigateTo("/collectionPage");
+    }
 }

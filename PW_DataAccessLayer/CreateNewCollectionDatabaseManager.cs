@@ -2,7 +2,8 @@
 
 namespace PW_DataAccessLayer
 {
-    class CreateNewCollectionDatabaseManager : ICreateNewCollectionDatabaseManager
+    public class CreateNewCollectionDatabaseManager : ICreateNewCollectionDatabaseManager
     {
+
     }
 }
