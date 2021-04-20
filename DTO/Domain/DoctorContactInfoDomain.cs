@@ -11,7 +11,7 @@ namespace DataClasses.Domain
 
         public string MedicalPracticeName { get; set; }
         public string PhoneNumber { get; set; }
-        public string Adress { get; set; }
+        public string Address { get; set; }
         public List<string> OpeningHours { get; set; }
         public string Website { get; set; }
     }

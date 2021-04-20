@@ -145,7 +145,7 @@ namespace DataAccessLayer
                 MedicalPracticeID = doctorContactInfoDTO.MedicalPracticeID,
                 MedicalPracticeName = doctorContactInfoDTO.MedicalPracticeName,
                 PhoneNumber = doctorContactInfoDTO.PhoneNumber,
-                Adress = doctorContactInfoDTO.Adress,
+                Address = doctorContactInfoDTO.Adress,
                 OpeningHours = doctorContactInfoDTO.OpeningHours,
                 Website = doctorContactInfoDTO.Website
             };
