@@ -1,10 +1,13 @@
-﻿using DataClasses.CollectionDTO;
-using DataClasses.Domain;
-using DataClasses.MISCDTO;
-using DataClasses.PictureDTO;
+﻿using DataClasses.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DataClasses.DataObjects.DTO;
+using DataClasses.DTO;
+using CollectionDTO = DataClasses.CollectionDTO.CollectionDTO;
+using DoctorContactInfoDTO = DataClasses.MISCDTO.DoctorContactInfoDTO;
+using LocationOnBodyDTO = DataClasses.CollectionDTO.LocationOnBodyDTO;
+using PictureInfoDTO = DataClasses.PictureDTO.PictureInfoDTO;
 
 namespace DataAccessLayer
 {
@@ -15,7 +18,7 @@ namespace DataAccessLayer
             List<PictureInfoDomain> list = new List<PictureInfoDomain>() { };
             foreach (PictureInfoDTO item in collectionDTO.PictureList)
             {
-                list.Add(item.ToDomain());
+                list.Add(PictureInfoToDomain(item));
             }
             CollectionDomain collectionDomain = new CollectionDomain()
             {
@@ -48,6 +51,68 @@ namespace DataAccessLayer
             };
             return pictureInfoDomain;
         }
+
+        public static DoctorInfoDomain DoctorInfoToDomain(DoctorInfoDTO doctorInfoDTO)
+        {
+            DoctorInfoDomain doctorInfoDomain = new DoctorInfoDomain()
+            {
+                DoctorID = doctorInfoDTO.DoctorID
+            };
+            return doctorInfoDomain;
+        }
+
+        public static LoginInfoDomain LoginInfoToDomain(LoginInfoDTO loginInfoDTO)
+        {
+            LoginInfoDomain loginInfoDomain = new LoginInfoDomain()
+            {
+                Username = loginInfoDTO.Username,
+                Password = loginInfoDTO.Password
+            };
+            return loginInfoDomain;
+        }
+
+        public static PatientInfoDomain PatientInfoToDomain(PatientInfoDTO patientInfoDTO)
+        {
+            PatientInfoDomain patientInfoDomain = new PatientInfoDomain()
+            {
+                CPR = patientInfoDTO.CPR,
+                Email = patientInfoDTO.Email,
+                Gender = patientInfoDTO.Gender,
+                Name = patientInfoDTO.Name,
+                PhoneNumber = patientInfoDTO.PhoneNumber,
+                PatientID = patientInfoDTO.PatientID
+            };
+            return patientInfoDomain;
+        }
+
+        public static SessionInfoDomain SessionInfoToDomain(SessionInfoDTO sessionInfoDTO)
+        {
+            SessionInfoDomain sessionInfoDomain = new SessionInfoDomain()
+            {
+                SessionID = sessionInfoDTO.SessionID,
+                LoginID = sessionInfoDTO.LoginID,
+                LoginType = sessionInfoDTO.LoginType
+            };
+            return sessionInfoDomain;
+        }
+
+        public static MedicalPracticePatientsDomain MedicalPracticePatientsToDomain(
+            MedicalPracticePatientsDTO medicalPracticePatientsDTO)
+        {
+            List<PatientInfoDomain> list = new List<PatientInfoDomain>() { };
+            foreach (PatientInfoDTO item in medicalPracticePatientsDTO.PatientList)
+            {
+                list.Add(PatientInfoToDomain(item));
+            }
+
+            MedicalPracticePatientsDomain medicalPracticePatientsDomain = new MedicalPracticePatientsDomain()
+            {
+                MedicalPracticeID = medicalPracticePatientsDTO.MedicalPracticeID,
+                PatientList = list
+            };
+            return medicalPracticePatientsDomain;
+        }
+
         public static DoctorContactInfoDomain DoctorContactInfoToDomain(DoctorContactInfoDTO doctorContactInfoDTO)
         {
             DoctorContactInfoDomain doctorContactInfoDomain = new DoctorContactInfoDomain()

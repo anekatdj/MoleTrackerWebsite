@@ -6,6 +6,7 @@ using APIWebServiesConnector;
 using DataClasses.Domain;
 using DataClasses.LoginDTO;
 using DataClasses.MISCDTO;
+using SessionInfoDTO = DataClasses.DataObjects.DTO.SessionInfoDTO;
 
 namespace DataAccessLayer
 {
