@@ -43,13 +43,19 @@
         </div>
     </div>
     <div class="row mb-3">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Telefon</label>
+        <div class="col-sm-10">
+            <input disabled="@IsDisabled" type="email" class="form-control" id="colFormLabel" placeholder=@PatientInfo.PhoneNumber>
+        </div>
+    </div>
+    <div class="row mb-3">
         <label for="colFormLabel" class="col-sm-2 col-form-label">Email</label>
         <div class="col-sm-10">
             <input disabled="@IsDisabled" type="email" class="form-control" id="colFormLabel" placeholder=@PatientInfo.Email>
         </div>
     </div>
 
-    <button bind="@IsDisabled" type="submit" style="float:right" class="btn btn-primary" @onclick="EditAndSave">@TxtType</button>
+    <button bind="@IsDisabled" type="submit" style="float:right" class="btn btn-primary rounded-pill" @onclick="EditAndSave">@TxtType</button>
 
 </div>
 
@@ -69,6 +75,7 @@
         {
             this.IsDisabled = true;
             this.TxtType = "Redigér";
+
         }
     }
 
