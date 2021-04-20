@@ -21,13 +21,16 @@
 @code {
 
     private PatientInfoDomain patientInfo;
+    //private PatientDataDomain patientData;
     public string NameOfPatient { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         patientInfo = SelectPatientController.SelectedPatient;
+
         NameOfPatient = patientInfo.Name;
 
+        //patientData = SelectPatientController.GetPatientData(patientInfo);
     }
 
 }

@@ -14,6 +14,10 @@
 @inject NavigationManager NavManager;
 @*<h3>PatientOverviewPage</h3>*@
 
+@layout EmptyLayout
+
+<link href="css/styles.css" rel="stylesheet"/>
+
 <div class="wrapper fadeInDown" style="margin-top:10%">
     <div id="formContent">
         <EditForm Model="@MedicalPracticePatients">
@@ -21,7 +25,7 @@
             <DataAnnotationsValidator />
             <ValidationSummary />
             <h2>Patientoversigt</h2>
-            <InputText id="myInput" @bind-Value="SearchInput" @onkeyup="MyFunction" placeholder="Search for patients.." />
+            <InputText id="myInput" @bind-Value="SearchInput" @onkeyup="MyFunction" placeholder="Søg efter patient" />
             <table id="patientTable" class="table table-striped">
                 <tbody>
                     <tr class="header">

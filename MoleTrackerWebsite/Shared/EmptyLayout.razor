@@ -1,4 +1,7 @@
-﻿@inherits LayoutComponentBase
+﻿@using DataClasses.Domain
+@inherits LayoutComponentBase
+@inject NavigationManager NavManager
+@inject SessionInfoDomain SesInfo;
 
 <div class="main">
     <div class="content px-4">
@@ -6,3 +9,13 @@
 
     </div>
 </div>
+@code
+{
+    //protected override void OnAfterRender(bool firstRender)
+    //{
+    //    if (!SesInfo.LoggedIn)
+    //    {
+    //        NavManager.NavigateTo("/login");
+    //    }
+    //}
+}
