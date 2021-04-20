@@ -7,6 +7,8 @@ namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
 {
     public interface ISelectPatient
     {
+        PatientInfoDomain SelectedPatient { get; set; }
         void GetPatientData(PatientInfoDomain patientInfoDomain);
+      
     }
 }
