@@ -1,0 +1,51 @@
+﻿@page "/CollectionPage"
+
+@using BusinessLogicLayer
+@using BusinessLogicLayer.BusinessLogicLayerInterfaces
+@using DataClasses.Domain
+@using System.Drawing
+
+@inject IViewCollectionController ViewCollectionController
+@inject NavigationManager NavManager;
+
+<h3>CollectionPage</h3>
+<div>
+    <table>
+        <tr>
+            <th>@collection.CollectionName</th>
+        </tr>
+        @foreach (var item in PicDataList)
+        {
+            <tr @onclick="@((e) => ShowPicture(e, item.PictureID))">
+                <td>
+                    @item.PictureData
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+@code {
+
+    private CollectionDomain collection;
+    private PatientDataDomain patientData;
+    public string NameOfPatient { get; set; }
+    public List<PictureDataDomain> PicDataList { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        collection = ViewCollectionController.SelectedCollection;
+
+        foreach (var pic in collection.PictureList)
+        {
+            PicDataList.Add(ViewCollectionController.GetPictureData(pic));
+
+        }
+    }
+
+    private void ShowPicture(MouseEventArgs e, int pictureId)
+    {
+        
+    }
+
+}

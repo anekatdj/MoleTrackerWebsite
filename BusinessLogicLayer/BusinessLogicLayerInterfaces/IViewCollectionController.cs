@@ -7,6 +7,7 @@ namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
 {
     public interface IViewCollectionController
     {
+        CollectionDomain SelectedCollection { get; set; }
         PictureDataDomain GetPictureData(PictureInfoDomain pictureInfo);
     }
 }

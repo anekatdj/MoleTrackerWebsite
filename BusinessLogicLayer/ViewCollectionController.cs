@@ -11,10 +11,15 @@ namespace BusinessLogicLayer
     public class ViewCollectionController : IViewCollectionController
     {
         private IViewCollectionDatabaseManager viewCollectionDatabaseManager;
+
+        public CollectionDomain SelectedCollection { get; set; }
+
         public ViewCollectionController()
         {
             viewCollectionDatabaseManager = new ViewCollectionDatabaseManager();
         }
+
+
         public PictureDataDomain GetPictureData(PictureInfoDomain pictureInfo)
         {
             return viewCollectionDatabaseManager.GetPictureData(pictureInfo);

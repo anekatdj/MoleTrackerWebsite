@@ -3,26 +3,35 @@
 @using BusinessLogicLayer
 @using BusinessLogicLayer.BusinessLogicLayerInterfaces
 @using DataClasses.Domain
+@using System.Drawing
 
 @inject ISelectPatient SelectPatientController
+@inject IViewCollectionController ViewCollectionController
 @inject NavigationManager NavManager;
 
-<h3>Samlinger</h3>
+<h3>@patientInfo.Name</h3>
 <div>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>@NameOfPatient</th>
-            </tr>
-        </thead>
+    <table>
+        <tr>
+            <th>Modermærker</th>
+        </tr>
+        @foreach (var collection in patientData.CollectionList)
+            {
+                <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))">
+                    <td>
+                        @collection.CollectionName
+                    </td>
+                </tr>
+            }
     </table>
 </div>
 
 @code {
 
     private PatientInfoDomain patientInfo;
-    //private PatientDataDomain patientData;
+    private PatientDataDomain patientData;
     public string NameOfPatient { get; set; }
+    public List<PictureDataDomain> PicDataList { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -31,6 +40,17 @@
         NameOfPatient = patientInfo.Name;
 
         //patientData = SelectPatientController.GetPatientData(patientInfo);
+    }
+
+    private void NavigateToCollectionPage(MouseEventArgs e, object collectionId)
+    {
+
+        var selectedCollection = patientData.CollectionList.Where(x => x.CollectionID.Equals(collectionId)).ToList();
+
+        ViewCollectionController.SelectedCollection = selectedCollection[0];
+
+        NavManager.NavigateTo("/CollectionPage");
+
     }
 
 }
