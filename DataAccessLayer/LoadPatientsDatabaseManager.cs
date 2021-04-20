@@ -11,7 +11,6 @@ namespace DataAccessLayer
 {
     public class LoadPatientsDatabaseManager : ILoadPatientsDatabaseManager
     {
-        private MedicalPracticePatientsDomain medicalPracticePatientsDomain;
         private IAPIService API;
 
         public LoadPatientsDatabaseManager()
@@ -33,7 +32,7 @@ namespace DataAccessLayer
                 throw;
             }
 
-            medicalPracticePatientsDomain = medicalPracticePatientsDTO.ToDomain();
+            MedicalPracticePatientsDomain medicalPracticePatientsDomain = medicalPracticePatientsDTO.ToDomain();
             return medicalPracticePatientsDomain;
         }
     }

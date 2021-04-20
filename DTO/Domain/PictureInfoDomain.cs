@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataClasses.PictureDTO;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,5 +10,15 @@ namespace DataClasses.Domain
         public int PictureID { get; set; }
         public int CollectionID { get; set; }
         public DateTime DateOfUpload { get; set; }
+        public PictureInfoDTO ToDTO()
+        {
+            PictureInfoDTO pictureInfoDTO = new PictureInfoDTO()
+            {
+                PictureID = PictureID,
+                CollectionID = CollectionID,
+                DateOfUpload = DateOfUpload
+            };
+            return pictureInfoDTO;
+        }
     }
 }

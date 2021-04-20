@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataClasses.PictureDTO;
+using System;
 using System.Collections.Generic;
 using System.Text;
 

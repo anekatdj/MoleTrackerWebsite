@@ -17,9 +17,9 @@ namespace BusinessLogicLayer
         {
             loadPatientsDatabase = new LoadPatientsDatabaseManager();
         }
-        public void LoadPatientList(MedicalPracticePatientsDomain patients)
+        public MedicalPracticePatientsDomain LoadPatientList(DoctorInfoDomain doctorInfoDomain)
         {
-            loadPatientsDatabase.GetMedicalPracticePatients(/*Skal ændres senere*/new DoctorInfoDomain());
+            return loadPatientsDatabase.GetMedicalPracticePatients(doctorInfoDomain);
         }
 
 

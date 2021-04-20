@@ -7,6 +7,6 @@ namespace DataAccessLayer.DataAccessLayerInterfaces
 {
     public interface ILogInDatabaseManager
     {
-        public bool VerifyLoginWithAPI(LoginInfoDomain loginInfo);
+        bool VerifyLoginWithAPI(LoginInfoDomain loginInfo);
     }
 }
