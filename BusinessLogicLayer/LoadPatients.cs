@@ -13,6 +13,7 @@ namespace BusinessLogicLayer
     public class LoadPatients : ILoadPatients
     {
         private ILoadPatientsDatabaseManager loadPatientsDatabase;
+
         public LoadPatients()
         {
             loadPatientsDatabase = new LoadPatientsDatabaseManager();

@@ -1,6 +1,12 @@
 ﻿@page "/PatientPage"
 
 @using DataClasses.LoginDTO
+@using BusinessLogicLayer
+@using BusinessLogicLayer.BusinessLogicLayerInterfaces
+@using DataClasses.Domain
+
+@inject ISelectPatient SelectPatientController
+@inject NavigationManager NavManager;
 
 <h3>Samlinger</h3>
 <div>
@@ -14,5 +20,13 @@
 </div>
 
 @code {
+
+    private PatientInfoDomain patientInfo;
+
+    protected override async Task OnInitializedAsync()
+    {
+        patientInfo = SelectPatientController.SelectedPatient;
+         
+    }
 
 }

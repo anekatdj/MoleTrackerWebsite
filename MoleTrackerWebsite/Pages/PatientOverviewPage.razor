@@ -3,9 +3,16 @@
 @using DataClasses.LoginDTO
 @using DataClasses.Domain
 @using System.Reflection.Metadata
+@using System.Xml;
+@using System.Xml.Linq
+@using System.Xml.XPath
+@using BusinessLogicLayer
+@using BusinessLogicLayer.BusinessLogicLayerInterfaces
 
 @*@inject PatientDataDomain PatientData*@
-@inject MedicalPracticePatientsDomain MedicalPracticePatients;
+@inject MedicalPracticePatientsDomain MedicalPracticePatients
+@inject ISelectPatient SelectPatientController
+@inject NavigationManager NavManager;
 @*<h3>PatientOverviewPage</h3>*@
 
 <div class="wrapper fadeInDown" style="margin-top:10%">
@@ -15,61 +22,77 @@
             <DataAnnotationsValidator />
             <ValidationSummary />
             <h2>Patientoversigt</h2>
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for patients..">
-            <tbody>
-            <ul id="myUL">
-                @foreach (var item in MedicalPracticePatients.PatientList)
-                {
-                    <li><a href="#" class="row-link"> @item.Name @item.CPR</a></li>
-                }
-
-            </ul>
-            </tbody>
-
-            @*<table class="table table-striped">
+            <InputText id="myInput" @bind-Value="SearchInput" @onkeyup="MyFunction" placeholder="Search for patients.." />
+            <table id="patientTable" class="table table-striped">
                 <tbody>
-                <thead>
-                    <tr>
-                        <th>Navn</th>
-                        <th>CPR-Nummer</th>
+                    <tr class="header">
+                        <th style="width: 40%;">Navn</th>
+                        <th style="width: 60%;">CPR-Nummer</th>
                     </tr>
-                    @foreach (var item in MedicalPracticePatients.PatientList)
+                    @foreach (var item in filteredPatientList)
                     {
                         <tr>
                             <td>
-                                <a href="#" class="row-link">
-                                    @item.Name
-                                </a>
+                                <select @onchange="(e)=>NavigateToSpecificPatientPage(e, item)">
+                                @item.Name
+                                </select>
                             </td>
                             <td>
-                                <a href="#" tabindex="-1" class="row-link">
+                                <a href="#" class="row-link">
                                     @item.CPR
                                 </a>
                             </td>
                         </tr>
                     }
-                </thead>
                 </tbody>
-            </table>*@
+            </table>
         </EditForm>
     </div>
 </div>
 
 
 @code {
-    
-    private List<PatientInfoDTO> patientInfo;
+
+    public string SearchInput { get; set; }
+    public List<PatientInfoDomain> filteredPatientList { get; set; }
+
+    public string LinkToSpecifikPatientPage { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        patientInfo = new List<PatientInfoDTO>();
-
-        patientInfo.Add(new PatientInfoDTO("123456-7890", "Hans Hansen"));
+        filteredPatientList = MedicalPracticePatients.PatientList;
+        SearchInput = "";
     }
 
-    protected void myFunction()
+    protected void MyFunction()
     {
-      
+
+
+        XmlDocument doc = new XmlDocument();
+
+        var input = doc.GetElementById("myInput");
+
+        //var filter = input.Value.ToUpper();
+
+
+        var filter = SearchInput.ToUpper();
+
+
+        filteredPatientList = MedicalPracticePatients.PatientList.Where(x => x.CPR.Contains(filter)).ToList();
+
     }
+
+    private void NavigateToSpecificPatientPage(ChangeEventArgs e, PatientInfoDomain patient)
+    {
+        string selectedPatientName = e.Value.ToString();
+
+        var selectedPatientsInfo = filteredPatientList.Where(x => x.Name.Contains(selectedPatientName)).ToList();
+
+        SelectPatientController.SelectedPatient = new PatientInfoDomain(selectedPatientsInfo[0].CPR, selectedPatientsInfo[0].Name);
+
+
+        NavManager.NavigateTo("/PatientPage");
+    }
+
 }
 

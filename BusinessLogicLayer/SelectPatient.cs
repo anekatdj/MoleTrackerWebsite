@@ -12,9 +12,13 @@ namespace BusinessLogicLayer
     public class SelectPatient : ISelectPatient
     {
         private ISelectPatientDatabaseManager selectPatientDatabaseManager;
+
+        public PatientInfoDomain SelectedPatient { get; set; }
         public SelectPatient()
         {
             selectPatientDatabaseManager = new SelectPatientDatabaseManager();
+            
+            SelectedPatient = new PatientInfoDomain();
         }
         public void GetPatientData(PatientInfoDomain patientInfoDomain)
         {
@@ -24,5 +28,6 @@ namespace BusinessLogicLayer
         {
             selectPatientDatabaseManager.GetPatientInfo(patientInfo);
         }
+
     }
 }
