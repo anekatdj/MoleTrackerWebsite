@@ -7,7 +7,7 @@ using APIWebServiesConnector;
 using APIWebServiesConnector.APIStringFabrics;
 using DataClasses;
 using DataClasses.Domain;
-using DataClasses.LoginDTO;
+using DataClasses.DTO;
 
 namespace DataAccessLayer
 {

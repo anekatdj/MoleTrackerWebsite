@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using DataClasses.LoginDTO;
+using DataClasses.DTO;
 
 namespace DataClasses.Domain
 {

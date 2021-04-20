@@ -1,7 +1,8 @@
-﻿using DataClasses.PictureDTO;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DataClasses.DTO;
 
 namespace DataClasses.Domain
 {
@@ -12,14 +13,14 @@ namespace DataClasses.Domain
         public string CollectionName { get; set; }
         public LocationOnBodyDomain Location { get; set; }
 
-        public CollectionDTO.CollectionDTO ToDTO()
+        public CollectionDTO ToDTO()
         {
             List<PictureInfoDTO> list = new List<PictureInfoDTO>() { };
             foreach (PictureInfoDomain item in PictureList)
             {
                 list.Add(item.ToDTO());
             }
-            CollectionDTO.CollectionDTO collectionDTO = new CollectionDTO.CollectionDTO()
+            CollectionDTO collectionDTO = new CollectionDTO()
             {
                 CollectionID = CollectionID,
                 CollectionName = CollectionName,

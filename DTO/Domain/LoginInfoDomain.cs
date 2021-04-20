@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using DataClasses.LoginDTO;
+using DataClasses.DTO;
 
 namespace DataClasses.Domain
 {

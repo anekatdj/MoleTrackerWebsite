@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using DataAccessLayer.DataAccessLayerInterfaces;
 using APIWebServiesConnector;
-using DataClasses.MISCDTO;
 using DataClasses.Domain;
-using DataClasses.LoginDTO;
+using DataClasses.DTO;
+using DataClasses.DTO.MISCDTOS;
 
 namespace DataAccessLayer
 {
@@ -32,7 +32,7 @@ namespace DataAccessLayer
                 throw;
             }
 
-            PatientDataDomain patientDataDomain = patientDataDTO.ToDomain();
+            PatientDataDomain patientDataDomain = DTOConverter.PatientDataToDomain(patientDataDTO);
 
             return patientDataDomain;
         }
@@ -50,7 +50,7 @@ namespace DataAccessLayer
                 throw;
             }
 
-            PatientInfoDomain newpatientInfoDomain = patientInfoDTO.ToDomain();
+            PatientInfoDomain newpatientInfoDomain = DTOConverter.PatientInfoToDomain(patientInfoDTO);
 
             
 

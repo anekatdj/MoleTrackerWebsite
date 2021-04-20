@@ -4,10 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using DataClasses.DataObjects.DTO;
 using DataClasses.DTO;
-using CollectionDTO = DataClasses.CollectionDTO.CollectionDTO;
-using DoctorContactInfoDTO = DataClasses.MISCDTO.DoctorContactInfoDTO;
-using LocationOnBodyDTO = DataClasses.CollectionDTO.LocationOnBodyDTO;
-using PictureInfoDTO = DataClasses.PictureDTO.PictureInfoDTO;
+using DataClasses.DTO.MISCDTOS;
 
 namespace DataAccessLayer
 {
@@ -52,6 +49,16 @@ namespace DataAccessLayer
             return pictureInfoDomain;
         }
 
+        public static PictureDataDomain PictureDataToDomain(PictureDataDTO pictureDataDTO)
+        {
+            PictureDataDomain pictureDataDomain = new PictureDataDomain()
+            {
+                PictureData = pictureDataDTO.PictureData,
+                PictureID = pictureDataDTO.PictureID
+            };
+            return pictureDataDomain;
+        }
+
         public static DoctorInfoDomain DoctorInfoToDomain(DoctorInfoDTO doctorInfoDTO)
         {
             DoctorInfoDomain doctorInfoDomain = new DoctorInfoDomain()
@@ -83,6 +90,23 @@ namespace DataAccessLayer
                 PatientID = patientInfoDTO.PatientID
             };
             return patientInfoDomain;
+        }
+
+        public static PatientDataDomain PatientDataToDomain(PatientDataDTO patientDataDTO)
+        {
+            List<CollectionDomain> list = new List<CollectionDomain>() { };
+            foreach (CollectionDTO item in patientDataDTO.CollectionList)
+            {
+                list.Add(CollectionToDomain(item));
+            }
+
+            PatientDataDomain patientDataDomain = new PatientDataDomain()
+            {
+                CollectionList = list,
+                PatientInfo = PatientInfoToDomain(patientDataDTO.PatientInfo),
+                PatientID = patientDataDTO.PatientID
+            };
+            return patientDataDomain;
         }
 
         public static SessionInfoDomain SessionInfoToDomain(SessionInfoDTO sessionInfoDTO)

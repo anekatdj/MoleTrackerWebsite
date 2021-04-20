@@ -1,10 +1,10 @@
 ﻿using APIWebServiesConnector;
 using DataAccessLayer.DataAccessLayerInterfaces;
-using DataClasses.CollectionDTO;
 using DataClasses.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DataClasses.DTO;
 
 namespace DataAccessLayer
 {
@@ -22,7 +22,7 @@ namespace DataAccessLayer
             CollectionDTO collectionDTO = collection.ToDTO();
             try
             {
-                API.PostObject("PostNewCollection", collectionDTO);
+                API.PostObject<CollectionDTO>("PostNewCollection", collectionDTO);
             }
             catch (Exception)
             {

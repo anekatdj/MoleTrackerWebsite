@@ -1,7 +1,7 @@
-﻿using DataClasses.PictureDTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DataClasses.DTO;
 
 namespace DataClasses.Domain
 {

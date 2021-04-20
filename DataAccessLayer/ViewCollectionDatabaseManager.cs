@@ -1,11 +1,10 @@
 ﻿using APIWebServiesConnector;
 using DataAccessLayer.DataAccessLayerInterfaces;
-using DataClasses.CollectionDTO;
 using DataClasses.Domain;
-using DataClasses.PictureDTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DataClasses.DTO;
 
 namespace DataAccessLayer
 {
@@ -32,7 +31,8 @@ namespace DataAccessLayer
 
                 throw;
             }
-            PictureDataDomain pictureDataDomain = pictureDataDTO.ToDomain();
+
+            PictureDataDomain pictureDataDomain = DTOConverter.PictureDataToDomain(pictureDataDTO);
             return pictureDataDomain;
         }
     }
