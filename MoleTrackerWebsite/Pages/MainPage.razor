@@ -9,6 +9,7 @@
 @inject NavigationManager NavManager
 @inject SessionInfo SessionInfo
 @inject PatientInfo PatientInfo
+@inject ILogInController LogInController
 
 
 <link href="css/CSSStyles.css" rel="stylesheet" />
@@ -117,17 +118,34 @@
 
     public void GetGender()
     {
+        PatientInfo = LogInController.HandlePatientInfo();
         Gender = PatientInfo.Gender;
+    }
 
-        //if (Gender == "Kvinde")
-        //{
-        //    FrontOrBack = "/Images/FemaleFrontcrop.png";
-        //}
+    public void DisplayPatientModel()
+    {
+        GetGender();
 
-        //else if (Gender == "Mand")
-        //{
-        //    FrontOrBack = "/Images/MaleFrontCrop.png";
-        //}
+        if (Gender == "G")
+        {
+            FrontOrBack = "/Images/FemaleFrontcrop.png";
+        }
+
+        else if (Gender == "B")
+        {
+            FrontOrBack = "/Images/MaleFrontCrop.png";
+        }
+    }
+
+    Task StartupTask()
+    {
+        return Task.CompletedTask;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        DisplayPatientModel();
+        await StartupTask();
     }
 
 

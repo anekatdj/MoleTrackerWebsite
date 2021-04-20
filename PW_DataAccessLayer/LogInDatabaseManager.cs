@@ -12,12 +12,14 @@ namespace PW_DataAccessLayer
         private PatientInfoDTO patientInfoDTO;
 
         private IAPIService API;
+        private PatientInfo patientInfo;
 
         public LogInDatabaseManager()
         {
             API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
             
             //API = new StubApiService();
+            patientInfo = new PatientInfo();
         }
 
         public bool ValidateLogin(LogInInfo loginInfo)
@@ -51,8 +53,6 @@ namespace PW_DataAccessLayer
         public PatientInfo GetPatientInfo()
         {
             //TODO Måske skal den laves om?
-
-            PatientInfo patientInfo = new PatientInfo();
 
             patientInfo.Name = patientInfoDTO.Name;
             patientInfo.PatientID = patientInfoDTO.PatientID;
