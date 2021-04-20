@@ -9,5 +9,7 @@ namespace DataClasses.Domain
         public int SessionID { get; set; }
         public int LoginID { get; set; }
         public string LoginType { get; set; }
+        public bool LoggedIn { get; set; }
+        public int UseID { get; set; }
     }
 }
