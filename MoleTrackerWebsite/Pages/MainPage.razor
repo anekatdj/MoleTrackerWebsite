@@ -48,7 +48,7 @@
     <div class="col">
         @*padding og sticky*@
         <div style="width: 400px">
-            <img src="@FrontOrBack" style="float: right; width: 212px; height: 477px;" /> @*onmousewheel="@MouseWheel"*@
+            <img src="@FrontOrBack" style="float: right; width:@Width; height: @Height;" /> @*onmousewheel="@MouseWheel"*@
             <button style="float:right" class="@Arrow" @onclick="TurnAroundModel"></button>
 
         </div>
@@ -76,6 +76,8 @@
     public string AddCollectionButton = "fa fa-plus";
     public string TurnAround { get; set; }
     public string Gender { get; set; }
+    public string Width{ get; set; }
+    public string Height{ get; set; }
 
     private IEnumerable<Collection> collections = new[]
     {
@@ -103,7 +105,7 @@
             }
         }
 
-        else if (Gender == "Mand")
+        else if (Gender == "B")
         {
             if (this.FrontOrBack == "/Images/MaleBackCrop.png")
             {
@@ -129,11 +131,15 @@
         if (Gender == "G")
         {
             FrontOrBack = "/Images/FemaleFrontcrop.png";
+            Width = "212px";
+            Height = "477px";
         }
 
         else if (Gender == "B")
         {
             FrontOrBack = "/Images/MaleFrontCrop.png";
+            Width = "270px";
+            Height = "520px";
         }
     }
 
