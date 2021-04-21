@@ -23,7 +23,7 @@
         </div>
         
         <div>
-            <button @onclick="NavigateToMedLogInPage" style="background-color: firebrick;
+            <button id="MedLogInButton" @onclick="NavigateToMedLogInPage" style="background-color: firebrick;
                                                             color: white;
                                                             border-radius: 8px;
                                                             font-size: 20px;
@@ -40,7 +40,7 @@
 
 @code {
 
-    private void NavigateToPatientLogInPage()
+    public void NavigateToPatientLogInPage()
     {
         NavManager.NavigateTo("/patientLogin");
     }
