@@ -35,6 +35,10 @@
 
     protected override async Task OnInitializedAsync()
     {
+        //Bare for ikke at smide exception
+        patientData = new PatientDataDomain();
+        patientData.CollectionList = new List<CollectionDomain>();
+
         patientInfo = SelectPatientController.SelectedPatient;
 
         NameOfPatient = patientInfo.Name;
