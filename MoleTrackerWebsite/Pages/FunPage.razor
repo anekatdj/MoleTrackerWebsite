@@ -1,0 +1,66 @@
+﻿@page "/FunPage"
+
+@using BusinessLogicLayer
+@using BusinessLogicLayer.BusinessLogicLayerInterfaces
+@using DataClasses.Domain
+@using System.Drawing
+
+@inject IViewCollectionController ViewCollectionController
+@inject NavigationManager NavManager;
+
+<style>
+    div.ex1 {
+        background-color: lightblue;
+        width: 200px;
+        overflow: scroll;
+    }
+</style>
+
+<h3>CollectionPage</h3>
+<div class="ex1">
+    <table>
+        <tr>
+            <th>title</th>
+        </tr>
+        <tr>
+            @for (int i = 0; i < 3; i++)
+            {
+            <td>
+                <img src="https://cdn-main.ideal.shop/images/by_hash/cc4d007de5de23ef43f48d72c6429a0ed5b54bf0b206af848f567fcacf900fb3/0-160/sailserverlogo1.webp" alt="W3Schools.com" width="104" height="142">
+            </td>
+            }
+            
+
+                @*@foreach (var item in PicDataList)
+                {
+                    @item.PictureData
+                }*@
+            
+        </tr>
+    </table>
+</div>
+
+@code {
+
+    private CollectionDomain collection;
+    private PatientDataDomain patientData;
+    public string NameOfPatient { get; set; }
+    public List<PictureDataDomain> PicDataList { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //collection = ViewCollectionController.SelectedCollection;
+
+        //foreach (var pic in collection.PictureList)
+        //{
+        //    PicDataList.Add(ViewCollectionController.GetPictureData(pic));
+
+        //}
+    }
+
+    private void ShowPicture(MouseEventArgs e, int pictureId)
+    {
+
+    }
+
+}
