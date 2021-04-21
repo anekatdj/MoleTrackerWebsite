@@ -22,6 +22,8 @@
 
 <h1>Velkommen, @PatientInfo.Name</h1>
 
+<p>Her kan du sammenligne de billeder, du har taget med MoleTracker, så du nemt og hurtigt kan se efter forandringer i dine modermærker.</p>
+
 <div class="row align-items-start" style="height: auto; width: auto">
 
     <div class="col">
@@ -61,9 +63,22 @@
 </div>
 
 <div class="col align-self-end">
-    <button style="float: right; border-radius: 28px;" class="@AddCollectionButton" @onclick="AddNewCollection"></button>
+    @if (@ButtonPressed == false)
+    {
+        <button style="float: right; border-radius: 28px;" class="@AddCollectionButton" @onclick="AddNewCollection"></button>
+    }
+    @if (@ButtonPressed == true)
+    {
+        @if (PointClicked == false)
+        {
+            <button style="float: right; border-radius: 28px;" @onclick="NavigateToCollectionPage" disabled="@true">Godkendt</button>
+            <p style="float: right; color: crimson; margin-right: 15px">Vælg placering af modermærke</p>
+        }
+    }
 
 </div>
+
+<p style="font-size: 10px">Bemærk venligst at MoleTracker ikke diagnosticerer hudkræft. Hvis du er bekymret for et eller flere modermærker, skal du kontakte din læge.</p>
 
 
 
@@ -176,12 +191,13 @@
 
 
     public string NewPinAdded { get; set; }
+    public bool ButtonPressed{ get; set; }
+    public bool PointClicked { get; set; }
 
     private void AddNewCollection(MouseEventArgs e)
     {
         NewPinAdded = "pin.png";
-
-        NavigateToCollectionPage();
+        ButtonPressed = true;
     }
 
     private void GetCoordinates(MouseEventArgs e)
