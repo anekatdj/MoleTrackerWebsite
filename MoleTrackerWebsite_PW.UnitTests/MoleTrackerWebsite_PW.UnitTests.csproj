@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DTO\DataClasses.csproj" />
+    <ProjectReference Include="..\MoleTrackerWebsite\MoleTrackerWebsite.csproj" />
     <ProjectReference Include="..\PW_BusinessLogicLayer\PW_BusinessLogicLayer.csproj" />
     <ProjectReference Include="..\PW_DataAccessLayer\PW_DataAccessLayer.csproj" />
   </ItemGroup>
