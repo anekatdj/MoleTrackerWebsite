@@ -30,21 +30,21 @@
             <InputText id="myInput" @bind-Value="SearchInput" @onkeyup="MyFunction" placeholder="Søg efter patient" />
             <table id="patientTable" class="table table-striped">
                 <tbody>
-                    <tr class="header">
-                        <th style="width: 40%;">Navn</th>
-                        <th style="width: 60%;">CPR-Nummer</th>
+                <tr class="header">
+                    <th style="width: 40%;">Navn</th>
+                    <th style="width: 60%;">CPR-Nummer</th>
+                </tr>
+                @foreach (var item in filteredPatientList)
+                {
+                    <tr @onclick="@((e) => NavigateToSpecificPatientPage(e, item.CPR))">
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.CPR
+                        </td>
                     </tr>
-                    @foreach (var item in filteredPatientList)
-                    {
-                        <tr @onclick="@((e) => NavigateToSpecificPatientPage(e, item.CPR))">
-                            <td>
-                                @item.Name
-                            </td>
-                            <td>
-                                @item.CPR
-                            </td>
-                        </tr>
-                    }
+                }
                 </tbody>
             </table>
         </EditForm>
@@ -89,7 +89,7 @@
         var filter = SearchInput.ToUpper();
 
 
-        filteredPatientList = MedicalPracticePatients.PatientList.Where(x => x.CPR.Contains(filter)).ToList();
+        filteredPatientList = MedicalPracticePatientList.Where(x => x.CPR.Contains(filter)).ToList();
 
     }
 

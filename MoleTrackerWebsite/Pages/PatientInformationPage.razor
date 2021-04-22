@@ -8,54 +8,70 @@
 @inject NavigationManager NavManager;
 
 <h3>Patientoplysninger</h3>
+
+@if (errorOccurred)
+{
+    @foreach (string error in patientInfoErrors)
+    {
+<div>
+    <span  class="oi oi-warning" style="margin: 10px; font-size: 30px; color: red;">
+        @error
+    </span>
+</div>
+    }
+
+}
 <table id="patientInformationTable" class="table table-striped">
     <tbody>
     <tr>
-            <td>
-               Navn
-            </td>
-            <td>
-                @patientInfo.Name
-            </td>
+        <td>
+            Navn
+        </td>
+        <td>
+            @patientInfo.Name
+        </td>
     </tr>    
     <tr>
-            <td>
-               Fødselsdato
-            </td>
-            <td>
-                @DateOfBirth
-            </td>
-        </tr>  
+        <td>
+            Fødselsdato
+        </td>
+        <td>
+            @DateOfBirth
+        </td>
+    </tr>  
     <tr>
-            <td>
-               Køn
-            </td>
-            <td>
-                @patientInfo.Gender
-            </td>
-        </tr>  
+        <td>
+            Køn
+        </td>
+        <td>
+            @patientInfo.Gender
+        </td>
+    </tr>  
     <tr>
-            <td>
-               E-mail
-            </td>
-            <td>
-                @patientInfo.Email
-            </td>
-        </tr>  
+        <td>
+            E-mail
+        </td>
+        <td>
+            @patientInfo.Email
+        </td>
+    </tr>  
     <tr>
-            <td>
-               CPR-nummer
-            </td>
-            <td>
-                @patientInfo.CPR
-            </td>
-        </tr>
+        <td>
+            CPR-nummer
+        </td>
+        <td>
+            @patientInfo.CPR
+        </td>
+    </tr>
     </tbody>
 </table>
+
 @code {
 
     private PatientInfoDomain patientInfo;
     private string DateOfBirth;
+    private List<string> patientInfoErrors = new List<string>();
+    private bool errorOccurred = false;
     //private string Gender;
 
 
@@ -71,36 +87,44 @@
 
         string year = "";
 
-        for (int i = 0; i < 2; i++)
+        try
         {
-            date = date + CPRArray[i];
+
+            for (int i = 0; i < 2; i++)
+            {
+                date = date + CPRArray[i];
+            }
+            for (int i = 2; i < 4; i++)
+            {
+                month = month + CPRArray[i];
+            }
+            for (int i = 4; i < 6; i++)
+            {
+                year = year + CPRArray[i];
+            }
+
+            if (CPRArray[10] == '1' ||CPRArray[10] == '3' ||CPRArray[10] == '5' ||CPRArray[10] == '7' ||CPRArray[10] == '9')
+            {
+                patientInfo.Gender = "Mand";
+            }
+            else if (CPRArray[10] == '0' || CPRArray[10] == '2' || CPRArray[10] == '4' || CPRArray[10] == '6' || CPRArray[10] == '8')
+            {
+                patientInfo.Gender = "Kvinde";
+            }
+
+
+            month = GetMonthOfBirth(month);
+            year = GetYearOfBirth(year);
+
+            DateOfBirth = date + ". " + month + " " + year;
+
         }
-        for (int i = 2; i < 4; i++)
+        catch (Exception e)
         {
-            month = month + CPRArray[i];
-        }
-        for (int i = 4; i < 6; i++)
-        {
-            year = year + CPRArray[i];
+            patientInfoErrors.Add("En fejl opstod. Tjek om patientens CPR-nummer er korrekt");
+            errorOccurred = true;
         }
 
-        if (CPRArray[10] == '1' ||CPRArray[10] == '3' ||CPRArray[10] == '5' ||CPRArray[10] == '7' ||CPRArray[10] == '9')
-        {
-            patientInfo.Gender = "Mand";
-        }
-        else if (CPRArray[10] == '0' || CPRArray[10] == '2' || CPRArray[10] == '4' || CPRArray[10] == '6' || CPRArray[10] == '8')
-        {
-            patientInfo.Gender = "Kvinde";
-        }
-
-
-        month = GetMonthOfBirth(month);
-        year = GetYearOfBirth(year);
-
-
-
-
-        DateOfBirth = date + ". " + month + " " + year;
     }
 
     private string GetYearOfBirth(string year)
