@@ -11,6 +11,8 @@
 @*@inject PatientDataDomain PatientData*@
 @inject MedicalPracticePatientsDomain MedicalPracticePatients
 @inject ISelectPatient SelectPatientController
+@inject ILoadPatients LoadPatientsController
+@inject ILogInController LogInController
 @inject NavigationManager NavManager;
 @*<h3>PatientOverviewPage</h3>*@
 
@@ -34,7 +36,7 @@
                     </tr>
                     @foreach (var item in filteredPatientList)
                     {
-                        <tr @onclick="@((e) => NavigateToSpecificPatientPage(e, item.Name))">
+                        <tr @onclick="@((e) => NavigateToSpecificPatientPage(e, item.CPR))">
                             <td>
                                 @item.Name
                             </td>
@@ -53,6 +55,8 @@
 @code {
 
     public string SearchInput { get; set; }
+    public MedicalPracticePatientsDomain MedicalPractice { get; set; }
+    public List<PatientInfoDomain> MedicalPracticePatientList { get; set; }
     public List<PatientInfoDomain> filteredPatientList { get; set; }
     public bool IsDisabled { get; set; }
 
@@ -60,10 +64,16 @@
 
     protected override async Task OnInitializedAsync()
     {
+        MedicalPractice = LoadPatientsController.LoadPatientList(LogInController.DoctorInfo);
+
+        MedicalPracticePatientList = MedicalPractice.PatientList;
+
         IsDisabled = true;
-        filteredPatientList = MedicalPracticePatients.PatientList;
+        filteredPatientList = MedicalPracticePatientList;
         SearchInput = "";
     }
+
+   
 
     protected void MyFunction()
     {
@@ -83,11 +93,11 @@
 
     }
 
-    private void NavigateToSpecificPatientPage(MouseEventArgs e, string patientName)
+    private void NavigateToSpecificPatientPage(MouseEventArgs e, string cpr)
     {
-        string selectedPatientName = patientName;
+        string selectedPatientCPR = cpr;
 
-        var selectedPatientsInfo = filteredPatientList.Where(x => x.Name.Contains(selectedPatientName)).ToList();
+        var selectedPatientsInfo = filteredPatientList.Where(x => x.CPR.Equals(selectedPatientCPR)).ToList();
 
         SelectPatientController.SelectedPatient = new PatientInfoDomain(selectedPatientsInfo[0].CPR, selectedPatientsInfo[0].Name);
 

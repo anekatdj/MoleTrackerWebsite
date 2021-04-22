@@ -4,6 +4,7 @@ using DataClasses.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using APIWebServiesConnector.APIStringFabrics;
 using DataClasses.DTO;
 
 namespace DataAccessLayer
@@ -14,7 +15,8 @@ namespace DataAccessLayer
 
         public ViewCollectionDatabaseManager()
         {
-            API = new StubApiService();
+            API = APIFactory.GetAPI("");
+
         }
 
         public PictureDataDomain GetPictureData(PictureInfoDomain pictureInfoDomain)

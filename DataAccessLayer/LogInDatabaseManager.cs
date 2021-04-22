@@ -19,29 +19,22 @@ namespace DataAccessLayer
 
         public LogInDatabaseManager()
         {
-            API = new ApiService(APIStringFabric.GetDeveloperAPIString());
+            API = APIFactory.GetAPI("");
         }
 
-        public bool VerifyLoginWithAPI(LoginInfoDomain loginInfo)
+        public DoctorInfoDomain VerifyLoginWithAPI(LoginInfoDomain loginInfo)
         {
             LoginInfoDTO newLogin = loginInfo.ToDTO();
 
             try
             {
                 doctorInfo = API.GetObject<DoctorInfoDTO, LoginInfoDTO>("MedLogin", newLogin);
+                 var doctorInfoDomain = DTOConverter.DoctorInfoToDomain(doctorInfo);
+                 return doctorInfoDomain;
             }
             catch (Exception e)
             {
-                return false;
-            }
-
-            if (doctorInfo != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
+                return null;
             }
 
         }

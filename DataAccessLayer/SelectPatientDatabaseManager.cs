@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using DataAccessLayer.DataAccessLayerInterfaces;
 using APIWebServiesConnector;
+using APIWebServiesConnector.APIStringFabrics;
 using DataClasses.Domain;
 using DataClasses.DTO;
 using DataClasses.DTO.MISCDTOS;
@@ -15,7 +16,8 @@ namespace DataAccessLayer
 
         public SelectPatientDatabaseManager()
         {
-            API = new StubApiService();
+            API = APIFactory.GetAPI("");
+
         }
 
         public PatientDataDomain GetPatientData(PatientInfoDomain patientInfoDomain)

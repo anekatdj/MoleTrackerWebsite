@@ -38,6 +38,7 @@ namespace MoleTrackerWebsite
             services.AddSingleton<MedicalPracticePatientsDomain>();
             services.AddSingleton<SessionInfoDomain>();
             services.AddSingleton<ILogInController, LogInController>();
+            services.AddSingleton<ILoadPatients, LoadPatients>();
             services.AddSingleton<ISelectPatient, SelectPatient>();
             services.AddSingleton<IViewCollectionController, ViewCollectionController>();
         }

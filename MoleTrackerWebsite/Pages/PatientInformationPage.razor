@@ -56,6 +56,7 @@
 
     private PatientInfoDomain patientInfo;
     private string DateOfBirth;
+    //private string Gender;
 
 
     protected override async Task OnInitializedAsync()
@@ -83,9 +84,21 @@
             year = year + CPRArray[i];
         }
 
+        if (CPRArray[10] == '1' ||CPRArray[10] == '3' ||CPRArray[10] == '5' ||CPRArray[10] == '7' ||CPRArray[10] == '9')
+        {
+            patientInfo.Gender = "Mand";
+        }
+        else if (CPRArray[10] == '0' || CPRArray[10] == '2' || CPRArray[10] == '4' || CPRArray[10] == '6' || CPRArray[10] == '8')
+        {
+            patientInfo.Gender = "Kvinde";
+        }
+
+
         month = GetMonthOfBirth(month);
         year = GetYearOfBirth(year);
-        
+
+
+
 
         DateOfBirth = date + ". " + month + " " + year;
     }

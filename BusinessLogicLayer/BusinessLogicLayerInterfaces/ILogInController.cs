@@ -7,6 +7,8 @@ namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
 {
     public interface ILogInController
     {
+
+        public DoctorInfoDomain DoctorInfo { get; set; }
         bool login(LoginInfoDomain loginData);
     }
 }

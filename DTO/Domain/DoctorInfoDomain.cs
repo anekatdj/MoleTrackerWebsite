@@ -5,7 +5,7 @@ using DataClasses.DTO;
 
 namespace DataClasses.Domain
 {
-    public class DoctorInfoDomain
+    public class DoctorInfoDomain: SessionInfoDomain
     {
         public int DoctorID { get; set; }
 

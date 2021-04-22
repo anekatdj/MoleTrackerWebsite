@@ -120,8 +120,7 @@ namespace DataAccessLayer
             return sessionInfoDomain;
         }
 
-        public static MedicalPracticePatientsDomain MedicalPracticePatientsToDomain(
-            MedicalPracticePatientsDTO medicalPracticePatientsDTO)
+        public static MedicalPracticePatientsDomain MedicalPracticePatientsToDomain(MedicalPracticePatientsDTO medicalPracticePatientsDTO)
         {
             List<PatientInfoDomain> list = new List<PatientInfoDomain>() { };
             foreach (PatientInfoDTO item in medicalPracticePatientsDTO.PatientList)
