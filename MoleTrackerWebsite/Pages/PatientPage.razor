@@ -1,21 +1,30 @@
 ﻿@page "/PatientPage"
-
+@using Microsoft.AspNetCore.Mvc.Diagnostics
+@using DataClasses.Domain
+@using System.Reflection.Metadata
+@using System.Xml;
+@using System.Xml.Linq
+@using System.Xml.XPath
 @using BusinessLogicLayer
 @using BusinessLogicLayer.BusinessLogicLayerInterfaces
-@using DataClasses.Domain
-@using System.Drawing
 
 @inject ISelectPatient SelectPatientController
 @inject IViewCollectionController ViewCollectionController
+@inject PatientDataDomain PatientDataModel
 @inject NavigationManager NavManager;
 
+
 <h3>@patientInfo.Name</h3>
-<div>
+@*<div>*@
+<EditForm Model="@PatientDataModel">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
     <table>
-        <tr>
-            <th>Modermærker</th>
-        </tr>
-        @foreach (var collection in patientData.CollectionList)
+        <tbody>
+            <tr>
+                <th>Modermærker</th>
+            </tr>
+            @foreach (var collection in collectionList)
             {
                 <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))">
                     <td>
@@ -23,13 +32,16 @@
                     </td>
                 </tr>
             }
+        </tbody>
     </table>
-</div>
+</EditForm>
+@*</div>*@
 
 @code {
 
     private PatientInfoDomain patientInfo;
-    private PatientDataDomain patientData;
+    public PatientDataDomain patientData { get; set; }
+    public List<CollectionDomain> collectionList { get; set; }
     public string NameOfPatient { get; set; }
     public List<PictureDataDomain> PicDataList { get; set; }
 
@@ -37,7 +49,8 @@
     {
         //Bare for ikke at smide exception
         patientData = new PatientDataDomain();
-        patientData.CollectionList = new List<CollectionDomain>();
+        collectionList = patientData.CollectionList;
+        //patientData.CollectionList = new List<CollectionDomain>();
 
         patientInfo = SelectPatientController.SelectedPatient;
 

@@ -16,7 +16,7 @@ namespace DataAccessLayer
             {
                 if (_api == null)
                 {
-                    _api = new ApiService(APIStringFabric.GetDeveloperAPIString(), 'm');
+                    _api = new ApiService(APIStringFabric.GetDeveloperAPIString(), 'W');
                 }
 
                 return _api;

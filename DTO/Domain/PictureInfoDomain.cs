@@ -10,6 +10,15 @@ namespace DataClasses.Domain
         public int PictureID { get; set; }
         public int CollectionID { get; set; }
         public DateTime DateOfUpload { get; set; }
+
+        public PictureInfoDomain()
+        {
+            
+        }
+        public PictureInfoDomain(int pictureID)
+        {
+            PictureID = pictureID;
+        }
         public PictureInfoDTO ToDTO()
         {
             PictureInfoDTO pictureInfoDTO = new PictureInfoDTO()

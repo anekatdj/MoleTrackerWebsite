@@ -36,6 +36,7 @@ namespace MoleTrackerWebsite
             services.AddTransient<LoginInfoDomain>();
             //er ikke sikker på om denne skal være singleton eller transient
             services.AddSingleton<MedicalPracticePatientsDomain>();
+            services.AddSingleton<PatientDataDomain>();
             services.AddSingleton<SessionInfoDomain>();
             services.AddSingleton<ILogInController, LogInController>();
             services.AddSingleton<ILoadPatients, LoadPatients>();
