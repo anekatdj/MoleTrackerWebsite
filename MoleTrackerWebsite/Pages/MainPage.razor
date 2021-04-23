@@ -50,7 +50,7 @@
     <div class="col">
         @*padding og sticky*@
         <div style="width: 400px">
-            <img src="@FrontOrBack" style="float: right; width:@Width; height: @Height;" /> @*onmousewheel="@MouseWheel"*@
+            <img src="@FrontOrBack" style="float: right; width:@Width; height: @Height;" @onclick="GetCoordinates" /> @*onmousewheel="@MouseWheel"*@
             <button style="float:right" class="@Arrow" @onclick="TurnAroundModel"></button>
 
         </div>
@@ -65,15 +65,12 @@
 <div class="col align-self-end">
     @if (@ButtonPressed == false)
     {
-        <button style="float: right; border-radius: 28px;" class="@AddCollectionButton" @onclick="AddNewCollection"></button>
+        <button style="float: right; border-radius: 28px;" class="@AddCollectionButton" @onclick="ChoosePoint"></button>
     }
     @if (@ButtonPressed == true)
     {
-        @if (PointClicked == false)
-        {
-            <button style="float: right; border-radius: 28px;" @onclick="NavigateToCollectionPage" disabled="@true">Godkendt</button>
-            <p style="float: right; color: crimson; margin-right: 15px">Vælg placering af modermærke</p>
-        }
+        <button style="float: right; border-radius: 28px;" @onclick="NavigateToCollectionPage" disabled="@true">Godkend</button>
+        <p style="float: right; color: crimson; margin-right: 15px">Vælg placering af modermærke</p>
     }
 
 </div>
@@ -84,15 +81,47 @@
 
 
 
-
 @code {
+
+    private enum Orientation
+    {
+        Lower,
+        Upper,
+        Right,
+        Left
+    }
+
+    private enum BodyPart
+    {
+        Shoulder,
+        Arm,
+        Hand,
+        Finger,
+        Thigh,
+        Leg,
+        Foot,
+        Toe,
+        Buttcheek,
+        Back,
+        Cheek,
+        Nose,
+        Forehead,
+        Chin,
+        Ear,
+        Temple,
+        Neck,
+        None,
+        Head
+    }
+
+    private BodyPart bodyPart = BodyPart.None;
     public string FrontOrBack = "/Images/MaleFrontCrop.png";
     public string Arrow = "fa fa-refresh";
     public string AddCollectionButton = "fa fa-plus";
     public string TurnAround { get; set; }
     public string Gender { get; set; }
-    public string Width{ get; set; }
-    public string Height{ get; set; }
+    public string Width { get; set; }
+    public string Height { get; set; }
 
     private IEnumerable<Collection> collections = new[]
     {
@@ -191,25 +220,35 @@
 
 
     public string NewPinAdded { get; set; }
-    public bool ButtonPressed{ get; set; }
+    public bool ButtonPressed { get; set; }
     public bool PointClicked { get; set; }
 
-    private void AddNewCollection(MouseEventArgs e)
+    private void ChoosePoint()
     {
-        NewPinAdded = "pin.png";
+        //NewPinAdded = "pin.png";
         ButtonPressed = true;
     }
 
     private void GetCoordinates(MouseEventArgs e)
     {
-        double x = e.ScreenX;
-        double y = e.ScreenY;
+        int x = Convert.ToInt32(e.ScreenX);
+        int y = Convert.ToInt32(e.ScreenY);
 
-        //if (obj.ScreenX > 1000 && obj.ScreenX < 1200)
-        //{
-        //    Point mousePoint = new Point((int)obj.ScreenX, (int)obj.ScreenY);
-        //    Debug.WriteLine("Koordinaterne er {0}, {1}", obj.ScreenX, obj.ScreenY);
-        //}
+        HandleLocation(e);
+    }
+
+    private void HandleLocation(MouseEventArgs e)
+    {
+        if (e.ScreenX > 1185 && e.ScreenX < 1225 && e.ScreenY > 270 && e.ScreenY < 335)
+        {
+            Debug.WriteLine("Hoved");
+            Debug.WriteLine("Koordinater: {0}, {1}", e.ScreenX, e.ScreenY);
+            bodyPart = BodyPart.Head;
+        }
+        else
+        {
+            Debug.WriteLine("Ikke hovedet");
+        }
     }
 
     private void NavigateToCollectionPage()
