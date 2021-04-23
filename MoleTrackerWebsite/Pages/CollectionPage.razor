@@ -34,7 +34,10 @@
 
     protected override async Task OnInitializedAsync()
     {
-        collection = ViewCollectionController.SelectedCollection;
+        //collection = ViewCollectionController.SelectedCollection;
+
+        collection = new CollectionDomain("Test collection");
+        PicDataList = new List<PictureDataDomain>();
 
         foreach (var pic in collection.PictureList)
         {
