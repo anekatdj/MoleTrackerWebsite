@@ -20,7 +20,7 @@
 
 <link href="css/styles.css" rel="stylesheet"/>
 
-<div class="wrapper fadeInDown" style="margin-top:10%">
+<div class="wrapper fadeInDown" style="margin-top: 10%">
     <div id="formContent">
         <EditForm Model="@MedicalPracticePatients">
 
@@ -36,7 +36,7 @@
                 </tr>
                 @foreach (var item in filteredPatientList)
                 {
-                    <tr @onclick="@((e) => NavigateToSpecificPatientPage(e, item.CPR))">
+                    <tr @onclick="@((e) => NavigateToSpecificPatientPage(e, item.CPR))" style="cursor: pointer">
                         <td>
                             @item.Name
                         </td>
