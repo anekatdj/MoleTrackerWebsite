@@ -5,6 +5,7 @@
 @using System.Drawing
 @using System.Net.Mime
 @using System.Diagnostics
+@using System.Diagnostics.Eventing.Reader
 
 @inject NavigationManager NavManager
 @inject SessionInfo SessionInfo
@@ -63,15 +64,26 @@
 </div>
 
 <div class="col align-self-end">
-    @if (@ButtonPressed == false)
+    @if (AddButtonPressed == false)
     {
         <button style="float: right; border-radius: 28px;" class="@AddCollectionButton" @onclick="ChoosePoint"></button>
     }
-    @if (@ButtonPressed == true)
+
+    @if (AddButtonPressed == true)
     {
-        <button style="float: right; border-radius: 28px;" @onclick="NavigateToCollectionPage" disabled="@true">Godkend</button>
-        <p style="float: right; color: crimson; margin-right: 15px">Vælg placering af modermærke</p>
+        @if (PointClicked == true)
+        {
+            <button style="float: right; border-radius: 28px;" @onclick="AcceptPosition">Godkend</button>
+            <p style="float: right; color: crimson; margin-right: 15px">Vælg placering af modermærke</p>
+        }
+        @if (PointClicked == false)
+        {
+            <button style="float: right; border-radius: 28px;" disabled="@true">Godkend</button>
+            <p style="float: right; color: crimson; margin-right: 15px">Vælg placering af modermærke</p>
+        }
     }
+
+
 
 </div>
 
@@ -220,13 +232,14 @@
 
 
     public string NewPinAdded { get; set; }
-    public bool ButtonPressed { get; set; }
+    public bool AddButtonPressed { get; set; }
+    public bool AcceptButtonPressed { get; set; }
     public bool PointClicked { get; set; }
 
     private void ChoosePoint()
     {
         //NewPinAdded = "pin.png";
-        ButtonPressed = true;
+        AddButtonPressed = true;
     }
 
     private void GetCoordinates(MouseEventArgs e)
@@ -239,16 +252,32 @@
 
     private void HandleLocation(MouseEventArgs e)
     {
-        if (e.ScreenX > 1185 && e.ScreenX < 1225 && e.ScreenY > 270 && e.ScreenY < 335)
+        if (AddButtonPressed == true)
         {
-            Debug.WriteLine("Hoved");
-            Debug.WriteLine("Koordinater: {0}, {1}", e.ScreenX, e.ScreenY);
-            bodyPart = BodyPart.Head;
+            if (e.ScreenX > 1185 && e.ScreenX < 1225 && e.ScreenY > 270 && e.ScreenY < 335)
+            {
+                Debug.WriteLine("Hoved");
+                Debug.WriteLine("Koordinater: {0}, {1}", e.ScreenX, e.ScreenY);
+                bodyPart = BodyPart.Head;
+
+                PointClicked = true;
+            }
+            else if (e.ScreenX < 1185 && e.ScreenX > 1225)
+            {
+                Debug.WriteLine("Ikke hovedet");
+                Debug.WriteLine("Koordinater: {0}, {1}", e.ScreenX, e.ScreenY);
+            }
         }
+
         else
         {
-            Debug.WriteLine("Ikke hovedet");
+            Debug.WriteLine("lort");
         }
+    }
+
+    private void AcceptPosition()
+    {
+        NavigateToCollectionPage();
     }
 
     private void NavigateToCollectionPage()
