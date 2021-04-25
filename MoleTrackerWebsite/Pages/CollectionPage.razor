@@ -1,8 +1,22 @@
 ﻿@page "/collectionPage"
-<h3>CollectionPage</h3>
+@using DataClasses.Domain
+
+<link href="css/CSSStyles.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> @*EYE*@
+
+@inject Collection CollectionInfo;
+
+<h3>@CollectionInfo.CollectionName</h3>
+
+<div class="row mb-3">
+    <div class="col">
+        <input style="width: 50%; margin-left: 25%" disabled="@true" type="text" class="form-control" placeholder="Right buttcheek">
+        <button style="border-radius: 28px;" class="@EditPencil"></button>
+    </div>
+</div>
 
 
 
 @code {
-
+    public string EditPencil = "fa fa-pencil-square";
 }
