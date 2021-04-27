@@ -10,16 +10,16 @@ namespace BusinessLogicLayer
 {
     public class LogInController: ILogInController
     {
-        private ILogInDatabaseManager loginDBM;
+        public ILogInDatabaseManager LogInDatabaseManager { get; set; }
         public DoctorInfoDomain DoctorInfo { get; set; }
 
         public LogInController()
         {
-            loginDBM = new LogInDatabaseManager();
+            LogInDatabaseManager = new LogInDatabaseManager();
         }
         public bool Login(LoginInfoDomain loginData)
         {
-            DoctorInfo = loginDBM.VerifyLoginWithAPI(loginData);
+            DoctorInfo = LogInDatabaseManager.VerifyLoginWithAPI(loginData);
 
             if (DoctorInfo != null)
             {
