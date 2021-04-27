@@ -12,6 +12,9 @@
 @inject PatientInfo PatientInfo
 @inject ILogInController LogInController
 
+@*To find coordinates*@
+@inject IJSRuntime JS;
+
 
 <link href="css/CSSStyles.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> @*EYE*@
@@ -35,7 +38,7 @@
                         <th>Personlige samlinger</th>
                     </tr>
                 </thead>
-                <tbody @onclick=NavigateToCollectionPage cursor="Hand">
+                <tbody @onclick=NavigateToCollectionPage style="cursor:grab">
                     @foreach (Collection collection in collections)
                     {
                         <tr>
@@ -51,7 +54,7 @@
     <div class="col">
         @*padding og sticky*@
         <div style="width: 400px">
-            <img src="@FrontOrBack" style="float: right; width:@Width; height: @Height;" @onclick="GetCoordinates" /> @*onmousewheel="@MouseWheel"*@
+            <img id="PatientModel" src="@FrontOrBack" style="float: right; width:@Width; height: @Height;" @onclick="GetCoordinates" /> @*onmousewheel="@MouseWheel"*@
             <button style="float:right" class="@Arrow" @onclick="TurnAroundModel"></button>
 
         </div>
@@ -212,14 +215,31 @@
 
     private void ChoosePoint()
     {
-    //NewPinAdded = "pin.png";
+        //NewPinAdded = "pin.png";
         AddButtonPressed = true;
     }
 
-    private void GetCoordinates(MouseEventArgs e)
+    //Ny klasse
+    public class BoundingClientRect
     {
-        int x = Convert.ToInt32(e.ScreenX);
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double Width { get; set; }
+        public double Height { get; set; }
+        public double Top { get; set; }
+        public double Right { get; set; }
+        public double Bottom { get; set; }
+        public double Left { get; set; }
+    }
+
+
+    private async Task GetCoordinates(MouseEventArgs e) //Før var det en void
+    {
+        var result = await JS.InvokeAsync<BoundingClientRect>("PictureClickFind", new object[] { "PatientModel" });
+        int x = Convert.ToInt32(e.ClientX-result.Left);
+        int x2 = Convert.ToInt32(e.ScreenX);
         int y = Convert.ToInt32(e.ScreenY);
+        int y2 = Convert.ToInt32(e.ClientX - result.Top);
 
         HandleLocation(e);
     }
