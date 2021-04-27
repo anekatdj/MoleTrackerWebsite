@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DataAccessLayer.DataAccessLayerInterfaces;
 using DataClasses.Domain;
 
 namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
 {
-    public interface ISelectPatient
+    public interface ISelectPatientController
     {
+        ISelectPatientDatabaseManager SelectPatientDatabaseManager { get; set; }
         PatientInfoDomain SelectedPatient { get; set; }
         PatientDataDomain GetPatientData(PatientInfoDomain patientInfoDomain);
       

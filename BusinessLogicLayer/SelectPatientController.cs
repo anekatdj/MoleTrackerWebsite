@@ -8,24 +8,24 @@ using DataClasses.Domain;
 
 namespace BusinessLogicLayer
 {
-    public class SelectPatient : ISelectPatient
+    public class SelectPatientController : ISelectPatientController
     {
-        private ISelectPatientDatabaseManager selectPatientDatabaseManager;
+        public ISelectPatientDatabaseManager SelectPatientDatabaseManager { get; set; }
 
         public PatientInfoDomain SelectedPatient { get; set; }
-        public SelectPatient()
+        public SelectPatientController()
         {
-            selectPatientDatabaseManager = new SelectPatientDatabaseManager();
+            SelectPatientDatabaseManager = new SelectPatientDatabaseManager();
             
             SelectedPatient = new PatientInfoDomain();
         }
         public PatientDataDomain GetPatientData(PatientInfoDomain patientInfoDomain)
         {
-            return selectPatientDatabaseManager.GetPatientData(patientInfoDomain);
+            return SelectPatientDatabaseManager.GetPatientData(patientInfoDomain);
         }
         public void GetPatientInfo(PatientInfoDomain patientInfo)
         {
-            selectPatientDatabaseManager.GetPatientInfo(patientInfo);
+            SelectPatientDatabaseManager.GetPatientInfo(patientInfo);
         }
 
     }
