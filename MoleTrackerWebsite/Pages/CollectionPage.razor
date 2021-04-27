@@ -9,8 +9,8 @@
 
 <div class="row mb-3">
     <div class="col">
-        <input style="width: 50%; margin-left: 25%; font-size: 24pt" disabled="@true" type="text" placeholder="@CollectionInfo.CollectionName" class="@EditNameBool">
-        <button style="border-radius: 28px;" class="@EditPencil" onclick="EditName"></button>
+        <input style="width: 50%; margin-left: 25%; font-size: 24pt" disabled="@IsDisabled" type="text" @oninput="OnInputHandler" placeholder="@CollectionInfo.CollectionName">
+        <button style="border-radius: 28px;" class="@EditPencil" @onclick="EditName"></button>
         <button style="float: right" class="oi oi-ellipses"></button>
     </div>
 </div>
@@ -19,10 +19,26 @@
 
 @code {
     public string EditPencil = "fa fa-pencil-square";
-    public bool EditNameBool { get; set; }
+    public bool IsDisabled { get; set; } = true;
 
     private void EditName()
     {
-        EditNameBool = true;
+        if (EditPencil == "fa fa-pencil-square")
+        {
+            IsDisabled = false;
+            EditPencil = "Gem";
+        }
+
+        else
+        {
+            IsDisabled = true;
+            EditPencil = "fa fa-pencil-square";
+        }
+
+    }
+
+    private void OnInputHandler(ChangeEventArgs e)
+    {
+        CollectionInfo.CollectionName = e.Value.ToString();
     }
 }
