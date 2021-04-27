@@ -96,6 +96,8 @@
 
 @code {
 
+    #region Properties and fields
+
     private enum Orientation
     {
         Lower,
@@ -148,6 +150,8 @@
         new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
     };
 
+    #endregion
+
 
     public void TurnAroundModel()
     {
@@ -185,36 +189,6 @@
         Gender = PatientInfo.Gender;
     }
 
-    public void DisplayPatientModel()
-    {
-        GetGender();
-
-        if (Gender == "G")
-        {
-            FrontOrBack = "/Images/FemaleFrontcrop.png";
-            Width = "212px";
-            Height = "477px";
-        }
-
-        else if (Gender == "B")
-        {
-            FrontOrBack = "/Images/MaleFrontCrop.png";
-            Width = "270px";
-            Height = "520px";
-        }
-    }
-
-    Task StartupTask()
-    {
-        return Task.CompletedTask;
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        DisplayPatientModel();
-        await StartupTask();
-    }
-
 
     //Zoom forsøg - virker ikke helt med event
     //https://stackoverflow.com/questions/54222913/scrollable-image-stack-using-blazor-component/54227687
@@ -225,8 +199,6 @@
 
     public class WheelEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs { public int DeltaY { get; } }
 
-
-
     Task MouseWheel(WheelEventArgs args)
     {
         imgNumber += Math.Sign(args.DeltaY);
@@ -236,9 +208,11 @@
     }
 
 
+    #region Coordinates
+
     private void ChoosePoint()
     {
-        //NewPinAdded = "pin.png";
+    //NewPinAdded = "pin.png";
         AddButtonPressed = true;
     }
 
@@ -284,4 +258,41 @@
     {
         NavManager.NavigateTo("/collectionPage");
     }
+
+    #endregion
+
+    #region OnStartUp
+
+
+    public void DisplayPatientModel()
+    {
+        GetGender();
+
+        if (Gender == "G")
+        {
+            FrontOrBack = "/Images/FemaleFrontcrop.png";
+            Width = "212px";
+            Height = "477px";
+        }
+
+        else if (Gender == "B")
+        {
+            FrontOrBack = "/Images/MaleFrontCrop.png";
+            Width = "270px";
+            Height = "520px";
+        }
+    }
+
+    Task StartupTask()
+    {
+        return Task.CompletedTask;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        DisplayPatientModel();
+        await StartupTask();
+    }
+
+    #endregion
 }
