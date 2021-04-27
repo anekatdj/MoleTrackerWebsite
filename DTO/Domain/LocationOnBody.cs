@@ -6,8 +6,10 @@
         public int yCoordinate { get; set; }
 
         public bool IsFrontFacing { get; set; }
+        public BodyPart BodyParts = BodyPart.Hoved;
+        public Orientation Orientations { get; set; }
 
-        private enum Orientation
+        public enum Orientation
         {
             Nedre,
             Øvre,
@@ -15,7 +17,7 @@
             Venstre
         }
 
-        private enum BodyPart
+        public enum BodyPart
         {
             Skulder,
             Arm,
