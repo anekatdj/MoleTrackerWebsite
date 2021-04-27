@@ -35,7 +35,7 @@
                         <th>Personlige samlinger</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody @onclick=NavigateToCollectionPage cursor="Hand">
                     @foreach (Collection collection in collections)
                     {
                         <tr>
