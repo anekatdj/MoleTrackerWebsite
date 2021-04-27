@@ -4,14 +4,13 @@
 <link href="css/CSSStyles.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> @*EYE*@
 
-@inject Collection CollectionInfo;
-
-<h3>@CollectionInfo.CollectionName</h3>
+@inject Collection CollectionInfo
+@inject LocationOnBody Location
 
 <div class="row mb-3">
     <div class="col">
-        <input style="width: 50%; margin-left: 25%" disabled="@true" type="text" class="form-control">
-        <button style="border-radius: 28px;" class="@EditPencil"></button>
+        <input style="width: 50%; margin-left: 25%; font-size: 24pt" disabled="@true" type="text" placeholder="@CollectionInfo.CollectionName" class="@EditNameBool">
+        <button style="border-radius: 28px;" class="@EditPencil" onclick="EditName"></button>
         <button style="float: right" class="oi oi-ellipses"></button>
     </div>
 </div>
@@ -20,6 +19,10 @@
 
 @code {
     public string EditPencil = "fa fa-pencil-square";
+    public bool EditNameBool { get; set; }
 
-
+    private void EditName()
+    {
+        EditNameBool = true;
+    }
 }
