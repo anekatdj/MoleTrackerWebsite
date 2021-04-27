@@ -231,8 +231,8 @@
         public double Left { get; set; }
     }
 
-    public int X{ get; set; }
-    public int Y{ get; set; }
+    public int X { get; set; }
+    public int Y { get; set; }
 
     private async Task GetCoordinates(MouseEventArgs e) //Før var det en void
     {
@@ -245,30 +245,34 @@
 
     private void HandleLocation(MouseEventArgs e)
     {
-        //if (AddButtonPressed == true)
-        //{
-        //    if (e.ScreenX > 1185 && e.ScreenX < 1225 && e.ScreenY > 270 && e.ScreenY < 335)
-        //    {
-        //        Debug.WriteLine("Hoved");
-        //        Debug.WriteLine("Koordinater: {0}, {1}", e.ScreenX, e.ScreenY);
-        //        bodyPart = BodyPart.Head;
+        if (AddButtonPressed == true)
+        {
+            if (Y < 215) //alt over hoften
+            {
+                if (X > 86 && X < 124 && Y > 0 && Y < 19)
+                {
+                    Debug.WriteLine("Pande");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Forehead;
 
-        //        PointClicked = true;
-        //    }
-        //else if (e.ScreenX < 1185 && e.ScreenX > 1225)
-        //{
-        //    Debug.WriteLine("Ikke hovedet");
-        //    Debug.WriteLine("Koordinater: {0}, {1}", e.ScreenX, e.ScreenY);
-        //}
+                    PointClicked = true;
+                }
 
-        //else
-        //{
-        //Debug.WriteLine("lort");
-        Debug.WriteLine("Koordinater: {0}, {1}", e.ScreenX, e.ScreenY);
-        //}
+                else
+                {
+                    Debug.WriteLine("lort");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                }
+            }
+
+            else //alt under hoften
+            {
+
+            }
+            
+        }
+        //Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
     }
-
-
 
 
     private void AcceptPosition()
