@@ -219,7 +219,7 @@
         AddButtonPressed = true;
     }
 
-    //Ny klasse
+    //Klasse til skærmmål
     public class BoundingClientRect
     {
         public double X { get; set; }
@@ -236,10 +236,8 @@
     private async Task GetCoordinates(MouseEventArgs e) //Før var det en void
     {
         var result = await JS.InvokeAsync<BoundingClientRect>("PictureClickFind", new object[] { "PatientModel" });
-        int x = Convert.ToInt32(e.ClientX-result.Left);
-        int x2 = Convert.ToInt32(e.ScreenX);
-        int y = Convert.ToInt32(e.ScreenY);
-        int y2 = Convert.ToInt32(e.ClientY - result.Top);
+        int x = Convert.ToInt32(e.ClientX - result.Left);
+        int y = Convert.ToInt32(e.ClientY - result.Top);
 
         HandleLocation(e);
     }
