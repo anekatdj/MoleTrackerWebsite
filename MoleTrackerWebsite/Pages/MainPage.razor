@@ -239,7 +239,7 @@
         int x = Convert.ToInt32(e.ClientX-result.Left);
         int x2 = Convert.ToInt32(e.ScreenX);
         int y = Convert.ToInt32(e.ScreenY);
-        int y2 = Convert.ToInt32(e.ClientX - result.Top);
+        int y2 = Convert.ToInt32(e.ClientY - result.Top);
 
         HandleLocation(e);
     }
