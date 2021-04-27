@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer;
 using BusinessLogicLayer.BusinessLogicLayerInterfaces;
+using DataAccessLayer;
 using DataClasses.Domain;
 
 namespace MoleTrackerWebsite
@@ -39,8 +40,8 @@ namespace MoleTrackerWebsite
             services.AddSingleton<PatientDataDomain>();
             services.AddSingleton<SessionInfoDomain>();
             services.AddSingleton<ILogInController, LogInController>();
-            services.AddSingleton<ILoadPatients, LoadPatients>();
-            services.AddSingleton<ISelectPatient, SelectPatient>();
+            services.AddSingleton<ILoadPatients, LoadPatientsController>();
+            services.AddSingleton<ISelectPatientController, SelectPatientController>();
             services.AddSingleton<IViewCollectionController, ViewCollectionController>();
         }
 
