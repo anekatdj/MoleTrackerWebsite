@@ -6,7 +6,7 @@ using DataClasses.Domain;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace MedWebNUnitTest.ControllerTest
+namespace MedWebNUnitTest.BusinessLogicLayerTests
 {
     public class TestSelectPatientController
     {

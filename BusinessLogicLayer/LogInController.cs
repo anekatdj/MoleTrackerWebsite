@@ -17,7 +17,7 @@ namespace BusinessLogicLayer
         {
             loginDBM = new LogInDatabaseManager();
         }
-        public bool login(LoginInfoDomain loginData)
+        public bool Login(LoginInfoDomain loginData)
         {
             DoctorInfo = loginDBM.VerifyLoginWithAPI(loginData);
 

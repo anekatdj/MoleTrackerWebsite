@@ -9,6 +9,6 @@ namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
     {
 
         public DoctorInfoDomain DoctorInfo { get; set; }
-        bool login(LoginInfoDomain loginData);
+        bool Login(LoginInfoDomain loginData);
     }
 }

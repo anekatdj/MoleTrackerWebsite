@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 
-namespace MedWebNUnitTest.BoundaryTest
+namespace MedWebNUnitTest.BusinessLogicLayerTests
 {
-    public class TestLoadPatientsDatabaseManager
+    public class TestLoadPatientsController
     {
         [SetUp]
         public void Setup()

@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 
-namespace MedWebNUnitTest.ControllerTest
+namespace MedWebNUnitTest.DataAccessLayerTests
 {
-    public class TestCreateCollectionController
+    public class TestCreateCollectionDatabaseManager
     {
         [SetUp]
         public void Setup()
