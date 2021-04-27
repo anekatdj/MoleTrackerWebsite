@@ -11,7 +11,6 @@
 @inject SessionInfo SessionInfo
 @inject PatientInfo PatientInfo
 @inject ILogInController LogInController
-
 @*To find coordinates*@
 @inject IJSRuntime JS;
 
@@ -236,7 +235,7 @@
     private async Task GetCoordinates(MouseEventArgs e) //Før var det en void
     {
         var result = await JS.InvokeAsync<BoundingClientRect>("PictureClickFind", new object[] { "PatientModel" });
-        int x = Convert.ToInt32(e.ClientX-result.Left);
+        int x = Convert.ToInt32(e.ClientX - result.Left);
         int x2 = Convert.ToInt32(e.ScreenX);
         int y = Convert.ToInt32(e.ScreenY);
         int y2 = Convert.ToInt32(e.ClientY - result.Top);
@@ -246,28 +245,31 @@
 
     private void HandleLocation(MouseEventArgs e)
     {
-        if (AddButtonPressed == true)
-        {
-            if (e.ScreenX > 1185 && e.ScreenX < 1225 && e.ScreenY > 270 && e.ScreenY < 335)
-            {
-                Debug.WriteLine("Hoved");
-                Debug.WriteLine("Koordinater: {0}, {1}", e.ScreenX, e.ScreenY);
-                bodyPart = BodyPart.Head;
+        //if (AddButtonPressed == true)
+        //{
+        //    if (e.ScreenX > 1185 && e.ScreenX < 1225 && e.ScreenY > 270 && e.ScreenY < 335)
+        //    {
+        //        Debug.WriteLine("Hoved");
+        //        Debug.WriteLine("Koordinater: {0}, {1}", e.ScreenX, e.ScreenY);
+        //        bodyPart = BodyPart.Head;
 
-                PointClicked = true;
-            }
-            else if (e.ScreenX < 1185 && e.ScreenX > 1225)
-            {
-                Debug.WriteLine("Ikke hovedet");
-                Debug.WriteLine("Koordinater: {0}, {1}", e.ScreenX, e.ScreenY);
-            }
-        }
+        //        PointClicked = true;
+        //    }
+        //else if (e.ScreenX < 1185 && e.ScreenX > 1225)
+        //{
+        //    Debug.WriteLine("Ikke hovedet");
+        //    Debug.WriteLine("Koordinater: {0}, {1}", e.ScreenX, e.ScreenY);
+        //}
 
-        else
-        {
-            Debug.WriteLine("lort");
-        }
+        //else
+        //{
+        //Debug.WriteLine("lort");
+        Debug.WriteLine("Koordinater: {0}, {1}", e.ScreenX, e.ScreenY);
+        //}
     }
+
+
+
 
     private void AcceptPosition()
     {
