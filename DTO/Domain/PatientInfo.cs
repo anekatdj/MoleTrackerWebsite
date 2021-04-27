@@ -10,10 +10,10 @@ namespace DataClasses.Domain
     {
         public int PatientID { get; set; }
 
-        public string CPR { get; set; }
-        public string Name { get; set; }
-        public string Gender { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Email { get; set; }
+        public string CPR { get; set; } = "2007981233";
+        public string Name { get; set; } = "AK";
+        public string Gender { get; set; } = "G";
+        public string PhoneNumber { get; set; } = "24 84 09 48";
+        public string Email { get; set; } = "AToTheK47@godmail.dk";
     }
 }
