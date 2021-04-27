@@ -18,12 +18,12 @@
 
 
 @code {
-    public string EditPencil = "fa fa-pencil-square";
+    public string EditPencil = "fa fa-pencil";
     public bool IsDisabled { get; set; } = true;
 
     private void EditName()
     {
-        if (EditPencil == "fa fa-pencil-square")
+        if (EditPencil == "fa fa-pencil")
         {
             IsDisabled = false;
             EditPencil = "Gem";
@@ -32,7 +32,7 @@
         else
         {
             IsDisabled = true;
-            EditPencil = "fa fa-pencil-square";
+            EditPencil = "fa fa-pencil";
         }
 
     }
