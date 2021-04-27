@@ -15,7 +15,7 @@
 
 
 <h3>@patientInfo.Name</h3>
-@*<div>*@
+<div class="col">
 <EditForm Model="@PatientDataModel">
     <DataAnnotationsValidator />
     <ValidationSummary />
@@ -26,7 +26,7 @@
             </tr>
             @foreach (var collection in collectionList)
             {
-                <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))">
+                <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))" style="cursor: pointer">
                     <td>
                         @collection.CollectionName
                     </td>
@@ -35,7 +35,10 @@
         </tbody>
     </table>
 </EditForm>
-@*</div>*@
+</div>
+<div class="col">
+    <img src="~/css/Pictures/MaleFront.png" alt="Image not found" width="200" height="400" />
+</div>
 
 @code {
 
