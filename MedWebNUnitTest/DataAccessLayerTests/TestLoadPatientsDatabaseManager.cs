@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 
-namespace MedWebNUnitTest.BoundaryTest
+namespace MedWebNUnitTest.DataAccessLayerTests
 {
-    public class TestCreateCollectionDatabaseManager
+    public class TestLoadPatientsDatabaseManager
     {
         [SetUp]
         public void Setup()

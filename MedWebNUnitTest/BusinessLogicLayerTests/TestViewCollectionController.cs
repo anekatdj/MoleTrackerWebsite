@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 
-namespace MedWebNUnitTest.ControllerTest
+namespace MedWebNUnitTest.BusinessLogicLayerTests
 {
-    public class TestSelectPatientController
+    public class TestViewCollectionController
     {
         [SetUp]
         public void Setup()
