@@ -7,6 +7,6 @@ namespace DataAccessLayer.DataAccessLayerInterfaces
 {
     public interface ILoadPatientsDatabaseManager
     {
-        MedicalPracticePatientsDomain GetMedicalPracticePatients(DoctorInfoDomain doctorInfoDomain);
+        MedicalPracticePatientsDomain GetMedicalPracticePatients();
     }
 }

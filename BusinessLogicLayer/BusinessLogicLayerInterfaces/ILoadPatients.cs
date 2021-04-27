@@ -8,6 +8,8 @@ namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
 {
     public interface ILoadPatients
     {
-         MedicalPracticePatientsDomain LoadPatientList(DoctorInfoDomain doctorInfoDomain);
+
+        public ILoadPatientsDatabaseManager LoadPatientsDatabaseManager { get; set; }
+        List<PatientInfoDomain> LoadPatientList();
     }
 }

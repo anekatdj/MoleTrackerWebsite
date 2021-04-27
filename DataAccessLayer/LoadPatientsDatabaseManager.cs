@@ -21,11 +21,9 @@ namespace DataAccessLayer
 
         }
 
-        public MedicalPracticePatientsDomain GetMedicalPracticePatients(DoctorInfoDomain doctorInfoDomain)
+        public MedicalPracticePatientsDomain GetMedicalPracticePatients()
         {
-            //MedicalPracticePatientsDTO medicalPracticePatientsDTO = new MedicalPracticePatientsDTO();
-            DoctorInfoDTO doctorInfoDTOTest = doctorInfoDomain.ToDTO();
-            //DoctorInfoDTO doctorInfoDTO = new DoctorInfoDTO() {DoctorID = doctorInfoDomain.DoctorID};
+            
             try
             {
                 medicalPracticePatientsDTO = API.GetObject<MedicalPracticePatientsDTO, SessionInfoDTO>("MedicalPracticePatients", new SessionInfoDTO());
