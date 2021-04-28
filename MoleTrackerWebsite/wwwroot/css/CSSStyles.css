@@ -26,6 +26,10 @@
     overflow: scroll;
 }
 
+.cursor {
+    cursor: url("../Images/Pin.cur"),default;
+}
+
 /*.show,.hide {*/
     /*position: absolute;*/
     /*right: 15px;
