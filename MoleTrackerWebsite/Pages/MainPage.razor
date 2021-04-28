@@ -100,38 +100,49 @@
 
     #region Properties and fields
 
-    private enum Orientation
+    public enum Orientation
     {
-        Lower,
-        Upper,
-        Right,
-        Left
+        Nedre,
+        Øvre,
+        Højre,
+        Venstre
     }
 
-    private enum BodyPart
+    public enum BodyPart
     {
-        Shoulder,
-        Arm,
-        Hand,
+        Pande,
+        Kind,
+        Næse,
+        Hage,
+        Øre,
+        Hals,
+        Skulder,
+        Bryst,
+        Mave,
+        Overarm,
+        Underarm,
+        Håndflade,
         Finger,
-        Thigh,
-        Leg,
-        Foot,
-        Toe,
-        Buttcheek,
-        Back,
-        Cheek,
-        Nose,
-        Forehead,
-        Chin,
-        Ear,
-        Temple,
-        Neck,
-        None,
-        Head
+        Håndryg,
+        Hofte,
+        Lår,
+        Knæ,
+        Underben,
+        Fod,
+        Tå,
+        Baghoved,
+        Nakke,
+        Bagskulder,
+        Ryg,
+        Balle,
+        Baglår,
+        Knæhase,
+        Læg,
+        Hæl,
+        Unavngivet
     }
 
-    private BodyPart bodyPart = BodyPart.None;
+    private BodyPart bodyPart = BodyPart.Unavngivet;
     public string FrontOrBack = "/Images/MaleFrontCrop.png";
     public string Arrow = "fa fa-refresh";
     public string AddCollectionButton = "fa fa-plus";
@@ -253,23 +264,23 @@
                 {
                     Debug.WriteLine("Pande");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = BodyPart.Forehead;
+                    bodyPart = BodyPart.Pande;
 
                     PointClicked = true;
                 }
 
-                else
-                {
-                    Debug.WriteLine("lort");
-                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                }
+                //else if ( X > 3 && X < && Y > && Y <)
+                //{
+                //    Debug.WriteLine("lort");
+                //    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                //}
             }
 
             else //alt under hoften
             {
 
             }
-            
+
         }
         //Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
     }
