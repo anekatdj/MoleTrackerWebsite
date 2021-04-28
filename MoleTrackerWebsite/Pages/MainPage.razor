@@ -138,12 +138,10 @@
         Balle,
         Baglår,
         Knæhase,
-        Læg,
-        Hæl,
-        Unavngivet
+        Læg
     }
 
-    private BodyPart bodyPart = BodyPart.Unavngivet;
+    private BodyPart bodyPart;
     public string FrontOrBack = "/Images/MaleFrontCrop.png";
     public string Arrow = "fa fa-refresh";
     public string AddCollectionButton = "fa fa-plus";
@@ -252,10 +250,208 @@
         X = Convert.ToInt32(e.ClientX - result.Left);
         Y = Convert.ToInt32(e.ClientY - result.Top);
 
-        HandleLocation(e);
+        BackOrFront();
     }
 
-    private void HandleLocation(MouseEventArgs e)
+    private void BackOrFront()
+    {
+        GetGender();
+
+        if (Gender == "G")
+        {
+            if (FrontOrBack == "/Images/FemaleFrontcrop.png")
+            {
+                HandleLocationFemaleFront();
+            }
+            else
+            {
+                HandleLocationFemaleBack();
+            }
+        }
+
+        else if (Gender == "B")
+        {
+
+        }
+    }
+
+    private void HandleLocationFemaleBack()
+    {
+        if (AddButtonPressed == true)
+        {
+            if (Y < 211) //alt over hoften
+            {
+                if (X > 86 && X < 126 && Y > 0 && Y < 49)
+                {
+                    Debug.WriteLine("Baghoved");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Baghoved;
+
+                    PointClicked = true;
+                }
+                else if ((X > 83 && X < 88 && Y > 30 && Y < 42) || (X > 124 && X < 130 && Y > 30 && Y < 42))
+                {
+                    Debug.WriteLine("Øre");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Øre;
+
+                    PointClicked = true;
+                }
+                else if (X > 93 && X < 119 && Y > 49 && Y < 73)
+                {
+                    Debug.WriteLine("Nakke");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Nakke;
+
+                    PointClicked = true;
+                }
+                else if ((X > 52 && X < 79 && Y > 73 && Y < 106) || (X > 127 && X < 162 && Y > 73 && Y < 106))
+                {
+                    Debug.WriteLine("Bagskulder");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Bagskulder;
+
+                    PointClicked = true;
+                }
+                else if ((X > 51 && X < 73 && Y > 106 && Y < 165) || (X > 140 && X < 166 && Y > 106 && Y < 165))
+                {
+                    Debug.WriteLine("Overarm");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Overarm;
+
+                    PointClicked = true;
+                }
+                else if ((X > 22 && X < 58 && Y > 165 && Y < 226) || (X > 153 && X < 194 && Y > 165 && Y < 226))
+                {
+                    Debug.WriteLine("Underarm");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Underarm;
+
+                    PointClicked = true;
+                }
+                else if (X > 66 && X < 147 && Y > 73 && Y < 211)
+                {
+                    Debug.WriteLine("Ryg");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Ryg;
+
+                    PointClicked = true;
+                }
+                else if (X > 57 && X < 155 && Y > 211 && Y < 253)
+                {
+                    Debug.WriteLine("Balle");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Balle;
+
+                    PointClicked = true;
+                }
+                else if ((X > 59 && X < 104 && Y > 253 && Y < 318) || (X > 108 && X < 154 && Y > 253 && Y < 318))
+                {
+                    Debug.WriteLine("Baglår");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Baglår;
+
+                    PointClicked = true;
+                }
+                else if ((X > 72 && X < 103 && Y > 318 && Y < 351) || (X > 110 && X < 140 && Y > 318 && Y < 351))
+                {
+                    Debug.WriteLine("Knæhase");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Knæhase;
+
+                    PointClicked = true;
+                }
+                else if ((X > 70 && X < 101 && Y > 351 && Y < 438) || (X > 113 && X < 144 && Y > 351 && Y < 438))
+                {
+                    Debug.WriteLine("Læg");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Læg;
+
+                    PointClicked = true;
+                }
+                else if ((X > 62 && X < 100 && Y > 438 && Y < 476) || (X > 112 && X < 152 && Y > 438 && Y < 476))
+                {
+                    Debug.WriteLine("Fod");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Fod;
+
+                    PointClicked = true;
+                }
+            }
+
+            else //alt under hoften
+            {
+                if ((X > 9 && X < 33 && Y > 226 && Y < 254) || (X > 179 && X < 201 && Y > 226 && Y < 254))
+                {
+                    Debug.WriteLine("Håndryg");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Håndryg;
+
+                    PointClicked = true;
+                }
+                else if ((X > 0 && X < 11 && Y > 233 && Y < 254) || (X > 202 && X < 211 && Y > 233 && Y < 254))
+                {
+                    Debug.WriteLine("Tommelfinger");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Tommelfinger;
+
+                    PointClicked = true;
+                }
+                else if ((X > 9 && X < 28 && Y > 254 && Y < 275) || (X > 184 && X < 203 && Y > 254 && Y < 275))
+                {
+                    Debug.WriteLine("Finger");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Finger;
+
+                    PointClicked = true;
+                }
+                else if (X > 57 && X < 155 && Y > 211 && Y < 253)
+                {
+                    Debug.WriteLine("Balle");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Balle;
+
+                    PointClicked = true;
+                }
+                else if ((X > 59 && X < 104 && Y > 253 && Y < 318) || (X > 108 && X < 154 && Y > 253 && Y < 318))
+                {
+                    Debug.WriteLine("Baglår");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Baglår;
+
+                    PointClicked = true;
+                }
+                else if ((X > 72 && X < 103 && Y > 318 && Y < 351) || (X > 110 && X < 140 && Y > 318 && Y < 351))
+                {
+                    Debug.WriteLine("Knæhase");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Knæhase;
+
+                    PointClicked = true;
+                }
+                else if ((X > 70 && X < 101 && Y > 351 && Y < 438) || (X > 113 && X < 144 && Y > 351 && Y < 438))
+                {
+                    Debug.WriteLine("Læg");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Læg;
+
+                    PointClicked = true;
+                }
+                else if ((X > 62 && X < 100 && Y > 438 && Y < 476) || (X > 112 && X < 152 && Y > 438 && Y < 476))
+                {
+                    Debug.WriteLine("Fod");
+                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
+                    bodyPart = BodyPart.Fod;
+
+                    PointClicked = true;
+                }
+            }
+
+        }
+    }
+
+
+    private void HandleLocationFemaleFront()
     {
         if (AddButtonPressed == true)
         {
@@ -269,7 +465,7 @@
 
                     PointClicked = true;
                 }
-                else if ((X > 88 && X < 98 && Y > 35 && Y < 55)||(X > 110 && X < 124 && Y > 35 && Y < 55))
+                else if ((X > 88 && X < 98 && Y > 35 && Y < 55) || (X > 110 && X < 124 && Y > 35 && Y < 55))
                 {
                     Debug.WriteLine("Kind");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
@@ -301,7 +497,7 @@
 
                     PointClicked = true;
                 }
-                else if ((X > 83 && X < 87 && Y > 30 && Y < 42)||(X > 125 && X < 130 && Y > 30 && Y < 42))
+                else if ((X > 83 && X < 87 && Y > 30 && Y < 42) || (X > 125 && X < 130 && Y > 30 && Y < 42))
                 {
                     Debug.WriteLine("Øre");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
