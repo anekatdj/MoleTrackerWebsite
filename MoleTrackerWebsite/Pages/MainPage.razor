@@ -53,8 +53,16 @@
     <div class="col">
         @*padding og sticky*@
         <div style="width: 400px;">
-            <a href="~/Images/pin.png"/>
-            <img class="cursor" id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates"  /> @*onmousewheel="@MouseWheel"*@
+            <a href="~/Images/pin.png" />
+            @if (AddButtonPressed == true)
+            {
+                <img class="cursor" id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" /> @*onmousewheel="@MouseWheel"*@
+            }
+            else
+            {
+                <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" /> @*onmousewheel="@MouseWheel"*@
+            }
+
             <button style="float: right" class="@Arrow" @onclick="TurnAroundModel"></button>
 
         </div>
