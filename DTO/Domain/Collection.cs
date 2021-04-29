@@ -8,7 +8,7 @@ namespace DataClasses.Domain
     {
         public int CollectionID { get; set; }
         public List<PictureInfo> PictureList { get; set; }
-        public string CollectionName { get; set; } = "Hoved";
+        public string CollectionName { get; set; }
         public LocationOnBody Location { get; set; }
     }
 }
