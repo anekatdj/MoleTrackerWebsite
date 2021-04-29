@@ -20,9 +20,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MW_DataAccessLayer", "MW_DataAccessLayer\MW_DataAccessLayer.csproj", "{8E18C772-DAD3-441A-BD12-B62A8F99714A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1A46C724-5C1E-49D0-912E-20A6B50EF2F2}"
-	ProjectSection(SolutionItems) = preProject
-		Pin.cur = Pin.cur
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
