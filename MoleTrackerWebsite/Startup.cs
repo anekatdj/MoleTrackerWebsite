@@ -12,7 +12,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer;
 using BusinessLogicLayer.BusinessLogicLayerInterfaces;
-using DataAccessLayer;
 using DataClasses.Domain;
 
 namespace MoleTrackerWebsite

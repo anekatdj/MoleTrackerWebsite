@@ -15,7 +15,7 @@ namespace BusinessLogicLayer
 
         public LogInController()
         {
-            LogInDatabaseManager = new LogInDatabaseManager();
+            LogInDatabaseManager = new LogInDatabaseManager("");
         }
         public bool Login(LoginInfoDomain loginData)
         {

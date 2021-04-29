@@ -9,13 +9,13 @@ namespace MedWebNUnitTest.BusinessLogicLayerTests
 {
     public class TestLoadPatientsController
     {
-        private LoadPatients uut;
+        private LoadPatientsController uut;
         private ILoadPatientsDatabaseManager fakeLoadPatientsDatabaseManager;
 
         [SetUp]
         public void Setup()
         {
-            uut = new LoadPatients();
+            uut = new LoadPatientsController();
             fakeLoadPatientsDatabaseManager = Substitute.For<ILoadPatientsDatabaseManager>();
             uut.LoadPatientsDatabaseManager = fakeLoadPatientsDatabaseManager;
         }

@@ -12,12 +12,13 @@ namespace DataAccessLayer
 {
     public class LoadPatientsDatabaseManager : ILoadPatientsDatabaseManager
     {
-        private IAPIService API;
+
+        public IAPIService API { get; set; }
         public MedicalPracticePatientsDTO medicalPracticePatientsDTO;
 
-        public LoadPatientsDatabaseManager()
+        public LoadPatientsDatabaseManager(string stub)
         {
-            API = APIFactory.GetAPI("");
+            API = APIFactory.GetAPI(stub);
 
         }
 

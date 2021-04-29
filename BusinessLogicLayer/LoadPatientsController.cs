@@ -14,7 +14,7 @@ namespace BusinessLogicLayer
 
         public LoadPatientsController()
         {
-            LoadPatientsDatabaseManager = new LoadPatientsDatabaseManager();
+            LoadPatientsDatabaseManager = new LoadPatientsDatabaseManager("");
         }
         public List<PatientInfoDomain> LoadPatientList()
         {
