@@ -27,7 +27,7 @@
 }
 
 .cursor {
-    cursor: url("../Images/Pin.cur"),default;
+    cursor: url("../Images/Pin.cur") 24 46,default;
 }
 
 /*.show,.hide {*/
