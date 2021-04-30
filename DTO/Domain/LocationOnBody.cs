@@ -6,7 +6,7 @@
         public int yCoordinate { get; set; }
 
         public bool IsFrontFacing { get; set; }
-        public BodyPart BodyParts = BodyPart.Hoved;
+        public BodyPart BodyParts { get; set; }
         public Orientation Orientations { get; set; }
 
         public enum Orientation
@@ -19,25 +19,35 @@
 
         public enum BodyPart
         {
-            Skulder,
-            Arm,
-            Hånd,
-            Finger,
-            Lår,
-            Ben,
-            Fed,
-            Tå,
-            Balle,
-            Ryg,
+            Pande,
             Kind,
             Næse,
-            Pande,
-            Kæbe,
+            Læber,
+            Hage,
             Øre,
-            Tindinge,
+            Hals,
+            Skulder,
+            Bryst,
+            Mave,
+            Overarm,
+            Underarm,
+            Håndflade,
+            Tommelfinger,
+            Finger,
+            Håndryg,
+            Underliv,
+            Lår,
+            Knæ,
+            Underben,
+            Fod,
+            Baghoved,
             Nakke,
-            Hoved,
-            Intet
+            Bagskulder,
+            Ryg,
+            Balle,
+            Baglår,
+            Knæhase,
+            Læg
         }
     }
 }

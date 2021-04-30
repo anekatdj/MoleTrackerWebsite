@@ -15,9 +15,39 @@
     </div>
 </div>
 
+<div class="col">
+    <div class="tabelcontainer" style="overflow: scroll; height: 500px; width: 400px">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Modermærker for denne samling</th>
+            </tr>
+            </thead>
+            <tbody style="cursor:pointer">
+            @foreach (Collection collection in collections)
+            {
+                <tr>
+                    <td>@collection.CollectionName</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
 
 @code {
+    private IEnumerable<Collection> collections = new[]
+    {
+        new Collection {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Venstre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
+    };
+
+
+
     public string EditPencil = "fa fa-pencil";
     public bool IsDisabled { get; set; } = true;
 
