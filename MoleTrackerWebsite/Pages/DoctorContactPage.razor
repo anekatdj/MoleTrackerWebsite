@@ -1,6 +1,46 @@
 ﻿@page "/doctorinformation"
+@using DataClasses.Domain
+@inject DoctorInfo DoctorInfo
 
-<h3>DoctorContactInformation</h3>
+
+
+
+<div>
+    <h3>Kontakt din læge</h3>
+    <hr />
+
+    <div class="row mb-3">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Lægepraksis</label>
+        <div class="col">
+            <input disabled="@true" type="text" class="form-control" placeholder=@DoctorInfo.MedicalPracticeName aria-label="First name">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Træffetider</label>
+        <div class="col-sm-10">
+            <input disabled="@true" type="text" class="form-control" id="colFormLabel" placeholder=@DoctorInfo.OpeningHours>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Adresse</label>
+        <div class="col-sm-10">
+            <input disabled="@true" type="text" class="form-control" id="colFormLabel" placeholder=@DoctorInfo.Adress>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Telefon</label>
+        <div class="col-sm-10">
+            <input disabled="@true" type="password" class="form-control" id="colFormLabel" placeholder=@DoctorInfo.PhoneNumber>
+        </div>
+    </div>
+    <div class="row mb-3 ">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Hjemmeside</label>
+        <div class="col-sm-10">
+            <input disabled="@true" type="text" class="form-control" id="colFormLabel" placeholder="https://www.google.dk/">
+            @*<a href="#" class="text-decoration-none">https://www.google.dk/</a>*@
+        </div>
+    </div>
+</div>
 
 @code {
 

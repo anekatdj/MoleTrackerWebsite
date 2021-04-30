@@ -22,6 +22,16 @@
     z-index: 2;
 }
 
+.tabelcontainer {
+    overflow: scroll;
+}
+
+.cursor {
+    cursor: url("../Images/pinNew.cur") 5 34,default;
+}
+
+
+
 /*.show,.hide {*/
     /*position: absolute;*/
     /*right: 15px;
@@ -35,6 +45,15 @@
 
 
 /* BASIC */
+
+.scroll {
+    border: none;
+    padding: 5px;
+    font: 24px/36px sans-serif;
+    width: 200px;
+    height: 200px;
+    overflow: scroll;
+}
 
 html {
     background-color: #56baed;

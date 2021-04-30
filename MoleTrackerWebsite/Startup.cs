@@ -36,7 +36,10 @@ namespace MoleTrackerWebsite
             services.AddSingleton<ILogInController, LogInController>();
             services.AddSingleton<PatientInfo>();
             services.AddSingleton<Collection>();
-
+            services.AddSingleton<DoctorInfo>();
+            services.AddSingleton<LocationOnBody>();
+            services.AddSingleton<PictureInfo>();
+            services.AddSingleton<CoordinatesLocalization>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

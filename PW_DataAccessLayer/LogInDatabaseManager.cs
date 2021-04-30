@@ -2,7 +2,7 @@
 using System.Net;
 using APIWebServiesConnector;
 using DataClasses.Domain;
-using DataClasses.DTO.LoginDTOS;
+using DataClasses.DTO;
 using PW_DataAccessLayer.Interfaces;
 
 namespace PW_DataAccessLayer
@@ -10,13 +10,16 @@ namespace PW_DataAccessLayer
     public class LogInDatabaseManager : ILogInDatabaseManager
     {
         private PatientInfoDTO patientInfoDTO;
-        private IAPIService API; //API
+
+        private IAPIService API;
+        private PatientInfo patientInfo;
 
         public LogInDatabaseManager()
         {
-            API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
+            //API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
             
-            //API = new StubApiService();
+            API = new StubApiService();
+            patientInfo = new PatientInfo();
         }
 
         public bool ValidateLogin(LogInInfo loginInfo)
@@ -50,8 +53,6 @@ namespace PW_DataAccessLayer
         public PatientInfo GetPatientInfo()
         {
             //TODO Måske skal den laves om?
-
-            PatientInfo patientInfo = new PatientInfo();
 
             patientInfo.Name = patientInfoDTO.Name;
             patientInfo.PatientID = patientInfoDTO.PatientID;

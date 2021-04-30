@@ -1,5 +1,74 @@
-﻿<h3>CollectionPage</h3>
+﻿@page "/collectionPage"
+@using DataClasses.Domain
+
+<link href="css/CSSStyles.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> @*EYE*@
+
+@inject Collection CollectionInfo
+@inject LocationOnBody Location
+
+<div class="row mb-3">
+    <div class="col">
+        <input style="width: 50%; margin-left: 25%; font-size: 24pt" disabled="@IsDisabled" type="text" @oninput="OnInputHandler" placeholder="@CollectionInfo.CollectionName">
+        <button style="border-radius: 28px;" class="@EditPencil" @onclick="EditName"></button>
+        <button style="float: right" class="oi oi-ellipses"></button> @*oi oi-ellipses*@
+    </div>
+</div>
+
+<div class="col">
+    <div class="tabelcontainer" style="overflow: scroll; height: 500px; width: 400px">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Modermærker for denne samling</th>
+            </tr>
+            </thead>
+            <tbody style="cursor:pointer">
+            @foreach (Collection collection in collections)
+            {
+                <tr>
+                    <td>@collection.CollectionName</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
 
 @code {
+    private IEnumerable<Collection> collections = new[]
+    {
+        new Collection {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Venstre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
+    };
 
+
+
+    public string EditPencil = "fa fa-pencil";
+    public bool IsDisabled { get; set; } = true;
+
+    private void EditName()
+    {
+        if (EditPencil == "fa fa-pencil")
+        {
+            IsDisabled = false;
+            EditPencil = "Gem";
+        }
+
+        else
+        {
+            IsDisabled = true;
+            EditPencil = "fa fa-pencil";
+        }
+
+    }
+
+    private void OnInputHandler(ChangeEventArgs e)
+    {
+        CollectionInfo.CollectionName = e.Value.ToString();
+    }
 }

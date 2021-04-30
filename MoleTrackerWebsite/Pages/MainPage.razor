@@ -2,13 +2,22 @@
 
 @using PW_BusinessLogicLayer.Interfaces
 @using DataClasses.Domain
+@using System.Drawing
+@using System.Net.Mime
+@using System.Diagnostics
+@using System.Diagnostics.Eventing.Reader
+@using PW_BusinessLogicLayer
 
 @inject NavigationManager NavManager
 @inject SessionInfo SessionInfo
 @inject PatientInfo PatientInfo
+@inject ILogInController LogInController
+@inject CoordinatesLocalization Coordinates
+@*To find coordinates*@
+@inject IJSRuntime JS;
 
 
-
+<link href="css/CSSStyles.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> @*EYE*@
 
 @if (!SessionInfo.LoggedIn)
@@ -18,70 +27,150 @@
 
 <h1>Velkommen, @PatientInfo.Name</h1>
 
-<div class="container">
-    <table class="table table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>Personlige samlinger</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (Collection collection in collections)
-        {
-            <tr>
-                <td>@collection.CollectionName</td>
-            </tr>
-        }
-        </tbody>
-    </table>
+<p>Her kan du sammenligne de billeder, du har taget med MoleTracker, så du nemt og hurtigt kan se efter forandringer i dine modermærker.</p>
+
+<div class="row align-items-start" style="height: auto; width: auto">
+
+    <div class="col">
+        <div class="tabelcontainer" style="overflow: scroll; height: 500px; width: 400px">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Personlige samlinger</th>
+                    </tr>
+                </thead>
+                <tbody @onclick=NavigateToCollectionPage style="cursor:pointer">
+                    @foreach (Collection collection in collections)
+                    {
+                        <tr>
+                            <td>@collection.CollectionName</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="col">
+        @*padding og sticky*@
+        <div style="width: 400px;">
+            <a href="~/Images/pin.png" />
+            @if (AddButtonPressed == true)
+            {
+                <img class="cursor" id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" /> @*onmousewheel="@MouseWheel"*@
+            }
+            else
+            {
+                <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" /> @*onmousewheel="@MouseWheel"*@
+            }
+
+            <button style="float: right" class="@Arrow" @onclick="TurnAroundModel"></button>
+
+        </div>
+    </div>
+
+    @*636*1431 billedstørrelse*@
+
+
+
 </div>
 
+<div class="col align-self-end">
+    @if (AddButtonPressed == false)
+    {
+        <button style="float: right; border-radius: 28px;" class="@AddCollectionButton" @onclick="ChoosePoint"></button>
+        <label style="float: right; margin-right: 1%">Klik her for at tilføje en ny samling</label>
+    }
+
+    @if (AddButtonPressed == true)
+    {
+        @if (PointClicked == true)
+        {
+            <button style="float: right; border-radius: 28px;" @onclick="AcceptPosition">Godkend</button>
+            <p style="float: right; color: crimson; margin-right: 15px">Vælg placering af modermærke</p>
+        }
+        @if (PointClicked == false)
+        {
+            <button style="float: right; border-radius: 28px;" disabled="@true">Godkend</button>
+            <p style="float: right; color: crimson; margin-right: 15px">Vælg placering af modermærke</p>
+        }
+    }
+
+
+
+</div>
+
+<p style="font-size: 10px">Bemærk venligst at MoleTracker ikke diagnosticerer hudkræft. Hvis du er bekymret for et eller flere modermærker, skal du kontakte din læge.</p>
+
+
+
+
+
 @code {
+
+    #region Properties and fields
+
+
+    private LocationOnBody.BodyPart bodyPart;
+    public string FrontOrBack = "/Images/MaleFrontCrop.png";
+    public string Arrow = "fa fa-refresh";
+    public string AddCollectionButton = "fa fa-plus";
+    public string TurnAround { get; set; }
+    public string Gender { get; set; }
+    public string Width { get; set; }
+    public string Height { get; set; }
+    public string NewPinAdded { get; set; }
+    public bool AddButtonPressed { get; set; }
+    public bool AcceptButtonPressed { get; set; }
+    public bool PointClicked { get; set; }
 
     private IEnumerable<Collection> collections = new[]
     {
-        new Collection()
+        new Collection {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Venstre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
     };
 
-};
-}
+    #endregion
 
-
-
-
-@*padding og sticky*@
-
-<img src="@FrontOrBack" style="float: right; width: 212px; height: 477px;" onmousewheel="@MouseWheel" />
-<button style="float:right" class="@Arrow" @onclick="TurnAroundModel"></button>
-<button> </button>
-
-@*636*1431 billedstørrelse*@
-
-
-
-@code {
-    public string FrontOrBack = "/Images/FemaleBackCrop.png";
-    public string Arrow = "fa fa-refresh";
-    public string TurnAround { get; set; }
-    public string Gender { get; set; }
 
     public void TurnAroundModel()
     {
-        if (this.FrontOrBack == "/Images/FemaleBackCrop.png")
+        GetGender();
+
+        if (Gender == "G")
         {
-            this.FrontOrBack = "/Images/FemaleFrontcrop.png";
+
+            if (this.FrontOrBack == "/Images/FemaleBackCrop.png")
+            {
+                this.FrontOrBack = "/Images/FemaleFrontcrop.png";
+            }
+            else
+            {
+                this.FrontOrBack = "/Images/FemaleBackCrop.png";
+            }
         }
-        else
+
+        else if (Gender == "B")
         {
-            this.FrontOrBack = "/Images/FemaleBackCrop.png";
+            if (this.FrontOrBack == "/Images/MaleBackCrop.png")
+            {
+                this.FrontOrBack = "/Images/MaleFrontCrop.png";
+            }
+            else
+            {
+                this.FrontOrBack = "/Images/MaleBackCrop.png";
+            }
         }
     }
 
     public void GetGender()
     {
-
+        //PatientInfo = LogInController.HandlePatientInfo();
+        Gender = PatientInfo.Gender;
     }
-
 
 
     //Zoom forsøg - virker ikke helt med event
@@ -89,10 +178,9 @@
 
     int imgNumber = 0;
     string img => $"/Images/FemaleBackCrop {imgNumber}.png";
+    string img2 => $"/Images/pin.png";
 
     public class WheelEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs { public int DeltaY { get; } }
-
-
 
     Task MouseWheel(WheelEventArgs args)
     {
@@ -102,4 +190,123 @@
         return Task.CompletedTask;
     }
 
+
+    #region Coordinates
+
+    private void ChoosePoint()
+    {
+        //NewPinAdded = "pin.png";
+        AddButtonPressed = true;
+    }
+
+    //Klasse til skærmmål
+    public class BoundingClientRect
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double Width { get; set; }
+        public double Height { get; set; }
+        public double Top { get; set; }
+        public double Right { get; set; }
+        public double Bottom { get; set; }
+        public double Left { get; set; }
+    }
+
+    public int X { get; set; }
+    public int Y { get; set; }
+
+    private async Task GetCoordinates(MouseEventArgs e) //Før var det en void
+    {
+        var result = await JS.InvokeAsync<BoundingClientRect>("PictureClickFind", new object[] { "PatientModel" });
+        X = Convert.ToInt32(e.ClientX - result.Left);
+        Y = Convert.ToInt32(e.ClientY - result.Top);
+
+        BackOrFront();
+    }
+
+    private void BackOrFront()
+    {
+        GetGender();
+
+        if (Gender == "G")
+        {
+            if (FrontOrBack == "/Images/FemaleFrontcrop.png")
+            {
+                HandleLocationFemaleFront();
+            }
+            else
+            {
+                HandleLocationFemaleBack();
+            }
+        }
+
+        else if (Gender == "B")
+        {
+
+        }
+    }
+
+    private void HandleLocationFemaleFront()
+    {
+        if (AddButtonPressed == true)
+        {
+            PointClicked = Coordinates.LocalizePointFemaleFront(PointClicked, X, Y);
+        }
+    }
+
+    private void HandleLocationFemaleBack()
+    {
+        if (AddButtonPressed == true)
+        {
+            PointClicked = Coordinates.LocalizePointFemaleBack(PointClicked, X, Y);
+        }
+    }
+
+
+    private void AcceptPosition()
+    {
+        NavigateToCollectionPage();
+    }
+
+    private void NavigateToCollectionPage()
+    {
+        NavManager.NavigateTo("/collectionPage");
+    }
+
+    #endregion
+
+    #region OnStartUp
+
+
+    public void DisplayPatientModel()
+    {
+        GetGender();
+
+        if (Gender == "G")
+        {
+            FrontOrBack = "/Images/FemaleFrontcrop.png";
+            Width = "212px";
+            Height = "477px";
+        }
+
+        else if (Gender == "B")
+        {
+            FrontOrBack = "/Images/MaleFrontCrop.png";
+            Width = "270px";
+            Height = "520px";
+        }
+    }
+
+    Task StartupTask()
+    {
+        return Task.CompletedTask;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        DisplayPatientModel();
+        await StartupTask();
+    }
+
+    #endregion
 }
