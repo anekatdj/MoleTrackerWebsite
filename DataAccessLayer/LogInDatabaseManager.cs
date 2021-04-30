@@ -14,21 +14,22 @@ namespace DataAccessLayer
     public class LogInDatabaseManager : ILogInDatabaseManager
     {
         private DoctorInfoDTO doctorInfo;
-        private IAPIService API;
+        public IAPIService API { get; set; }
+        public LoginInfoDTO NewLogin { get; set; }
 
 
-        public LogInDatabaseManager()
+        public LogInDatabaseManager(string stub)
         {
-            API = APIFactory.GetAPI("");
+            API = APIFactory.GetAPI(stub);
         }
 
         public DoctorInfoDomain VerifyLoginWithAPI(LoginInfoDomain loginInfo)
         {
-            LoginInfoDTO newLogin = loginInfo.ToDTO();
+            NewLogin = loginInfo.ToDTO();
 
             try
             {
-                doctorInfo = API.GetObject<DoctorInfoDTO, LoginInfoDTO>("MedLogin", newLogin);
+                doctorInfo = API.GetObject<DoctorInfoDTO, LoginInfoDTO>("MedLogin", NewLogin);
                  var doctorInfoDomain = DTOConverter.DoctorInfoToDomain(doctorInfo);
                  return doctorInfoDomain;
             }
@@ -38,5 +39,6 @@ namespace DataAccessLayer
             }
 
         }
+
     }
 }

@@ -10,15 +10,16 @@ namespace BusinessLogicLayer
 {
     public class LoadPatientsController : ILoadPatientsController
     {
-        private ILoadPatientsDatabaseManager loadPatientsDatabase;
+        public ILoadPatientsDatabaseManager LoadPatientsDatabaseManager { get; set; }
 
         public LoadPatientsController()
         {
-            loadPatientsDatabase = new LoadPatientsDatabaseManager();
+            LoadPatientsDatabaseManager = new LoadPatientsDatabaseManager("");
         }
-        public MedicalPracticePatientsDomain LoadPatientList(DoctorInfoDomain doctorInfoDomain)
+        public List<PatientInfoDomain> LoadPatientList()
         {
-            return loadPatientsDatabase.GetMedicalPracticePatients(doctorInfoDomain);
+             MedicalPracticePatientsDomain medicalPractice = LoadPatientsDatabaseManager.GetMedicalPracticePatients();
+             return medicalPractice.PatientList;
         }
 
 

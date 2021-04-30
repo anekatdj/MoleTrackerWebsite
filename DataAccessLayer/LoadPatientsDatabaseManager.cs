@@ -12,20 +12,19 @@ namespace DataAccessLayer
 {
     public class LoadPatientsDatabaseManager : ILoadPatientsDatabaseManager
     {
-        private IAPIService API;
+
+        public IAPIService API { get; set; }
         public MedicalPracticePatientsDTO medicalPracticePatientsDTO;
 
-        public LoadPatientsDatabaseManager()
+        public LoadPatientsDatabaseManager(string stub)
         {
-            API = APIFactory.GetAPI("");
+            API = APIFactory.GetAPI(stub);
 
         }
 
-        public MedicalPracticePatientsDomain GetMedicalPracticePatients(DoctorInfoDomain doctorInfoDomain)
+        public MedicalPracticePatientsDomain GetMedicalPracticePatients()
         {
-            //MedicalPracticePatientsDTO medicalPracticePatientsDTO = new MedicalPracticePatientsDTO();
-            DoctorInfoDTO doctorInfoDTOTest = doctorInfoDomain.ToDTO();
-            //DoctorInfoDTO doctorInfoDTO = new DoctorInfoDTO() {DoctorID = doctorInfoDomain.DoctorID};
+            
             try
             {
                 medicalPracticePatientsDTO = API.GetObject<MedicalPracticePatientsDTO, SessionInfoDTO>("MedicalPracticePatients", new SessionInfoDTO());

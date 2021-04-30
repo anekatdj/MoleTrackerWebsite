@@ -27,7 +27,7 @@
             <DataAnnotationsValidator />
             <ValidationSummary />
             <h2>Patientoversigt</h2>
-            <InputText id="myInput" @bind-Value="SearchInput" @onkeyup="MyFunction" placeholder="Søg efter patient" />
+            <InputText id="myInput" @bind-Value="SearchInput" @onkeyup="SearchFunction" placeholder="Søg efter patient" />
             <table id="patientTable" class="table table-striped">
                 <tbody>
                 <tr class="header">
@@ -55,7 +55,7 @@
 @code {
 
     public string SearchInput { get; set; }
-    public MedicalPracticePatientsDomain MedicalPractice { get; set; }
+    //public MedicalPracticePatientsDomain MedicalPractice { get; set; }
     public List<PatientInfoDomain> MedicalPracticePatientList { get; set; }
     public List<PatientInfoDomain> filteredPatientList { get; set; }
     public bool IsDisabled { get; set; }
@@ -64,18 +64,16 @@
 
     protected override async Task OnInitializedAsync()
     {
-        MedicalPractice = LoadPatientsController.LoadPatientList(LogInController.DoctorInfo);
-
-        MedicalPracticePatientList = MedicalPractice.PatientList;
+        MedicalPracticePatientList = LoadPatientsController.LoadPatientList();
 
         IsDisabled = true;
         filteredPatientList = MedicalPracticePatientList;
         SearchInput = "";
     }
 
-   
 
-    protected void MyFunction()
+
+    protected void SearchFunction()
     {
 
 
