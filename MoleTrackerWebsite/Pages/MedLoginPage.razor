@@ -7,7 +7,7 @@
 
 @inject NavigationManager NavManager
 @inject ILogInController LogInController
-@inject LoginInfoDomain loginInfo
+@inject LoginInfoDomain logInInfo
 @inject SessionInfoDomain SesInfo;
 
 
@@ -21,7 +21,7 @@
         <h1 style="padding: 20px 100px">Mole Tracker</h1>
         <h2 style="margin-top: 2px">Medical professional login</h2>
 
-        <EditForm Model="@loginInfo">
+        <EditForm Model="@logInInfo">
 
             <DataAnnotationsValidator />
             <ValidationSummary/>
@@ -29,13 +29,13 @@
             <div style="margin-left:0%"><b>Brugernavn</b></div>
 
             <div style="margin-bottom: 8px">
-                <InputText id="Name" placeholder="Brugernavn" @bind-Value="loginInfo.Username" style="border-radius: 5px" />
+                <InputText id="Name" placeholder="Brugernavn" @bind-Value="LogInInfo.Username" style="border-radius: 5px" />
             </div>
 
             <div style="margin-left:0%"><b>Kodeord</b></div>
             <div>
 
-                <InputText id="Password" @bind-Value="loginInfo.Password" class="border-none flex-1" type="@(showPassword ? "text" : "password")" placeholder="Adgangskode" style="border-radius: 5px" />
+                <InputText id="Password" @bind-Value="LogInInfo.Password" class="border-none flex-1" type="@(showPassword ? "text" : "password")" placeholder="Adgangskode" style="border-radius: 5px" />
                 @*<button id="toggle" @onclick="ToggleShowPassword">
                     <svg viewBox="0 0 24 24"
                          style="fill: none; height: 24px; stroke: rgba(0, 0, 0, 0.4); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1; width: 20px;">
@@ -79,17 +79,28 @@
 
 @code {
     private List<string> errors = new List<string>();
-    private bool LoginFailed = false;
+    public LoginInfoDomain LogInInfo { get; set; }
+    public bool LoginFailed { get; set; } = false;
     private int errorCounter = 0;
     private bool showPassword;
 
-    private void Login()
+    public MedLoginPage()
+    {
+        LogInInfo = new LoginInfoDomain();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        LogInInfo = new LoginInfoDomain();
+    }
+
+    public void Login()
     {
 
         LoginInfoDomain loginData = new LoginInfoDomain()
         {
-            Username = loginInfo.Username,
-            Password = loginInfo.Password
+            Username = LogInInfo.Username,
+            Password = LogInInfo.Password
         };
 
         if (LogInController.Login(loginData))
@@ -114,7 +125,7 @@
         showPassword = !showPassword;
     }
 
-    private void NavigateToPatientOverviewPage()
+    public void NavigateToPatientOverviewPage()
     {
         NavManager.NavigateTo("/PatientOverviewPage");
     }

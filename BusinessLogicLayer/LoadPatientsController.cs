@@ -8,7 +8,7 @@ using DataClasses.Domain;
 
 namespace BusinessLogicLayer
 {
-    public class LoadPatientsController : ILoadPatients
+    public class LoadPatientsController : ILoadPatientsController
     {
         private ILoadPatientsDatabaseManager loadPatientsDatabase;
 

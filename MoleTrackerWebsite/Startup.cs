@@ -40,7 +40,7 @@ namespace MoleTrackerWebsite
             services.AddSingleton<PatientDataDomain>();
             services.AddSingleton<SessionInfoDomain>();
             services.AddSingleton<ILogInController, LogInController>();
-            services.AddSingleton<ILoadPatients, LoadPatientsController>();
+            services.AddSingleton<ILoadPatientsController, LoadPatientsController>();
             services.AddSingleton<ISelectPatientController, SelectPatientController>();
             services.AddSingleton<IViewCollectionController, ViewCollectionController>();
         }

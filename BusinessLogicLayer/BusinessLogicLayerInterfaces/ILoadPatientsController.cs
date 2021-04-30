@@ -6,7 +6,7 @@ using DataClasses.Domain;
 
 namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
 {
-    public interface ILoadPatients
+    public interface ILoadPatientsController
     {
          MedicalPracticePatientsDomain LoadPatientList(DoctorInfoDomain doctorInfoDomain);
     }

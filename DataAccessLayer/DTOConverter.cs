@@ -5,6 +5,7 @@ using System.Text;
 using DataClasses.DataObjects.DTO;
 using DataClasses.DTO;
 using DataClasses.DTO.MISCDTOS;
+using PatientDataDTO = DataClasses.DTO.MISCDTOS.PatientDataDTO;
 
 namespace DataAccessLayer
 {

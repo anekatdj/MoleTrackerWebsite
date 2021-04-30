@@ -7,6 +7,6 @@ namespace DataClasses.Domain
     public class PictureDataDomain
     {
         public int PictureID { get; set; }
-        public int PictureData { get; set; }
+        public byte[] PictureData { get; set; }
     }
 }

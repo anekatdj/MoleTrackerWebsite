@@ -7,6 +7,7 @@ using APIWebServiesConnector.APIStringFabrics;
 using DataClasses.Domain;
 using DataClasses.DTO;
 using DataClasses.DTO.MISCDTOS;
+using PatientDataDTO = DataClasses.DTO.MISCDTOS.PatientDataDTO;
 
 namespace DataAccessLayer
 {
@@ -30,8 +31,8 @@ namespace DataAccessLayer
             }
             catch (Exception)
             {
-
-                throw;
+                
+                throw /*new Exception("API Fejl")*/;
             }
 
             PatientDataDomain patientDataDomain = DTOConverter.PatientDataToDomain(patientDataDTO);
@@ -49,7 +50,7 @@ namespace DataAccessLayer
             catch (Exception)
             {
 
-                throw;
+                throw new Exception("API Fejl");
             }
 
             PatientInfoDomain newpatientInfoDomain = DTOConverter.PatientInfoToDomain(patientInfoDTO);
