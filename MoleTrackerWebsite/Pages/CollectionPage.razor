@@ -16,6 +16,7 @@
         @if (SidebarVisible) //class="td"
         {
             <div id="mySidebar" class="sidebar" style="float: right">
+                <h2 style="color:azure">Indstillinger</h2>
                 <div style="color: azure; margin-left: 5px" @onclick="ItemMarked">
                     <span class="@Flag" style="transform: scaleX(-1);"></span>
                     Markér samling
@@ -31,8 +32,26 @@
                 </div>
                 @if (NotificationVisible)
                 {
-                    <div class="dropdown-item">Dage</div>
-                    <div class="dropdown-item">Tidspunkt</div>
+                    <div class="dropdown-toggle" style="color: azure; margin-left: 20px" @onclick="Days">Dag</div>
+                    @if (DaysVisible)
+                    {
+                        <div style="color: azure; margin: 30px">
+                            @*<table>*@
+                            @*<tbody>*@
+                            @foreach (var day in weekdays)
+                            {
+                                <tr>
+                                    <td style="cursor: pointer">
+                                        @day
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            }
+                            @*</tbody>*@
+                            @*</table>*@
+                        </div>
+                    }
+                    <div class="dropdown-toggle" style="color: azure; margin-left: 20px">Tidspunkt</div>
                 }
             </div>
         }
@@ -63,6 +82,7 @@
 
 
 @code {
+
     private IEnumerable<Collection> collections = new[]
     {
         new Collection {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
@@ -130,5 +150,15 @@
     {
         NotificationVisible = !NotificationVisible;
     }
+
+    public bool DaysVisible{ get; set; }
+
+    public void Days()
+    {
+        DaysVisible = !DaysVisible;
+    }
+
+    private List<string> weekdays = new List<string>(new string[] {"Mandag","Tirsdag","Onsdag","Torsdag","Fredag","Lørdag","Søndag"});
+
 
 }
