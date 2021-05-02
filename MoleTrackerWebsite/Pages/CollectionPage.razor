@@ -9,7 +9,7 @@
 
 <div class="row mb-3">
     <div class="col">
-        <input style="width: 50%; margin-left: 25%; font-size: 24pt" disabled="@IsDisabled" type="text" @oninput="OnInputHandler" placeholder="@CollectionInfo.CollectionName">
+        <input style="width: 50%; margin-left: 25%; font-size: 24pt" disabled="@IsDisabled" type="text" @oninput="OnInputHandler" bind="@CollectionInfo.CollectionName">
         <button style="border-radius: 28px;" class="@EditPencil" @onclick="EditName"></button>
         <button style="float: right" class="oi oi-ellipses"></button> @*oi oi-ellipses*@
     </div>
@@ -38,15 +38,7 @@
 
 
 @code {
-    private IEnumerable<Collection> collections = new[]
-    {
-        new Collection {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Venstre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
-    };
-
-
+    private List<Collection> collections = new List<Collection>();
 
     public string EditPencil = "fa fa-pencil";
     public bool IsDisabled { get; set; } = true;

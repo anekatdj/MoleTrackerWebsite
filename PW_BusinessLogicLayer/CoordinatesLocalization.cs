@@ -8,12 +8,13 @@ namespace PW_BusinessLogicLayer
 {
     public class CoordinatesLocalization
     {
-        private LocationOnBody.BodyPart bodyPart;
+        private LocationOnBody locationOnBody;
         private Collection collection;
 
         public CoordinatesLocalization()
         {
             collection = new Collection();
+            locationOnBody = new LocationOnBody();
         }
 
         #region FemaleFront
@@ -26,7 +27,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Pande");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Pande;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Pande;
 
                     PointClicked = true;
                 }
@@ -34,7 +35,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Kind");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Kind;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Kind;
 
                     PointClicked = true;
                 }
@@ -42,7 +43,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Næse");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Næse;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Næse;
 
                     PointClicked = true;
                 }
@@ -50,7 +51,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Læber");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Læber;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Læber;
 
                     PointClicked = true;
                 }
@@ -58,7 +59,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Hage");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Hage;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Hage;
 
                     PointClicked = true;
                 }
@@ -66,7 +67,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Øre");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Øre;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Øre;
 
                     PointClicked = true;
                 }
@@ -74,7 +75,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Hals");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Hals;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Hals;
 
                     PointClicked = true;
                 }
@@ -82,7 +83,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Skulder");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Skulder;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Skulder;
 
                     PointClicked = true;
                 }
@@ -90,7 +91,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Bryst");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Bryst;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Bryst;
 
                     PointClicked = true;
                 }
@@ -98,7 +99,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Mave");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Mave;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Mave;
 
                     PointClicked = true;
                 }
@@ -106,7 +107,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Overarm");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Overarm;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Overarm;
 
                     PointClicked = true;
                 }
@@ -114,7 +115,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Underarm");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Underarm;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Underarm;
 
                     PointClicked = true;
                 }
@@ -134,7 +135,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Håndflade");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Håndflade;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Håndflade;
 
                     PointClicked = true;
                 }
@@ -142,7 +143,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Tommelfinger");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Tommelfinger;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Tommelfinger;
 
                     PointClicked = true;
                 }
@@ -150,7 +151,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Finger");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Finger;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Finger;
 
                     PointClicked = true;
                 }
@@ -158,7 +159,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Underliv");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Underliv;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Underliv;
 
                     PointClicked = true;
                 }
@@ -166,7 +167,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Lår");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Lår;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Lår;
 
                     PointClicked = true;
                 }
@@ -174,7 +175,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Knæ");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Knæ;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Knæ;
 
                     PointClicked = true;
                 }
@@ -182,7 +183,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Underben");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Underben;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Underben;
 
                     PointClicked = true;
                 }
@@ -190,12 +191,13 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Fod");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Fod;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Fod;
 
                     PointClicked = true;
                 }
             }
 
+            collection.CollectionName = locationOnBody.BodyParts.ToString();
             return PointClicked;
         }
 
@@ -211,9 +213,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Baghoved");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-
-                    bodyPart = LocationOnBody.BodyPart.Baghoved;
-                    collection.CollectionName = bodyPart.ToString();
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Baghoved;
 
                     PointClicked = true;
                 }
@@ -221,7 +221,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Øre");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Øre;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Øre;
 
                     PointClicked = true;
                 }
@@ -229,7 +229,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Nakke");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Nakke;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Nakke;
 
                     PointClicked = true;
                 }
@@ -237,7 +237,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Bagskulder");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Bagskulder;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Bagskulder;
 
                     PointClicked = true;
                 }
@@ -245,7 +245,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Overarm");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Overarm;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Overarm;
 
                     PointClicked = true;
                 }
@@ -253,7 +253,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Underarm");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Underarm;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Underarm;
 
                     PointClicked = true;
                 }
@@ -261,47 +261,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Ryg");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Ryg;
-
-                    PointClicked = true;
-                }
-                else if (X > 57 && X < 155 && Y > 211 && Y < 253)
-                {
-                    Debug.WriteLine("Balle");
-                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Balle;
-
-                    PointClicked = true;
-                }
-                else if ((X > 59 && X < 104 && Y > 253 && Y < 318) || (X > 108 && X < 154 && Y > 253 && Y < 318))
-                {
-                    Debug.WriteLine("Baglår");
-                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Baglår;
-
-                    PointClicked = true;
-                }
-                else if ((X > 72 && X < 103 && Y > 318 && Y < 351) || (X > 110 && X < 140 && Y > 318 && Y < 351))
-                {
-                    Debug.WriteLine("Knæhase");
-                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Knæhase;
-
-                    PointClicked = true;
-                }
-                else if ((X > 70 && X < 101 && Y > 351 && Y < 438) || (X > 113 && X < 144 && Y > 351 && Y < 438))
-                {
-                    Debug.WriteLine("Læg");
-                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Læg;
-
-                    PointClicked = true;
-                }
-                else if ((X > 62 && X < 100 && Y > 438 && Y < 476) || (X > 112 && X < 152 && Y > 438 && Y < 476))
-                {
-                    Debug.WriteLine("Fod");
-                    Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Fod;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Ryg;
 
                     PointClicked = true;
                 }
@@ -313,7 +273,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Håndryg");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Håndryg;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Håndryg;
 
                     PointClicked = true;
                 }
@@ -321,7 +281,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Tommelfinger");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Tommelfinger;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Tommelfinger;
 
                     PointClicked = true;
                 }
@@ -329,7 +289,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Finger");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Finger;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Finger;
 
                     PointClicked = true;
                 }
@@ -337,7 +297,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Balle");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Balle;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Balle;
 
                     PointClicked = true;
                 }
@@ -345,7 +305,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Baglår");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Baglår;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Baglår;
 
                     PointClicked = true;
                 }
@@ -353,7 +313,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Knæhase");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Knæhase;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Knæhase;
 
                     PointClicked = true;
                 }
@@ -361,7 +321,7 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Læg");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Læg;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Læg;
 
                     PointClicked = true;
                 }
@@ -369,12 +329,13 @@ namespace PW_BusinessLogicLayer
                 {
                     Debug.WriteLine("Fod");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Fod;
+                    locationOnBody.BodyParts = LocationOnBody.BodyPart.Fod;
 
                     PointClicked = true;
                 }
             }
 
+            collection.CollectionName = locationOnBody.BodyParts.ToString();
             return PointClicked;
         }
 
