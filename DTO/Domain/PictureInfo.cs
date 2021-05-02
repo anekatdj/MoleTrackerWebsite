@@ -6,8 +6,8 @@ namespace DataClasses.Domain
 {
     public class PictureInfo
     {
-        public int PictureID { get; set; }
-        public int CollectionID { get; set; }
-        public DateTime DateOfUpload { get; set; }
+        public int PictureID { get; set; } = 1;
+        public int CollectionID { get; set; } = 1;
+        public DateTime DateOfUpload { get; set; } = new DateTime(2021, 02, 21);
     }
 }

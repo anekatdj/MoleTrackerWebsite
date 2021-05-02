@@ -6,95 +6,157 @@
 
 @inject Collection CollectionInfo
 @inject LocationOnBody Location
+@inject PictureInfo Picture
 
-<div class="row mb-3">
-    <div class="col">
-        <input style="width: 50%; margin-left: 25%; font-size: 24pt" disabled="@IsDisabled" type="text" @oninput="OnInputHandler" placeholder="@CollectionInfo.CollectionName">
-        <button style="border-radius: 28px;" class="@EditPencil" @onclick="EditName"></button>
+
+
+<div class="row">
+    @if (!SidebarVisible)
+    {
+        <div class="col">
+            <input style="width: 45%; height: 45%; margin-left: 35%; font-size: 24pt; color: @FontColor" disabled="@IsDisabled" type="text" @oninput="OnInputHandler" placeholder="@CollectionInfo.CollectionName" />
+            <button style="border-radius: 28px" class="@EditPencil" @onclick="EditName"> Redigér</button>
+        </div>
+    }
+
+    <div class="col" style="float: right">
         <button style="float: right" class="fa fa-ellipsis-h" @onclick="Sidebar"></button> @*onclick="Sidebar"*@
         @*Denne skal flyve ind fra siden over det eksisterende på siden*@
         @if (SidebarVisible) //class="td"
         {
-            <div id="mySidebar" class="sidebar" style="float: right">
-                <h2 style="color:azure">Indstillinger</h2>
-                <div style="color: azure; margin-left: 5px" @onclick="ItemMarked">
+            <div id="mySidebar" class="sidebar" style="float: right; width: 30%; height: 100%">
+                <h2 style="color: azure">Indstillinger</h2>
+                <div style="color: azure; margin-left: 5%; cursor: pointer" @onclick="ItemMarked">
                     <span class="@Flag" style="transform: scaleX(-1);"></span>
                     Markér samling
                 </div>
-                <div style="color: azure; margin-left: 5px" @onclick="DeleteCollection">
+                <div style="color: azure; margin-left: 5%; cursor: pointer" @onclick="DeleteCollection">
                     <span class="fa fa-trash-o"></span>
                     Slet samling
                 </div>
-                <div class="dropdown-toggle" style="color: azure; margin: 5px" @onclick="Notifications">
+                <div class="dropdown-toggle" style="color: azure; margin-left: 5%; cursor: pointer" @onclick="Notifications">
                     <span class="fa fa-clock-o"></span>
                     Ændr follow-up notifikationer
 
                 </div>
                 @if (NotificationVisible)
                 {
-                    <div class="dropdown-toggle" style="color: azure; margin-left: 20px" @onclick="Days">Dag</div>
-                    @if (DaysVisible)
-                    {
-                        <div style="color: azure; margin: 30px">
-                            @*<table>*@
-                            @*<tbody>*@
-                            @foreach (var day in weekdays)
+                    @*<div class="dropdown-toggle" style="color: azure; margin-left: 5%" @onclick="Days">Dag</div>
+                        @if (DaysVisible)
+                        {*@
+                    <div style="color: azure; width: 50%; margin-left: 5%; margin-bottom: 5%">
+                        <label>Dag: </label>
+                        <select class="form-control" @onchange="Days">
+                            <option value="">--Vælg dag--</option>
+                            @foreach (var day in weekdaysList)
                             {
-                                <tr>
-                                    <td style="cursor: pointer">
-                                        @day
-                                    </td>
-                                    <td></td>
-                                </tr>
+                                <option value="@day">@day</option>
                             }
-                            @*</tbody>*@
-                            @*</table>*@
-                        </div>
-                    }
-                    <div class="dropdown-toggle" style="color: azure; margin-left: 20px">Tidspunkt</div>
+                        </select>
+                    </div>
+
+
+                    @*<div class="dropdown-toggle" style="color: azure; margin-left: 5%" @onclick="Hours">Tidspunkt</div>
+                        @if (HoursVisible)
+                        {*@
+                    <div style="color: azure; width: 35%; margin-left: 5%; margin-bottom: 5%">
+                        <label>Klokken: </label>
+                        <select class="form-control" @onchange="Hours">
+                            <option>--Time--</option>
+                            @foreach (var hour in hoursList)
+                            {
+                                <option value="@hour">@hour.00</option>
+                            }
+                        </select>
+                    </div>
+
+
+                    <div style="color: azure; width: 40%; margin-left: 5%; margin-bottom: 5%">
+                        @*<div class="dropdown-toggle" style="color: azure; margin-left: 5%" @onclick="Weeks">Antal uger</div>
+                            @if (WeeksVisible)
+                            {*@
+                        <label>Antal uger: </label>
+                        <select class="form-control" @onchange="Weeks">
+                            <option>--Uger--</option>
+                            @foreach (var week in weeksList)
+                            {
+                                <option value="@week">Hver @week. uge</option>
+                            }
+                        </select>
+                    </div>
+
+                    <button disabled="@SaveNotifications" @onclick="SaveNotificationChanges" style="margin-left: 37%">Gem ændringer</button>
                 }
             </div>
         }
     </div>
+
 </div>
 
-<div class="col-1">
-    <div class="tabelcontainer" style="overflow: scroll; height: 500px; width: 400px">
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>Modermærker for denne samling</th>
-                </tr>
-            </thead>
-            <tbody style="cursor:pointer">
-                @foreach (Collection collection in collections)
-                {
+@if (!SidebarVisible)
+{
+    <div class="row">
+        <div class="col" style="float: left">
+            <img src="Images/download.jfif" />
+        </div>
+
+        <div class="col">
+
+            <div style="overflow: scroll; height: 500px; width: 400px; float: right">
+
+                <table class="table table-striped table-bordered">
+                    <thead>
                     <tr>
-                        <td>@collection.CollectionName</td>
+                        <th>Modermærker for denne samling</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                    </thead>
+                    <tbody style="cursor: pointer">
+                    @foreach (Collection collection in collections)
+                    {
+                        <tr>
+                            <td>@Picture.DateOfUpload</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
     </div>
-</div>
+}
+
+
+    <div class="row" style="float: left">
+        <div class="col">
+            @if (!SidebarVisible)
+            {
+                <div>
+                    <label>Noter</label>
+                    <input placeholder="Indtast noter her..."/>
+                </div>
+            }
+        </div>
+    </div>
 
 
 
 
-@code {
 
-    private IEnumerable<Collection> collections = new[]
-    {
+    @code {
+
+private IEnumerable<Collection> collections = new[]
+{
         new Collection {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Venstre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
+        new Collection {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
     };
 
+    public bool SaveDisabled { get; set; } = true;
 
 
     public string EditPencil = "fa fa-pencil";
     public bool IsDisabled { get; set; } = true;
+    public string FontColor { get; set; }
 
     private void EditName()
     {
@@ -107,6 +169,7 @@
         else
         {
             IsDisabled = true;
+            FontColor = "Black";
             EditPencil = "fa fa-pencil";
         }
 
@@ -151,14 +214,40 @@
         NotificationVisible = !NotificationVisible;
     }
 
-    public bool DaysVisible{ get; set; }
+    public bool DaysVisible { get; set; }
 
     public void Days()
     {
         DaysVisible = !DaysVisible;
     }
 
-    private List<string> weekdays = new List<string>(new string[] {"Mandag","Tirsdag","Onsdag","Torsdag","Fredag","Lørdag","Søndag"});
+    public bool HoursVisible { get; set; }
+
+    public void Hours()
+    {
+        HoursVisible = !HoursVisible;
+    }
+
+    public bool WeeksVisible { get; set; }
+
+    public void Weeks()
+    {
+        WeeksVisible = !WeeksVisible;
+    }
+
+    public bool SaveNotifications { get; set; }
+    private string _days { get; set; }
+    private string _hour { get; set; }
+    private string _weeks { get; set; }
+
+    public void SaveNotificationChanges()
+    {
+    }
+
+    private List<string> weekdaysList = new List<string>(new string[] { "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag" });
+    private List<string> weeksList = new List<string>(new string[] { "1", "2", "4", "6", "8", "12" });
+    private List<string> hoursList = new List<string>(new string[] {"00","01","02","03","04","05","06","07", "08", "09", "10", "11", "12", "13",
+                                                                            "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"});
 
 
-}
+    }
