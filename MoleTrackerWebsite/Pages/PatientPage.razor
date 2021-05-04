@@ -11,9 +11,11 @@
 @inject ISelectPatientController SelectPatientController
 @inject IViewCollectionController ViewCollectionController
 @inject PatientDataDomain PatientDataModel
-@inject NavigationManager NavManager;
+@inject NavigationManager NavManager
+@inject SessionInfoDomain SesInfo
 @inject IJSRuntime JS;
 
+@layout MainLayout
 
 <h3>@patientInfo.Name</h3>
 
@@ -43,10 +45,10 @@
             </EditForm>
         </div>
     </div>
-    </div>
+</div>
 
 
-  
+
 
 @code {
 
@@ -58,6 +60,9 @@
 
     protected override async Task OnInitializedAsync()
     {
+        SesInfo.LoggedIn = true;
+        SesInfo.UseID = 1;
+
         //Bare for ikke at smide exception
         PatientData = new PatientDataDomain();
         CollectionList = PatientData.CollectionList;
@@ -132,8 +137,7 @@
     <div class="col">
         <img src="~/css/Pictures/MaleFront.png" alt="Image not found" width="200" height="400" />
     </div>*@
-
-@*@code {
+@*code {
 
         //private PatientInfoDomain patientInfo;
         //public PatientDataDomain PatientData { get; set; }
@@ -147,4 +151,6 @@
         //    PatientData = new PatientDataDomain();
         //    CollectionList = PatientData.CollectionList;
         //    //patientData.CollectionList = new List<CollectionDomain>();
+    }
+*@
 
