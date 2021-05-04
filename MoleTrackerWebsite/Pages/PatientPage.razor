@@ -83,4 +83,68 @@
 
 }
 
+        else if (Gender == "B")
+        {
+            FrontOrBack = "~/css/Pictures/MaleFront.png";
+            Width = "270px";
+            Height = "520px";
+        }
+    }
+
+    Task StartupTask()
+    {
+        return Task.CompletedTask;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        patientInfo = SelectPatientController.SelectedPatient;
+
+        NameOfPatient = patientInfo.Name;
+        DisplayPatientModel();
+        await StartupTask();
+    }
+
+    #endregion
+}
+
+@*<div class="col">
+    <EditForm Model="@PatientDataModel">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <table>
+            <tbody>
+                <tr>
+                    <th>Modermærker</th>
+                </tr>
+                @foreach (var collection in CollectionList)
+                {
+                    <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))" style="cursor: pointer">
+                        <td>
+                            @collection.CollectionName
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </EditForm>
+    </div>
+    <div class="col">
+        <img src="~/css/Pictures/MaleFront.png" alt="Image not found" width="200" height="400" />
+    </div>*@
+
+@*@code {
+
+        //private PatientInfoDomain patientInfo;
+        //public PatientDataDomain PatientData { get; set; }
+        //public List<CollectionDomain> CollectionList { get; set; }
+        //public string NameOfPatient { get; set; }
+        //public List<PictureDataDomain> PicDataList { get; set; }
+
+        //protected override async Task OnInitializedAsync()
+        //{
+        //    //Bare for ikke at smide exception
+        //    PatientData = new PatientDataDomain();
+        //    CollectionList = PatientData.CollectionList;
+        //    //patientData.CollectionList = new List<CollectionDomain>();
 
