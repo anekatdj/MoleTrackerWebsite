@@ -11,10 +11,11 @@
 @inject ISelectPatientController SelectPatientController
 @inject IViewCollectionController ViewCollectionController
 @inject PatientDataDomain PatientDataModel
-@inject NavigationManager NavManager;
+@inject NavigationManager NavManager
+@inject SessionInfoDomain SesInfo
 @inject IJSRuntime JS;
 
-@layout EmptyLayout;
+@layout MainLayout
 
 <h3>@patientInfo.Name</h3>
 
@@ -64,7 +65,6 @@
         </div>
     </div>
 
-    @*636*1431 billedstørrelse*@
 
 
 
@@ -105,8 +105,6 @@
 
 @code {
 
-    #region Properties and fields
-
     private PatientInfoDomain patientInfo;
     public PatientDataDomain PatientData { get; set; }
     public List<CollectionDomain> CollectionList { get; set; }
@@ -133,8 +131,6 @@
         new CollectionDomain() {CollectionID = 1, CollectionName = "Venstre fod", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()},
         new CollectionDomain() {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()}
     };
-
-    #endregion
 
 
     public void TurnAroundModel()
@@ -166,12 +162,15 @@
         }
     }
 
+    
+
     public void GetGender()
     {
         //PatientInfo = LogInController.HandlePatientInfo();
         //Gender = PatientInfoDomain.Gender;
     }
 
+    
 
     //Zoom forsøg - virker ikke helt med event
     //https://stackoverflow.com/questions/54222913/scrollable-image-stack-using-blazor-component/54227687
@@ -310,7 +309,14 @@
 
     protected override async Task OnInitializedAsync()
     {
+        SesInfo.LoggedIn = true;
+        SesInfo.UseID = 1;
         patientInfo = SelectPatientController.SelectedPatient;
+
+    //Bare for ikke at smide exception
+        PatientData = new PatientDataDomain();
+        CollectionList = PatientData.CollectionList;
+    //patientData.CollectionList = new List<CollectionDomain>();
 
         NameOfPatient = patientInfo.Name;
         DisplayPatientModel();
