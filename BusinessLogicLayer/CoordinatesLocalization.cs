@@ -26,7 +26,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Pande");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Pande;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Pande;
 
                     PointClicked = true;
                 }
@@ -34,7 +34,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Kind");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Kind;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Kind;
 
                     PointClicked = true;
                 }
@@ -42,7 +42,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Næse");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Næse;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Næse;
 
                     PointClicked = true;
                 }
@@ -50,7 +50,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Læber");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Læber;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Læber;
 
                     PointClicked = true;
                 }
@@ -58,7 +58,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Hage");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Hage;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Hage;
 
                     PointClicked = true;
                 }
@@ -66,7 +66,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Øre");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Øre;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Øre;
 
                     PointClicked = true;
                 }
@@ -74,7 +74,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Hals");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Hals;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Hals;
 
                     PointClicked = true;
                 }
@@ -82,7 +82,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Skulder");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Skulder;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Skulder;
 
                     PointClicked = true;
                 }
@@ -90,7 +90,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Bryst");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Bryst;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Bryst;
 
                     PointClicked = true;
                 }
@@ -98,7 +98,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Mave");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Mave;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Mave;
 
                     PointClicked = true;
                 }
@@ -106,7 +106,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Overarm");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Overarm;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Overarm;
 
                     PointClicked = true;
                 }
@@ -114,7 +114,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Underarm");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Underarm;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Underarm;
 
                     PointClicked = true;
                 }
@@ -134,7 +134,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Håndflade");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Håndflade;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Håndflade;
 
                     PointClicked = true;
                 }
@@ -142,7 +142,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Tommelfinger");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Tommelfinger;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Tommelfinger;
 
                     PointClicked = true;
                 }
@@ -150,7 +150,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Finger");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Finger;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Finger;
 
                     PointClicked = true;
                 }
@@ -158,7 +158,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Underliv");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Underliv;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Underliv;
 
                     PointClicked = true;
                 }
@@ -166,7 +166,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Lår");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Lår;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Lår;
 
                     PointClicked = true;
                 }
@@ -174,7 +174,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Knæ");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Knæ;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Knæ;
 
                     PointClicked = true;
                 }
@@ -182,7 +182,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Underben");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Underben;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Underben;
 
                     PointClicked = true;
                 }
@@ -190,7 +190,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Fod");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Fod;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Fod;
 
                     PointClicked = true;
                 }
@@ -212,7 +212,7 @@ namespace BusinessLogicLayer
                     Debug.WriteLine("Baghoved");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
 
-                    bodyPart = LocationOnBody.BodyPart.Baghoved;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Baghoved;
                     collection.CollectionName = bodyPart.ToString();
 
                     PointClicked = true;
@@ -221,7 +221,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Øre");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Øre;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Øre;
 
                     PointClicked = true;
                 }
@@ -229,7 +229,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Nakke");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Nakke;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Nakke;
 
                     PointClicked = true;
                 }
@@ -237,7 +237,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Bagskulder");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Bagskulder;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Bagskulder;
 
                     PointClicked = true;
                 }
@@ -245,7 +245,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Overarm");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Overarm;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Overarm;
 
                     PointClicked = true;
                 }
@@ -253,7 +253,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Underarm");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Underarm;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Underarm;
 
                     PointClicked = true;
                 }
@@ -261,7 +261,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Ryg");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Ryg;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Ryg;
 
                     PointClicked = true;
                 }
@@ -269,7 +269,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Balle");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Balle;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Balle;
 
                     PointClicked = true;
                 }
@@ -277,7 +277,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Baglår");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Baglår;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Baglår;
 
                     PointClicked = true;
                 }
@@ -285,7 +285,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Knæhase");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Knæhase;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Knæhase;
 
                     PointClicked = true;
                 }
@@ -293,7 +293,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Læg");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Læg;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Læg;
 
                     PointClicked = true;
                 }
@@ -301,7 +301,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Fod");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Fod;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Fod;
 
                     PointClicked = true;
                 }
@@ -313,7 +313,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Håndryg");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Håndryg;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Håndryg;
 
                     PointClicked = true;
                 }
@@ -321,7 +321,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Tommelfinger");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Tommelfinger;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Tommelfinger;
 
                     PointClicked = true;
                 }
@@ -329,7 +329,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Finger");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Finger;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Finger;
 
                     PointClicked = true;
                 }
@@ -337,7 +337,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Balle");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Balle;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Balle;
 
                     PointClicked = true;
                 }
@@ -345,7 +345,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Baglår");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Baglår;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Baglår;
 
                     PointClicked = true;
                 }
@@ -353,7 +353,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Knæhase");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Knæhase;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Knæhase;
 
                     PointClicked = true;
                 }
@@ -361,7 +361,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Læg");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Læg;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Læg;
 
                     PointClicked = true;
                 }
@@ -369,7 +369,7 @@ namespace BusinessLogicLayer
                 {
                     Debug.WriteLine("Fod");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
-                    bodyPart = LocationOnBody.BodyPart.Fod;
+                    bodyPart = LocationOnBodyDomain.BodyPart.Fod;
 
                     PointClicked = true;
                 }
