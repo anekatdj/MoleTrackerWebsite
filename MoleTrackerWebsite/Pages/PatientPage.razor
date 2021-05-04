@@ -14,6 +14,7 @@
 @inject NavigationManager NavManager;
 @inject IJSRuntime JS;
 
+@layout EmptyLayout;
 
 <h3>@patientInfo.Name</h3>
 
@@ -113,7 +114,7 @@
     public List<PictureDataDomain> PicDataList { get; set; }
 
     //private LocationOnBodyDomain.BodyPart bodyPart;
-    public string FrontOrBack = "/Images/MaleFrontCrop.png";
+    public string FrontOrBack = "/css/Pictures/MaleFront.png";
     public string Arrow = "fa fa-refresh";
     public string AddCollectionButton = "fa fa-plus";
     public string TurnAround { get; set; }
@@ -142,25 +143,25 @@
 
         if (Gender == "G")
         {
-            if (this.FrontOrBack == "~/css/Pictures/FemaleBack.png")
+            if (this.FrontOrBack == "/css/Pictures/FemaleBack.png")
             {
-                this.FrontOrBack = "~/css/Pictures/FemaleFront.png";
+                this.FrontOrBack = "/css/Pictures/FemaleFront.png";
             }
             else
             {
-                this.FrontOrBack = "~/css/Pictures/FemaleBack.png";
+                this.FrontOrBack = "/css/Pictures/FemaleBack.png";
             }
         }
 
         else if (Gender == "B")
         {
-            if (this.FrontOrBack == "~/css/Pictures/MaleBack.png")
+            if (this.FrontOrBack == "/css/Pictures/MaleBack.png")
             {
-                this.FrontOrBack = "~/css/Pictures/MaleFront.png";
+                this.FrontOrBack = "/css/Pictures/MaleFront.png";
             }
             else
             {
-                this.FrontOrBack = "~/css/Pictures/MaleBack.png";
+                this.FrontOrBack = "/css/Pictures/MaleBack.png";
             }
         }
     }
@@ -229,7 +230,7 @@
 
         if (Gender == "G")
         {
-            if (FrontOrBack == "/Images/FemaleFrontcrop.png")
+            if (FrontOrBack == "/css/Pictures/FemaleFront.png")
             {
                 HandleLocationFemaleFront();
             }
@@ -289,14 +290,14 @@
 
         if (Gender == "G")
         {
-            FrontOrBack = "~/css/Pictures/FemaleFront.png";
+            FrontOrBack = "/css/Pictures/FemaleFront.png";
             Width = "212px";
             Height = "477px";
         }
 
         else if (Gender == "B")
         {
-            FrontOrBack = "~/css/Pictures/MaleFront.png";
+            FrontOrBack = "/css/Pictures/MaleFront.png";
             Width = "270px";
             Height = "520px";
         }
