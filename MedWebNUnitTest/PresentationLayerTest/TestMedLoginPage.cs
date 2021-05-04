@@ -42,6 +42,8 @@ namespace MedWebNUnitTest.PresentationLayerTest
             //Assert
             logInController.Received(1).Login(Arg.Any<LoginInfoDomain>());
         }
+
+        //Denne test virker kun hvis linje 131 "NavManagerProp.NavigateTo("/PatientOverviewPage");" udkommenteres, da vi ikke kan stubbe NavigateTo.
         [Test]
         public void Login_Test_TrueLogin()
         {
