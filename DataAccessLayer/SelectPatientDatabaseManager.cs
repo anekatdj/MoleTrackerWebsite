@@ -29,10 +29,10 @@ namespace DataAccessLayer
             {
                 patientDataDTO = API.GetObject<PatientDataDTO, PatientInfoRequestDTO>("GetPatientData", patientInfoRequestDTO);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 
-                throw /*new Exception("API Fejl")*/;
+                throw e /*new Exception("API Fejl")*/;
             }
 
             PatientDataDomain patientDataDomain = DTOConverter.PatientDataToDomain(patientDataDTO);
@@ -47,10 +47,10 @@ namespace DataAccessLayer
             {
                 patientInfoDTO = API.GetObject<PatientInfoDTO, PatientInfoRequestDTO>("GetPatientInfo", patientInfoRequestDTO);
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                throw new Exception("API Fejl");
+                throw e;
             }
 
             PatientInfoDomain newpatientInfoDomain = DTOConverter.PatientInfoToDomain(patientInfoDTO);

@@ -15,6 +15,54 @@
 
 
 <h3>@patientInfo.Name</h3>
+
+<!--<div class="row align-items-start" style="height: auto; width: auto">
+
+    <div class="col">
+        <div class="tabelcontainer" style="overflow: scroll; height: 500px; width: 400px">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Personlige samlinger</th>
+                    </tr>
+                </thead>
+                <tbody @onclick=NavigateToCollectionPage style="cursor:pointer">
+                    @foreach (Collection collection in collections)
+                    {
+                        <tr>
+                            <td>@collection.CollectionName</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="col">-->
+        @*padding og sticky*@
+        <!--<div style="width: 400px;">
+            <a href="~/Images/pin.png" />
+            @if (AddButtonPressed == true)
+            {
+                <img class="cursor" id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" />--> @*onmousewheel="@MouseWheel"*@
+            <!--}
+            else
+            {
+                <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" />--> @*onmousewheel="@MouseWheel"*@
+            <!--}
+
+            <button style="float: right" class="@Arrow" @onclick="TurnAroundModel"></button>
+
+        </div>
+    </div>-->
+
+    @*636*1431 billedstørrelse*@
+
+
+
+<!--</div>-->
+
 <div class="col">
 <EditForm Model="@PatientDataModel">
     <DataAnnotationsValidator />
@@ -24,7 +72,7 @@
             <tr>
                 <th>Modermærker</th>
             </tr>
-            @foreach (var collection in collectionList)
+            @foreach (var collection in CollectionList)
             {
                 <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))" style="cursor: pointer">
                     <td>
@@ -43,16 +91,16 @@
 @code {
 
     private PatientInfoDomain patientInfo;
-    public PatientDataDomain patientData { get; set; }
-    public List<CollectionDomain> collectionList { get; set; }
+    public PatientDataDomain PatientData { get; set; }
+    public List<CollectionDomain> CollectionList { get; set; }
     public string NameOfPatient { get; set; }
     public List<PictureDataDomain> PicDataList { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         //Bare for ikke at smide exception
-        patientData = new PatientDataDomain();
-        collectionList = patientData.CollectionList;
+        PatientData = new PatientDataDomain();
+        CollectionList = PatientData.CollectionList;
         //patientData.CollectionList = new List<CollectionDomain>();
 
         patientInfo = SelectPatientController.SelectedPatient;
@@ -65,7 +113,7 @@
     private void NavigateToCollectionPage(MouseEventArgs e, object collectionId)
     {
 
-        var selectedCollection = patientData.CollectionList.Where(x => x.CollectionID.Equals(collectionId)).ToList();
+        var selectedCollection = PatientData.CollectionList.Where(x => x.CollectionID.Equals(collectionId)).ToList();
 
         ViewCollectionController.SelectedCollection = selectedCollection[0];
 

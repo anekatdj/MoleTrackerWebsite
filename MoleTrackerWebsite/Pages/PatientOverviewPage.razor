@@ -34,7 +34,7 @@
                     <th style="width: 40%;">Navn</th>
                     <th style="width: 60%;">CPR-Nummer</th>
                 </tr>
-                @foreach (var item in filteredPatientList)
+                @foreach (var item in FilteredPatientList)
                 {
                     <tr @onclick="@((e) => NavigateToSpecificPatientPage(e, item.CPR))" style="cursor: pointer">
                         <td>
@@ -57,7 +57,7 @@
     public string SearchInput { get; set; }
     //public MedicalPracticePatientsDomain MedicalPractice { get; set; }
     public List<PatientInfoDomain> MedicalPracticePatientList { get; set; }
-    public List<PatientInfoDomain> filteredPatientList { get; set; }
+    public List<PatientInfoDomain> FilteredPatientList { get; set; }
     public bool IsDisabled { get; set; }
 
     public ILoadPatientsController LoadPatientsControllerProp { get; set; }
@@ -75,13 +75,13 @@
         MedicalPracticePatientList = LoadPatientsController.LoadPatientList();
 
         IsDisabled = true;
-        filteredPatientList = MedicalPracticePatientList;
+        FilteredPatientList = MedicalPracticePatientList;
         SearchInput = "";
     }
 
 
 
-    protected void SearchFunction()
+    private void SearchFunction()
     {
 
 
@@ -95,7 +95,7 @@
         var filter = SearchInput.ToUpper();
 
 
-        filteredPatientList = MedicalPracticePatientList.Where(x => x.CPR.Contains(filter)).ToList();
+        FilteredPatientList = MedicalPracticePatientList.Where(x => x.CPR.Contains(filter)).ToList();
 
     }
 
@@ -103,7 +103,7 @@
     {
         string selectedPatientCPR = cpr;
 
-        var selectedPatientsInfo = filteredPatientList.Where(x => x.CPR.Equals(selectedPatientCPR)).ToList();
+        var selectedPatientsInfo = FilteredPatientList.Where(x => x.CPR.Equals(selectedPatientCPR)).ToList();
 
         SelectPatientController.SelectedPatient = new PatientInfoDomain(selectedPatientsInfo[0].CPR, selectedPatientsInfo[0].Name);
 
