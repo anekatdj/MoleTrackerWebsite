@@ -24,7 +24,7 @@
             <tr>
                 <th>Modermærker</th>
             </tr>
-            @foreach (var collection in collectionList)
+            @foreach (var collection in CollectionList)
             {
                 <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))" style="cursor: pointer">
                     <td>
@@ -43,16 +43,16 @@
 @code {
 
     private PatientInfoDomain patientInfo;
-    public PatientDataDomain patientData { get; set; }
-    public List<CollectionDomain> collectionList { get; set; }
+    public PatientDataDomain PatientData { get; set; }
+    public List<CollectionDomain> CollectionList { get; set; }
     public string NameOfPatient { get; set; }
     public List<PictureDataDomain> PicDataList { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         //Bare for ikke at smide exception
-        patientData = new PatientDataDomain();
-        collectionList = patientData.CollectionList;
+        PatientData = new PatientDataDomain();
+        CollectionList = PatientData.CollectionList;
         //patientData.CollectionList = new List<CollectionDomain>();
 
         patientInfo = SelectPatientController.SelectedPatient;
@@ -65,7 +65,7 @@
     private void NavigateToCollectionPage(MouseEventArgs e, object collectionId)
     {
 
-        var selectedCollection = patientData.CollectionList.Where(x => x.CollectionID.Equals(collectionId)).ToList();
+        var selectedCollection = PatientData.CollectionList.Where(x => x.CollectionID.Equals(collectionId)).ToList();
 
         ViewCollectionController.SelectedCollection = selectedCollection[0];
 
