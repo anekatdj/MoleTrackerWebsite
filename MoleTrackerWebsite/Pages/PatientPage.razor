@@ -12,6 +12,7 @@
 @inject IViewCollectionController ViewCollectionController
 @inject PatientDataDomain PatientDataModel
 @inject NavigationManager NavManager;
+@inject IJSRuntime JS;
 
 
 <h3>@patientInfo.Name</h3>
@@ -26,17 +27,17 @@
                 <ValidationSummary />
                 <table class="table table-striped table-bordered">
                     <tbody>
-                    <tr>
-                        <th>Modermærker</th>
-                    </tr>
-                    @foreach (var collection in CollectionList)
-                    {
-                        <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))" style="cursor: pointer">
-                            <td>
-                                @collection.CollectionName
-                            </td>
+                        <tr>
+                            <th>Modermærker</th>
                         </tr>
-                    }
+                        @foreach (var collection in CollectionList)
+                        {
+                            <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))" style="cursor: pointer">
+                                <td>
+                                    @collection.CollectionName
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </EditForm>
@@ -50,11 +51,11 @@
             <a href="~/Images/pin.png" />
             @if (AddButtonPressed == true)
             {
-                <img class="cursor" id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" /> onmousewheel="@MouseWheel"
+                <img class="cursor" id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" /> @*onmousewheel = "@MouseWheel"*@
             }
             else
             {
-                <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" /> onmousewheel="@MouseWheel"
+                <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" /> @*onmousewheel = "@MouseWheel"*@
             }
 
             <button style="float: right" class="@Arrow" @onclick="TurnAroundModel"></button>
@@ -74,22 +75,22 @@
         <button style="float: right; border-radius: 28px;" class="@AddCollectionButton" @onclick="ChoosePoint"></button>
         <label style="float: right; margin-right: 1%">Klik her for at tilføje en ny samling</label>
     }
-    
+
     @* Få ind bagefter *@
 
     @*@if (AddButtonPressed == true)
-    {
-        @if (PointClicked == true)
         {
-            <button style="float: right; border-radius: 28px;" @onclick="AcceptPosition">Godkend</button>
-            <p style="float: right; color: crimson; margin-right: 15px">Vælg placering af modermærke</p>
-        }
-        @if (PointClicked == false)
-        {
-            <button style="float: right; border-radius: 28px;" disabled="@true">Godkend</button>
-            <p style="float: right; color: crimson; margin-right: 15px">Vælg placering af modermærke</p>
-        }
-    }*@
+            @if (PointClicked == true)
+            {
+                <button style="float: right; border-radius: 28px;" @onclick="AcceptPosition">Godkend</button>
+                <p style="float: right; color: crimson; margin-right: 15px">Vælg placering af modermærke</p>
+            }
+            @if (PointClicked == false)
+            {
+                <button style="float: right; border-radius: 28px;" disabled="@true">Godkend</button>
+                <p style="float: right; color: crimson; margin-right: 15px">Vælg placering af modermærke</p>
+            }
+        }*@
 
 
 
@@ -215,11 +216,11 @@
 
     private async Task GetCoordinates(MouseEventArgs e) //Før var det en void
     {
-        //var result = await JS.InvokeAsync<BoundingClientRect>("PictureClickFind", new object[] { "PatientModel" });
-        //X = Convert.ToInt32(e.ClientX - result.Left);
-        //Y = Convert.ToInt32(e.ClientY - result.Top);
+        var result = await JS.InvokeAsync<BoundingClientRect>("PictureClickFind", new object[] { "PatientModel" });
+        X = Convert.ToInt32(e.ClientX - result.Left);
+        Y = Convert.ToInt32(e.ClientY - result.Top);
 
-        //BackOrFront();
+        BackOrFront();
     }
 
     private void BackOrFront()
@@ -316,61 +317,61 @@
 }
 
 @*<div class="col">
-<EditForm Model="@PatientDataModel">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <table>
-        <tbody>
-            <tr>
-                <th>Modermærker</th>
-            </tr>
-            @foreach (var collection in CollectionList)
-            {
-                <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))" style="cursor: pointer">
-                    <td>
-                        @collection.CollectionName
-                    </td>
+    <EditForm Model="@PatientDataModel">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <table>
+            <tbody>
+                <tr>
+                    <th>Modermærker</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</EditForm>
-</div>
-<div class="col">
-    <img src="~/css/Pictures/MaleFront.png" alt="Image not found" width="200" height="400" />
-</div>*@
+                @foreach (var collection in CollectionList)
+                {
+                    <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))" style="cursor: pointer">
+                        <td>
+                            @collection.CollectionName
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </EditForm>
+    </div>
+    <div class="col">
+        <img src="~/css/Pictures/MaleFront.png" alt="Image not found" width="200" height="400" />
+    </div>*@
 
 @*@code {
 
-    //private PatientInfoDomain patientInfo;
-    //public PatientDataDomain PatientData { get; set; }
-    //public List<CollectionDomain> CollectionList { get; set; }
-    //public string NameOfPatient { get; set; }
-    //public List<PictureDataDomain> PicDataList { get; set; }
+        //private PatientInfoDomain patientInfo;
+        //public PatientDataDomain PatientData { get; set; }
+        //public List<CollectionDomain> CollectionList { get; set; }
+        //public string NameOfPatient { get; set; }
+        //public List<PictureDataDomain> PicDataList { get; set; }
 
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    //Bare for ikke at smide exception
-    //    PatientData = new PatientDataDomain();
-    //    CollectionList = PatientData.CollectionList;
-    //    //patientData.CollectionList = new List<CollectionDomain>();
+        //protected override async Task OnInitializedAsync()
+        //{
+        //    //Bare for ikke at smide exception
+        //    PatientData = new PatientDataDomain();
+        //    CollectionList = PatientData.CollectionList;
+        //    //patientData.CollectionList = new List<CollectionDomain>();
 
-    //    patientInfo = SelectPatientController.SelectedPatient;
+        //    patientInfo = SelectPatientController.SelectedPatient;
 
-    //    NameOfPatient = patientInfo.Name;
+        //    NameOfPatient = patientInfo.Name;
 
-    //    //patientData = SelectPatientController.GetPatientData(patientInfo);
-    //}
+        //    //patientData = SelectPatientController.GetPatientData(patientInfo);
+        //}
 
-    //private void NavigateToCollectionPage(MouseEventArgs e, object collectionId)
-    //{
+        //private void NavigateToCollectionPage(MouseEventArgs e, object collectionId)
+        //{
 
-    //    var selectedCollection = PatientData.CollectionList.Where(x => x.CollectionID.Equals(collectionId)).ToList();
+        //    var selectedCollection = PatientData.CollectionList.Where(x => x.CollectionID.Equals(collectionId)).ToList();
 
-    //    ViewCollectionController.SelectedCollection = selectedCollection[0];
+        //    ViewCollectionController.SelectedCollection = selectedCollection[0];
 
-    //    NavManager.NavigateTo("/CollectionPage");
+        //    NavManager.NavigateTo("/CollectionPage");
 
-    //}
+        //}
 
-}*@
+    }*@

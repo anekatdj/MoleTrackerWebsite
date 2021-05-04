@@ -33,7 +33,7 @@ namespace DataAccessLayer
             {
                 xCoordinate = locationOnBodyDTO.xCoordinate,
                 yCoordinate = locationOnBodyDTO.yCoordinate,
-                BodyPart = locationOnBodyDTO.BodyPart,
+                //BodyPart = locationOnBodyDTO.BodyPart,
                 BodyPartSide = locationOnBodyDTO.BodyPartSide,
                 IsFrontFacing = locationOnBodyDTO.IsFrontFacing
             };
