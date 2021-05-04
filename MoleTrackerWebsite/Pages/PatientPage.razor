@@ -32,7 +32,7 @@
                         <tr>
                             <th>Modermærker</th>
                         </tr>
-                        @foreach (var collection in CollectionList)
+                        @foreach (var collection in collections)
                         {
                             <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))" style="cursor: pointer">
                                 <td>
