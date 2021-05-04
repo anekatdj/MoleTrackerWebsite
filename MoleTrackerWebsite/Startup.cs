@@ -40,6 +40,14 @@ namespace MoleTrackerWebsite
             services.AddSingleton<LocationOnBody>();
             services.AddSingleton<PictureInfo>();
             services.AddSingleton<CoordinatesLocalization>();
+            services.AddSingleton<IChangeCollectionNameController, ChangeCollectionNameController>();
+            services.AddSingleton<IViewCollectionController, ViewCollectionController>();
+            services.AddSingleton<IUploadPictureController, UploadPictureController>();
+            services.AddSingleton<IDeletePictureController, DeletePictureController>();
+            services.AddSingleton<IDeleteCollectionController, DeleteCollectionController>();
+            services.AddSingleton<IChangeFollowUpNotificationsController, ChangeFollowUpNotificationsController>();
+            services.AddSingleton<IMarkCollectionController, MarkCollectionController>();
+            services.AddSingleton<ILoadContactInformationController, LoadContactInformationController>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

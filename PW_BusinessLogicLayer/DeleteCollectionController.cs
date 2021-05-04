@@ -4,6 +4,9 @@ namespace PW_BusinessLogicLayer
 {
     public class DeleteCollectionController : IDeleteCollectionController
     {
-
+        public void DeleteCollection()
+        {
+            
+        }
     }
 }

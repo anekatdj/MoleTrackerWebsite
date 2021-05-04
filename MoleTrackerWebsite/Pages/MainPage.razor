@@ -125,13 +125,14 @@
     public bool AcceptButtonPressed { get; set; }
     public bool PointClicked { get; set; }
 
-    private IEnumerable<Collection> collections = new[]
-    {
-        new Collection {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Venstre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
-    };
+    //private IEnumerable<Collection> collections = new[]
+    //{
+    //    new Collection {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+    //    new Collection {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+    //    new Collection {CollectionID = 1, CollectionName = "Venstre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+    //    new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
+    //};
+    private List<Collection> collections = new List<Collection>();
 
     #endregion
 
