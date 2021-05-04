@@ -1,5 +1,7 @@
 ﻿@page "/collectionPage"
 @using DataClasses.Domain
+@using BlazorInputFile
+@using System.IO
 @using PW_BusinessLogicLayer.Interfaces
 
 <link href="css/CSSStyles.css" rel="stylesheet" />
@@ -117,7 +119,11 @@
 {
     <div class="row">
         <div class="col" style="float: left">
-            <img src="Images/download.jfif" />
+            @if (ShowUploadedMolePicture == true)
+            {
+                <img src="Images/@imageDataUrl" style="width:300px;height:300px"/>
+            }
+            @*<img src="Images/download.jfif"/>*@
         </div>
 
         <div class="col">
@@ -162,7 +168,18 @@
 
     <div class="col" style="margin-top: 2%">
         <div class="col" style="float: right">
-            <button class="@AddPictureButton" style="border-radius: 10%; float: right; margin-top: 20%">Upload billede</button>
+            <div>
+                <button class="@AddPictureButton" @onclick="ShowUploadedMole" style="border-radius: 10%; float: right; margin-top: 20%">Upload billede</button>
+                @*@if (ShowUploadedMolePicture == true)
+                {
+                    <img src="Images/@imageDataUrl" style="width: 300px;height:300px"/>
+                }*@
+            </div>
+            <InputFile OnChange="HandleSelection"/> @*OnChange="HandleSelection"*@
+            @*@if (!string.IsNullOrEmpty(imageDataUrl))
+            {
+                <img src="Images/@imageDataUrl" />
+             }*@ 
         </div>
     </div>
 </div>
@@ -303,5 +320,50 @@
     private List<string> hoursList = new List<string>(new string[] {"00","01","02","03","04","05","06","07", "08", "09", "10", "11", "12", "13",
                                                                             "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"});
 
+    string status;
 
+    public string imageDataUrl { get; set; }
+    public bool ShowUploadedMolePicture{ get; set; }
+
+    private void ShowUploadedMole()
+    {
+        ShowUploadedMolePicture = !ShowUploadedMolePicture;
+    }
+
+    async Task HandleSelection(IFileListEntry[] files)
+    {
+        var file = files.FirstOrDefault();
+        if (file != null)
+        {
+            var fileType = GetFileType(file.Name);
+            if (fileType == "image")
+            {
+                var ms = new MemoryStream();
+                await file.Data.CopyToAsync(ms);
+                //string imageBase64Data = Convert.ToBase64String(ms.ToArray());
+                //imageDataUrl = string.Format("image/png;base64,{0}", imageBase64Data);
+                imageDataUrl = file.Name;
+
+                using (FileStream newFile = new FileStream("wwwroot\\images\\" + file.Name, FileMode.Create, FileAccess.Write))
+                {
+                    ms.WriteTo(newFile);
+                }
+            }
+        }
+        status = $"Finished loading {file.Size} bytes from {file.Name}";
+
+    }
+
+    private string GetFileType(string name)
+    {
+        string result = "";
+        if (name.Contains("jpg") || name.Contains("jpg") || name.Contains("gif")||name.Contains("jfif"))
+        {
+            result = "image";
+        }else if (name.Contains("text"))
+        {
+            result = "text";
+        }
+        return result;
+    }
 }
