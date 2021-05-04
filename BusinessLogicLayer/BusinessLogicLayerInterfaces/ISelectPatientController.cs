@@ -10,7 +10,11 @@ namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
     {
         ISelectPatientDatabaseManager SelectPatientDatabaseManager { get; set; }
         PatientInfoDomain SelectedPatient { get; set; }
+        string DateOfBirth { get; set; }
+
+        public bool BirthDataCalcFailed { get; set; }
         PatientDataDomain GetPatientData(PatientInfoDomain patientInfoDomain);
-      
+
+        void HandlePatientInfo();
     }
 }
