@@ -309,6 +309,9 @@
 
     protected override async Task OnInitializedAsync()
     {
+        patientInfo = SelectPatientController.SelectedPatient;
+
+        NameOfPatient = patientInfo.Name;
         DisplayPatientModel();
         await StartupTask();
     }
