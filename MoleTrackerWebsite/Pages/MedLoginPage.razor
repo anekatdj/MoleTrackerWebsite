@@ -90,13 +90,13 @@
 
     protected override async Task OnInitializedAsync()
     {
+        LogInInfo = new LoginInfoDomain();
         LoginControllerProp = LogInController;
         NavManagerProp = NavManager;
     }
 
     public void Login()
     {
-        LogInInfo = new LoginInfoDomain();
 
         LoginInfoDomain loginData = new LoginInfoDomain()
         {
