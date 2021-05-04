@@ -60,10 +60,18 @@
     public List<PatientInfoDomain> FilteredPatientList { get; set; }
     public bool IsDisabled { get; set; }
 
-    public string LinkToSpecifikPatientPage { get; set; }
+    public ILoadPatientsController LoadPatientsControllerProp { get; set; }
+
+    public NavigationManager NavManagerProp { get; set; }
+
+    //public string LinkToSpecifikPatientPage { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
+
+        LoadPatientsControllerProp = LoadPatientsController;
+        NavManagerProp = NavManager;
+
         MedicalPracticePatientList = LoadPatientsController.LoadPatientList();
 
         IsDisabled = true;
