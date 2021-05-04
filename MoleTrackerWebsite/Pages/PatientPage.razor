@@ -68,41 +68,6 @@
 
 
 
-</div>
-
-<div class="col align-self-end">
-    @if (AddButtonPressed == false)
-    {
-        <button style="float: right; border-radius: 28px;" class="@AddCollectionButton" @onclick="ChoosePoint"></button>
-        <label style="float: right; margin-right: 1%">Klik her for at tilføje en ny samling</label>
-    }
-
-    @* Få ind bagefter *@
-
-    @*@if (AddButtonPressed == true)
-        {
-            @if (PointClicked == true)
-            {
-                <button style="float: right; border-radius: 28px;" @onclick="AcceptPosition">Godkend</button>
-                <p style="float: right; color: crimson; margin-right: 15px">Vælg placering af modermærke</p>
-            }
-            @if (PointClicked == false)
-            {
-                <button style="float: right; border-radius: 28px;" disabled="@true">Godkend</button>
-                <p style="float: right; color: crimson; margin-right: 15px">Vælg placering af modermærke</p>
-            }
-        }*@
-
-
-
-</div>
-
-<p style="font-size: 10px">Bemærk venligst at MoleTracker ikke diagnosticerer hudkræft. Hvis du er bekymret for et eller flere modermærker, skal du kontakte din læge.</p>
-
-
-
-
-
 @code {
 
     private PatientInfoDomain patientInfo;
