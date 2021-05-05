@@ -116,11 +116,13 @@
 {
     <div class="row">
         <div class="col" style="float: left">
-            @if (ShowUploadedMolePicture == true)
-            {
-                <img src="Images/@imageDataUrl" style="width:300px;height:300px" />
-            }
-            @*<img src="Images/download.jfif"/>*@
+            <div class="modal" tabindex="-1">
+                @if (ShowUploadedMolePicture == true)
+                {
+                    <img src="Images/@imageDataUrl" style="width: 300px; height: 300px" />
+                }
+                @*<img src="Images/download.jfif"/>*@
+            </div>
         </div>
 
         <div class="col">

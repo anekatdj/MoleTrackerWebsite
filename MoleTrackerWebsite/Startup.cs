@@ -10,6 +10,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataClasses.Domain;
+using DataClasses.Domain.Collections;
+using DataClasses.Domain.Login;
+using DataClasses.Domain.MISC;
+using DataClasses.Domain.Picture;
 using PW_BusinessLogicLayer;
 using PW_BusinessLogicLayer.Interfaces;
 
