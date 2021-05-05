@@ -23,6 +23,14 @@
     z-index: 2;
 }
 
+.tabelcontainer {
+    overflow: scroll;
+}
+
+.cursor {
+    cursor: url("/css/Pictures/pinNew.cur") 5 34,default;
+}
+
 
 /* BASIC */
 
@@ -90,7 +98,7 @@ h2 {
 }
 
 /* Belinda */
-body {
+.body {
     display: flex;
     justify-content: center;
     margin-top: 20px;
