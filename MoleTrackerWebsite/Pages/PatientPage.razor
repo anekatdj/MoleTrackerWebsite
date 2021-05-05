@@ -32,7 +32,7 @@
                         <tr>
                             <th>Modermærker</th>
                         </tr>
-                        @foreach (var collection in CollectionList)
+                        @foreach (var collection in collections)
                         {
                             <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))" style="cursor: pointer">
                                 <td>
@@ -45,8 +45,26 @@
             </EditForm>
         </div>
     </div>
-</div>
 
+
+    <div class="col">
+        padding og sticky
+        <div style="width: 400px;">
+            <a href="/css/Pictures/pin" />
+            @if (AddButtonPressed == true)
+            {
+                <img class="cursor" id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" /> @*onmousewheel = "@MouseWheel"*@
+            }
+            else
+            {
+                <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" /> @*onmousewheel = "@MouseWheel"*@
+            }
+
+            <button style="float: right" class="@Arrow" @onclick="TurnAroundModel"></button>
+
+        </div>
+    </div>
+</div>
 
 
 
@@ -58,22 +76,161 @@
     public string NameOfPatient { get; set; }
     public List<PictureDataDomain> PicDataList { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    //private LocationOnBodyDomain.BodyPart bodyPart;
+    public string FrontOrBack = "/css/Pictures/MaleFront.png";
+    public string Arrow = "fa fa-refresh";
+    public string AddCollectionButton = "fa fa-plus";
+    public string TurnAround { get; set; }
+    public string Gender { get; set; }
+    public string Width { get; set; }
+    public string Height { get; set; }
+    public string NewPinAdded { get; set; }
+    public bool AddButtonPressed { get; set; }
+    public bool AcceptButtonPressed { get; set; }
+    public bool PointClicked { get; set; }
+
+    private IEnumerable<CollectionDomain> collections = new[]
     {
-        SesInfo.LoggedIn = true;
-        SesInfo.UseID = 1;
+        new CollectionDomain {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()},
+        new CollectionDomain() {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()},
+        new CollectionDomain() {CollectionID = 1, CollectionName = "Venstre fod", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()},
+        new CollectionDomain() {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()}
+    };
 
-        //Bare for ikke at smide exception
-        PatientData = new PatientDataDomain();
-        CollectionList = PatientData.CollectionList;
-        //patientData.CollectionList = new List<CollectionDomain>();
 
-        patientInfo = SelectPatientController.SelectedPatient;
+    public void TurnAroundModel()
+    {
+        GetGender();
 
-        NameOfPatient = patientInfo.Name;
+        if (Gender == "G")
+        {
+            if (this.FrontOrBack == "/css/Pictures/FemaleBack.png")
+            {
+                this.FrontOrBack = "/css/Pictures/FemaleFront.png";
+            }
+            else
+            {
+                this.FrontOrBack = "/css/Pictures/FemaleBack.png";
+            }
+        }
 
-        //patientData = SelectPatientController.GetPatientData(patientInfo);
+        else if (Gender == "B")
+        {
+            if (this.FrontOrBack == "/css/Pictures/MaleBack.png")
+            {
+                this.FrontOrBack = "/css/Pictures/MaleFront.png";
+            }
+            else
+            {
+                this.FrontOrBack = "/css/Pictures/MaleBack.png";
+            }
+        }
     }
+
+    
+
+    public void GetGender()
+    {
+        //PatientInfo = LogInController.HandlePatientInfo();
+        //Gender = PatientInfoDomain.Gender;
+    }
+
+    
+
+    //Zoom forsøg - virker ikke helt med event
+    //https://stackoverflow.com/questions/54222913/scrollable-image-stack-using-blazor-component/54227687
+
+    int imgNumber = 0;
+    string img => $"/Images/FemaleBackCrop {imgNumber}.png";
+    string img2 => $"/Images/pin.png";
+
+    public class WheelEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs { public int DeltaY { get; } }
+
+    Task MouseWheel(WheelEventArgs args)
+    {
+        imgNumber += Math.Sign(args.DeltaY);
+        if (imgNumber == 43) imgNumber = 0;
+        if (imgNumber == -1) imgNumber = 42;
+        return Task.CompletedTask;
+    }
+
+
+    #region Coordinates
+
+    private void ChoosePoint()
+    {
+        //NewPinAdded = "pin.png";
+        AddButtonPressed = true;
+    }
+
+    //Klasse til skærmmål
+    public class BoundingClientRect
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double Width { get; set; }
+        public double Height { get; set; }
+        public double Top { get; set; }
+        public double Right { get; set; }
+        public double Bottom { get; set; }
+        public double Left { get; set; }
+    }
+
+    public int X { get; set; }
+    public int Y { get; set; }
+
+    private async Task GetCoordinates(MouseEventArgs e) //Før var det en void
+    {
+        var result = await JS.InvokeAsync<BoundingClientRect>("PictureClickFind", new object[] { "PatientModel" });
+        X = Convert.ToInt32(e.ClientX - result.Left);
+        Y = Convert.ToInt32(e.ClientY - result.Top);
+
+        BackOrFront();
+    }
+
+    private void BackOrFront()
+    {
+        GetGender();
+
+        if (Gender == "G")
+        {
+            if (FrontOrBack == "/css/Pictures/FemaleFront.png")
+            {
+                HandleLocationFemaleFront();
+            }
+            else
+            {
+                HandleLocationFemaleBack();
+            }
+        }
+
+        else if (Gender == "B")
+        {
+
+        }
+    }
+
+    private void HandleLocationFemaleFront()
+    {
+        if (AddButtonPressed == true)
+        {
+            //PointClicked = Coordinates.LocalizePointFemaleFront(PointClicked, X, Y);
+        }
+    }
+
+    private void HandleLocationFemaleBack()
+    {
+        if (AddButtonPressed == true)
+        {
+            //PointClicked = Coordinates.LocalizePointFemaleBack(PointClicked, X, Y);
+        }
+    }
+
+
+    //private void AcceptPosition()
+    //{
+    //    NavigateToCollectionPage();
+    //}
 
     private void NavigateToCollectionPage(MouseEventArgs e, object collectionId)
     {
@@ -86,11 +243,25 @@
 
     }
 
-}
+    #endregion
+
+    #region OnStartUp
+
+
+    public void DisplayPatientModel()
+    {
+        GetGender();
+
+        if (Gender == "G")
+        {
+            FrontOrBack = "/css/Pictures/FemaleFront.png";
+            Width = "212px";
+            Height = "477px";
+        }
 
         else if (Gender == "B")
         {
-            FrontOrBack = "~/css/Pictures/MaleFront.png";
+            FrontOrBack = "/css/Pictures/MaleFront.png";
             Width = "270px";
             Height = "520px";
         }
@@ -103,7 +274,14 @@
 
     protected override async Task OnInitializedAsync()
     {
+        SesInfo.LoggedIn = true;
+        SesInfo.UseID = 1;
         patientInfo = SelectPatientController.SelectedPatient;
+
+    //Bare for ikke at smide exception
+        PatientData = new PatientDataDomain();
+        CollectionList = PatientData.CollectionList;
+    //patientData.CollectionList = new List<CollectionDomain>();
 
         NameOfPatient = patientInfo.Name;
         DisplayPatientModel();
@@ -137,7 +315,8 @@
     <div class="col">
         <img src="~/css/Pictures/MaleFront.png" alt="Image not found" width="200" height="400" />
     </div>*@
-@*code {
+
+@*@code {
 
         //private PatientInfoDomain patientInfo;
         //public PatientDataDomain PatientData { get; set; }
@@ -151,6 +330,23 @@
         //    PatientData = new PatientDataDomain();
         //    CollectionList = PatientData.CollectionList;
         //    //patientData.CollectionList = new List<CollectionDomain>();
-    }
-*@
 
+        //    patientInfo = SelectPatientController.SelectedPatient;
+
+        //    NameOfPatient = patientInfo.Name;
+
+        //    //patientData = SelectPatientController.GetPatientData(patientInfo);
+        //}
+
+        //private void NavigateToCollectionPage(MouseEventArgs e, object collectionId)
+        //{
+
+        //    var selectedCollection = PatientData.CollectionList.Where(x => x.CollectionID.Equals(collectionId)).ToList();
+
+        //    ViewCollectionController.SelectedCollection = selectedCollection[0];
+
+        //    NavManager.NavigateTo("/CollectionPage");
+
+        //}
+
+    }*@
