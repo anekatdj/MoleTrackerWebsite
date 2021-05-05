@@ -1,6 +1,6 @@
-﻿namespace DataClasses.Domain
+﻿namespace DataClasses.Domain.Picture
 {
-    public class LocationOnBody
+    public class LocationOnBody : SessionInfo
     {
         public int xCoordinate { get; set; }
         public int yCoordinate { get; set; }

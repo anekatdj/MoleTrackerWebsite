@@ -1,7 +1,8 @@
 ﻿@page "/collectionPage"
-@using DataClasses.Domain
 @using BlazorInputFile
 @using System.IO
+@using DataClasses.Domain.Collections
+@using DataClasses.Domain.Picture
 @using PW_BusinessLogicLayer.Interfaces
 
 <link href="css/CSSStyles.css" rel="stylesheet" />
@@ -11,6 +12,7 @@
 @inject LocationOnBody Location
 @inject PictureInfo Picture
 @inject IDeleteCollectionController DeleteCollectionController
+@inject IMarkCollectionController MarkCollectionController
 @inject NavigationManager NavManager
 
 
@@ -23,94 +25,89 @@
             <button style="border-radius: 9px" class="@EditPencil" @onclick="EditName"> Redigér</button>
         </div>
     }
-
+    
+    
     <div class="col" style="float: right">
         <button style="float: right" class="fa fa-ellipsis-h" @onclick="Sidebar"></button> @*onclick="Sidebar"*@
         @*Denne skal flyve ind fra siden over det eksisterende på siden*@
         @if (SidebarVisible) //class="td"
         {
-            <div id="mySidebar" class="sidebar" style="float: right; width: 30%; height: 100%">
-                <h2 style="color: azure">Indstillinger</h2>
-                <div style="color: azure; margin-left: 5%; cursor: pointer" @onclick="ItemMarked">
-                    <span class="@Flag" style="transform: scaleX(-1);"></span>
-                    Markér samling
+    <div id="mySidebar" class="sidebar" style="float: right; width: 30%; height: 100%">
+        <h2 style="color: azure">Indstillinger</h2>
+        <div style="color: azure; margin-left: 5%; margin-bottom: 4%; cursor: pointer" @onclick="ItemMarked">
+            <span class="@Flag" style="transform: scaleX(-1);"></span>
+            Markér samling
+        </div>
+
+        <div style="color: azure; margin-left: 5%; margin-bottom: 4%; cursor: pointer" @onclick="DialogShow">
+            <span class="fa fa-trash-o"></span>
+            Slet samling
+        </div>
+
+        @if (DeleteCollectionBool)
+        {
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title" id="titleLabel">Ønsker du at slette denne samling?</p>
+                        <button class="fa fa-check" style="margin-right: 1%" @onclick="DeleteCollection">Ja</button>
+                        <button class="fa fa-close" @onclick="DialogShow">Nej</button>
+                    </div>
                 </div>
-                @if (!CollectionDeleted)
-                {
-                    <div style="color: azure; margin-left: 5%; cursor: pointer" @onclick="DialogShow">
-                        <span class="fa fa-trash-o"></span>
-                        Slet samling
-                    </div>
-                }
-                @if (CollectionDeleted)
-                {
-                    <div style="color: azure; margin-left: 5%; cursor: pointer" @onclick="DeleteCollection">
-                        <span class="fa fa-trash-o"></span>
-                        Slet samling
-                    </div>
-
-                    <div class="modal-content">
-                        <div class="modal-dialog">
-                            <div class="modal-header">
-                                <p class="modal-title" id="titleLabel">Ønsker du at slette denne samling?</p>
-                                <button class="fa fa-check" style="margin-right: 1%" @onclick="DeleteCollection">Ja</button>
-                                <button class="fa fa-close" @onclick="DeletionCancelled">Nej</button>
-                            </div>
-                        </div>
-                    </div>
-                }
-                <div class="dropdown-toggle" style="color: azure; margin-left: 5%; cursor: pointer" @onclick="Notifications">
-                    <span class="fa fa-clock-o"></span>
-                    Ændr follow-up notifikationer
-
-                </div>
-                @if (NotificationVisible)
-                {
-                    @*<div class="dropdown-toggle" style="color: azure; margin-left: 5%" @onclick="Days">Dag</div>
-                        @if (DaysVisible)
-                        {*@
-                    <div style="color: azure; width: 50%; margin-left: 5%; margin-bottom: 5%">
-                        <label>Dag: </label>
-                        <select class="form-control" @onchange="DaysChanged">
-                            <option value="">@_dayOption</option>
-                            @foreach (var day in weekdaysList)
-                            {
-                                <option value="@day">@day</option>
-                            }
-                        </select>
-                    </div>
-
-
-                    @*<div class="dropdown-toggle" style="color: azure; margin-left: 5%" @onclick="Hours">Tidspunkt</div>
-                        @if (HoursVisible)
-                        {*@
-                    <div style="color: azure; width: 35%; margin-left: 5%; margin-bottom: 5%">
-                        <label>Klokken: </label>
-                        <select class="form-control" @onchange="HourChanged">
-                            <option>@_hourOption</option>
-                            @foreach (var hour in hoursList)
-                            {
-                                <option value="@hour">@hour.00</option>
-                            }
-                        </select>
-                    </div>
-
-
-                    <div style="color: azure; width: 40%; margin-left: 5%; margin-bottom: 5%">
-                        @*<div class="dropdown-toggle" style="color: azure; margin-left: 5%" @onclick="Weeks">Antal uger</div>
-                            @if (WeeksVisible)
-                            {*@
-                        <label>Antal uger: </label>
-                        <select class="form-control" @onchange="WeeksChanged">
-                            <option>@_weekOption</option>
-                            @foreach (var week in weeksList)
-                            {
-                                <option value="@week">Hver @week. uge</option>
-                            }
-                        </select>
-                    </div>
-                }
             </div>
+        }
+        <div class="dropdown-toggle" style="color: azure; margin-left: 5%; cursor: pointer" @onclick="Notifications">
+            <span class="fa fa-clock-o"></span>
+            Ændr follow-up notifikationer
+
+        </div>
+        @if (NotificationVisible)
+        {
+            @*<div class="dropdown-toggle" style="color: azure; margin-left: 5%" @onclick="Days">Dag</div>
+            @if (DaysVisible)
+            {*@
+            <div style="color: azure; width: 50%; margin-left: 5%; margin-bottom: 5%">
+                <label>Dag: </label>
+                <select class="form-control" @onchange="DaysChanged">
+                    <option value="">@_dayOption</option>
+                    @foreach (var day in weekdaysList)
+                    {
+                        <option value="@day">@day</option>
+                    }
+                </select>
+            </div>
+
+
+            @*<div class="dropdown-toggle" style="color: azure; margin-left: 5%" @onclick="Hours">Tidspunkt</div>
+            @if (HoursVisible)
+            {*@
+            <div style="color: azure; width: 35%; margin-left: 5%; margin-bottom: 5%">
+                <label>Klokken: </label>
+                <select class="form-control" @onchange="HourChanged">
+                    <option>@_hourOption</option>
+                    @foreach (var hour in hoursList)
+                    {
+                        <option value="@hour">@hour.00</option>
+                    }
+                </select>
+            </div>
+
+
+            <div style="color: azure; width: 40%; margin-left: 5%; margin-bottom: 5%">
+                @*<div class="dropdown-toggle" style="color: azure; margin-left: 5%" @onclick="Weeks">Antal uger</div>
+                @if (WeeksVisible)
+                {*@
+                <label>Antal uger: </label>
+                <select class="form-control" @onchange="WeeksChanged">
+                    <option>@_weekOption</option>
+                    @foreach (var week in weeksList)
+                    {
+                        <option value="@week">Hver @week. uge</option>
+                    }
+                </select>
+            </div>
+        }
+    </div>
         }
     </div>
 </div>
@@ -121,7 +118,7 @@
         <div class="col" style="float: left">
             @if (ShowUploadedMolePicture == true)
             {
-                <img src="Images/@imageDataUrl" style="width:300px;height:300px"/>
+                <img src="Images/@imageDataUrl" style="width:300px;height:300px" />
             }
             @*<img src="Images/download.jfif"/>*@
         </div>
@@ -171,15 +168,15 @@
             <div>
                 <button class="@AddPictureButton" @onclick="ShowUploadedMole" style="border-radius: 10%; float: right; margin-top: 20%">Upload billede</button>
                 @*@if (ShowUploadedMolePicture == true)
-                {
-                    <img src="Images/@imageDataUrl" style="width: 300px;height:300px"/>
-                }*@
+                    {
+                        <img src="Images/@imageDataUrl" style="width: 300px;height:300px"/>
+                    }*@
             </div>
-            <InputFile OnChange="HandleSelection"/> @*OnChange="HandleSelection"*@
+            <InputFile OnChange="HandleSelection" /> @*OnChange="HandleSelection"*@
             @*@if (!string.IsNullOrEmpty(imageDataUrl))
-            {
-                <img src="Images/@imageDataUrl" />
-             }*@ 
+                {
+                    <img src="Images/@imageDataUrl" />
+                 }*@
         </div>
     </div>
 </div>
@@ -189,6 +186,7 @@
 
 
 @code {
+    //TODO Lav popop med fortryd handling efter man er kommet ind på main page og har slettet en collection
     private List<Collection> collections = new List<Collection>();
     //private IEnumerable<Collection> collections = new[]
     //{
@@ -198,7 +196,7 @@
 
     public bool SaveDisabled { get; set; } = true;
     public string AddPictureButton = "fa fa-picture-o";
-    public bool CollectionDeleted { get; set; }
+    public bool DeleteCollectionBool { get; set; }
     public string EditPencil = "fa fa-pencil";
     public bool IsDisabled { get; set; } = true;
     public string FontColor { get; set; }
@@ -250,18 +248,13 @@
     public void DialogShow()
     {
         //SidebarVisible = !SidebarVisible;
-        CollectionDeleted = true;
+        DeleteCollectionBool = !DeleteCollectionBool;
     }
 
     public void DeleteCollection()
     {
         DeleteCollectionController.DeleteCollection();
         NavManager.NavigateTo("/mainPage");
-    }
-
-    public void DeletionCancelled()
-    {
-        NavManager.NavigateTo("/collectionPage");
     }
 
     public bool NotificationVisible { get; set; }
@@ -323,7 +316,7 @@
     string status;
 
     public string imageDataUrl { get; set; }
-    public bool ShowUploadedMolePicture{ get; set; }
+    public bool ShowUploadedMolePicture { get; set; }
 
     private void ShowUploadedMole()
     {
@@ -357,10 +350,11 @@
     private string GetFileType(string name)
     {
         string result = "";
-        if (name.Contains("jpg") || name.Contains("jpg") || name.Contains("gif")||name.Contains("jfif"))
+        if (name.Contains("jpg") || name.Contains("jpg") || name.Contains("gif") || name.Contains("jfif"))
         {
             result = "image";
-        }else if (name.Contains("text"))
+        }
+        else if (name.Contains("text"))
         {
             result = "text";
         }
