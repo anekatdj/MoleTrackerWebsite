@@ -48,7 +48,6 @@ namespace PW_DataAccessLayer
             }
             
         }
-        //LAURA HEJ AK
         
         public PatientInfo GetPatientInfo()
         {
