@@ -341,9 +341,9 @@
             {
                 var ms = new MemoryStream();
                 await file.Data.CopyToAsync(ms);
-                string imageBase64Data = Convert.ToBase64String(ms.ToArray());
-                imageDataUrl = string.Format("image/png;base64,{0}", imageBase64Data);
-                //imageDataUrl = file.Name;
+                //string imageBase64Data = Convert.ToBase64String(ms.ToArray());
+                //imageDataUrl = string.Format("image/png;base64,{0}", imageBase64Data);
+                imageDataUrl = file.Name;
 
                 using (FileStream newFile = new FileStream("wwwroot\\images\\" + file.Name, FileMode.Create, FileAccess.Write))
                 {
