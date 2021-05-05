@@ -4,6 +4,9 @@
 @using BusinessLogicLayer.BusinessLogicLayerInterfaces
 @using DataClasses.Domain
 @using System.Drawing
+@using static System.IO.File
+@using System.Diagnostics
+@using System.IO
 
 @inject IViewCollectionController ViewCollectionController
 @inject NavigationManager NavManager;
@@ -18,7 +21,8 @@
         {
             <tr @onclick="@((e) => ShowPicture(e, item.PictureID))">
                 <td>
-                    @item.PictureData
+                    <img src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" width="80" height="80" />
+                   @* @item.PictureData*@
                 </td>
             </tr>
         }
@@ -34,21 +38,33 @@
 
     protected override async Task OnInitializedAsync()
     {
+        PictureDataDomain picture1 = new PictureDataDomain();
+
+       var filePath = @"MoleOne.jpg";
+
+        byte[] picByteArray = ReadAllBytes(filePath);
+
+        picture1.PictureData = picByteArray;
+        PicDataList = new List<PictureDataDomain>();
+        PicDataList.Add( picture1);
         //collection = ViewCollectionController.SelectedCollection;
 
+
         collection = new CollectionDomain("Test collection");
-        PicDataList = new List<PictureDataDomain>();
+        var PicInfoList = new List<PictureInfoDomain>();
 
-        foreach (var pic in collection.PictureList)
-        {
-            PicDataList.Add(ViewCollectionController.GetPictureData(pic));
+        collection.PictureList = PicInfoList;
 
-        }
+        //foreach (var pic in collection.PictureList)
+        //{
+        //    PicDataList.Add(ViewCollectionController.GetPictureData(pic));
+
+        //}
     }
 
     private void ShowPicture(MouseEventArgs e, int pictureId)
     {
-        
+
     }
 
 }
