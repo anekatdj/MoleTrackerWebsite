@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataClasses.Domain
+namespace DataClasses.Domain.MISC
 {
     public class DoctorInfo
     {

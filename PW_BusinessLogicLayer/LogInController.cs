@@ -1,5 +1,5 @@
 ﻿using System;
-using DataClasses.Domain;
+using DataClasses.Domain.Login;
 using PW_BusinessLogicLayer.Interfaces;
 using PW_DataAccessLayer;
 using PW_DataAccessLayer.Interfaces;

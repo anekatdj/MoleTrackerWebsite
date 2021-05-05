@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using DataClasses.Domain;
+using DataClasses.Domain.Collections;
+using DataClasses.Domain.Picture;
 
 namespace PW_BusinessLogicLayer
 {

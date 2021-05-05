@@ -1,7 +1,7 @@
 ﻿
 
 using System.Diagnostics;
-using DataClasses.Domain;
+using DataClasses.Domain.Login;
 
 namespace PW_BusinessLogicLayer.Interfaces
 {

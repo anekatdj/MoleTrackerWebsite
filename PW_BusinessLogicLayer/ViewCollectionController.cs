@@ -1,4 +1,5 @@
 ﻿using DataClasses.Domain;
+using DataClasses.Domain.Collections;
 using PW_BusinessLogicLayer.Interfaces;
 using PW_DataAccessLayer;
 using PW_DataAccessLayer.Interfaces;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using APIWebServiesConnector;
-using DataClasses.Domain;
+using DataClasses.Domain.Login;
 using DataClasses.DTO;
 using PW_DataAccessLayer.Interfaces;
 
@@ -48,7 +48,7 @@ namespace PW_DataAccessLayer
             }
             
         }
-
+        //LAURA HEJ AK
         
         public PatientInfo GetPatientInfo()
         {

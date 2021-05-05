@@ -1,6 +1,6 @@
 ﻿using System;
 using APIWebServiesConnector;
-using DataClasses.Domain;
+using DataClasses.Domain.Collections;
 using DataClasses.DTO;
 using PW_DataAccessLayer.Interfaces;
 

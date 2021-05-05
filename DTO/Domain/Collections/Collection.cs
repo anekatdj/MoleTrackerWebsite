@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
+using DataClasses.Domain.Picture;
 
-namespace DataClasses.Domain
+namespace DataClasses.Domain.Collections
 {
-    public class Collection
+    public class Collection : SessionInfo
     {
         public int CollectionID { get; set; }
         public List<PictureInfo> PictureList { get; set; }

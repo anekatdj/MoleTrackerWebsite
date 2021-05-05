@@ -1,4 +1,4 @@
-﻿using DataClasses.Domain;
+﻿using DataClasses.Domain.Login;
 
 namespace PW_DataAccessLayer.Interfaces
 {

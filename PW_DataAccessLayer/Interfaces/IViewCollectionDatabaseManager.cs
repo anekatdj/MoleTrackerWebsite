@@ -1,4 +1,4 @@
-﻿using DataClasses.Domain;
+﻿using DataClasses.Domain.Collections;
 
 namespace PW_DataAccessLayer.Interfaces
 {
