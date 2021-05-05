@@ -2,5 +2,6 @@
 {
     public interface IDeleteCollectionController
     {
+        public void DeleteCollection();
     }
 }

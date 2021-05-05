@@ -2,6 +2,7 @@
 @using DataClasses.Domain
 @using BlazorInputFile
 @using System.IO
+@using PW_BusinessLogicLayer.Interfaces
 
 <link href="css/CSSStyles.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> @*EYE*@
@@ -9,6 +10,8 @@
 @inject Collection CollectionInfo
 @inject LocationOnBody Location
 @inject PictureInfo Picture
+@inject IDeleteCollectionController DeleteCollectionController
+@inject NavigationManager NavManager
 
 
 
@@ -32,10 +35,30 @@
                     <span class="@Flag" style="transform: scaleX(-1);"></span>
                     Markér samling
                 </div>
-                <div style="color: azure; margin-left: 5%; cursor: pointer" @onclick="DeleteCollection">
-                    <span class="fa fa-trash-o"></span>
-                    Slet samling
-                </div>
+                @if (!CollectionDeleted)
+                {
+                    <div style="color: azure; margin-left: 5%; cursor: pointer" @onclick="DialogShow">
+                        <span class="fa fa-trash-o"></span>
+                        Slet samling
+                    </div>
+                }
+                @if (CollectionDeleted)
+                {
+                    <div style="color: azure; margin-left: 5%; cursor: pointer" @onclick="DeleteCollection">
+                        <span class="fa fa-trash-o"></span>
+                        Slet samling
+                    </div>
+
+                    <div class="modal-content">
+                        <div class="modal-dialog">
+                            <div class="modal-header">
+                                <p class="modal-title" id="titleLabel">Ønsker du at slette denne samling?</p>
+                                <button class="fa fa-check" style="margin-right: 1%" @onclick="DeleteCollection">Ja</button>
+                                <button class="fa fa-close" @onclick="DeletionCancelled">Nej</button>
+                            </div>
+                        </div>
+                    </div>
+                }
                 <div class="dropdown-toggle" style="color: azure; margin-left: 5%; cursor: pointer" @onclick="Notifications">
                     <span class="fa fa-clock-o"></span>
                     Ændr follow-up notifikationer
@@ -48,8 +71,8 @@
                         {*@
                     <div style="color: azure; width: 50%; margin-left: 5%; margin-bottom: 5%">
                         <label>Dag: </label>
-                        <select class="form-control" @onchange="Days">
-                            <option value="">--Vælg dag--</option>
+                        <select class="form-control" @onchange="DaysChanged">
+                            <option value="">@_dayOption</option>
                             @foreach (var day in weekdaysList)
                             {
                                 <option value="@day">@day</option>
@@ -63,8 +86,8 @@
                         {*@
                     <div style="color: azure; width: 35%; margin-left: 5%; margin-bottom: 5%">
                         <label>Klokken: </label>
-                        <select class="form-control" @onchange="Hours">
-                            <option>--Time--</option>
+                        <select class="form-control" @onchange="HourChanged">
+                            <option>@_hourOption</option>
                             @foreach (var hour in hoursList)
                             {
                                 <option value="@hour">@hour.00</option>
@@ -78,16 +101,14 @@
                             @if (WeeksVisible)
                             {*@
                         <label>Antal uger: </label>
-                        <select class="form-control" @onchange="Weeks">
-                            <option>--Uger--</option>
+                        <select class="form-control" @onchange="WeeksChanged">
+                            <option>@_weekOption</option>
                             @foreach (var week in weeksList)
                             {
                                 <option value="@week">Hver @week. uge</option>
                             }
                         </select>
                     </div>
-
-                    <button disabled="@SaveNotifications" @onclick="SaveNotificationChanges" style="margin-left: 37%">Gem ændringer</button>
                 }
             </div>
         }
@@ -132,7 +153,7 @@
 }
 
 
-<div class="row" >
+<div class="row">
     <div class="col">
         @if (!SidebarVisible)
         {
@@ -144,7 +165,7 @@
             </div>
         }
     </div>
-    
+
     <div class="col" style="margin-top: 2%">
         <div class="col" style="float: right">
             <div>
@@ -168,16 +189,16 @@
 
 
 @code {
-
-    private IEnumerable<Collection> collections = new[]
-    {
-        new Collection {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-        new Collection {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
-    };
+    private List<Collection> collections = new List<Collection>();
+    //private IEnumerable<Collection> collections = new[]
+    //{
+    //    new Collection {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
+    //    new Collection {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
+    //};
 
     public bool SaveDisabled { get; set; } = true;
     public string AddPictureButton = "fa fa-picture-o";
-
+    public bool CollectionDeleted { get; set; }
     public string EditPencil = "fa fa-pencil";
     public bool IsDisabled { get; set; } = true;
     public string FontColor { get; set; }
@@ -226,9 +247,21 @@
         }
     }
 
+    public void DialogShow()
+    {
+        //SidebarVisible = !SidebarVisible;
+        CollectionDeleted = true;
+    }
+
     public void DeleteCollection()
     {
-        SidebarVisible = !SidebarVisible;
+        DeleteCollectionController.DeleteCollection();
+        NavManager.NavigateTo("/mainPage");
+    }
+
+    public void DeletionCancelled()
+    {
+        NavManager.NavigateTo("/collectionPage");
     }
 
     public bool NotificationVisible { get; set; }
@@ -259,14 +292,28 @@
         WeeksVisible = !WeeksVisible;
     }
 
-    public bool SaveNotifications { get; set; }
-    private string _days { get; set; }
-    private string _hour { get; set; }
-    private string _weeks { get; set; }
+    private string _dayOption { get; set; } = "--Dag--";
+    private string _hourOption { get; set; } = "--Time--";
+    private string _weekOption { get; set; } = "--Uger--";
 
-    public void SaveNotificationChanges()
+    public void DaysChanged(ChangeEventArgs dayEvent)
     {
+        _dayOption = dayEvent.Value.ToString();
+        StateHasChanged();
     }
+
+    public void HourChanged(ChangeEventArgs hourEvent)
+    {
+        _hourOption = hourEvent.Value.ToString();
+        StateHasChanged();
+    }
+
+    public void WeeksChanged(ChangeEventArgs weekEvent)
+    {
+        _weekOption = weekEvent.Value.ToString();
+        StateHasChanged();
+    }
+
 
     private List<string> weekdaysList = new List<string>(new string[] { "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag" });
     private List<string> weeksList = new List<string>(new string[] { "1", "2", "4", "6", "8", "12" });
