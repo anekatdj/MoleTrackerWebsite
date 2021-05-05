@@ -169,11 +169,12 @@
     <div class="col" style="margin-top: 2%">
         <div class="col" style="float: right">
             <div>
-                <button class="@AddPictureButton" @onclick="ShowUploadedMole" style="border-radius: 10%; float: right; margin-top: 20%">Upload billede</button>
+                <button  class="@AddPictureButton" @onclick="ShowUploadedMole" style="border-radius: 10%; float: right; margin-top: 20%" >Upload billede</button>
+               
                 @*@if (ShowUploadedMolePicture == true)
-                {
-                    <img src="Images/@imageDataUrl" style="width: 300px;height:300px"/>
-                }*@
+        {
+            <img src="Images/@imageDataUrl" style="width: 300px;height:300px"/>
+        }*@
             </div>
             <InputFile OnChange="HandleSelection"/> @*OnChange="HandleSelection"*@
             @*@if (!string.IsNullOrEmpty(imageDataUrl))
@@ -340,9 +341,9 @@
             {
                 var ms = new MemoryStream();
                 await file.Data.CopyToAsync(ms);
-                //string imageBase64Data = Convert.ToBase64String(ms.ToArray());
-                //imageDataUrl = string.Format("image/png;base64,{0}", imageBase64Data);
-                imageDataUrl = file.Name;
+                string imageBase64Data = Convert.ToBase64String(ms.ToArray());
+                imageDataUrl = string.Format("image/png;base64,{0}", imageBase64Data);
+                //imageDataUrl = file.Name;
 
                 using (FileStream newFile = new FileStream("wwwroot\\images\\" + file.Name, FileMode.Create, FileAccess.Write))
                 {
