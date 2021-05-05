@@ -4,10 +4,11 @@ using System.Diagnostics;
 using System.Text;
 using DataClasses.Domain.Collections;
 using DataClasses.Domain.Picture;
+using PW_BusinessLogicLayer.Interfaces;
 
 namespace PW_BusinessLogicLayer
 {
-    public class CoordinatesLocalization
+    public class CoordinatesLocalization : ICoordinatesLocalization
     {
         private LocationOnBody _locationOnBody;
         private Collection _collection;

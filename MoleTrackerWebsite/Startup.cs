@@ -35,15 +35,20 @@ namespace MoleTrackerWebsite
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
+            services.AddTransient<ChangeCollectionName>();
+            services.AddTransient<ChangeCollectionMarking>();
+            services.AddTransient<ChangeNotifications>();
+            services.AddTransient<PictureComment>();
+            services.AddTransient<PictureData>();
+            services.AddSingleton<PictureInfo>();
             services.AddTransient<LogInInfo>();
             services.AddSingleton<SessionInfo>();
-            services.AddSingleton<ILogInController, LogInController>();
             services.AddSingleton<PatientInfo>();
             services.AddSingleton<Collection>();
             services.AddSingleton<DoctorInfo>();
             services.AddSingleton<LocationOnBody>();
-            services.AddSingleton<PictureInfo>();
-            services.AddSingleton<CoordinatesLocalization>();
+            services.AddSingleton<ICoordinatesLocalization, CoordinatesLocalization>();
+            services.AddSingleton<ILogInController, LogInController>();
             services.AddSingleton<IChangeCollectionNameController, ChangeCollectionNameController>();
             services.AddSingleton<IViewCollectionController, ViewCollectionController>();
             services.AddSingleton<IUploadPictureController, UploadPictureController>();

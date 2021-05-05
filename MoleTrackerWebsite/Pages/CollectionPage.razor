@@ -11,6 +11,8 @@
 @inject Collection CollectionInfo
 @inject LocationOnBody Location
 @inject PictureInfo Picture
+@inject PictureComment PicComment
+@inject ChangeCollectionMarking ChangeCollectionMarking
 @inject IDeleteCollectionController DeleteCollectionController
 @inject IMarkCollectionController MarkCollectionController
 @inject NavigationManager NavManager
@@ -160,7 +162,8 @@
                 <label style="font-weight: bold">Noter</label>
             </div>
             <div style="float: left">
-                <input type="text" class="form-control" style="overflow: scroll; width: 100%; height: 100%" placeholder="Indtast noter her..." />
+                <input type="text" class="form-control" style="overflow: scroll; width: 100%; height: 100%" @bind="PicComment.Comment" placeholder="Indtast noter her..." />
+                <button @onclick="SaveNotes">Gem noter</button>
             </div>
         }
     </div>
@@ -196,7 +199,7 @@
     //    new Collection {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
     //    new Collection {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
     //};
-
+    
     public bool SaveDisabled { get; set; } = true;
     public string AddPictureButton = "fa fa-picture-o";
     public bool DeleteCollectionBool { get; set; }
@@ -211,7 +214,7 @@
             IsDisabled = false;
             EditPencil = "Gem";
         }
-
+        
         else
         {
             IsDisabled = true;
@@ -241,11 +244,19 @@
         if (Flag == "fa fa-flag-o")
         {
             Flag = "fa fa-flag-checkered";
+            ChangeCollectionMarking.IsMarked = true;
+            MarkCollectionController.HandleMarking(ChangeCollectionMarking);
         }
         else
         {
+            ChangeCollectionMarking.IsMarked = false;
             Flag = "fa fa-flag-o";
         }
+    }
+
+    private void SaveNotes()
+    {
+
     }
 
     public void DialogShow()

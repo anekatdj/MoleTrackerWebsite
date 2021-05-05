@@ -9,8 +9,6 @@ namespace PW_DataAccessLayer
     public class MarkCollectionDatabaseManager : IMarkCollectionDatabaseManager
     {
         private IAPIService API;
-        private ChangeCollectionMarking _changeCollectionMarking;
-        
 
         public MarkCollectionDatabaseManager()
         {
