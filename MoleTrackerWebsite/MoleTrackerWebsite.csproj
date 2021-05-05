@@ -13,4 +13,8 @@
     <Folder Include="wwwroot\css\Pictures\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
+  </ItemGroup>
+
 </Project>
