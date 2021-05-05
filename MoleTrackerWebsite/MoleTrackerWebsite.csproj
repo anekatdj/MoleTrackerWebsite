@@ -9,8 +9,4 @@
     <ProjectReference Include="..\DTO\DataClasses.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\css\Pictures\" />
-  </ItemGroup>
-
 </Project>
