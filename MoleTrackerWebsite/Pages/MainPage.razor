@@ -61,17 +61,27 @@
             <a href="~/Images/pin.png" />
             @if (AddButtonPressed == true)
             {
-                <img class="cursor" id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" usemap="#patientModel" />
-                <map name="patientModel">
-                    <area  shape="circle" style="fill:blue" coords="19,20,30" />
-                </map>
+                <img class="cursor" id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" />
+
+                <div class="cursor" @onclick="GetCoordinates" style="width: @(_pointRadius*2)px;height: @(_pointRadius*2)px;top: @(YPoint-_pointRadius)px;left: @(XPoint-_pointRadius)px; background-color: red; position: fixed;border-radius:@(_pointRadius)px"></div>
+
+                //TODO kan eventuelt bruges senere til at klikke på et modermærke
+                @*<map name="patientModel">
+                        <area shape="circle" style="fill:blue" coords="19,20,30" />
+                    </map>
+
+                    <div style="width: 20px;height:30px; background-color: orange; top:300px "></div>*@
+
             }
             else
             {
                 <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" usemap="#patientModel" /> @*onmousewheel="@MouseWheel"*@
-                <map name="patientModel">
-                    <area shape="circle" coords="126, 344,30" />
-                </map>
+
+
+                @*<map name="patientModel">
+                        <area shape="circle" coords="126, 344,30" />
+                    </map>*@
+
             }
 
             <button style="float: right" class="@Arrow" @onclick="TurnAroundModel"></button>
@@ -224,6 +234,9 @@
 
     public int X { get; set; }
     public int Y { get; set; }
+    int _pointRadius = 2;
+    public int XPoint { get; set; }
+    public int YPoint { get; set; }
 
     private async Task GetCoordinates(MouseEventArgs e) //Før var det en void
     {
@@ -231,8 +244,8 @@
         X = Convert.ToInt32(e.ClientX - result.Left);
         Y = Convert.ToInt32(e.ClientY - result.Top);
 
-        
-        
+        XPoint = (int)e.ClientX;
+        YPoint = (int)e.ClientY;
 
         BackOrFront();
     }
