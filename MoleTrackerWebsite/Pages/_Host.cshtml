@@ -16,7 +16,8 @@
     <link href="css/site.css" rel="stylesheet" />
     <script>PictureClickFind = (elementid) => { return document.getElementById(elementid).getBoundingClientRect() }</script>
     <script src="_content/BlazorInputFile/inputfile.js"></script>
-    </head>
+    <script>GetWindowYScroll = () => { return window.scrollY }</script>
+</head>
 <body>
     <app>
         <component type="typeof(App)" render-mode="ServerPrerendered" />
