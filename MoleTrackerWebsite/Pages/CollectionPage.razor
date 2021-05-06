@@ -161,11 +161,8 @@
     <div class="col">
         @if (!SidebarVisible)
         {
-            <div style="margin-top: 2%">
-                <label style="font-weight: bold">Noter</label>
-            </div>
-            <div style="float: left">
-                <textarea class="textarea" style="overflow: scroll; overflow-x: hidden; width: 150%" @bind="PicComment.Comment" placeholder="Indtast noter her..." />
+            <div style="float: left; margin-top: 3%;">
+                <textarea class="textarea" style="overflow-y; overflow-x: hidden; max-height: 80%; width: 150%" @bind="PicComment.Comment" placeholder="Indtast noter her..." />
                 <button class="btn btn-primary rounded-pill" @onclick="SaveNotes">Gem noter</button>
             </div>
         }
