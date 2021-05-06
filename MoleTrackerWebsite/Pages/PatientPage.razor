@@ -17,9 +17,10 @@
 
 @layout MainLayout
 
+<link href="css/CSSStyles.css" rel="stylesheet" style="display:flex; justify-content: normal" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> @*EYE*@
+
 <h3>@patientInfo.Name</h3>
-
-
 
 <div class="row align-items-start" style="height: auto; width: auto">
     <div class="col">
@@ -127,7 +128,7 @@
         }
     }
 
-    
+
 
     public void GetGender()
     {
@@ -135,7 +136,7 @@
         //Gender = PatientInfoDomain.Gender;
     }
 
-    
+
 
     //Zoom forsøg - virker ikke helt med event
     //https://stackoverflow.com/questions/54222913/scrollable-image-stack-using-blazor-component/54227687
@@ -278,10 +279,10 @@
         SesInfo.UseID = 1;
         patientInfo = SelectPatientController.SelectedPatient;
 
-    //Bare for ikke at smide exception
+        //Bare for ikke at smide exception
         PatientData = new PatientDataDomain();
         CollectionList = PatientData.CollectionList;
-    //patientData.CollectionList = new List<CollectionDomain>();
+        //patientData.CollectionList = new List<CollectionDomain>();
 
         NameOfPatient = patientInfo.Name;
         DisplayPatientModel();
