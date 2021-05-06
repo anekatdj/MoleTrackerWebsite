@@ -61,11 +61,17 @@
             <a href="~/Images/pin.png" />
             @if (AddButtonPressed == true)
             {
-                <img class="cursor" id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" /> @*onmousewheel="@MouseWheel"*@
+                <img class="cursor" id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" usemap="#patientModel" />
+                <map name="patientModel">
+                    <area  shape="circle" style="fill:blue" coords="19,20,30" />
+                </map>
             }
             else
             {
-                <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" /> @*onmousewheel="@MouseWheel"*@
+                <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" usemap="#patientModel" /> @*onmousewheel="@MouseWheel"*@
+                <map name="patientModel">
+                    <area shape="circle" coords="126, 344,30" />
+                </map>
             }
 
             <button style="float: right" class="@Arrow" @onclick="TurnAroundModel"></button>
@@ -224,6 +230,9 @@
         var result = await JS.InvokeAsync<BoundingClientRect>("PictureClickFind", new object[] { "PatientModel" });
         X = Convert.ToInt32(e.ClientX - result.Left);
         Y = Convert.ToInt32(e.ClientY - result.Top);
+
+        
+        
 
         BackOrFront();
     }

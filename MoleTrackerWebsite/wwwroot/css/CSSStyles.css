@@ -30,6 +30,14 @@
     cursor: url("../Images/pinNew.cur") 5 34,default;
 }
 
+.area {
+    fill:red
+}
+
+.mapcolor {
+    background-color:red
+}
+
 
 
 
