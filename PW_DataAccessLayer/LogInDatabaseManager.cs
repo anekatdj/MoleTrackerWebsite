@@ -16,9 +16,9 @@ namespace PW_DataAccessLayer
 
         public LogInDatabaseManager()
         {
-            //API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
+            API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
             
-            API = new StubApiService();
+            //API = new StubApiService();
             patientInfo = new PatientInfo();
         }
 

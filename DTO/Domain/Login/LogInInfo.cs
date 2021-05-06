@@ -16,14 +16,5 @@ namespace DataClasses.Domain.Login
         [Required]
         [MinLength(1, ErrorMessage = "Adgangskode er for kort")]
         public string Password { get; set; }
-
-        /// <summary>
-        /// TEST
-        /// </summary>
-        public LogInInfo()
-        {
-            Username = "2007981233";
-            Password = "121212";
-        }
     }
 }

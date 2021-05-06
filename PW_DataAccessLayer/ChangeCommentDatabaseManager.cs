@@ -15,9 +15,9 @@ namespace PW_DataAccessLayer
 
         public ChangeCommentDatabaseManager()
         {
-            //API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
+            API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
             
-            API = new StubApiService();
+            //API = new StubApiService();
             _pictureRequestDTO = new PictureRequestDTO();
         }
 

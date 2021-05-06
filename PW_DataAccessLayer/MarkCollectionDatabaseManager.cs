@@ -12,9 +12,9 @@ namespace PW_DataAccessLayer
 
         public MarkCollectionDatabaseManager()
         {
-            //API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
+            API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
 
-            API = new StubApiService();
+            //API = new StubApiService();
         }
 
         public void PostMarkedCollection(ChangeCollectionMarking _changeCollectionMarking) //TODO Skal det her være void?

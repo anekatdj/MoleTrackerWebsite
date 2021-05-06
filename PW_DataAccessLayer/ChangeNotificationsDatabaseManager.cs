@@ -12,9 +12,9 @@ namespace PW_DataAccessLayer
 
         public ChangeNotificationsDatabaseManager()
         {
-            //API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
+            API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
 
-            API = new StubApiService();
+            //API = new StubApiService();
         }
 
         public void PostChangedNotifications(ChangeNotifications _changeNotifications) //TODO Skal det her være void?

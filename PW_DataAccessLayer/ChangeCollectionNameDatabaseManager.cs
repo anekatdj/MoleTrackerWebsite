@@ -12,9 +12,9 @@ namespace PW_DataAccessLayer
 
         public ChangeCollectionNameDatabaseManager()
         {
-            //API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
+            API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
 
-            API = new StubApiService();
+            //API = new StubApiService();
         }
 
         public void PostChangedCollectionName(ChangeCollectionName _changeCollectionName) //TODO Skal det her være void?
@@ -26,7 +26,7 @@ namespace PW_DataAccessLayer
 
             try
             {
-                string ID = API.PostObject<ChangeCollectionMarkingDTO>("PutNewCollectionName", _changeCollectionNameDTO);
+                API.PostObject<ChangeCollectionMarkingDTO>("PutNewCollectionName", _changeCollectionNameDTO);
             }
             catch (Exception e)
             {

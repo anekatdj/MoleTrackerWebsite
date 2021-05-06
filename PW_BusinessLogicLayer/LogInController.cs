@@ -18,8 +18,8 @@ namespace PW_BusinessLogicLayer
 
         public bool HandleLogin(LogInInfo loginInfo)
         {
-            //return logInDatabaseManager.ValidateLogin(loginInfo);
-            return true;
+            return logInDatabaseManager.ValidateLogin(loginInfo);
+            //return true;
         }
 
         //public PatientInfo HandlePatientInfo()
