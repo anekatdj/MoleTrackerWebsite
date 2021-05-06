@@ -10,40 +10,33 @@ namespace PW_DataAccessLayer
 {
     public class ChangeCommentDatabaseManager : IChangeCommentDatabaseManager
     {
+        PictureRequestDTO _pictureRequestDTO;
         private IAPIService API;
 
         public ChangeCommentDatabaseManager()
         {
             //API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
-
+            
             API = new StubApiService();
+            _pictureRequestDTO = new PictureRequestDTO();
         }
 
 
-        public void HandleChangedComment(PictureComment _pictureComment)
+        public void HandleChangedComment(PictureComment pictureComment)
         {
-            //PictureCommentDTO _pictureCommentDTO = new PictureCommentDTO();
+            PictureCommentDTO _pictureCommentDTO = new PictureCommentDTO();
 
-            //_pictureCommentDTO.Comment = _pictureComment.Comment;
-            //_pictureCommentDTO.PictureID = _pictureComment.PictureID;
+            _pictureCommentDTO.Comment = pictureComment.Comment;
+            _pictureCommentDTO.PictureID = pictureComment.PictureID;
 
-            //try
-            //{
-            //    _pictureCommentDTO = API.GetObject<PictureCommentDTO>("GetPictureComment", loginInfoDTO);
-            //}
-            //catch (WebException e) when ((e.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
-            //{
-            //    Console.WriteLine(e);
-            //}
-
-            //if (patientInfoDTO.CPR != null)
-            //{
-            //    return true;
-            //}
-            //else
-            //{
-            //    return false;
-            //}
+            try
+            {
+                _pictureRequestDTO = API.GetObject<PictureRequestDTO, PictureCommentDTO>("GetPictureComment", _pictureCommentDTO);
+            }
+            catch (WebException e) when ((e.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }
