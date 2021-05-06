@@ -41,12 +41,14 @@ namespace MoleTrackerWebsite
             services.AddTransient<PictureComment>();
             services.AddTransient<PictureData>();
             services.AddSingleton<PictureInfo>();
+            services.AddSingleton<PictureRequest>();
             services.AddTransient<LogInInfo>();
             services.AddSingleton<SessionInfo>();
             services.AddSingleton<PatientInfo>();
             services.AddSingleton<Collection>();
             services.AddSingleton<DoctorInfo>();
             services.AddSingleton<LocationOnBody>();
+            services.AddSingleton<IChangeComment, ChangeComment>();
             services.AddSingleton<ICoordinatesLocalization, CoordinatesLocalization>();
             services.AddSingleton<ILogInController, LogInController>();
             services.AddSingleton<IChangeCollectionNameController, ChangeCollectionNameController>();

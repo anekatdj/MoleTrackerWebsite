@@ -30,7 +30,13 @@
     cursor: url("../Images/pinNew.cur") 5 34,default;
 }
 
-
+.textarea {
+    padding: 10px;
+    line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
+}
 
 
 /*.show,.hide {*/
