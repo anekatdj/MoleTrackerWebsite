@@ -10,7 +10,6 @@
         <ul class="nav flex-column">
             <li class="nav-item px-3">
                 <NavLink class="nav-link" href="mainPage">
-                    @*Match="NavLinkMatch.All"*@
                     <span class="oi oi-home" aria-hidden="true"></span> Hjem
                 </NavLink>
             </li>
@@ -29,22 +28,58 @@
                     <span class="oi oi-info" aria-hidden="true"></span> Om
                 </NavLink>
             </li>
-            @*<li class="nav-item px-3">
-            <NavLink class="nav-link" href="mainPage">
-                <span class="oi oi-home" aria-hidden="true"></span> Kontaktinformation
-            </NavLink>
-        </li>*@
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" @onclick="LogOutClick">
+                    <span class="oi oi-account-logout" aria-hidden="true"></span> Log ud
+                </NavLink>
+            </li>
+            @if (LogOut)
+            {
+                <NavLink class="nav-link">
+                    <i style="color:azure">Er du sikker på, at du vil logge ud?</i>
+                </NavLink>
+                <ul class="nav flex-column">
+                    <li class="nav-item px-2" @onclick="ToggleNavMenu">
+                        <NavLink class="nav-link" href="patientLogin">
+                            <button class="iconfieldsWithText" style="color:azure">
+                                <i class="oi oi-check"style="color:forestgreen"></i>
+                                Ja
+                            </button>
+                        </NavLink>
+                    </li>
+                    <li class="nav-item px-2" @onclick="LogOutClick">
+                        <NavLink class="nav-link">
+                            <button class="iconfieldsWithText" style="color:azure">
+                                <i class="oi oi-x" style="color:red"></i>
+                                Nej
+                            </button>
+                        </NavLink>
+                    </li>
+                </ul>
+                    }
         </ul>
     </div>
 </nav>
 
 @code {
     private bool collapseNavMenu = true;
+    public bool LogOut{ get; set; }
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        LogOut = false;
+
+    }
+
+    private void LogOutClick()
+    {
+        LogOut = !LogOut;
     }
 }
