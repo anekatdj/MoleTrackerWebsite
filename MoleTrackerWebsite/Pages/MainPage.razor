@@ -9,13 +9,16 @@
 @using DataClasses.Domain.Collections
 @using DataClasses.Domain.Login
 @using DataClasses.Domain.Picture
+@using DataClasses.DTO
 @using PW_BusinessLogicLayer
 
 @inject NavigationManager NavManager
 @inject SessionInfo SessionInfo
 @inject PatientInfo PatientInfo
+@inject Collection Collection
 @inject ILogInController LogInController
 @inject ICoordinatesLocalization Coordinates
+@inject ICreateNewCollectionController CreateNewCollectionController
 @*To find coordinates*@
 @inject IJSRuntime JS;
 
@@ -292,9 +295,15 @@
         }
     }
 
-
     private void AcceptPosition()
     {
+        Collection newCollectionDomain = new Collection()
+        {
+            Location = Coordinates.Location,
+            CollectionName = Coordinates.Collections.CollectionName,
+            PictureList = new List<PictureInfo>()
+        };
+        CreateNewCollectionController.HandleCreateNewCollection(newCollectionDomain);
         NavigateToCollectionPage();
     }
 
@@ -334,6 +343,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        CreateNewCollectionController.HandleLoadCollection(Collection);
         DisplayPatientModel();
         await StartupTask();
     }
