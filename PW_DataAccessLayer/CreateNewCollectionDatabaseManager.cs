@@ -9,43 +9,53 @@ namespace PW_DataAccessLayer
     public class CreateNewCollectionDatabaseManager : ICreateNewCollectionDatabaseManager
     {
 
-        private CollectionDTO collectionDTO;
-
-        private PatientInfoDTO patientInfoDTO;
-
-        private Collection collection;
-
+        public  CollectionDTO CollectionDTO { get; private set; }
+        public PatientInfoDTO CurrentPatient { get; set; }
 
         private IAPIService API;
 
         public CreateNewCollectionDatabaseManager()
         {
-            //API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
-
-            API = new StubApiService();
+            API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
+            //API = new StubApiService();
+            CurrentPatient = new PatientInfoDTO();
+            CollectionDTO = new CollectionDTO();
         }
 
-        public Collection GetCollection()
+        //public Collection PostNewCollection()
+        //{
+
+        //}
+
+        public void GetExistingCollection(Collection collection)
         {
+            CollectionRequestDTO collectionRequestDTO = new CollectionRequestDTO();
+
+            collectionRequestDTO.CollectionID = collection.CollectionID;
+
+            collectionRequestDTO.PatientID = CurrentPatient.PatientID;
+
             try
             {
-                collectionDTO = API.GetObject<CollectionDTO, PatientInfoDTO>("CollectionRequest", collectionDTO);
+                CollectionDTO = API.GetObject<CollectionDTO, CollectionRequestDTO>("GetCollection", collectionRequestDTO);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
 
-            collection.CollectionID = collectionDTO.CollectionID;
-            collection.CollectionName = collectionDTO.CollectionName;
-            //foreach (var picture in collectionDTO.PictureList)
-            //{
-            //    collection.PictureList.Add(picture);
-            //}
+            collection.CollectionID = CollectionDTO.CollectionID;
+            collection.CollectionName = CollectionDTO.CollectionName;
+            //collection.Location = CollectionDTO.Location;
+            //collection.PictureList = CollectionDTO.PictureList;
+            ////foreach (var picture in collectionDTO.PictureList)
+            ////{
+            ////    collection.PictureList.Add(picture);
+            ////}
 
-            //collection.Location = collectionDTO.Location;
+            ////collection.Location = collectionDTO.Location;
 
-            return collection;
+            //return collection;
         }
     }
 }

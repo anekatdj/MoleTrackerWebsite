@@ -14,8 +14,10 @@
 @inject NavigationManager NavManager
 @inject SessionInfo SessionInfo
 @inject PatientInfo PatientInfo
+@inject Collection Collection
 @inject ILogInController LogInController
 @inject ICoordinatesLocalization Coordinates
+@inject ICreateNewCollectionController CreateNewCollectionController
 @*To find coordinates*@
 @inject IJSRuntime JS;
 
@@ -334,6 +336,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        CreateNewCollectionController.HandleCreateNewCollection(Collection);
         DisplayPatientModel();
         await StartupTask();
     }

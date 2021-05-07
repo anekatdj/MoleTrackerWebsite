@@ -1,4 +1,9 @@
-﻿namespace PW_DataAccessLayer.Interfaces
+﻿using DataClasses.Domain.Collections;
+
+namespace PW_DataAccessLayer.Interfaces
 {
-    public interface ICreateNewCollectionDatabaseManager{}
+    public interface ICreateNewCollectionDatabaseManager
+    {
+        public void GetExistingCollection(Collection collection);
+    }
 }

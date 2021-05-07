@@ -7,9 +7,9 @@
 
         public bool IsFrontFacing { get; set; }
         public BodyPart BodyParts { get; set; }
-        public Orientation Orientations { get; set; }
+        public BodyPartSide Orientations { get; set; }
 
-        public enum Orientation
+        public enum BodyPartSide
         {
             Nedre,
             Øvre,

@@ -26,6 +26,7 @@ namespace PW_DataAccessLayer
         {
             LoginInfoDTO loginInfoDTO = new LoginInfoDTO();
 
+            
             loginInfoDTO.Username = loginInfo.Username;
             loginInfoDTO.Password = loginInfo.Password;
 
@@ -36,6 +37,8 @@ namespace PW_DataAccessLayer
             catch (WebException e) when ((e.Response as HttpWebResponse)?.StatusCode==HttpStatusCode.NotFound)
             {
                 Console.WriteLine(e);
+
+                return false;
             }
 
             if (patientInfoDTO.CPR != null)

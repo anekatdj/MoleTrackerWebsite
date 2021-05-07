@@ -52,6 +52,7 @@ namespace MoleTrackerWebsite
             services.AddSingleton<IChangeComment, ChangeComment>();
             services.AddSingleton<ICoordinatesLocalization, CoordinatesLocalization>();
             services.AddSingleton<ILogInController, LogInController>();
+            services.AddSingleton<ICreateNewCollectionController, CreateNewCollectionController>();
             services.AddSingleton<IChangeCollectionNameController, ChangeCollectionNameController>();
             services.AddSingleton<IViewCollectionController, ViewCollectionController>();
             services.AddSingleton<IUploadPictureController, UploadPictureController>();
