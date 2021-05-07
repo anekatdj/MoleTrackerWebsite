@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using DataClasses.DTO;
@@ -8,6 +7,7 @@ namespace DataClasses.Domain
 {
     public class CollectionDomain
     {
+        public int PatientID { get; set; }
         public int CollectionID { get; set; }
         public List<PictureInfoDomain> PictureList { get; set; }
         public string CollectionName { get; set; }
@@ -40,8 +40,10 @@ namespace DataClasses.Domain
             {
                 list.Add(item.ToDTO());
             }
+
             CollectionDTO collectionDTO = new CollectionDTO()
             {
+                PatientID = PatientID,
                 CollectionID = CollectionID,
                 CollectionName = CollectionName,
                 PictureList = list,

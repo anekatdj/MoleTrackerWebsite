@@ -61,7 +61,6 @@
             {
                 <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" /> @*onmousewheel = "@MouseWheel"*@
             }
-
             <button style="float: right" class="@Arrow" @onclick="TurnAroundModel"></button>
 
         </div>
@@ -221,7 +220,7 @@
     {
         GetGender();
 
-        if (Gender == "Kvinde")
+        if (Gender == "Kvinde" || SelectPatientController.BirthDataCalcFailed == true)
         {
             if (FrontOrBack == "/css/Pictures/FemaleFront.png")
             {
@@ -233,7 +232,7 @@
             }
         }
 
-        else if (Gender == "Mand" || SelectPatientController.BirthDataCalcFailed == true)
+        else if (Gender == "Mand")
         {
             if (FrontOrBack == "/css/Pictures/MaleFront.png")
             {

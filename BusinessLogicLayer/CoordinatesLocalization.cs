@@ -199,7 +199,6 @@ namespace BusinessLogicLayer
             LocationOnBody = new LocationOnBodyDomain()
             {
                 BodyParts = bodyPart,
-                BodyPartSide = LocationOnBody.BodyPartSide,
                 IsFrontFacing = false,
                 xCoordinate = X,
                 yCoordinate = Y
@@ -392,7 +391,6 @@ namespace BusinessLogicLayer
             LocationOnBody = new LocationOnBodyDomain()
             {
                 BodyParts = bodyPart,
-                BodyPartSide = LocationOnBody.BodyPartSide,
                 IsFrontFacing = false,
                 xCoordinate = X,
                 yCoordinate = Y
@@ -590,7 +588,6 @@ namespace BusinessLogicLayer
             LocationOnBody = new LocationOnBodyDomain()
             {
                 BodyParts = bodyPart,
-                BodyPartSide = LocationOnBody.BodyPartSide,
                 IsFrontFacing = false,
                 xCoordinate = X,
                 yCoordinate = Y
