@@ -83,7 +83,11 @@
     border:none;
     font-size:26px;
 }
-
+.iconfieldsWithText {
+    background: none;
+    border: none;
+    font-size: 15px;
+}
 
 .icon-bar a:hover {
     background-color: #000; /* Add a hover color */
@@ -94,7 +98,14 @@
 }
 
 
+.float-container {
+    
+}
 
+.float-child {
+    float: left;
+    
+} 
 
 
 
