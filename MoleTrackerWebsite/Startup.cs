@@ -15,6 +15,7 @@ using DataClasses.Domain.Collections;
 using DataClasses.Domain.Login;
 using DataClasses.Domain.MISC;
 using DataClasses.Domain.Picture;
+using DataClasses.DTO;
 using PW_BusinessLogicLayer;
 using PW_BusinessLogicLayer.Interfaces;
 
@@ -36,11 +37,11 @@ namespace MoleTrackerWebsite
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            services.AddTransient<ChangeCollectionName>();
-            services.AddTransient<ChangeCollectionMarking>();
-            services.AddTransient<ChangeNotifications>();
-            services.AddTransient<PictureComment>();
-            services.AddTransient<PictureData>();
+            services.AddSingleton<ChangeCollectionName>();
+            services.AddSingleton<ChangeCollectionMarking>();
+            services.AddSingleton<ChangeNotifications>();
+            services.AddSingleton<PictureComment>();
+            services.AddSingleton<PictureData>();
             services.AddSingleton<PictureInfo>();
             services.AddSingleton<PictureRequest>();
             services.AddTransient<LogInInfo>();

@@ -1,4 +1,9 @@
-﻿namespace DataClasses.Domain.Picture
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using DataClasses.DTO;
+
+namespace DataClasses.Domain.Picture
 {
     public class LocationOnBody : SessionInfo
     {
@@ -6,10 +11,11 @@
         public int yCoordinate { get; set; }
 
         public bool IsFrontFacing { get; set; }
+        public string BodyPartSide { get; set; }
         public BodyPart BodyParts { get; set; }
-        public BodyPartSide Orientations { get; set; }
+        public Orientation Orientations { get; set; }
 
-        public enum BodyPartSide
+        public enum Orientation
         {
             Nedre,
             Øvre,
@@ -48,6 +54,19 @@
             Baglår,
             Knæhase,
             Læg
+        }
+
+        public LocationOnBodyDTO ToDTO(LocationOnBody.BodyPart bodyPart)
+        {
+            LocationOnBodyDTO locationOnBodyDTO = new LocationOnBodyDTO()
+            {
+                xCoordinate = xCoordinate,
+                yCoordinate = yCoordinate,
+                IsFrontFacing = IsFrontFacing,
+                BodyPart = bodyPart.ToString(),
+                BodyPartSide = BodyPartSide
+            };
+            return locationOnBodyDTO;
         }
     }
 }

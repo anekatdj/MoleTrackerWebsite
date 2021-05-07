@@ -9,6 +9,7 @@
 @using DataClasses.Domain.Collections
 @using DataClasses.Domain.Login
 @using DataClasses.Domain.Picture
+@using DataClasses.DTO
 @using PW_BusinessLogicLayer
 
 @inject NavigationManager NavManager
@@ -294,9 +295,15 @@
         }
     }
 
-
     private void AcceptPosition()
     {
+        Collection newCollectionDomain = new Collection()
+        {
+            Location = Coordinates.Location,
+            CollectionName = Coordinates.Collections.CollectionName,
+            PictureList = new List<PictureInfo>()
+        };
+        CreateNewCollectionController.HandleCreateNewCollection(newCollectionDomain);
         NavigateToCollectionPage();
     }
 
@@ -336,7 +343,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        CreateNewCollectionController.HandleCreateNewCollection(Collection);
+        CreateNewCollectionController.HandleLoadCollection(Collection);
         DisplayPatientModel();
         await StartupTask();
     }

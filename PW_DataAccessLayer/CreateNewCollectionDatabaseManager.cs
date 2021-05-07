@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using APIWebServiesConnector;
 using DataClasses.Domain.Collections;
 using DataClasses.DTO;
@@ -22,10 +23,27 @@ namespace PW_DataAccessLayer
             CollectionDTO = new CollectionDTO();
         }
 
-        //public Collection PostNewCollection()
-        //{
+        public void PostNewCollection(Collection collection)
+        {
+            CollectionDTO collectionDTO = collection.ToDTO(collection.Location.BodyParts);
+            //collectionDTO.CollectionID = collection.CollectionID;
+            //collectionDTO.CollectionName = collection.CollectionName;
+            //collectionDTO.PictureList = new List<PictureInfoDTO>();
+            //collectionDTO.Location = new LocationOnBodyDTO();
 
-        //}
+            try
+            {
+                string ID = API.PostObject<CollectionDTO>("NewCollection", collectionDTO);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            //collection.CollectionID = Convert.ToInt32(ID);
+            //return collection.CollectionID;
+        }
+
 
         public void GetExistingCollection(Collection collection)
         {

@@ -5,6 +5,6 @@
         public int PictureID { get; set; }
 
         //TODO denne skal lige findes en rigtig datatype til.
-        public int PicData { get; set; }
+        public byte[] PicData { get; set; }
     }
 }

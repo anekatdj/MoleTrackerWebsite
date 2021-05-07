@@ -33,8 +33,7 @@ namespace PW_DataAccessLayer
             {
                 xCoordinate = locationOnBodyDTO.xCoordinate,
                 yCoordinate = locationOnBodyDTO.yCoordinate,
-                //BodyPart = locationOnBodyDTO.BodyPart,
-                //BodyParts = locationOnBodyDTO.BodyPartSide,
+                //BodyParts = locationOnBodyDTO.BodyPartSide, //TODO skal være en enum i DTO, ikke en string
                 IsFrontFacing = locationOnBodyDTO.IsFrontFacing
             };
             return locationOnBodyDomain;
@@ -54,7 +53,7 @@ namespace PW_DataAccessLayer
         {
             PictureData pictureDataDomain = new PictureData()
             {
-                //PicData = pictureDataDTO.PictureData,
+                PicData = pictureDataDTO.PictureData,
                 PictureID = pictureDataDTO.PictureID
             };
             return pictureDataDomain;
