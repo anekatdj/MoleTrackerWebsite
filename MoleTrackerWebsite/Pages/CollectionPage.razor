@@ -62,11 +62,13 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <p class="modal-title" id="titleLabel">Ønsker du at slette denne samling?</p>
-                                <button style="margin-right: 1%" @onclick="DeleteCollection">
+                            </div>
+                            <div class="modal-body" >
+                                <button class="iconfieldsWithText" style="margin-right: 1%" @onclick="DeleteCollection">
                                     <i class="fa fa-check"></i>
                                     Ja
                                 </button>
-                                <button  @onclick="DeleteDialogShow">
+                                <button class="iconfieldsWithText" @onclick="DeleteDialogShow">
                                     <i class="fa fa-close"></i>
                                     Nej
                                 </button>
