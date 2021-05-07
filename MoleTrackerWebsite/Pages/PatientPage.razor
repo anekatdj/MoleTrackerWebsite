@@ -10,6 +10,7 @@
 
 @inject ISelectPatientController SelectPatientController
 @inject IViewCollectionController ViewCollectionController
+@inject ICreateCollectionController CreateCollectionController
 @inject PatientDataDomain PatientDataModel
 @inject NavigationManager NavManager
 @inject SessionInfoDomain SesInfo
@@ -278,7 +279,13 @@
 
     private void AcceptPosition()
     {
-        //NavigateToCollectionPage();
+        CollectionDomain newCollectionDomain = new CollectionDomain()
+        {
+            Location = Coordinates.LocationOnBody,
+            CollectionName = Coordinates.Collection.CollectionName
+        };
+        CreateCollectionController.AddNewCollection(newCollectionDomain);
+        NavManager.NavigateTo("/PatientPage");
     }
 
     private void NavigateToCollectionPage(MouseEventArgs e, object collectionId)

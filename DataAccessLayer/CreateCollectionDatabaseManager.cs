@@ -17,6 +17,20 @@ namespace DataAccessLayer
             API = new StubApiService();
         }
 
+        public void AddNewCollection(CollectionDomain collection)
+        {
+            CollectionDTO collectionDTO = collection.ToDTO();
+            try
+            {
+                API.PostObject<CollectionDTO>("PostNewCollection", collectionDTO);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public void SaveNewCollection(CollectionDomain collection)
         {
             CollectionDTO collectionDTO = collection.ToDTO();

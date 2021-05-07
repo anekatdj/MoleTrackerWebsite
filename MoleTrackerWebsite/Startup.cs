@@ -42,6 +42,7 @@ namespace MoleTrackerWebsite
             services.AddSingleton<ILoadPatientsController, LoadPatientsController>();
             services.AddSingleton<ISelectPatientController, SelectPatientController>();
             services.AddSingleton<IViewCollectionController, ViewCollectionController>();
+            services.AddSingleton<ICreateCollectionController, CreateCollectionController>();
             services.AddSingleton<CoordinatesLocalization>();
         }
 

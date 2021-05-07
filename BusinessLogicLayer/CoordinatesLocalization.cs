@@ -8,12 +8,13 @@ namespace BusinessLogicLayer
 {
     public class CoordinatesLocalization
     {
-        private LocationOnBodyDomain.BodyPart bodyPart;
-        private CollectionDomain collection;
+        public LocationOnBodyDomain LocationOnBody { get; set; }
+        private LocationOnBodyDomain.BodyPart bodyPart { get; set; }
+        public CollectionDomain Collection { get; set; }
 
         public CoordinatesLocalization()
         {
-            collection = new CollectionDomain();
+            Collection = new CollectionDomain();
         }
 
         #region FemaleFront
@@ -195,6 +196,14 @@ namespace BusinessLogicLayer
                     PointClicked = true;
                 }
             }
+            LocationOnBody = new LocationOnBodyDomain()
+            {
+                BodyParts = bodyPart,
+                IsFrontFacing = false,
+                xCoordinate = X,
+                yCoordinate = Y
+            };
+            Collection.CollectionName = bodyPart.ToString();
 
             return PointClicked;
         }
@@ -211,8 +220,7 @@ namespace BusinessLogicLayer
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
 
                     bodyPart = LocationOnBodyDomain.BodyPart.Baghoved;
-                    collection.CollectionName = bodyPart.ToString();
-
+                    
                     PointClicked = true;
                 }
                 else if ((X > 83 && X < 88 && Y > 30 && Y < 42) || (X > 124 && X < 130 && Y > 30 && Y < 42))
@@ -372,6 +380,14 @@ namespace BusinessLogicLayer
                     PointClicked = true;
                 }
             }
+            LocationOnBody = new LocationOnBodyDomain()
+            {
+                BodyParts = bodyPart,
+                IsFrontFacing = false,
+                xCoordinate = X,
+                yCoordinate = Y
+            };
+            Collection.CollectionName = bodyPart.ToString();
 
             return PointClicked;
         }
@@ -553,6 +569,14 @@ namespace BusinessLogicLayer
                     PointClicked = true;
                 }
             }
+            LocationOnBody = new LocationOnBodyDomain()
+            {
+                BodyParts = bodyPart,
+                IsFrontFacing = false,
+                xCoordinate = X,
+                yCoordinate = Y
+            };
+            Collection.CollectionName = bodyPart.ToString();
 
             return PointClicked;
         }
@@ -567,7 +591,7 @@ namespace BusinessLogicLayer
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
 
                     bodyPart = LocationOnBodyDomain.BodyPart.Baghoved;
-                    collection.CollectionName = bodyPart.ToString();
+                    Collection.CollectionName = bodyPart.ToString();
 
                     PointClicked = true;
                 }
@@ -728,6 +752,14 @@ namespace BusinessLogicLayer
                     PointClicked = true;
                 }
             }
+            LocationOnBody = new LocationOnBodyDomain()
+            {
+                BodyParts = bodyPart,
+                IsFrontFacing = false,
+                xCoordinate = X,
+                yCoordinate = Y
+            };
+            Collection.CollectionName = bodyPart.ToString();
 
             return PointClicked;
         }
