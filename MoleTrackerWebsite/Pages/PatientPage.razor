@@ -279,14 +279,16 @@
         SesInfo.UseID = 1;
         patientInfo = SelectPatientController.SelectedPatient;
 
-        //Bare for ikke at smide exception
-        PatientData = new PatientDataDomain();
-        CollectionList = PatientData.CollectionList;
-        //patientData.CollectionList = new List<CollectionDomain>();
+        patientInfo = SelectPatientController.SelectedPatient;
 
+        PatientData = SelectPatientController.GetPatientData(patientInfo);
+
+        CollectionList = PatientData.CollectionList;
         NameOfPatient = patientInfo.Name;
+
         DisplayPatientModel();
         await StartupTask();
+
     }
 
     #endregion

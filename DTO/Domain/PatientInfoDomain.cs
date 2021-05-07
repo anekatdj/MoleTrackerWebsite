@@ -7,10 +7,11 @@ namespace DataClasses.Domain
     public class PatientInfoDomain
 
     {
-        public PatientInfoDomain(string CPR, string name)
+        public PatientInfoDomain(string CPR, string name, int patientID)
         {
             this.CPR = CPR;
             this.Name = name;
+            this.PatientID = patientID;
         }
 
         public PatientInfoDomain()

@@ -103,9 +103,9 @@
     {
         string selectedPatientCPR = cpr;
 
-        var selectedPatientsInfo = FilteredPatientList.Where(x => x.CPR.Equals(selectedPatientCPR)).ToList();
+        List<PatientInfoDomain> selectedPatientsInfo = FilteredPatientList.Where(x => x.CPR.Equals(selectedPatientCPR)).ToList();
 
-        SelectPatientController.SelectedPatient = new PatientInfoDomain(selectedPatientsInfo[0].CPR, selectedPatientsInfo[0].Name);
+        SelectPatientController.SelectedPatient = new PatientInfoDomain(selectedPatientsInfo[0].CPR, selectedPatientsInfo[0].Name, selectedPatientsInfo[0].PatientID);
 
 
         NavManager.NavigateTo("/PatientPage");
