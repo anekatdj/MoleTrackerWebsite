@@ -145,20 +145,7 @@
                         Slet
                     </button>
                 </div>
-                @if (DeletePictureModal)
-                {
-                    <div class="modal">
-                        <!-- The Modal -->
-                        <div  class="modal">
-
-                            <!-- Modal content -->
-                            <div class="modal-content">
-                                <p>Some text in the Modal..</p>
-                            </div>
-
-                        </div>
-                    </div>
-                }
+                
                 <div class="float-child" style="width: 15%">
                     <button class="btn btn-primary rounded-pill" @onclick="ShowUploadedMole" style="border-radius: 1%; float: right; font-size: 10px">
                         <i class="@AddPictureButton"></i>
@@ -174,6 +161,29 @@
             <i class="fas fa-exchange-alt"></i>
             Sammenlign
         </button>
+        
+        @if (DeletePictureModal)
+        {
+                    
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title" id="titleLabel">Ønsker du at slette dette billede?</p>
+                    </div>
+                    <div class="modal-body">
+                        <button class="iconfieldsWithText" style="margin-right: 1%" @onclick="DeletePicture">
+                            <i class="fa fa-check" style="color:forestgreen"></i>
+                            Ja
+                        </button>
+                        <button class="iconfieldsWithText" @onclick="DeleteDialogShow">
+                            <i class="fa fa-close" style="color:red"></i>
+                            Nej
+                        </button>
+                    </div>
+                </div>
+            </div>
+                    
+        }
     </div>
 
     <div class="col">
