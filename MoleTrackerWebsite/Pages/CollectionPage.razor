@@ -145,7 +145,20 @@
                         Slet
                     </button>
                 </div>
+                @if (DeletePictureModal)
+                {
+                    <div class="modal">
+                        <!-- The Modal -->
+                        <div  class="modal">
 
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <p>Some text in the Modal..</p>
+                            </div>
+
+                        </div>
+                    </div>
+                }
                 <div class="float-child" style="width: 15%">
                     <button class="btn btn-primary rounded-pill" @onclick="ShowUploadedMole" style="border-radius: 1%; float: right; font-size: 10px">
                         <i class="@AddPictureButton"></i>
@@ -247,9 +260,10 @@
         //ChangeComment.HandleComment(PicComment); //TODO Skal sættes op når lasse har fikset det
     }
 
+    public bool DeletePictureModal{ get; set; }
     private void DeletePicture()
     {
-
+        DeletePictureModal = !DeletePictureModal;
     }
 
     public void CloseSideNav()
