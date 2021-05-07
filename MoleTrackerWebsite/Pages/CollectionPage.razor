@@ -31,21 +31,23 @@
     <div class="col">
         <input style="width: 45%; height: 45%; margin-left: 35%; font-size: 24pt; color: @FontColor" disabled="@IsDisabled" type="text" @oninput="OnInputHandler" placeholder="@CollectionInfo.CollectionName" />
 
-        <button style="border-radius: 9px" class="@EditPencil" @onclick="EditName"> @EditSaveButton</button>
+        <button class="iconfields"  @onclick="EditName">
+        <i class="@EditIcon"></i>
+            </button>
 
     </div>
 
 
     <div class="col" style="float: right">
-        <button class="fa fa-ellipsis-h ellipsisSideBar" @onclick="Sidebar"></button> @*onclick="Sidebar"*@
+        <button class="fa fa-ellipsis-h ellipsisSideBar iconfields" @onclick="Sidebar"></button> @*onclick="Sidebar"*@
         @*Denne skal flyve ind fra siden over det eksisterende på siden*@
         @if (SidebarVisible) //class="td"
         {
             <div id="mySidenav" class="sidenav">
-                <button class="fa fa-arrow-right closebtn" @onclick="CloseSideNav"></button>
+                <button class="fas fa-arrow-right closebtn" @onclick="CloseSideNav"></button>
                 <h2 style="color: azure">Indstillinger</h2>
                 <div style="color: azure; margin-left: 5%; margin-bottom: 4%; cursor: pointer" @onclick="ItemMarked">
-                    <span class="@Flag" style="transform: scaleX(-1);"></span>
+                    <span class="@Flag" style="transform: scaleX(-1);color:@FlagColor"></span>
                     Markér samling
                 </div>
 
@@ -60,8 +62,14 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <p class="modal-title" id="titleLabel">Ønsker du at slette denne samling?</p>
-                                <button class="fa fa-check" style="margin-right: 1%" @onclick="DeleteCollection">Ja</button>
-                                <button class="fa fa-close" @onclick="DeleteDialogShow">Nej</button>
+                                <button style="margin-right: 1%" @onclick="DeleteCollection">
+                                    <i class="fa fa-check"></i>
+                                    Ja
+                                </button>
+                                <button  @onclick="DeleteDialogShow">
+                                    <i class="fa fa-close"></i>
+                                    Nej
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -200,23 +208,23 @@
     public bool SaveDisabled { get; set; } = true;
     public string AddPictureButton = "fa fa-picture-o";
     public bool DeleteCollectionBool { get; set; }
-    public string EditPencil = "fa fa-pencil";
+    public string EditIcon{ get; set; } = "fa fa-pencil";
     public bool ChangeNameBool { get; set; }
     public bool IsDisabled { get; set; } = true;
     public string FontColor { get; set; }
-    public string EditSaveButton { get; set; } = "Redigér";
+    public string FlagColor = "azure";
 
     private void EditName()
     {
         if (!ChangeNameBool)
         {
-            EditSaveButton = "Gem";
+            EditIcon = "fa fa-floppy-o";
             IsDisabled = false;
         }
         else
         {
+            EditIcon = "fa fa-pencil";
             ChangeCollectionNameController.HandleChangedName(ChangeCollectionName);
-            EditSaveButton = "Redigér";
             IsDisabled = true;
         }
         ChangeNameBool = !ChangeNameBool;
@@ -255,12 +263,14 @@
         if (Flag == "fa fa-flag-o")
         {
             Flag = "fa fa-flag-checkered";
+            FlagColor = "red";
             ChangeCollectionMarking.IsMarked = true;
             MarkCollectionController.HandleMarking(ChangeCollectionMarking);
         }
         else
         {
             Flag = "fa fa-flag-o";
+            FlagColor = "azure";
             ChangeCollectionMarking.IsMarked = false;
             MarkCollectionController.HandleMarking(ChangeCollectionMarking);
         }
@@ -401,6 +411,6 @@
 
     private void PointOnPatientModel()
     {
-        
+
     }
 }
