@@ -132,10 +132,23 @@
             @*@if (ShowUploadedMolePicture == true)
                 {*@
             <img src="Images/@imageDataUrl" style="height:260px" />
-            <button class="fa fa-trash-o" @onclick="DeletePicture" style="background: none; border: none"></button>
         </div>
-        <div>
-            <InputFile OnChange="HandleSelection" />
+        <div class="float-container">
+            <div class="float-child" style="width:70%">
+                <InputFile OnChange="HandleSelection"/>
+            </div>
+            <div class="float-child" style="width: 14%;margin-right:1%">
+                <button class="btn btn-danger rounded-pill" @onclick="DeletePicture" style="font-size:10px" >
+                    <i class="fa fa-trash-o"></i>
+                    Slet
+                </button>
+            </div>
+            <div class="float-child" style="width:15%">
+                <button class="btn btn-primary rounded-pill" @onclick="ShowUploadedMole" style="border-radius: 1%; float: right;font-size:10px">
+                    <i class="@AddPictureButton"></i>
+                    Gem
+                </button>
+            </div>
         </div>
     </div>
     
@@ -172,19 +185,9 @@
 
 <div class="row">
     <div class="col">
-
         <div style="float: left; margin-top: 3%;">
             <textarea class="textarea" style="overflow-y; overflow-x: hidden; max-height: 80%; width: 150%" @bind="PicComment.Comment" placeholder="Indtast noter her..." />
             <button class="btn btn-primary rounded-pill" @onclick="SaveNotes">Gem noter</button>
-        </div>
-
-    </div>
-
-    <div class="col" style="margin-top: 2%">
-        <div class="col" style="float: right">
-            <div>
-                <button class="@AddPictureButton" @onclick="ShowUploadedMole" style="border-radius: 10%; float: right; margin-top: 20%">Gem billede</button>
-            </div>
         </div>
     </div>
 </div>

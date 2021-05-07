@@ -98,7 +98,14 @@
 }
 
 
+.float-container {
+    
+}
 
+.float-child {
+    float: left;
+    
+} 
 
 
 
