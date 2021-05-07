@@ -19,10 +19,10 @@ namespace DataAccessLayer
 
         public void AddNewCollection(CollectionDomain collection)
         {
-            CollectionDTO collectionDTO = collection.ToDTO();
+            CollectionDTO collectionDTO = collection.ToDTO(collection.Location.BodyParts);
             try
             {
-                API.PostObject<CollectionDTO>("PostNewCollection", collectionDTO);
+                string result = API.PostObject<CollectionDTO>("NewCollection", collectionDTO);
             }
             catch (Exception)
             {
@@ -33,7 +33,7 @@ namespace DataAccessLayer
 
         public void SaveNewCollection(CollectionDomain collection)
         {
-            CollectionDTO collectionDTO = collection.ToDTO();
+            CollectionDTO collectionDTO = collection.ToDTO(collection.Location.BodyParts);
             try
             {
                 API.PostObject<CollectionDTO>("PostNewCollection", collectionDTO);

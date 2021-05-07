@@ -129,7 +129,7 @@
     {
         GetGender();
 
-        if (Gender == "Kvinde")
+        if (Gender == "Kvinde" || SelectPatientController.BirthDataCalcFailed == true)
         {
             if (this.FrontOrBack == "/css/Pictures/FemaleBack.png")
             {
@@ -141,7 +141,7 @@
             }
         }
 
-        else if (Gender == "Mand" || SelectPatientController.BirthDataCalcFailed == true)
+        else if (Gender == "Mand")
         {
             if (this.FrontOrBack == "/css/Pictures/MaleBack.png")
             {
@@ -282,9 +282,11 @@
         CollectionDomain newCollectionDomain = new CollectionDomain()
         {
             Location = Coordinates.LocationOnBody,
-            CollectionName = Coordinates.Collection.CollectionName
+            CollectionName = Coordinates.Collection.CollectionName,
+            PictureList = new List<PictureInfoDomain>()
         };
         CreateCollectionController.AddNewCollection(newCollectionDomain);
+        //CollectionList.Add(newCollectionDomain);
         NavManager.NavigateTo("/PatientPage");
     }
 
@@ -308,14 +310,14 @@
     {
         GetGender();
 
-        if (Gender == "G")
+        if (Gender == "Kvinde" || SelectPatientController.BirthDataCalcFailed == true)
         {
             FrontOrBack = "/css/Pictures/FemaleFront.png";
             Width = "212px";
             Height = "477px";
         }
 
-        else if (Gender == "B")
+        else if (Gender == "Mand")
         {
             FrontOrBack = "/css/Pictures/MaleFront.png";
             Width = "270px";

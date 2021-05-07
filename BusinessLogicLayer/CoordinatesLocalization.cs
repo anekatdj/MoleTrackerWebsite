@@ -199,10 +199,19 @@ namespace BusinessLogicLayer
             LocationOnBody = new LocationOnBodyDomain()
             {
                 BodyParts = bodyPart,
+                BodyPartSide = LocationOnBody.BodyPartSide,
                 IsFrontFacing = false,
                 xCoordinate = X,
                 yCoordinate = Y
             };
+            if (X >= 212 / 2)
+            {
+                LocationOnBody.BodyPartSide = "Right";
+            }
+            else
+            {
+                LocationOnBody.BodyPartSide = "Left";
+            }
             Collection.CollectionName = bodyPart.ToString();
 
             return PointClicked;
@@ -383,10 +392,19 @@ namespace BusinessLogicLayer
             LocationOnBody = new LocationOnBodyDomain()
             {
                 BodyParts = bodyPart,
+                BodyPartSide = LocationOnBody.BodyPartSide,
                 IsFrontFacing = false,
                 xCoordinate = X,
                 yCoordinate = Y
             };
+            if (X >= 212 / 2)
+            {
+                LocationOnBody.BodyPartSide = "Right";
+            }
+            else
+            {
+                LocationOnBody.BodyPartSide = "Left";
+            }
             Collection.CollectionName = bodyPart.ToString();
 
             return PointClicked;
@@ -572,12 +590,21 @@ namespace BusinessLogicLayer
             LocationOnBody = new LocationOnBodyDomain()
             {
                 BodyParts = bodyPart,
+                BodyPartSide = LocationOnBody.BodyPartSide,
                 IsFrontFacing = false,
                 xCoordinate = X,
                 yCoordinate = Y
             };
+            if (X >= 270 / 2)
+            {
+                LocationOnBody.BodyPartSide = "Right";
+            }
+            else
+            {
+                LocationOnBody.BodyPartSide = "Left";
+            }
             Collection.CollectionName = bodyPart.ToString();
-
+            
             return PointClicked;
         }
 
@@ -759,6 +786,15 @@ namespace BusinessLogicLayer
                 xCoordinate = X,
                 yCoordinate = Y
             };
+            if (X >= 212 / 2)
+            {
+                LocationOnBody.BodyPartSide = "Right";
+            }
+            else
+            {
+                LocationOnBody.BodyPartSide = "Left";
+            }
+
             Collection.CollectionName = bodyPart.ToString();
 
             return PointClicked;

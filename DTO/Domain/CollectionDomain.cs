@@ -33,7 +33,7 @@ namespace DataClasses.Domain
             //collectionName = CollectionName; 
             
         }
-        public CollectionDTO ToDTO()
+        public CollectionDTO ToDTO(LocationOnBodyDomain.BodyPart bodyPart)
         {
             List<PictureInfoDTO> list = new List<PictureInfoDTO>() { };
             foreach (PictureInfoDomain item in PictureList)
@@ -45,7 +45,7 @@ namespace DataClasses.Domain
                 CollectionID = CollectionID,
                 CollectionName = CollectionName,
                 PictureList = list,
-                Location = Location.ToDTO()
+                Location = Location.ToDTO(bodyPart)
             };
             return collectionDTO;
         }
