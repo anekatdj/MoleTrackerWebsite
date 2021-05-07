@@ -11,21 +11,35 @@
 @inject IViewCollectionController ViewCollectionController
 @inject NavigationManager NavManager;
 
-<h3>CollectionPage</h3>
-<div>
+<div style="width:80%;overflow-x:scroll">
+    <h4 style="font-style: oblique">
+        @collection.CollectionName
+    </h4>
     <table>
         <tr>
-            <th>@collection.CollectionName</th>
-        </tr>
-        @foreach (var item in PicDataList)
-        {
-            <tr @onclick="@((e) => ShowPicture(e, item.PictureID))">
-                <td>
-                    <img src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" width="80" height="80" />
-                   @* @item.PictureData*@
+            @foreach (var item in PicDataList)
+            {
+                <td @onclick="@((e) => ShowPicture(e, item.PictureID))">
+                    <img src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" width="100" height="100" />
                 </td>
-            </tr>
-        }
+            }
+        </tr>
+    </table>
+</div>
+<div>
+    <table>
+        <th>@FocusedPicDateOfUpload</th>
+        <th>Noter:</th>
+        <tr>
+            <td>
+                <img src="data:image;base64,@System.Convert.ToBase64String(FocusedPic)" width="300" height="300"/>
+            </td>
+            <table id="t1" width="">
+                <td style="text-align:left;vertical-align:top;padding:0">
+                    Modermærke er blevet lidt større og har fået en mørkere plet. xxxxxxxxxx xxxxxxxx xxx xxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxx xx xxxxxxxxxxxxxxxx
+                </td>
+            </table>
+        </tr>
     </table>
 </div>
 
@@ -35,19 +49,43 @@
     private PatientDataDomain patientData;
     public string NameOfPatient { get; set; }
     public List<PictureDataDomain> PicDataList { get; set; }
+    public byte[] FocusedPic { get; set; }
+    public DateTime FocusedPicDateOfUpload { get; set; }
+    public CollectionDomain ChosenCollection { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         PictureDataDomain picture1 = new PictureDataDomain();
+        PictureDataDomain picture2 = new PictureDataDomain();
+        PictureDataDomain picture3 = new PictureDataDomain();
 
-       var filePath = @"MoleOne.jpg";
+        var filePath = @"MoleOne.jpg";
 
-        byte[] picByteArray = ReadAllBytes(filePath);
+        byte[] picByteArray1 = ReadAllBytes(filePath);
+        byte[] picByteArray2 = ReadAllBytes(@"MoleTwo.jpg");
+        byte[] picByteArray3 = ReadAllBytes(@"MoleThree.jpg");
 
-        picture1.PictureData = picByteArray;
+        picture1.PictureData = picByteArray1;
+        picture1.PictureID = 1;
+        picture2.PictureData = picByteArray2;
+        picture2.PictureID = 2;
+        picture3.PictureData = picByteArray3;
+        picture3.PictureID = 3;
+
         PicDataList = new List<PictureDataDomain>();
-        PicDataList.Add( picture1);
-        //collection = ViewCollectionController.SelectedCollection;
+        PicDataList.Add(picture1);
+        PicDataList.Add(picture1);
+        PicDataList.Add(picture1);
+        PicDataList.Add(picture1);
+        PicDataList.Add(picture2);
+        PicDataList.Add(picture2);
+        PicDataList.Add(picture2);
+        PicDataList.Add(picture2);
+        PicDataList.Add(picture3);
+        PicDataList.Add(picture3);
+        PicDataList.Add(picture3);
+        PicDataList.Add(picture3);
+        //ChosenCollection = ViewCollectionController.SelectedCollection;
 
 
         collection = new CollectionDomain("Test collection");
@@ -55,7 +93,9 @@
 
         collection.PictureList = PicInfoList;
 
-        //foreach (var pic in collection.PictureList)
+        FocusedPic = PicDataList[0].PictureData;
+
+        //foreach (var pic in ChosenCollection.PictureList)
         //{
         //    PicDataList.Add(ViewCollectionController.GetPictureData(pic));
 
@@ -64,7 +104,11 @@
 
     private void ShowPicture(MouseEventArgs e, int pictureId)
     {
+        //PictureInfoDomain focusedPicInfo = ChosenCollection.PictureList.Find(x => x.PictureID.Equals(pictureId));
+        //FocusedPicDateOfUpload = focusedPicInfo.DateOfUpload;
+        PictureDataDomain focusedPicture = PicDataList.Find(x => x.PictureID.Equals(pictureId));
 
+        FocusedPic = focusedPicture.PictureData;
     }
 
 }

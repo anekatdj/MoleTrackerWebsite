@@ -25,6 +25,16 @@ app {
     display: flex;
     align-items: center;
 }
+#t1 td{
+    table-layout: fixed;
+    width: 200px;
+    height: 300px;
+    word-wrap: break-word;
+    overflow: hidden;
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding: 30px 30px;
+}
 
 .main {
     flex: 1;
@@ -180,4 +190,5 @@ app {
         /* Never collapse the sidebar for wide screens */
         display: block;
     }
+    
 }
