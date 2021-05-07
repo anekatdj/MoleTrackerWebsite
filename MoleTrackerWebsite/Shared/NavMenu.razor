@@ -10,7 +10,6 @@
         <ul class="nav flex-column">
             <li class="nav-item px-3">
                 <NavLink class="nav-link" href="mainPage">
-                    @*Match="NavLinkMatch.All"*@
                     <span class="oi oi-home" aria-hidden="true"></span> Hjem
                 </NavLink>
             </li>
@@ -31,7 +30,6 @@
             </li>
             <li class="nav-item px-3">
                 <NavLink class="nav-link" @onclick="LogOutClick">
-                    @*href="patientLogin"*@
                     <span class="oi oi-account-logout" aria-hidden="true"></span> Log ud
                 </NavLink>
             </li>
@@ -59,13 +57,7 @@
                     </li>
                 </ul>
                     }
-
-                    @*<li class="nav-item px-3">
-                    <NavLink class="nav-link" href="mainPage">
-                        <span class="oi oi-home" aria-hidden="true"></span> Kontaktinformation
-                    </NavLink> fa-sign-out
-                </li>*@
-            </ul>
+        </ul>
     </div>
 </nav>
 
@@ -91,85 +83,3 @@
         LogOut = !LogOut;
     }
 }
-
-
-@* <div class="top-row pl-4 navbar navbar-dark">
-        <a style="color: black" class="navbar-brand" href="">MoleTrackerWebsite</a>
-        <button class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-
-    <div class="@NavMenuCssClass">
-        <ul class="nav flex-column">
-            <li class="nav-item px-3" @onclick="PatientOverviewClick">
-                <NavLink class="nav-link">
-                    <span class="oi oi-people" aria-hidden="true"></span> Patientoversigt
-                </NavLink>
-            </li>
-                @if (PatientOverviewIsClicked == true)
-                {
-        <NavLink class="nav-link">
-            Er du sikker på, at du vil forlade denne side?
-        </NavLink>
-                    <ul class="nav flex-column">
-                            <li class="nav-item px-2" @onclick="ToggleNavMenu">
-                                <NavLink class="nav-link" href="PatientOverviewPage">
-                                    <span class="oi oi-check" aria-hidden="true"></span> Ja
-                                </NavLink>
-                            </li>
-                            <li class="nav-item px-2" @onclick="PatientOverviewClick">
-                                <NavLink class="nav-link">
-                                    <span class="oi oi-x" aria-hidden="true"></span> Nej
-                                </NavLink>
-                            </li>
-                            </ul>
-                }
-            <li class="nav-item px-3" @onclick="ToggleNavMenu">
-                <NavLink class="nav-link" href="PatientPage" Match="NavLinkMatch.All">
-                    <span class="oi oi-person" aria-hidden="true"></span> Modermærker
-                </NavLink>
-            </li>
-            <li class="nav-item px-3" @onclick="ToggleNavMenu">
-                <NavLink class="nav-link" href="PatientInformationPage">
-                    <span class="oi oi-info" aria-hidden="true"></span> Patientoplysninger
-                </NavLink>
-            </li>
-            <li class="nav-item px-3" @onclick="ToggleNavMenu">
-                <NavLink class="nav-link" href="ContactInfoPage">
-                    <span class="oi oi-chat" aria-hidden="true"></span> Kontaktinfo
-                </NavLink>
-            </li>
-        </ul>
-    </div>
-
-    @code {
-        private bool collapseNavMenu = true;
-        public bool PatientOverviewIsClicked { get; set; }
-
-        private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-        protected override async Task OnInitializedAsync()
-        {
-            PatientOverviewIsClicked = false;
-
-        }
-
-        private void ToggleNavMenu()
-        {
-            collapseNavMenu = !collapseNavMenu;
-        }
-
-        private void PatientOverviewClick()
-        {
-            if (PatientOverviewIsClicked == false)
-            {
-                PatientOverviewIsClicked = true;
-            }
-            else if (PatientOverviewIsClicked == true)
-                {
-                    PatientOverviewIsClicked = false;
-                }
-
-
-        } *@
