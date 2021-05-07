@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlazorPro.BlazorSize;
 using DataClasses.Domain;
 using DataClasses.Domain.Collections;
 using DataClasses.Domain.Login;
@@ -59,6 +60,8 @@ namespace MoleTrackerWebsite
             services.AddSingleton<IChangeFollowUpNotificationsController, ChangeFollowUpNotificationsController>();
             services.AddSingleton<IMarkCollectionController, MarkCollectionController>();
             services.AddSingleton<ILoadContactInformationController, LoadContactInformationController>();
+
+            services.AddMediaQueryService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
