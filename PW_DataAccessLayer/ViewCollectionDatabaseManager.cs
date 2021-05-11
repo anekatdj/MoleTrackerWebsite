@@ -19,9 +19,10 @@ namespace PW_DataAccessLayer
         {
             //API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
 
-            //API = new StubApiService();
+            API = new StubApiService();
 
-            API= APIFactory.GetAPI("");
+            
+            //API= APIFactory.GetAPI("");
         }
 
         public PictureData GetCollection(PictureInfo pictureInfo) //PatientInfo patientInfo
