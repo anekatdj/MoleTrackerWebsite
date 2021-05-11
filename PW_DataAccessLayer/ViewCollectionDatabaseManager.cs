@@ -6,6 +6,7 @@ using DataClasses.Domain.MISC;
 using DataClasses.Domain.Picture;
 using DataClasses.DTO;
 using PW_DataAccessLayer.Interfaces;
+using APIWebServiesConnector.APIStringFabrics;
 
 namespace PW_DataAccessLayer
 {
@@ -18,7 +19,9 @@ namespace PW_DataAccessLayer
         {
             //API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
 
-            API = new StubApiService();
+            //API = new StubApiService();
+
+            API= APIFactory.GetAPI("");
         }
 
         public PictureData GetCollection(PictureInfo pictureInfo) //PatientInfo patientInfo
@@ -38,6 +41,11 @@ namespace PW_DataAccessLayer
             PictureData pictureData = DTOConverter.PictureDataToDomain(pictureDataDTO); 
 
             return pictureData;
+        }
+
+        public Collection GetCollection()
+        {
+            throw new NotImplementedException();
         }
 
         public PatientData GetPatientData(PatientInfo patientInfoDomain)

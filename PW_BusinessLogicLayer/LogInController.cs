@@ -22,9 +22,9 @@ namespace PW_BusinessLogicLayer
             //return true;
         }
 
-        //public PatientInfo HandlePatientInfo()
-        //{
-        //    return logInDatabaseManager.GetPatientInfo();
-        //}
+        public PatientInfo HandlePatientInfo()
+        {
+            return logInDatabaseManager.GetPatientInfo();
+        }
     }
 }

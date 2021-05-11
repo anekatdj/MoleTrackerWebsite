@@ -337,6 +337,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        PatientInfo = LogInController.HandlePatientInfo();
         PatientData = ViewCollectionController.GetPatientData(PatientInfo);
         Collections = PatientData.CollectionList;
         //CreateNewCollectionController.HandleLoadCollection(Collection);
