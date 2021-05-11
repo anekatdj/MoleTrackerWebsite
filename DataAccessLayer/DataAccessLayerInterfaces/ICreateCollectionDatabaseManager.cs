@@ -7,6 +7,7 @@ namespace DataAccessLayer.DataAccessLayerInterfaces
 {
     public interface ICreateCollectionDatabaseManager
     {
+        void AddNewCollection(CollectionDomain collection);
         void SaveNewCollection(CollectionDomain collection);
     }
 }

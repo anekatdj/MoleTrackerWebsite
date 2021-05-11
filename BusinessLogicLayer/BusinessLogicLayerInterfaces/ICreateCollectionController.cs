@@ -7,7 +7,7 @@ namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
 {
     public interface ICreateCollectionController
     {
-        void AddNewCollection();
+        void AddNewCollection(CollectionDomain collection);
         void SaveNewCollection(CollectionDomain collection);
     }
 }

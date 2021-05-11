@@ -56,14 +56,14 @@ namespace DataClasses.Domain
             Knæhase,
             Læg
         }
-        public LocationOnBodyDTO ToDTO()
+        public LocationOnBodyDTO ToDTO(LocationOnBodyDomain.BodyPart bodyPart)
         {
             LocationOnBodyDTO locationOnBodyDTO = new LocationOnBodyDTO()
             {
                 xCoordinate = xCoordinate,
                 yCoordinate = yCoordinate,
                 IsFrontFacing = IsFrontFacing,
-                //BodyPart = BodyPart,
+                BodyPart = bodyPart.ToString(),
                 BodyPartSide = BodyPartSide
             };
             return locationOnBodyDTO;

@@ -15,9 +15,9 @@ namespace BusinessLogicLayer
         {
             createCollectionDatabaseManager = new CreateCollectionDatabaseManager();
         }
-        public void AddNewCollection()
+        public void AddNewCollection(CollectionDomain collection)
         {
-            throw new NotImplementedException();
+            createCollectionDatabaseManager.AddNewCollection(collection);
         }
 
         public void SaveNewCollection(CollectionDomain collection)
