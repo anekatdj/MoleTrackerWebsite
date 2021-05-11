@@ -1,6 +1,8 @@
 ﻿using System;
 using APIWebServiesConnector;
 using DataClasses.Domain.Collections;
+using DataClasses.Domain.Login;
+using DataClasses.Domain.MISC;
 using DataClasses.DTO;
 using PW_DataAccessLayer.Interfaces;
 
@@ -44,6 +46,24 @@ namespace PW_DataAccessLayer
             //collection.Location = collectionDTO.Location;
 
             return collection;
+        }
+
+        public PatientData GetPatientData(PatientInfo patientInfoDomain)
+        {
+            PatientDataDTO patientDataDTO = new PatientDataDTO();
+            PatientInfoRequestDTO patientInfoRequestDTO = new PatientInfoRequestDTO() { PatientID = patientInfoDomain.PatientID };
+            try
+            {
+                patientDataDTO = API.GetObject<PatientDataDTO, PatientInfoRequestDTO>("GetPatientData", patientInfoRequestDTO);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            PatientData patientDataDomain = DTOConverter.PatientDataToDomain(patientDataDTO);
+
+            return patientDataDomain;
         }
 
     }

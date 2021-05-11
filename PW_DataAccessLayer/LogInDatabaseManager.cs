@@ -33,6 +33,7 @@ namespace PW_DataAccessLayer
             try
             {
                 patientInfoDTO = API.GetObject<PatientInfoDTO, LoginInfoDTO>("PatientLogin", loginInfoDTO);
+                patientInfo = DTOConverter.PatientInfoToDomain(patientInfoDTO);
             }
             catch (WebException e) when ((e.Response as HttpWebResponse)?.StatusCode==HttpStatusCode.NotFound)
             {

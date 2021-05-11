@@ -44,6 +44,7 @@ namespace MoleTrackerWebsite
             services.AddSingleton<PictureData>();
             services.AddSingleton<PictureInfo>();
             services.AddSingleton<PictureRequest>();
+            services.AddSingleton<PatientData>();
             services.AddTransient<LogInInfo>();
             services.AddSingleton<SessionInfo>();
             services.AddSingleton<PatientInfo>();

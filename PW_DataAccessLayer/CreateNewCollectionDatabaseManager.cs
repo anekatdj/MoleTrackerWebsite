@@ -26,10 +26,6 @@ namespace PW_DataAccessLayer
         public void PostNewCollection(Collection collection)
         {
             CollectionDTO collectionDTO = collection.ToDTO(collection.Location.BodyParts);
-            //collectionDTO.CollectionID = collection.CollectionID;
-            //collectionDTO.CollectionName = collection.CollectionName;
-            //collectionDTO.PictureList = new List<PictureInfoDTO>();
-            //collectionDTO.Location = new LocationOnBodyDTO();
 
             try
             {

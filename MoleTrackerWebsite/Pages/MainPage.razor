@@ -8,17 +8,18 @@
 @using System.Diagnostics.Eventing.Reader
 @using DataClasses.Domain.Collections
 @using DataClasses.Domain.Login
+@using DataClasses.Domain.MISC
 @using DataClasses.Domain.Picture
-@using DataClasses.DTO
-@using PW_BusinessLogicLayer
 
 @inject NavigationManager NavManager
 @inject SessionInfo SessionInfo
 @inject PatientInfo PatientInfo
 @inject Collection Collection
+@inject PatientData PatientData
 @inject ILogInController LogInController
 @inject ICoordinatesLocalization Coordinates
 @inject ICreateNewCollectionController CreateNewCollectionController
+@inject IViewCollectionController ViewCollectionController
 @*To find coordinates*@
 @inject IJSRuntime JS;
 
@@ -46,7 +47,7 @@
                     </tr>
                 </thead>
                 <tbody @onclick=NavigateToCollectionPage style="cursor:pointer">
-                    @foreach (Collection collection in collections)
+                    @foreach (Collection collection in Collections)
                     {
                         <tr>
                             <td>@collection.CollectionName</td>
@@ -149,14 +150,7 @@
     public bool AcceptButtonPressed { get; set; }
     public bool PointClicked { get; set; }
 
-    //private IEnumerable<Collection> collections = new[]
-    //{
-    //    new Collection {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-    //    new Collection {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-    //    new Collection {CollectionID = 1, CollectionName = "Venstre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-    //    new Collection {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
-    //};
-    private List<Collection> collections = new List<Collection>();
+    public List<Collection> Collections { get; set; }
 
     #endregion
 
@@ -297,13 +291,13 @@
 
     private void AcceptPosition()
     {
-        Collection newCollectionDomain = new Collection()
+        Collection newCollection = new Collection()
         {
             Location = Coordinates.Location,
             CollectionName = Coordinates.Collections.CollectionName,
             PictureList = new List<PictureInfo>()
         };
-        CreateNewCollectionController.HandleCreateNewCollection(newCollectionDomain);
+        CreateNewCollectionController.HandleCreateNewCollection(newCollection);
         NavigateToCollectionPage();
     }
 
@@ -343,7 +337,9 @@
 
     protected override async Task OnInitializedAsync()
     {
-        CreateNewCollectionController.HandleLoadCollection(Collection);
+        PatientData = ViewCollectionController.GetPatientData(PatientInfo);
+        Collections = PatientData.CollectionList;
+        //CreateNewCollectionController.HandleLoadCollection(Collection);
         DisplayPatientModel();
         await StartupTask();
     }
