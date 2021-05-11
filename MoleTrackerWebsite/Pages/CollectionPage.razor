@@ -227,7 +227,7 @@
 
 
 @code {
-    //TODO Lav popop med fortryd handling efter man er kommet ind på main page og har slettet en collection
+        //TODO Lav popop med fortryd handling efter man er kommet ind på main page og har slettet en collection
     private List<Collection> collections = new List<Collection>();
     //private IEnumerable<Collection> collections = new[]
     //{
@@ -450,7 +450,19 @@
 
     }
 
+    public List<PictureData> PictureDataList { get; set; }
+    public Collection ChosenCollection { get; set; }
     PictureInfo pictureInfo = new PictureInfo();
+
+    protected override async Task OnInitializedAsync()
+    {
+        PictureDataList = new List<PictureData>();
+        //ChosenCollection = ViewCollectionController.SelectedCollection;
+        foreach (var picture in PictureDataList)
+        {
+            //PictureDataList.Add(ViewCollectionController.HandleCollection(pictureInfo);
+        }
+    }
 
     private void ShowCollections()
     {
