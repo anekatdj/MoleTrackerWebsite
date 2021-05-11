@@ -7,6 +7,7 @@ using DataClasses.Domain.Picture;
 using DataClasses.DTO;
 using PW_DataAccessLayer.Interfaces;
 using APIWebServiesConnector.APIStringFabrics;
+using DataAccessLayer;
 
 namespace PW_DataAccessLayer
 {
@@ -19,10 +20,10 @@ namespace PW_DataAccessLayer
         {
             //API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
 
-            API = new StubApiService();
+            //API = new StubApiService();
 
             
-            //API= APIFactory.GetAPI("");
+            API= APIFactory.GetAPI("");
         }
 
         public PictureData GetCollection(PictureInfo pictureInfo) //PatientInfo patientInfo
