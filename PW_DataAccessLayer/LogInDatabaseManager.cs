@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using APIWebServiesConnector;
+using DataAccessLayer;
 using DataClasses.Domain.Login;
 using DataClasses.DTO;
 using PW_DataAccessLayer.Interfaces;
@@ -16,9 +17,11 @@ namespace PW_DataAccessLayer
 
         public LogInDatabaseManager()
         {
-            API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
+            //API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
             
             //API = new StubApiService();
+            API = APIFactory.GetAPI("");
+
             patientInfo = new PatientInfo();
         }
 
