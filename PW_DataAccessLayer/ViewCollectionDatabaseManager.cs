@@ -45,6 +45,18 @@ namespace PW_DataAccessLayer
             return pictureData;
         }
 
+        //Den her er nok egentlig magen til den ovenfor 😅
+        public byte[] LoadSpecificPicture(int PictureID)
+        {
+            PictureRequestDTO PictureRequest = new PictureRequestDTO();
+            PictureRequest.PictureID = PictureID;
+            PictureDataDTO PictureFromApi = API.GetObject<PictureDataDTO, PictureRequestDTO>("GetPictureData", PictureRequest);
+
+            return PictureFromApi.PictureData;
+
+        }
+
+
         public Collection GetCollection()
         {
             throw new NotImplementedException();

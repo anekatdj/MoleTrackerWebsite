@@ -341,6 +341,9 @@
         PatientInfo = LogInController.HandlePatientInfo();
         
         PatientData = ViewCollectionController.GetPatientData(PatientInfo);
+
+        //ViewCollectionController.HandleSpecificPicture(17);
+
         Collections = PatientData.CollectionList;
         //CreateNewCollectionController.HandleLoadCollection(Collection);
         DisplayPatientModel();

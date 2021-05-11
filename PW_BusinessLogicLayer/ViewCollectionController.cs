@@ -22,6 +22,11 @@ namespace PW_BusinessLogicLayer
         {
             return viewCollectionDatabaseManager.GetCollection(pictureInfo);
         }
+
+        public byte[] HandleSpecificPicture(int pictureID)
+        {
+            return viewCollectionDatabaseManager.LoadSpecificPicture(pictureID);
+        }
         public PatientData GetPatientData(PatientInfo patientInfoDomain)
         {
             return viewCollectionDatabaseManager.GetPatientData(patientInfoDomain);
