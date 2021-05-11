@@ -22,6 +22,7 @@
 @inject IChangeCollectionNameController ChangeCollectionNameController
 @inject IChangeFollowUpNotificationsController ChangeFollowUpNotificationsController
 @inject NavigationManager NavManager
+@inject IViewCollectionController ViewCollectionController
 
 
 
@@ -139,12 +140,12 @@
             @if (imageDataUrl.Contains("."))
             {
                 <div class="float-child" style="width: 14%;margin-right:1%">
-                    <button class="btn btn-danger rounded-pill" @onclick="DeletePicture" style="font-size:10px">
+                    <button class="btn btn-danger rounded-pill" @onclick="ShowCollections" style="font-size:10px">
                         <i class="fa fa-trash-o"></i>
                         Slet
                     </button>
                 </div>
-
+                
                 <div class="float-child" style="width: 15%">
                     <button class="btn btn-primary rounded-pill" @onclick="ShowUploadedMole" style="border-radius: 1%; float: right; font-size: 10px">
                         <i class="@AddPictureButton"></i>
@@ -160,6 +161,29 @@
             <i class="fas fa-exchange-alt"></i>
             Sammenlign
         </button>
+        
+        @if (DeletePictureModal)
+        {
+                    
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title" id="titleLabel">Ønsker du at slette dette billede?</p>
+                    </div>
+                    <div class="modal-body">
+                        <button class="iconfieldsWithText" style="margin-right: 1%" @onclick="DeletePicture">
+                            <i class="fa fa-check" style="color:forestgreen"></i>
+                            Ja
+                        </button>
+                        <button class="iconfieldsWithText" @onclick="DeleteDialogShow">
+                            <i class="fa fa-close" style="color:red"></i>
+                            Nej
+                        </button>
+                    </div>
+                </div>
+            </div>
+                    
+        }
     </div>
 
     <div class="col">
@@ -203,7 +227,7 @@
 
 
 @code {
-    //TODO Lav popop med fortryd handling efter man er kommet ind på main page og har slettet en collection
+        //TODO Lav popop med fortryd handling efter man er kommet ind på main page og har slettet en collection
     private List<Collection> collections = new List<Collection>();
     //private IEnumerable<Collection> collections = new[]
     //{
@@ -246,9 +270,10 @@
         //ChangeComment.HandleComment(PicComment); //TODO Skal sættes op når lasse har fikset det
     }
 
+    public bool DeletePictureModal{ get; set; }
     private void DeletePicture()
     {
-
+        DeletePictureModal = !DeletePictureModal;
     }
 
     public void CloseSideNav()
@@ -423,5 +448,25 @@
     private void PointOnPatientModel()
     {
 
+    }
+
+    public List<PictureData> PictureDataList { get; set; }
+    public Collection ChosenCollection { get; set; }
+    PictureInfo pictureInfo = new PictureInfo();
+
+    protected override async Task OnInitializedAsync()
+    {
+        PictureDataList = new List<PictureData>();
+        //ChosenCollection = ViewCollectionController.SelectedCollection;
+        foreach (var picture in PictureDataList)
+        {
+            //PictureDataList.Add(ViewCollectionController.HandleCollection(pictureInfo);
+        }
+    }
+
+    private void ShowCollections()
+    {
+        pictureInfo.PictureID = 1;
+        ViewCollectionController.HandleCollection(pictureInfo);
     }
 }
