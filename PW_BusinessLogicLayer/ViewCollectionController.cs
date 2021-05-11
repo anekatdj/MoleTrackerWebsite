@@ -1,5 +1,6 @@
 ﻿using DataClasses.Domain;
 using DataClasses.Domain.Collections;
+using DataClasses.Domain.Picture;
 using PW_BusinessLogicLayer.Interfaces;
 using PW_DataAccessLayer;
 using PW_DataAccessLayer.Interfaces;
@@ -15,9 +16,9 @@ namespace PW_BusinessLogicLayer
             viewCollectionDatabaseManager = new ViewCollectionDatabaseManager();
         }
 
-        public Collection HandleCollection()
+        public PictureData HandleCollection(PictureInfo pictureInfo)
         {
-            return viewCollectionDatabaseManager.GetCollection();
+            return viewCollectionDatabaseManager.GetCollection(pictureInfo);
         }
     }
 }

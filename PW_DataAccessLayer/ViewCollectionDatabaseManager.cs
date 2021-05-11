@@ -1,6 +1,7 @@
 ﻿using System;
 using APIWebServiesConnector;
 using DataClasses.Domain.Collections;
+using DataClasses.Domain.Picture;
 using DataClasses.DTO;
 using PW_DataAccessLayer.Interfaces;
 
@@ -8,11 +9,6 @@ namespace PW_DataAccessLayer
 {
     public class ViewCollectionDatabaseManager : IViewCollectionDatabaseManager
     {
-        private PatientInfoDTO patientInfoDTO;
-
-        private CollectionDTO collectionDTO;
-
-        private Collection collection;
 
         private IAPIService API;
 
@@ -23,27 +19,23 @@ namespace PW_DataAccessLayer
             API = new StubApiService();
         }
 
-        public Collection GetCollection() //PatientInfo patientInfo
+        public PictureData GetCollection(PictureInfo pictureInfo) //PatientInfo patientInfo
         {
+            PictureDataDTO pictureDataDTO = new PictureDataDTO();
+            PictureRequestDTO pictureRequestDTO = new PictureRequestDTO() {PictureID = pictureInfo.PictureID};
+
             try
             {
-                collectionDTO = API.GetObject<CollectionDTO, PatientInfoDTO>("CollectionRequest", patientInfoDTO);
+                pictureDataDTO = API.GetObject<PictureDataDTO, PictureRequestDTO>("GetPictureData", pictureRequestDTO);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
 
-            collection.CollectionID = collectionDTO.CollectionID;
-            collection.CollectionName = collectionDTO.CollectionName;
-            //foreach (var picture in collectionDTO.PictureList)
-            //{
-            //    collection.PictureList.Add(picture);
-            //}
+            PictureData pictureData = DTOConverter.PictureDataToDomain(pictureDataDTO); 
 
-            //collection.Location = collectionDTO.Location;
-
-            return collection;
+            return pictureData;
         }
 
     }

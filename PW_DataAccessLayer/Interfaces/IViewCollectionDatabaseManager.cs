@@ -1,9 +1,9 @@
-﻿using DataClasses.Domain.Collections;
+﻿using DataClasses.Domain.Picture;
 
 namespace PW_DataAccessLayer.Interfaces
 {
     public interface IViewCollectionDatabaseManager
     {
-        Collection GetCollection();
+        PictureData GetCollection(PictureInfo pictureInfo);
     }
 }
