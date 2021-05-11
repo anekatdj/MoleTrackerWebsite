@@ -92,6 +92,15 @@ namespace DataAccessLayer
             };
             return patientInfoDomain;
         }
+        public static PictureCommentDomain PictureCommentToDomain(PictureCommentDTO pictureCommentDTO)
+        {
+            PictureCommentDomain pictureCommentDomain = new PictureCommentDomain()
+            {
+                PictureID = pictureCommentDTO.PictureID,
+                Comment = pictureCommentDTO.Comment
+            };
+            return pictureCommentDomain;
+        }
 
         public static PatientDataDomain PatientDataToDomain(PatientDataDTO patientDataDTO)
         {

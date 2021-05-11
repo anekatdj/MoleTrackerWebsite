@@ -24,5 +24,10 @@ namespace BusinessLogicLayer
         {
             return viewCollectionDatabaseManager.GetPictureData(pictureInfo);
         }
+
+        public PictureCommentDomain GetPictureComment(PictureInfoDomain pictureInfo)
+        {
+            return viewCollectionDatabaseManager.GetPictureComment(pictureInfo);
+        }
     }
 }

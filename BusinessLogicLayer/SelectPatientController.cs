@@ -162,9 +162,9 @@ namespace BusinessLogicLayer
         }
     
 
-        public void GetPatientInfo(PatientInfoDomain patientInfo)
-        {
-            SelectPatientDatabaseManager.GetPatientInfo(patientInfo);
-        }
+        //public void GetPatientInfo(PatientInfoDomain patientInfo)
+        //{
+        //    SelectPatientDatabaseManager.GetPatientInfo(patientInfo);
+        //}
     }
 }

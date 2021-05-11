@@ -7,39 +7,81 @@
 @using static System.IO.File
 @using System.Diagnostics
 @using System.IO
+@using System.Reflection.Metadata
+@using System.Xml
 
 @inject IViewCollectionController ViewCollectionController
 @inject NavigationManager NavManager;
 
 <div style="width:80%;overflow-x:scroll">
     <h4 style="font-style: oblique">
-        @collection.CollectionName
+        @ChosenCollection.CollectionName
     </h4>
     <table>
         <tr>
+            @if(ChosenCollection.PictureList.Count != 0)
+            {
             @foreach (var item in PicDataList)
             {
                 <td @onclick="@((e) => ShowPicture(e, item.PictureID))">
-                    <img src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" width="100" height="100" />
+                    <img src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" width="100" height="100"/>
                 </td>
+            }
             }
         </tr>
     </table>
 </div>
 <div>
-    <table>
+    <table class="table">
         <th>@FocusedPicDateOfUpload</th>
-        <th>Noter:</th>
+        <th>@LatestPicDateOfUpload</th>
+        <tr>
+            <td style="width:50%;">
+                <img style="width: 100%; " src="data:image;base64,@System.Convert.ToBase64String(FocusedPic)" />
+            </td>
+            <td style="width:50%">
+                <img style="width: 100%; " src="data:image;base64,@System.Convert.ToBase64String(LatestPic)" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table id="t1" class="table2">
+                    <td style="text-align: left; vertical-align: top; padding: 5px; height: 200px">
+                        <div style="font-weight: bold">
+                            Note:
+                        </div>
+                        <div>
+                            <EditForm Model="ViewCollectionController">
+
+                                <DataAnnotationsValidator />
+                                <ValidationSummary />
+                                @FocusedPicComment
+                            <InputText id="myCommentInput" border:none @bind-Value="CommentInput"> @FocusedPicComment</InputText>
+                            </EditForm>
+                        </div>
+                    </td>
+                    <td style="text-align: left; vertical-align: top; padding: 5px; height: 200px">
+                        <div style="font-weight: bold">
+                            Note:
+                        </div>
+                        <div>
+                            @LatestPicComment
+                        </div>
+                    </td>
+                </table>
+            </td>
+        </tr>
         <tr>
             <td>
-                <img src="data:image;base64,@System.Convert.ToBase64String(FocusedPic)" width="300" height="300"/>
+                <button class="editbtn" @onclick="@(EditComment)">Rediger note</button> 
+                <button class="editbtn">Gem note</button>
             </td>
-            <table id="t1" width="">
-                <td style="text-align:left;vertical-align:top;padding:0">
-                    Modermærke er blevet lidt større og har fået en mørkere plet. xxxxxxxxxx xxxxxxxx xxx xxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxx xx xxxxxxxxxxxxxxxx
-                </td>
-            </table>
+            <td>
+                <button class="editbtn">Rediger note</button>
+                <button class="editbtn">Gem note</button>
+            </td>
         </tr>
+
     </table>
 </div>
 
@@ -50,65 +92,105 @@
     public string NameOfPatient { get; set; }
     public List<PictureDataDomain> PicDataList { get; set; }
     public byte[] FocusedPic { get; set; }
+    public byte[] LatestPic { get; set; }
+    public string FocusedPicComment { get; set; }
+    public string LatestPicComment { get; set; }
     public DateTime FocusedPicDateOfUpload { get; set; }
+    public DateTime LatestPicDateOfUpload { get; set; }
     public CollectionDomain ChosenCollection { get; set; }
+    public string CommentInput { get; set; }
+
 
     protected override async Task OnInitializedAsync()
     {
-        PictureDataDomain picture1 = new PictureDataDomain();
-        PictureDataDomain picture2 = new PictureDataDomain();
-        PictureDataDomain picture3 = new PictureDataDomain();
+        #region Stubbet billeder
 
-        var filePath = @"MoleOne.jpg";
+        //STUB!!
+        //    PictureDataDomain picture1 = new PictureDataDomain();
+        //    PictureDataDomain picture2 = new PictureDataDomain();
+        //    PictureDataDomain picture3 = new PictureDataDomain();
 
-        byte[] picByteArray1 = ReadAllBytes(filePath);
-        byte[] picByteArray2 = ReadAllBytes(@"MoleTwo.jpg");
-        byte[] picByteArray3 = ReadAllBytes(@"MoleThree.jpg");
+        //    var filePath = @"MoleOne.jpg";
 
-        picture1.PictureData = picByteArray1;
-        picture1.PictureID = 1;
-        picture2.PictureData = picByteArray2;
-        picture2.PictureID = 2;
-        picture3.PictureData = picByteArray3;
-        picture3.PictureID = 3;
+        //    byte[] picByteArray1 = ReadAllBytes(filePath);
+        //    byte[] picByteArray2 = ReadAllBytes(@"MoleTwo.jpg");
+        //    byte[] picByteArray3 = ReadAllBytes(@"MoleThree.jpg");
+
+        //    picture1.PictureData = picByteArray1;
+        //    picture1.PictureID = 1;
+        //    picture2.PictureData = picByteArray2;
+        //    picture2.PictureID = 2;
+        //    picture3.PictureData = picByteArray3;
+        //    picture3.PictureID = 3;
+
+        //    PicDataList.Add(picture1);
+        //    PicDataList.Add(picture1);
+        //    PicDataList.Add(picture1);
+        //    PicDataList.Add(picture1);
+        //    PicDataList.Add(picture2);
+        //    PicDataList.Add(picture2);
+        //    PicDataList.Add(picture2);
+        //    PicDataList.Add(picture2);
+        //    PicDataList.Add(picture3);
+        //    PicDataList.Add(picture3);
+        //    PicDataList.Add(picture3);
+        //    PicDataList.Add(picture3);
+
+        #endregion
 
         PicDataList = new List<PictureDataDomain>();
-        PicDataList.Add(picture1);
-        PicDataList.Add(picture1);
-        PicDataList.Add(picture1);
-        PicDataList.Add(picture1);
-        PicDataList.Add(picture2);
-        PicDataList.Add(picture2);
-        PicDataList.Add(picture2);
-        PicDataList.Add(picture2);
-        PicDataList.Add(picture3);
-        PicDataList.Add(picture3);
-        PicDataList.Add(picture3);
-        PicDataList.Add(picture3);
-        //ChosenCollection = ViewCollectionController.SelectedCollection;
 
+        ChosenCollection = ViewCollectionController.SelectedCollection;
 
-        collection = new CollectionDomain("Test collection");
-        var PicInfoList = new List<PictureInfoDomain>();
-
-        collection.PictureList = PicInfoList;
+        foreach (var pic in ChosenCollection.PictureList)
+        {
+            PicDataList.Add(ViewCollectionController.GetPictureData(pic));
+        }
 
         FocusedPic = PicDataList[0].PictureData;
+        FocusedPicDateOfUpload = ChosenCollection.PictureList[0].DateOfUpload;
+        FocusedPicComment = ViewCollectionController.GetPictureComment(ChosenCollection.PictureList[0]).Comment;
 
-        //foreach (var pic in ChosenCollection.PictureList)
-        //{
-        //    PicDataList.Add(ViewCollectionController.GetPictureData(pic));
+        PicDataList.Reverse();
 
-        //}
+        List<PictureInfoDomain> reversedPicInfoList = ChosenCollection.PictureList;
+        reversedPicInfoList.Reverse();
+
+        LatestPic = PicDataList[0].PictureData;
+        LatestPicDateOfUpload = reversedPicInfoList[0].DateOfUpload;
+        LatestPicComment = ViewCollectionController.GetPictureComment(reversedPicInfoList[0]).Comment;
+
+        //Stub
+        FocusedPicComment = "Katten ser sund og rask ud";
+
+        CommentInput = "";
+
     }
 
     private void ShowPicture(MouseEventArgs e, int pictureId)
     {
-        //PictureInfoDomain focusedPicInfo = ChosenCollection.PictureList.Find(x => x.PictureID.Equals(pictureId));
-        //FocusedPicDateOfUpload = focusedPicInfo.DateOfUpload;
+        PictureInfoDomain focusedPicInfo = ChosenCollection.PictureList.Find(x => x.PictureID.Equals(pictureId));
+        FocusedPicDateOfUpload = focusedPicInfo.DateOfUpload;
+        FocusedPicComment = ViewCollectionController.GetPictureComment(focusedPicInfo).Comment;
         PictureDataDomain focusedPicture = PicDataList.Find(x => x.PictureID.Equals(pictureId));
 
         FocusedPic = focusedPicture.PictureData;
     }
+
+    private void EditComment(MouseEventArgs e)
+    {
+        
+    }
+
+    private void SaveNewComment()
+    {
+
+        XmlDocument doc = new XmlDocument();
+
+        var newComment = doc.GetElementById("CommentInput").Value;
+
+        //ViewCollectionController.PostNewPictureComment(NewCommentInput);
+    }
+
 
 }

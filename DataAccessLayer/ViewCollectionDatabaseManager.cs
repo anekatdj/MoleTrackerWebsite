@@ -26,7 +26,7 @@ namespace DataAccessLayer
 
             try
             {
-                pictureDataDTO = API.GetObject<PictureDataDTO, PictureRequestDTO>("GetMedicalPracticePatients", pictureRequestDTO);
+                pictureDataDTO = API.GetObject<PictureDataDTO, PictureRequestDTO>("GetPictureData", pictureRequestDTO);
             }
             catch (Exception)
             {
@@ -36,6 +36,25 @@ namespace DataAccessLayer
 
             PictureDataDomain pictureDataDomain = DTOConverter.PictureDataToDomain(pictureDataDTO);
             return pictureDataDomain;
+        }
+
+        public PictureCommentDomain GetPictureComment(PictureInfoDomain pictureInfo)
+        {
+            PictureCommentDTO pictureCommentDTO = new PictureCommentDTO();
+            PictureRequestDTO pictureRequestDTO = new PictureRequestDTO() { PictureID = pictureInfo.PictureID };
+
+            try
+            {
+                pictureCommentDTO = API.GetObject<PictureCommentDTO, PictureRequestDTO>("GetPictureComment", pictureRequestDTO);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            PictureCommentDomain pictureCommentDomain = DTOConverter.PictureCommentToDomain(pictureCommentDTO);
+            return pictureCommentDomain;
         }
     }
 }
