@@ -56,12 +56,6 @@ namespace PW_DataAccessLayer
 
         }
 
-
-        public Collection GetCollection()
-        {
-            throw new NotImplementedException();
-        }
-
         public PatientData GetPatientData(PatientInfo patientInfoDomain)
         {
             PatientDataDTO patientDataDTO = new PatientDataDTO();

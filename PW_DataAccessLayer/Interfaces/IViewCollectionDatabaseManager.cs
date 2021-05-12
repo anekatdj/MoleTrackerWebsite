@@ -8,7 +8,6 @@ namespace PW_DataAccessLayer.Interfaces
     public interface IViewCollectionDatabaseManager
     {
         PictureData GetCollection(PictureInfo pictureInfo);
-        Collection GetCollection();
         public PatientData GetPatientData(PatientInfo patientInfoDomain);
         byte[] LoadSpecificPicture(int pictureID);
     }
