@@ -1,4 +1,5 @@
-﻿using DataClasses.Domain.Picture;
+﻿using DataClasses.Domain.Collections;
+using DataClasses.Domain.Picture;
 
 using DataClasses.Domain.Login;
 using DataClasses.Domain.MISC;
@@ -7,6 +8,7 @@ namespace PW_BusinessLogicLayer.Interfaces
 {
     public interface IViewCollectionController
     {
+        public Collection SelectedCollection { get; set; }
         PictureData HandleCollection(PictureInfo pictureInfo);
 
         public PatientData GetPatientData(PatientInfo patientInfoDomain);

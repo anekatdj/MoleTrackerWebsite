@@ -12,6 +12,7 @@ namespace PW_BusinessLogicLayer
     public class ViewCollectionController : IViewCollectionController
     {
         private IViewCollectionDatabaseManager viewCollectionDatabaseManager;
+        public Collection SelectedCollection { get; set; }
 
         public ViewCollectionController()
         {

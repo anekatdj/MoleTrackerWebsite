@@ -46,10 +46,10 @@
                         <th>Personlige samlinger</th>
                     </tr>
                 </thead>
-                <tbody @onclick=NavigateToCollectionPage style="cursor:pointer">
+                <tbody  style="cursor:pointer">
                     @foreach (Collection collection in Collections)
                     {
-                        <tr>
+                        <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))">
                             <td>@collection.CollectionName</td>
                         </tr>
                     }
@@ -110,16 +110,16 @@
 
     @if (AddButtonPressed == true)
     {
-        @if (PointClicked == true)
-        {
-            <button style="float: right; margin-right: 7%; margin-top: 1%; border-radius: 28px;background:none" @onclick="AcceptPosition">Godkend</button>
-            <p style="float: right; color: crimson; margin-right: 1%; margin-top: 1%">Vælg placering af modermærke</p>
-        }
-        @if (PointClicked == false)
-        {
-            <button style="float: right; margin-right: 7%; margin-top: 1%; border-radius: 28px;background:none" disabled="@true">Godkend</button>
-            <p style="float: right; color: crimson; margin-right: 1%; margin-top: 1%">Vælg placering af modermærke</p>
-        }
+    @if (PointClicked == true)
+    {
+        <button style="float: right; margin-right: 7%; margin-top: 1%; border-radius: 28px;background:none" @onclick="AcceptPosition">Godkend</button>
+        <p style="float: right; color: crimson; margin-right: 1%; margin-top: 1%">Vælg placering af modermærke</p>
+    }
+    @if (PointClicked == false)
+    {
+        <button style="float: right; margin-right: 7%; margin-top: 1%; border-radius: 28px;background:none" disabled="@true">Godkend</button>
+        <p style="float: right; color: crimson; margin-right: 1%; margin-top: 1%">Vælg placering af modermærke</p>
+    }
     }
 
 
@@ -298,13 +298,26 @@
             PictureList = new List<PictureInfo>()
         };
         CreateNewCollectionController.HandleCreateNewCollection(newCollection);
-        NavigateToCollectionPage();
+        NavigateToNewCollectionPage();
     }
 
-    private void NavigateToCollectionPage()
+    private void NavigateToCollectionPage(MouseEventArgs e, object collectionId)
+    {
+        var selectedCollection = PatientData.CollectionList.Where(x => x.CollectionID.Equals(collectionId)).ToList();
+
+        if (Convert.ToInt32(collectionId)>0)
+        {
+            ViewCollectionController.SelectedCollection = selectedCollection[0];
+        }
+
+        NavManager.NavigateTo("/collectionPage");
+    }
+
+    private void NavigateToNewCollectionPage()
     {
         NavManager.NavigateTo("/collectionPage");
     }
+
 
     #endregion
 
@@ -337,9 +350,9 @@
 
     protected override async Task OnInitializedAsync()
     {
-        
+
         PatientInfo = LogInController.HandlePatientInfo();
-        
+
         PatientData = ViewCollectionController.GetPatientData(PatientInfo);
 
         //ViewCollectionController.HandleSpecificPicture(17);

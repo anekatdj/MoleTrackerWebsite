@@ -3,6 +3,7 @@
 @using System.IO
 @using System.Reflection.Metadata
 @using DataClasses.Domain.Collections
+@using DataClasses.Domain.Login
 @using DataClasses.Domain.Picture
 @using PW_BusinessLogicLayer
 @using PW_BusinessLogicLayer.Interfaces
@@ -26,6 +27,8 @@
 @inject IUploadPictureController UploadPictureController
 @inject IViewCollectionController ViewCollectionController
 @inject NavigationManager NavManager
+@inject ILogInController LogInController
+
 
 
 <div class="row">
@@ -199,11 +202,12 @@
                     </tr>
                 </thead>
                 <tbody style="cursor: pointer">
-                    @foreach (Collection collection in collections)
+                    @foreach (var item in PictureDataList)
                     {
-                        <tr>
-                            <td>@Picture.DateOfUpload</td>
-                        </tr>
+                    <tr>
+                        <td>@Picture.DateOfUpload</td>
+                        <img src="data:image;base64,@System.Convert.ToBase64String(@item.PicData)" width="100" height="100" />
+                    </tr>
                     }
                 </tbody>
             </table>
@@ -326,7 +330,7 @@
 
     public void DeleteCollection()
     {
-        DeleteCollectionController.DeleteCollection();
+        //DeleteCollectionController.HandleDeleteCollection();
         NavManager.NavigateTo("/mainPage");
     }
 
@@ -464,23 +468,38 @@
 
     }
 
-    public List<PictureData> PictureDataList { get; set; }
-    public Collection ChosenCollection { get; set; }
-    PictureInfo pictureInfo = new PictureInfo();
-
-    protected override async Task OnInitializedAsync()
-    {
-        PictureDataList = new List<PictureData>();
-        //ChosenCollection = ViewCollectionController.SelectedCollection;
-        foreach (var picture in PictureDataList)
-        {
-            //PictureDataList.Add(ViewCollectionController.HandleCollection(pictureInfo);
-        }
-    }
-
     private void ShowCollections()
     {
         pictureInfo.PictureID = 1;
         ViewCollectionController.HandleCollection(pictureInfo);
     }
+
+    private void DeleteCollection(Collection collection, PatientInfo patientInfo)
+    {
+        collection.CollectionID = ChosenCollection.CollectionID;
+        patientInfo = LogInController.HandlePatientInfo();
+
+        DeleteCollectionController.HandleDeleteCollection(collection, patientInfo);
+
+    }
+
+    public byte[] FocusedPic { get; set; }
+    public List<PictureData> PictureDataList { get; set; }
+    public Collection ChosenCollection { get; set; } = null;
+    PictureInfo pictureInfo = new PictureInfo();
+
+    protected override async Task OnInitializedAsync()
+    {
+        PictureDataList = new List<PictureData>();
+
+        ChosenCollection = ViewCollectionController.SelectedCollection;
+
+        foreach (var pic in ChosenCollection.PictureList)
+        {
+            PictureDataList.Add(ViewCollectionController.HandleCollection(pic));
+        }
+
+
+    }
+
 }

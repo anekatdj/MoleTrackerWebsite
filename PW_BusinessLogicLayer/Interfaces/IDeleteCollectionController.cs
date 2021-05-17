@@ -1,7 +1,10 @@
-﻿namespace PW_BusinessLogicLayer.Interfaces
+﻿using DataClasses.Domain.Collections;
+using DataClasses.Domain.Login;
+
+namespace PW_BusinessLogicLayer.Interfaces
 {
     public interface IDeleteCollectionController
     {
-        public void DeleteCollection();
+        void HandleDeleteCollection(Collection collection, PatientInfo patientInfo);
     }
 }
