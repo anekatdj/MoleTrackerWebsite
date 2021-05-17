@@ -471,13 +471,15 @@
 
     public byte[] FocusedPic { get; set; }
     public List<PictureData> PictureDataList { get; set; }
-    public Collection ChosenCollection { get; set; }
+    public Collection ChosenCollection { get; set; } = null;
     PictureInfo pictureInfo = new PictureInfo();
 
     protected override async Task OnInitializedAsync()
     {
         PictureDataList = new List<PictureData>();
+
         ChosenCollection = ViewCollectionController.SelectedCollection;
+
         foreach (var pic in ChosenCollection.PictureList)
         {
             PictureDataList.Add(ViewCollectionController.HandleCollection(pic));
