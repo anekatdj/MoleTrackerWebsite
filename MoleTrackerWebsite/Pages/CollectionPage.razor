@@ -3,7 +3,9 @@
 @using System.IO
 @using System.Reflection.Metadata
 @using DataClasses.Domain.Collections
+@using DataClasses.Domain.Login
 @using DataClasses.Domain.Picture
+@using PW_BusinessLogicLayer
 @using PW_BusinessLogicLayer.Interfaces
 
 <link href="css/CSSStyles.css" rel="stylesheet" />
@@ -23,6 +25,7 @@
 @inject IChangeFollowUpNotificationsController ChangeFollowUpNotificationsController
 @inject NavigationManager NavManager
 @inject IViewCollectionController ViewCollectionController
+@inject ILogInController LogInController
 
 
 
@@ -468,5 +471,14 @@
     {
         pictureInfo.PictureID = 1;
         ViewCollectionController.HandleCollection(pictureInfo);
+    }
+
+    private void DeleteCollection(Collection collection, PatientInfo patientInfo)
+    {
+        collection.CollectionID = ChosenCollection.CollectionID;
+        patientInfo = LogInController.HandlePatientInfo();
+
+        DeleteCollectionController.HandleDeleteCollection(collection, patientInfo);
+
     }
 }
