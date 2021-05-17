@@ -494,12 +494,13 @@
 
         ChosenCollection = ViewCollectionController.SelectedCollection;
 
-        foreach (var pic in ChosenCollection.PictureList)
+        if (ChosenCollection != null)
         {
-            PictureDataList.Add(ViewCollectionController.HandleCollection(pic));
+            foreach (var pic in ChosenCollection.PictureList)
+            {
+                PictureDataList.Add(ViewCollectionController.HandleCollection(pic));
+            }
         }
-
-
     }
 
 }
