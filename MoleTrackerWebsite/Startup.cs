@@ -65,7 +65,6 @@ namespace MoleTrackerWebsite
             services.AddSingleton<IChangeFollowUpNotificationsController, ChangeFollowUpNotificationsController>();
             services.AddSingleton<IMarkCollectionController, MarkCollectionController>();
             services.AddSingleton<ILoadContactInformationController, LoadContactInformationController>();
-            services.AddSingleton<ICreateNewCollectionDatabaseManager, CreateNewCollectionDatabaseManager>();
 
             services.AddMediaQueryService();
         }
