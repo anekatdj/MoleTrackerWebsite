@@ -7,6 +7,7 @@
 @using DataClasses.Domain.Picture
 @using PW_BusinessLogicLayer
 @using PW_BusinessLogicLayer.Interfaces
+@using PW_DataAccessLayer.Interfaces
 
 <link href="css/CSSStyles.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -23,6 +24,7 @@
 @inject IChangeComment ChangeComment
 @inject IChangeCollectionNameController ChangeCollectionNameController
 @inject IChangeFollowUpNotificationsController ChangeFollowUpNotificationsController
+@inject IUploadPictureController UploadPictureController
 @inject NavigationManager NavManager
 @inject IViewCollectionController ViewCollectionController
 @inject ILogInController LogInController
@@ -54,7 +56,7 @@
                     Markér samling
                 </div>
 
-                <div style="color: azure; margin-left: 5%; margin-bottom: 4%; cursor: pointer" @onclick="DeleteDialogShow">
+                <div style="color: azure; margin-left: 5%; margin-bottom: 4%; cursor: pointer" @onclick="DeleteCollectionDialogShow">
                     <span class="fa fa-trash-o"></span>
                     Slet samling
                 </div>
@@ -71,7 +73,7 @@
                                     <i class="fa fa-check" style="color:forestgreen"></i>
                                     Ja
                                 </button>
-                                <button class="iconfieldsWithText" @onclick="DeleteDialogShow">
+                                <button class="iconfieldsWithText" @onclick="DeleteCollectionDialogShow">
                                     <i class="fa fa-close" style="color:red"></i>
                                     Nej
                                 </button>
@@ -140,10 +142,10 @@
             <div class="float-child" style="width:70%">
                 <InputFile OnChange="HandleSelection" />
             </div>
-            @if (imageDataUrl.Contains("."))
+            @if (imageDataUrl.Contains(".") && !PictureUploaded)
             {
                 <div class="float-child" style="width: 14%;margin-right:1%">
-                    <button class="btn btn-danger rounded-pill" @onclick="ShowCollections" style="font-size:10px">
+                    <button class="btn btn-danger rounded-pill" @onclick="DeletePictureDialogShow" style="font-size:10px">
                         <i class="fa fa-trash-o"></i>
                         Slet
                     </button>
@@ -174,11 +176,11 @@
                         <p class="modal-title" id="titleLabel">Ønsker du at slette dette billede?</p>
                     </div>
                     <div class="modal-body">
-                        <button class="iconfieldsWithText" style="margin-right: 1%" @onclick="DeletePicture">
+                        <button class="iconfieldsWithText" style="margin-right: 1%">
                             <i class="fa fa-check" style="color:forestgreen"></i>
                             Ja
                         </button>
-                        <button class="iconfieldsWithText" @onclick="DeleteDialogShow">
+                        <button class="iconfieldsWithText" @onclick="DeleteCollectionDialogShow">
                             <i class="fa fa-close" style="color:red"></i>
                             Nej
                         </button>
@@ -275,7 +277,7 @@
     }
 
     public bool DeletePictureModal { get; set; }
-    private void DeletePicture()
+    private void DeletePictureDialogShow()
     {
         DeletePictureModal = !DeletePictureModal;
     }
@@ -320,7 +322,7 @@
 
     #region DeleteCollection
 
-    public void DeleteDialogShow()
+    public void DeleteCollectionDialogShow()
     {
         //SidebarVisible = !SidebarVisible;
         DeleteCollectionBool = !DeleteCollectionBool;
@@ -404,16 +406,25 @@
 
     #endregion
 
+    #region Find new picture
+
     string status;
 
     public string imageDataUrl { get; set; } = "";
     public bool ShowUploadedMolePicture { get; set; }
+    public bool PictureUploaded { get; set; }
 
     private void ShowUploadedMole()
     {
         ShowUploadedMolePicture = !ShowUploadedMolePicture;
+        pictureInfo.CollectionID = CollectionInfo.CollectionID;
+        pictureInfo.DateOfUpload = DateTime.Now;
+        byte[] imgByteArray = MS.ToArray();
+        UploadPictureController.UploadPicture(imgByteArray, Picture);
+        PictureUploaded = true;
     }
 
+    MemoryStream MS { get; set; }
     async Task HandleSelection(IFileListEntry[] files)
     {
         var file = files.FirstOrDefault();
@@ -422,15 +433,15 @@
             var fileType = GetFileType(file.Name);
             if (fileType == "image")
             {
-                var ms = new MemoryStream();
-                await file.Data.CopyToAsync(ms);
+                MS = new MemoryStream();
+                await file.Data.CopyToAsync(MS);
                 //string imageBase64Data = Convert.ToBase64String(ms.ToArray());
                 //imageDataUrl = string.Format("image/png;base64,{0}", imageBase64Data);
                 imageDataUrl = file.Name;
 
                 using (FileStream newFile = new FileStream("wwwroot\\images\\" + file.Name, FileMode.Create, FileAccess.Write))
                 {
-                    ms.WriteTo(newFile);
+                    MS.WriteTo(newFile);
                 }
             }
         }
@@ -448,6 +459,9 @@
 
         return result;
     }
+
+    #endregion
+
 
     private void PointOnPatientModel()
     {
