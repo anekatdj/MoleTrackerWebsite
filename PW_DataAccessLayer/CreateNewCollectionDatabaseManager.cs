@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using APIWebServiesConnector;
+using DataAccessLayer;
 using DataClasses.Domain.Collections;
 using DataClasses.DTO;
 using PW_DataAccessLayer.Interfaces;
@@ -11,15 +13,16 @@ namespace PW_DataAccessLayer
     {
 
         public  CollectionDTO CollectionDTO { get; private set; }
-        public PatientInfoDTO CurrentPatient { get; set; }
+        public PatientInfoDTO CurrentPatientInfo { get; set; }
 
         private IAPIService API;
 
         public CreateNewCollectionDatabaseManager()
         {
-            API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
+            //API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
             //API = new StubApiService();
-            CurrentPatient = new PatientInfoDTO();
+            API = APIFactory.GetAPI("");
+            CurrentPatientInfo = new PatientInfoDTO();
             CollectionDTO = new CollectionDTO();
         }
 
@@ -30,13 +33,14 @@ namespace PW_DataAccessLayer
             try
             {
                 string ID = API.PostObject<CollectionDTO>("NewCollection", collectionDTO);
+                collection.CollectionID = Convert.ToInt32(ID);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
 
-            //collection.CollectionID = Convert.ToInt32(ID);
+            
             //return collection.CollectionID;
         }
 
@@ -47,7 +51,7 @@ namespace PW_DataAccessLayer
 
             collectionRequestDTO.CollectionID = collection.CollectionID;
 
-            collectionRequestDTO.PatientID = CurrentPatient.PatientID;
+            collectionRequestDTO.PatientID = CurrentPatientInfo.PatientID;
 
             try
             {

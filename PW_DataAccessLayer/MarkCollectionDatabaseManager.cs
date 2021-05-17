@@ -9,6 +9,7 @@ namespace PW_DataAccessLayer
     public class MarkCollectionDatabaseManager : IMarkCollectionDatabaseManager
     {
         private IAPIService API;
+        //public PatientDataDTO CurrentPatientData { get; set; }
 
         public MarkCollectionDatabaseManager()
         {
@@ -33,5 +34,14 @@ namespace PW_DataAccessLayer
                 Console.WriteLine(e);
             }
         }
+
+        //public void UpdateCollection(CollectionDTO UpdatedCollection)
+        //{
+        //    CollectionDTO OldCollectionDTO = CurrentPatientData.CollectionList.First(i => i.CollectionID == UpdatedCollection.CollectionID);
+
+        //    int indexPosition = CurrentPatientData.CollectionList.IndexOf(OldCollectionDTO);
+
+        //    CurrentPatientData.CollectionList[indexPosition] = UpdatedCollection;
+        //}
     }
 }
