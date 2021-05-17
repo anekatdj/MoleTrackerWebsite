@@ -29,5 +29,10 @@ namespace BusinessLogicLayer
         {
             return viewCollectionDatabaseManager.GetPictureComment(pictureInfo);
         }
+
+        public void PostNewPictureComment(PictureCommentDomain editedComment)
+        {
+            viewCollectionDatabaseManager.PostNewPictureComment(editedComment);
+        }
     }
 }

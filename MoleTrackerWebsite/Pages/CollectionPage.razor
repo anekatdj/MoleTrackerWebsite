@@ -9,6 +9,7 @@
 @using System.IO
 @using System.Reflection.Metadata
 @using System.Xml
+@using System.Timers
 
 @inject IViewCollectionController ViewCollectionController
 @inject NavigationManager NavManager;
@@ -55,8 +56,8 @@
 
                                 <DataAnnotationsValidator />
                                 <ValidationSummary />
-                                @FocusedPicComment
-                            <InputText id="myCommentInput" border:none @bind-Value="CommentInput"> @FocusedPicComment</InputText>
+                                @*@FocusedPicComment*@
+                            <InputText id="myCommentInput" border:none @bind-Value="FocusedPicComment"></InputText>
                             </EditForm>
                         </div>
                     </td>
@@ -73,8 +74,14 @@
         </tr>
         <tr>
             <td>
-                <button class="editbtn" @onclick="@(EditComment)">Rediger note</button> 
-                <button class="editbtn">Gem note</button>
+                <button class="editbtn">Rediger note</button> 
+                <button class="editbtn" @onclick="SaveNewComment">Gem note</button>
+                @if (CommentJustSaved)
+                {
+                    <div>
+                Noten er gemt!
+                    </div>
+                }
             </td>
             <td>
                 <button class="editbtn">Rediger note</button>
@@ -99,7 +106,11 @@
     public DateTime LatestPicDateOfUpload { get; set; }
     public CollectionDomain ChosenCollection { get; set; }
     public string CommentInput { get; set; }
-
+    public List<PictureInfoDomain> ReversedPicInfoList { get; set; }
+    public PictureInfoDomain FocusedPicInfo { get; set; }
+    public bool CommentJustSaved { get; set; }
+    private Stopwatch _stopWatch;
+    private Timer _stopWatchTimer;
 
     protected override async Task OnInitializedAsync()
     {
@@ -153,15 +164,15 @@
 
         PicDataList.Reverse();
 
-        List<PictureInfoDomain> reversedPicInfoList = ChosenCollection.PictureList;
-        reversedPicInfoList.Reverse();
+        ReversedPicInfoList = ChosenCollection.PictureList;
+        ReversedPicInfoList.Reverse();
 
         LatestPic = PicDataList[0].PictureData;
-        LatestPicDateOfUpload = reversedPicInfoList[0].DateOfUpload;
-        LatestPicComment = ViewCollectionController.GetPictureComment(reversedPicInfoList[0]).Comment;
+        LatestPicDateOfUpload = ReversedPicInfoList[0].DateOfUpload;
+        LatestPicComment = ViewCollectionController.GetPictureComment(ReversedPicInfoList[0]).Comment;
 
         //Stub
-        FocusedPicComment = "Katten ser sund og rask ud";
+        FocusedPicComment = "";
 
         CommentInput = "";
 
@@ -169,27 +180,52 @@
 
     private void ShowPicture(MouseEventArgs e, int pictureId)
     {
-        PictureInfoDomain focusedPicInfo = ChosenCollection.PictureList.Find(x => x.PictureID.Equals(pictureId));
-        FocusedPicDateOfUpload = focusedPicInfo.DateOfUpload;
-        FocusedPicComment = ViewCollectionController.GetPictureComment(focusedPicInfo).Comment;
+        FocusedPicInfo = ChosenCollection.PictureList.Find(x => x.PictureID.Equals(pictureId));
+        FocusedPicDateOfUpload = FocusedPicInfo.DateOfUpload;
+        FocusedPicComment = ViewCollectionController.GetPictureComment(FocusedPicInfo).Comment;
         PictureDataDomain focusedPicture = PicDataList.Find(x => x.PictureID.Equals(pictureId));
 
         FocusedPic = focusedPicture.PictureData;
     }
 
-    private void EditComment(MouseEventArgs e)
-    {
-        
-    }
+
 
     private void SaveNewComment()
     {
 
         XmlDocument doc = new XmlDocument();
 
-        var newComment = doc.GetElementById("CommentInput").Value;
+        var input = doc.GetElementById("myCommentInput");
 
-        //ViewCollectionController.PostNewPictureComment(NewCommentInput);
+        PictureCommentDomain editedComment = new PictureCommentDomain();
+        editedComment.Comment = FocusedPicComment;
+        editedComment.PictureID = FocusedPicInfo.PictureID;
+
+        ViewCollectionController.PostNewPictureComment(editedComment);
+        CommentJustSaved = true;
+        StateHasChanged();
+        _stopWatch = new Stopwatch();
+        _stopWatch.Start();
+
+        _stopWatchTimer = new Timer();
+        _stopWatchTimer.Interval = 1000;
+        _stopWatchTimer.Elapsed += CheckStopWatch_Timer_Tick;
+        _stopWatchTimer.Enabled = true;
+
+        LatestPicComment = ViewCollectionController.GetPictureComment(ReversedPicInfoList[0]).Comment;
+
+    }
+    public void CheckStopWatch_Timer_Tick(object sender, EventArgs e)
+    {
+        if (_stopWatch.Elapsed.TotalSeconds >= 3)
+        {
+            CommentJustSaved = false;
+    //CommentJustSaved = !CommentJustSaved;
+            _stopWatch.Stop();
+            _stopWatch.Reset();
+            _stopWatchTimer.Enabled = false;
+
+        }
     }
 
 
