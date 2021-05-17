@@ -18,6 +18,8 @@ using DataClasses.Domain.Picture;
 using DataClasses.DTO;
 using PW_BusinessLogicLayer;
 using PW_BusinessLogicLayer.Interfaces;
+using PW_DataAccessLayer;
+using PW_DataAccessLayer.Interfaces;
 
 namespace MoleTrackerWebsite
 {
@@ -63,6 +65,7 @@ namespace MoleTrackerWebsite
             services.AddSingleton<IChangeFollowUpNotificationsController, ChangeFollowUpNotificationsController>();
             services.AddSingleton<IMarkCollectionController, MarkCollectionController>();
             services.AddSingleton<ILoadContactInformationController, LoadContactInformationController>();
+            services.AddSingleton<ICreateNewCollectionDatabaseManager, CreateNewCollectionDatabaseManager>();
 
             services.AddMediaQueryService();
         }

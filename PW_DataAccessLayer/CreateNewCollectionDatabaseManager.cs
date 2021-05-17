@@ -12,7 +12,7 @@ namespace PW_DataAccessLayer
     public class CreateNewCollectionDatabaseManager : ICreateNewCollectionDatabaseManager
     {
 
-        public  CollectionDTO CollectionDTO { get; private set; }
+        public  CollectionDTO CollectionDTO { get; set; }
         public PatientInfoDTO CurrentPatientInfo { get; set; }
 
         private IAPIService API;
