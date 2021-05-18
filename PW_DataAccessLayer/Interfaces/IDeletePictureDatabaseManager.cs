@@ -1,4 +1,9 @@
-﻿namespace PW_DataAccessLayer.Interfaces
+﻿using DataClasses.Domain.Picture;
+
+namespace PW_DataAccessLayer.Interfaces
 {
-    public interface IDeletePictureDatabaseManager{}
+    public interface IDeletePictureDatabaseManager
+    {
+        public void DeletePicture(PictureInfo pictureInfo);
+    }
 }
