@@ -28,10 +28,5 @@ namespace PW_BusinessLogicLayer
             //collection.CollectionID = _createNewCollectionDatabaseManager.PostNewCollection(collection);
             _createNewCollectionDatabaseManager.PostNewCollection(collection);
         }
-
-        //public void HandleLoadCollection(Collection collection)
-        //{
-        //    _createNewCollectionDatabaseManager.GetExistingCollection(collection);
-        //}
     }
 }

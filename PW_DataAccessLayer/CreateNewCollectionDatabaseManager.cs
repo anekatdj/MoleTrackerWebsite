@@ -39,41 +39,38 @@ namespace PW_DataAccessLayer
             {
                 Console.WriteLine(e);
             }
-
-            
-            //return collection.CollectionID;
         }
 
 
-        public void GetExistingCollection(Collection collection)
-        {
-            CollectionRequestDTO collectionRequestDTO = new CollectionRequestDTO();
+        //public void GetExistingCollection(Collection collection)
+        //{
+        //    CollectionRequestDTO collectionRequestDTO = new CollectionRequestDTO();
 
-            collectionRequestDTO.CollectionID = collection.CollectionID;
+        //    collectionRequestDTO.CollectionID = collection.CollectionID;
 
-            collectionRequestDTO.PatientID = CurrentPatientInfo.PatientID;
+        //    collectionRequestDTO.PatientID = CurrentPatientInfo.PatientID;
 
-            try
-            {
-                CollectionDTO = API.GetObject<CollectionDTO, CollectionRequestDTO>("GetCollection", collectionRequestDTO);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+        //    try
+        //    {
+        //        CollectionDTO = API.GetObject<CollectionDTO, CollectionRequestDTO>("GetCollection", collectionRequestDTO);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e);
+        //    }
 
-            collection.CollectionID = CollectionDTO.CollectionID;
-            collection.CollectionName = CollectionDTO.CollectionName;
-            //collection.Location = CollectionDTO.Location;
-            //collection.PictureList = CollectionDTO.PictureList;
-            ////foreach (var picture in collectionDTO.PictureList)
-            ////{
-            ////    collection.PictureList.Add(picture);
-            ////}
+        //    collection.CollectionID = CollectionDTO.CollectionID;
+        //    collection.CollectionName = CollectionDTO.CollectionName;
+        //    //collection.Location = CollectionDTO.Location;
+        //    //collection.PictureList = CollectionDTO.PictureList;
+        //    ////foreach (var picture in collectionDTO.PictureList)
+        //    ////{
+        //    ////    collection.PictureList.Add(picture);
+        //    ////}
 
-            ////collection.Location = collectionDTO.Location;
+        //    ////collection.Location = collectionDTO.Location;
 
-            //return collection;
-        }
+        //    //return collection;
+        //}
     }
 }

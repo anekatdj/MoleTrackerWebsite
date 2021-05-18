@@ -258,22 +258,18 @@
 
 @code {
     //TODO Lav popop med fortryd handling efter man er kommet ind på main page og har slettet en collection
-    private List<Collection> collections = new List<Collection>();
-    //private IEnumerable<Collection> collections = new[]
-    //{
-    //    new Collection {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-    //    new Collection {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
-    //};
 
-    public bool SaveDisabled { get; set; } = true;
+    #region Properties til html
+
     public string AddPictureButton = "fa fa-picture-o";
-    public bool DeleteCollectionBool { get; set; }
     public string EditIcon { get; set; } = "fa fa-pencil";
-    public bool ChangeNameBool { get; set; }
-    public bool IsDisabled { get; set; } = true;
     public string FontColor { get; set; }
     public string FlagColor = "azure";
 
+    #endregion
+
+    public bool ChangeNameBool { get; set; }
+    public bool IsDisabled { get; set; } = true;
     private void EditName()
     {
         if (!ChangeNameBool)
@@ -288,11 +284,6 @@
             IsDisabled = true;
         }
         ChangeNameBool = !ChangeNameBool;
-    }
-
-    private void OnInputHandler(ChangeEventArgs e)
-    {
-        CollectionInfo.CollectionName = e.Value.ToString();
     }
 
     private void SaveNotes()
@@ -313,8 +304,8 @@
         SidebarVisible = !SidebarVisible;
     }
 
-    public bool SidebarVisible { get; set; }
 
+    public bool SidebarVisible { get; set; }
     private void Sidebar()
     {
         SidebarVisible = !SidebarVisible;
@@ -323,7 +314,6 @@
     #region Flag
 
     public string Flag = "fa fa-flag-o";
-
     public void ItemMarked()
     {
         if (Flag == "fa fa-flag-o")
@@ -346,6 +336,7 @@
 
     #region DeleteCollection
 
+    public bool DeleteCollectionBool { get; set; }
     public void DeleteCollectionDialogShow()
     {
         //SidebarVisible = !SidebarVisible;
@@ -364,31 +355,19 @@
 
     public bool NotificationVisible { get; set; }
 
-    public void Notifications()
-    {
-        NotificationVisible = !NotificationVisible;
-    }
+    public void Notifications() => NotificationVisible = !NotificationVisible;
 
     public bool DaysVisible { get; set; }
 
-    public void Days()
-    {
-        DaysVisible = !DaysVisible;
-    }
+    public void Days() => DaysVisible = !DaysVisible;
 
     public bool HoursVisible { get; set; }
 
-    public void Hours()
-    {
-        HoursVisible = !HoursVisible;
-    }
+    public void Hours() => HoursVisible = !HoursVisible;
 
     public bool WeeksVisible { get; set; }
 
-    public void Weeks()
-    {
-        WeeksVisible = !WeeksVisible;
-    }
+    public void Weeks() => WeeksVisible = !WeeksVisible;
 
     private string _dayOption { get; set; } = "--Dag--";
     private string _hourOption { get; set; } = "--Time--";
@@ -443,12 +422,9 @@
         FocusedPic = PictureData.PicData;
     }
 
-
-
     #region Find/upload new picture
 
     string status;
-
     public string imageDataUrl { get; set; } = "";
     public bool ShowUploadedMolePicture { get; set; }
     public bool PictureUploaded { get; set; }
@@ -524,6 +500,11 @@
         patientInfo = LogInController.HandlePatientInfo();
 
         DeleteCollectionController.HandleDeleteCollection(collection, patientInfo);
+    }
+
+    private void OnInputHandler(ChangeEventArgs e)
+    {
+        CollectionInfo.CollectionName = e.Value.ToString();
     }
 
     public byte[] FocusedPic { get; set; }
