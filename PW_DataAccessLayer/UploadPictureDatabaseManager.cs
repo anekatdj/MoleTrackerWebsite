@@ -13,9 +13,9 @@ namespace PW_DataAccessLayer
         private IAPIService API;
         public Collection Collection { get; set; }
 
-        public UploadPictureDatabaseManager(Collection collection)
+        public UploadPictureDatabaseManager(string APIType, Collection collection)
         {
-            API = APIFactory.GetAPI("");
+            API = APIFactory.GetAPI(APIType);
             Collection = collection;
         }
 

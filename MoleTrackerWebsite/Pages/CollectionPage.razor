@@ -18,6 +18,7 @@
 @inject PictureInfo Picture
 @inject PictureData PictureData
 @inject PictureComment PicComment
+@inject PatientInfo PatientInfo
 @inject ChangeCollectionMarking ChangeCollectionMarking
 @inject ChangeCollectionName ChangeCollectionName
 @inject ChangeNotifications ChangeNotifications
@@ -282,7 +283,7 @@
         else
         {
             EditIcon = "fa fa-pencil";
-            ChangeCollectionNameController.HandleChangedName(ChangeCollectionName);
+            ChangeCollectionNameController.HandleChangedName(CollectionInfo);
             IsDisabled = true;
         }
         ChangeNameBool = !ChangeNameBool;
@@ -347,7 +348,7 @@
 
     public void DeleteCollection()
     {
-        //DeleteCollectionController.HandleDeleteCollection();
+        DeleteCollectionController.HandleDeleteCollection(CollectionInfo, PatientInfo);
         NavManager.NavigateTo("/mainPage");
     }
 
@@ -522,17 +523,11 @@
 
     protected override async Task OnInitializedAsync()
     {
-        //PictureDataList = new List<PictureData>();
-        //PictureInfoList = new List<PictureInfo>();
         Pictures = new List<Tuple<PictureInfo, PictureData>>();
-        if (CollectionInfo.CollectionID != 0)
-        {
-            CollectionInfo = ViewCollectionController.SelectedCollection;
-        }
-        else
-        {
-            CollectionInfo = new Collection();
-        }
+
+
+        CollectionInfo = ViewCollectionController.SelectedCollection;
+
 
         if (CollectionInfo.PictureList.Count != 0)
         {

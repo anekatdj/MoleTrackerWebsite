@@ -14,7 +14,7 @@ namespace PW_BusinessLogicLayer
 
         public ChangeComment()
         {
-            _changeCommentDatabaseManager = new ChangeCommentDatabaseManager();
+            _changeCommentDatabaseManager = new ChangeCommentDatabaseManager("");
         }
 
         public void HandleComment(PictureComment pictureComment)

@@ -16,7 +16,7 @@ namespace PW_BusinessLogicLayer
 
         public CreateNewCollectionController()
         {
-            _createNewCollectionDatabaseManager = new CreateNewCollectionDatabaseManager();
+            _createNewCollectionDatabaseManager = new CreateNewCollectionDatabaseManager("");
             _patientData = new PatientData();
         }
 

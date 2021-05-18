@@ -1,5 +1,6 @@
 ﻿using System;
 using APIWebServiesConnector;
+using DataAccessLayer;
 using DataClasses.Domain.Collections;
 using DataClasses.DTO;
 using PW_DataAccessLayer.Interfaces;
@@ -8,30 +9,22 @@ namespace PW_DataAccessLayer
 {
     public class ChangeCollectionNameDatabaseManager : IChangeCollectionNameDatabaseManager
     {
-        private IAPIService API;
+        private readonly IAPIService API;
 
-        public ChangeCollectionNameDatabaseManager()
+        public ChangeCollectionNameDatabaseManager(string APIType) //TODO implementer i resten
         {
-            API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
-
-            //API = new StubApiService();
+            API = APIFactory.GetAPI(APIType);
         }
 
-        public void PostChangedCollectionName(ChangeCollectionName _changeCollectionName) //TODO Skal det her være void?
+        public void PostChangedCollectionName(Collection collection)
         {
             ChangeCollectionNameDTO _changeCollectionNameDTO = new ChangeCollectionNameDTO();
 
-            _changeCollectionNameDTO.CollectionID = _changeCollectionName.CollectionID;
-            _changeCollectionNameDTO.CollectionName = _changeCollectionName.CollectionName;
+            _changeCollectionNameDTO.CollectionID = collection.CollectionID;
+            _changeCollectionNameDTO.CollectionName = collection.CollectionName;
 
-            try
-            {
-                API.PostObject<ChangeCollectionMarkingDTO>("PutNewCollectionName", _changeCollectionNameDTO);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            //TODO lav try-catch ordentligt
+            API.PostObject<ChangeCollectionNameDTO>("ChangeCollectionName", _changeCollectionNameDTO);
         }
     }
 }

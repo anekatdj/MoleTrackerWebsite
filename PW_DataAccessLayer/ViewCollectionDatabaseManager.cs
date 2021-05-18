@@ -16,14 +16,9 @@ namespace PW_DataAccessLayer
 
         private IAPIService API;
 
-        public ViewCollectionDatabaseManager()
+        public ViewCollectionDatabaseManager(string APIType)
         {
-            //API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
-
-            //API = new StubApiService();
-
-            
-            API= APIFactory.GetAPI("");
+            API= APIFactory.GetAPI(APIType);
         }
 
         public PictureData GetCollection(PictureInfo pictureInfo) //PatientInfo patientInfo

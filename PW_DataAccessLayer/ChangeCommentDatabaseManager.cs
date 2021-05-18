@@ -4,6 +4,7 @@ using DataClasses.Domain.Picture;
 using DataClasses.DTO;
 using PW_DataAccessLayer.Interfaces;
 using APIWebServiesConnector;
+using DataAccessLayer;
 using DataClasses.Domain.Login;
 
 namespace PW_DataAccessLayer
@@ -13,9 +14,9 @@ namespace PW_DataAccessLayer
         PictureRequestDTO _pictureRequestDTO;
         private IAPIService API;
 
-        public ChangeCommentDatabaseManager()
+        public ChangeCommentDatabaseManager(string APIType)
         {
-            API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
+            API = APIFactory.GetAPI(APIType);
             
             //API = new StubApiService();
             _pictureRequestDTO = new PictureRequestDTO();

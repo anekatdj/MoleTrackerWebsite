@@ -20,7 +20,8 @@ namespace DataClasses.Domain.Picture
             Nedre,
             Øvre,
             Højre,
-            Venstre
+            Venstre,
+            Ingen
         }
 
         public enum BodyPart

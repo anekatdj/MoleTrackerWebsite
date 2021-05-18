@@ -11,9 +11,9 @@ namespace PW_DataAccessLayer
     {
         private IAPIService API;
 
-        public DeleteCollectionDatabaseManager()
+        public DeleteCollectionDatabaseManager(string APIType)
         {
-            API = APIFactory.GetAPI("");
+            API = APIFactory.GetAPI(APIType);
         }
 
         public void DeleteCollection(Collection collection, PatientInfo patientInfo)
