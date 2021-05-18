@@ -183,7 +183,7 @@
     </div>
 
     <div>
-        <button class="iconfieldsWithText" @onclick="ComparePictures">
+        <button class="iconfieldsWithText" @onclick="@((e) => ShowSpecificPicture(e, Picture.PictureID))">
             <i class="fas fa-exchange-alt"></i>
             Sammenlign
         </button>
@@ -196,7 +196,7 @@
                         <p class="modal-title" id="titleLabel">Ønsker du at slette dette billede?</p>
                     </div>
                     <div class="modal-body">
-                        <button class="iconfieldsWithText" style="margin-right: 1%" @onclick="RemovePicture">
+                        <button class="iconfieldsWithText" style="margin-right: 1%" @onclick="DeletePicture">
                             <i class="fa fa-check" style="color:forestgreen"></i>
                             Ja
                         </button>
@@ -246,7 +246,7 @@
 <div class="row">
     <div class="col">
         <div style="float: left; margin-top: 3%;">
-            <textarea class="textarea" style="overflow-y; overflow-x: hidden; max-height: 80%; width: 150%" @bind="PicComment.Comment" placeholder="Indtast noter her..." />
+            <textarea class="textarea" style="overflow-y: visible; overflow-x: hidden; max-height: 80%; width: 150%" @bind="PicComment.Comment" placeholder="Indtast noter her..." />
             <button class="btn btn-primary rounded-pill" @onclick="SaveNotes">Gem noter</button>
         </div>
     </div>
@@ -298,12 +298,6 @@
     private void SaveNotes()
     {
         //ChangeComment.HandleComment(PicComment); //TODO Skal sættes op når lasse har fikset det
-    }
-
-    private void RemovePicture()
-    {
-        imageDataUrl = "";
-        DeletePictureModal = !DeletePictureModal;
     }
 
     public bool DeletePictureModal { get; set; }
@@ -438,27 +432,16 @@
 
     public DateTime FocusedPicDateOfUpload { get; set; }
     public DateTime LatestPicDateOfUpload { get; set; }
-    private void ShowSpecificPhoto(MouseEventArgs e, object pictureId)
+    public bool SpecificPictureChosen { get; set; }
+    private void ShowSpecificPicture(MouseEventArgs e, object pictureId)
     {
-        var selectedPicture = ChosenCollection.PictureList.Find(x => x.PictureID.Equals(pictureId));
-        FocusedPicDateOfUpload = selectedPicture.DateOfUpload;
+        SpecificPictureChosen = !SpecificPictureChosen;
+        Picture = ChosenCollection.PictureList.Find(x => x.PictureID.Equals(pictureId));
+        FocusedPicDateOfUpload = Picture.DateOfUpload;
         //TODO hent kommentarer
-        var selectedData = PictureDataList.Find(x => x.PictureID.Equals(pictureId));
-        FocusedPic = selectedData.PicData;
+        PictureData = PictureDataList.Find(x => x.PictureID.Equals(pictureId));
+        FocusedPic = PictureData.PicData;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -472,15 +455,13 @@
 
     private void ShowUploadedMole()
     {
-        //ShowUploadedMolePicture = !ShowUploadedMolePicture;
-        pictureInfo.CollectionID = CollectionInfo.CollectionID;
-        pictureInfo.DateOfUpload = DateTime.Now;
+        Picture.CollectionID = CollectionInfo.CollectionID;
+        Picture.DateOfUpload = DateTime.Now;
         byte[] imgByteArray = MS.ToArray();
         UploadPictureController.UploadPicture(imgByteArray, Picture);
-        //PictureUploaded = true;
     }
 
-    MemoryStream MS { get; set; }
+    private MemoryStream MS { get; set; }
     async Task HandleSelection(IFileListEntry[] files)
     {
         ShowUploadedMolePicture = !ShowUploadedMolePicture;
@@ -527,13 +508,14 @@
 
     private void ShowCollections()
     {
-        pictureInfo.PictureID = 1;
-        ViewCollectionController.HandleCollection(pictureInfo);
+        Picture.PictureID = 1;
+        ViewCollectionController.HandleCollection(Picture);
     }
 
     private void DeletePicture()
     {
-
+        imageDataUrl = "";
+        DeletePictureModal = !DeletePictureModal;
     }
 
     private void DeleteCollection(Collection collection, PatientInfo patientInfo)
@@ -544,20 +526,12 @@
         DeleteCollectionController.HandleDeleteCollection(collection, patientInfo);
     }
 
-    private void ComparePictures()
-    {
-
-    }
-
-
     public byte[] FocusedPic { get; set; }
     public byte[] LatestPic { get; set; }
     public List<PictureData> PictureDataList { get; set; }
-    public Collection ChosenCollection { get; set; } = null;
-    PictureInfo pictureInfo = new PictureInfo();
-    public List<PictureInfo> PictureInfoList { get; set; }
+    public Collection ChosenCollection { get; set; }
+    //PictureInfo pictureInfo = new PictureInfo();
     public List<Tuple<PictureInfo, PictureData>> Pictures { get; set; }
-    public PictureData PictureData { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -578,19 +552,19 @@
                 Pictures.Add(new Tuple<PictureInfo, PictureData>(pic, ViewCollectionController.HandleCollection(pic)));
             }
 
-        FocusedPic = PictureDataList[0].PicData;
-        FocusedPicDateOfUpload = ChosenCollection.PictureList[0].DateOfUpload;
-        //TODO kommentarer
+            FocusedPic = Pictures[0].Item2.PicData;
 
-        PictureDataList.Reverse();
+            FocusedPicDateOfUpload = ChosenCollection.PictureList[0].DateOfUpload;
+            //TODO kommentarer
 
-        List<PictureInfo> reversedPicInfoList = ChosenCollection.PictureList;
-        reversedPicInfoList.Reverse();
-
-        LatestPic = PictureDataList[0].PicData;
-        LatestPicDateOfUpload = reversedPicInfoList[0].DateOfUpload;
-        //TODO kommentarer
             Pictures.Reverse();
+
+            List<PictureInfo> reversedPicInfoList = ChosenCollection.PictureList;
+            reversedPicInfoList.Reverse();
+
+            LatestPic = Pictures[0].Item2.PicData;
+            LatestPicDateOfUpload = reversedPicInfoList[0].DateOfUpload;
+            //TODO kommentarer
         }
     }
 
