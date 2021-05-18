@@ -21,7 +21,7 @@ namespace PW_DataAccessLayer
             //ChangeNotificationsDTO _changeNotificationsDTO = new ChangeNotificationsDTO();
 
             //_changeNotificationsDTO.CollectionID = _changeNotifications.CollectionID;
-            //_changeNotificationsDTO.NotificationTimeInterval = _changeNotifications.NotificationTimeInterval;
+            //_changeNotificationsDTO.NotificationTimeInterval = _changeNotifications.;
 
             //try
             //{
