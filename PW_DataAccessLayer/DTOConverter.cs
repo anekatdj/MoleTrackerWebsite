@@ -150,5 +150,15 @@ namespace PW_DataAccessLayer
             };
             return doctorContactInfoDomain;
         }
+
+        public static PictureComment PictureCommentToDomain(PictureCommentDTO pictureCommentDTO)
+        {
+            PictureComment pictureCommentDomain = new PictureComment()
+            {
+                PictureID = pictureCommentDTO.PictureID,
+                Comment = pictureCommentDTO.Comment
+            };
+            return pictureCommentDomain;
+        }
     }
 }

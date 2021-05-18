@@ -13,7 +13,6 @@ namespace PW_DataAccessLayer
 {
     public class CreateNewCollectionDatabaseManager : ICreateNewCollectionDatabaseManager
     {
-
         public  CollectionDTO CollectionDTO { get; set; }
         public PatientData CurrentPatientData { get; set; }
 

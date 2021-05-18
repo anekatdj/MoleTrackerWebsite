@@ -69,5 +69,25 @@ namespace PW_DataAccessLayer
             return patientDataDomain;
         }
 
+
+        public PictureComment GetPictureComment(PictureInfo pictureInfo)
+        {
+            PictureCommentDTO pictureCommentDTO = new PictureCommentDTO();
+            PictureRequestDTO pictureRequestDTO = new PictureRequestDTO() { PictureID = pictureInfo.PictureID };
+
+            try
+            {
+                pictureCommentDTO = API.GetObject<PictureCommentDTO, PictureRequestDTO>("GetPictureComment", pictureRequestDTO);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            PictureComment pictureCommentDomain = DTOConverter.PictureCommentToDomain(pictureCommentDTO);
+            return pictureCommentDomain;
+        }
+
     }
 }

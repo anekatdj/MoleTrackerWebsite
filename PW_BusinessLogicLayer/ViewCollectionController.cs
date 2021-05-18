@@ -33,5 +33,9 @@ namespace PW_BusinessLogicLayer
             return viewCollectionDatabaseManager.GetPatientData(patientInfoDomain);
         }
 
+        public PictureComment HandlePictureComment(PictureInfo pictureInfo)
+        {
+            return viewCollectionDatabaseManager.GetPictureComment(pictureInfo);
+        }
     }
 }

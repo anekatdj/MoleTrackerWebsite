@@ -22,6 +22,8 @@
 @inject IViewCollectionController ViewCollectionController
 @*To find coordinates*@
 @inject IJSRuntime JS;
+@*inject CollectionPage CollectionPage
+
 
 
 <link href="css/CSSStyles.css" rel="stylesheet" />
@@ -300,6 +302,7 @@
             IsMarked = false
         };
         Collection.CollectionID = CreateNewCollectionController.HandleCreateNewCollection(newCollection);
+        CreateNewCollectionController.NewOrOld = true;
         NavigateToNewCollectionPage();
     }
 
