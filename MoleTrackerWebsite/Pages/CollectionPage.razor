@@ -223,7 +223,7 @@
                         <th>Modermærker for denne samling</th>
                     </tr>
                 </thead>
-                <tbody style="cursor: pointer">
+                <tbody style="cursor: pointer" @onclick="@((e) => ShowSpecificPicture(e, Picture.PictureID))">
 
                     @foreach (var item in Pictures)
                     {
@@ -519,6 +519,7 @@
     {
         imageDataUrl = "";
         DeletePictureModal = !DeletePictureModal;
+        Picture.PictureID = LatestPicID;
         DeletePictureController.HandleDeletePicture(Picture);
     }
 
@@ -536,6 +537,7 @@
     public Collection ChosenCollection { get; set; }
     //PictureInfo pictureInfo = new PictureInfo();
     public List<Tuple<PictureInfo, PictureData>> Pictures { get; set; }
+    public int LatestPicID { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -573,6 +575,7 @@
 
             LatestPic = Pictures[0].Item2.PicData;
             LatestPicDateOfUpload = reversedPicInfoList[0].DateOfUpload;
+            LatestPicID = reversedPicInfoList[0].PictureID;
             //TODO kommentarer
         }
     }
