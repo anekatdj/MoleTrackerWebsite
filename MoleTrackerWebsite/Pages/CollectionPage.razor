@@ -12,17 +12,20 @@
 @using System.Timers
 
 @inject IViewCollectionController ViewCollectionController
-@inject NavigationManager NavManager;
+@inject NavigationManager NavManager
+@inject IJSRuntime JsRuntime;
+
+
 
 <div style="width:80%;overflow-x:scroll">
-    <h4 style="font-style: oblique">
+    <h3>
         @ChosenCollection.CollectionName
-    </h4>
+    </h3>
     @if (ChosenCollection.PictureList.Count == 0 || ChosenCollection.PictureList == null)
     {
-        <h3>
+        <h4 style="color: red">
             Der er endnu ikke uploaded billeder til denne samling.
-        </h3>
+        </h4>
     }
     <table>
         <tr>
@@ -31,100 +34,100 @@
                 @foreach (var item in PicDataList)
                 {
                     <td @onclick="@((e) => ShowPicture(e, item.PictureID))">
-                        <img src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" width="100" height="100"/>
+                        <img src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" width="100" height="100" />
                     </td>
                 }
             }
-            </tr>
+        </tr>
     </table>
 </div>
 <div>
     <table class="table">
-    @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
-    {
-        <th>@FocusedPicDateOfUpload</th>
-        <th>@LatestPicDateOfUpload</th>
-    }
-    <tr>
-    @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
-    {
-        <td style="width: 50%;">
-            <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(FocusedPic)"/>
-        </td>
-        <td style="width: 50%">
-            <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(LatestPic)"/>
-        </td>
-    }
-    </tr>
+        @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+        {
+            <th>@FocusedPicDateOfUpload</th>
+            <th>@LatestPicDateOfUpload</th>
+        }
+        <tr>
+            @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+            {
+                <td style="width: 50%;">
+                    <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(FocusedPic)" />
+                </td>
+                <td style="width: 50%">
+                    <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(LatestPic)" />
+                </td>
+            }
+        </tr>
         <tr>
             <td colspan="2">
                 <table id="t1" class="table2">
                     <td style="text-align: left; vertical-align: top; padding: 5px; height: 200px">
-                    @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
-                    {
-                        <div style="font-weight: bold">
-                            Note:
-                        </div>
-                        <div>
+                        @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+                        {
+                            <div style="font-weight: bold">
+                                Note:
+                            </div>
+                            <div>
 
-                            <EditForm Model="ViewCollectionController">
+                                <EditForm Model="ViewCollectionController">
 
-                                <DataAnnotationsValidator/>
-                                <ValidationSummary/>
+                                    <DataAnnotationsValidator />
+                                    <ValidationSummary />
 
-                                <InputText style="width: 100%;" id="myFocusedCommentInput" border:none @bind-Value="FocusedPicComment"></InputText>
-                            </EditForm>
+                                    <InputText style="width: 100%; height: 100%; border: none" id="myFocusedCommentInput" border:none @bind-Value="FocusedPicComment"></InputText>
+                                </EditForm>
 
-                        </div>
-                    }
+                            </div>
+                        }
                     </td>
                     <td style="text-align: left; vertical-align: top; padding: 5px; height: 200px">
-                    @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
-                    {
-                        <div style="font-weight: bold">
-                            Note:
-                        </div>
-                        <div>
-                            <EditForm Model="ViewCollectionController">
+                        @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+                        {
+                            <div style="font-weight: bold">
+                                Note:
+                            </div>
+                            <div>
+                                <EditForm Model="ViewCollectionController">
 
-                                <DataAnnotationsValidator/>
-                                <ValidationSummary/>
+                                    <DataAnnotationsValidator />
+                                    <ValidationSummary />
 
-                                <InputText style="width: 100%;" id="myLatestCommentInput" border:none @bind-Value="LatestPicComment"></InputText>
-                            </EditForm>
+                                    <InputText style="width: 100%; height: 100%; border: none " id="myLatestCommentInput" border:none @bind-Value="LatestPicComment"></InputText>
+                                </EditForm>
 
-                        </div>
-                    }
+                            </div>
+                        }
                     </td>
                 </table>
             </td>
         </tr>
         <tr>
             <td>
-            @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
-            {
-                <button class="editbtn">Rediger note</button>
-                <button class="editbtn" @onclick="SaveNewFocusedComment">Gem note</button>
-                @if (FocusedCommentJustSaved)
+                @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
                 {
-                    <div>
-                        Noten er gemt!
-                    </div>
+                    <button class="editbtn" @onclick="FocusFocusedComment">Rediger note</button>
+                    <button class="editbtn" @onclick="SaveNewFocusedComment">Gem note</button>
+                    @if (FocusedCommentJustSaved)
+                    {
+                        <div>
+                            Noten er gemt!
+                        </div>
+                    }
                 }
-            }
             </td>
             <td>
-            @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
-            {
-                <button class="editbtn">Rediger note</button>
-                <button class="editbtn" @onclick="SaveNewLatestComment">Gem note</button>
-                @if (LatestCommentJustSaved)
+                @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
                 {
-                    <div>
-                        Noten er gemt!
-                    </div>
+                    <button class="editbtn" @onclick="FocusLatestComment">Rediger note</button>
+                    <button class="editbtn" @onclick="SaveNewLatestComment">Gem note</button>
+                    @if (LatestCommentJustSaved)
+                    {
+                        <div>
+                            Noten er gemt!
+                        </div>
+                    }
                 }
-            }
             </td>
 
         </tr>
@@ -153,6 +156,7 @@
     public bool LatestCommentJustSaved { get; set; }
     private Stopwatch _stopWatch;
     private Timer _stopWatchTimer;
+    private ElementReference _latestCommentField;
 
     protected override async Task OnInitializedAsync()
     {
@@ -213,9 +217,9 @@
             LatestPic = PicDataList[0].PictureData;
             LatestPicInfo = ReversedPicInfoList[0];
             LatestPicDateOfUpload = ReversedPicInfoList[0].DateOfUpload;
-            LatestPicComment = ViewCollectionController.GetPictureComment(ReversedPicInfoList[0]).Comment; 
+            LatestPicComment = ViewCollectionController.GetPictureComment(ReversedPicInfoList[0]).Comment;
         }
-      
+
         //Stub
         FocusedPicComment = "";
 
@@ -311,5 +315,14 @@
         }
     }
 
+
+    public async Task FocusFocusedComment()
+    {
+        await JsRuntime.InvokeVoidAsync("focusInput", "myFocusedCommentInput");
+    }
+    public async Task FocusLatestComment()
+    {
+        await JsRuntime.InvokeVoidAsync("focusInput", "myLatestCommentInput");
+    }
 
 }
