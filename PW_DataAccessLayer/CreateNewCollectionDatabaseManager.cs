@@ -16,7 +16,7 @@ namespace PW_DataAccessLayer
         public  CollectionDTO CollectionDTO { get; set; }
         public PatientData CurrentPatientData { get; set; }
 
-        private IAPIService API;
+        private readonly IAPIService API;
 
         public CreateNewCollectionDatabaseManager(string APIType)
         {

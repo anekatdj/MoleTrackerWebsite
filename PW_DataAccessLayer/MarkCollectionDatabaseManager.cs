@@ -28,7 +28,7 @@ namespace PW_DataAccessLayer
 
             try
             {
-                string ID = API.PostObject<ChangeCollectionMarkingDTO>("PutNewCollectionMark", _changeCollectionMarkingDTO);
+                string ID = API.PostObject<ChangeCollectionMarkingDTO>("ChangeCollectionMarking", _changeCollectionMarkingDTO);
             }
             catch (Exception e)
             {

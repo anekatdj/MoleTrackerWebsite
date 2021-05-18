@@ -7,6 +7,7 @@ using DataClasses.DTO;
 using NSubstitute;
 using NUnit.Framework;
 using PW_BusinessLogicLayer;
+using PW_DataAccessLayer.Interfaces;
 
 namespace MoleTrackerWebsite_PW.UnitTests
 { 
@@ -16,20 +17,37 @@ namespace MoleTrackerWebsite_PW.UnitTests
         private LogInInfo _logInInfo;
         private PatientInfo _patientInfo;
         private PatientInfoDTO _patientInfoDto;
+        private ILogInDatabaseManager logInDatabaseManager;
 
         [SetUp]
         public void Setup()
         {
             _uut = new LogInController();
             _logInInfo = Substitute.For<LogInInfo>();
-
-
             _patientInfo = Substitute.For<PatientInfo>();
             _patientInfoDto = Substitute.For<PatientInfoDTO>();
+            logInDatabaseManager = Substitute.For<ILogInDatabaseManager>();
         }
 
         [Test]
-        public void ExcistingUser_ReturnsTrue()
+        public void HandleLogin_ReturnsValidateLoginInDatabaseManager()
+        {
+            _logInInfo.Username = "12345";
+            _logInInfo.Password = "12345";
+            _uut.HandleLogin(_logInInfo).Returns(logInDatabaseManager.ValidateLogin(_logInInfo));
+        }
+
+        [Test]
+        public void HandlePatientInfo_ReturnsGetPatientInfoInDatabaseManager()
+        {
+            _logInInfo.Username = "12345";
+            _logInInfo.Password = "12345";
+            _uut.HandleLogin(_logInInfo);
+            _uut.HandlePatientInfo().Returns(logInDatabaseManager.GetPatientInfo());
+        }
+
+        [Test]
+        public void ExistingUser_ReturnsTrue()
         {
             _logInInfo.Username = "12345";
             _logInInfo.Password = "12345";

@@ -267,325 +267,323 @@
 
     #region Properties til html
 
-public string AddPictureButton = "fa fa-picture-o";
-public string EditIcon { get; set; } = "fa fa-pencil";
-public string FontColor { get; set; }
-public string FlagColor = "azure";
+    public string AddPictureButton = "fa fa-picture-o";
+    public string EditIcon { get; set; } = "fa fa-pencil";
+    public string FontColor { get; set; }
+    public string FlagColor = "azure";
 
-#endregion
+    #endregion
 
-public bool ChangeNameBool { get; set; }
-public bool IsDisabled { get; set; } = true;
+    public bool ChangeNameBool { get; set; }
+    public bool IsDisabled { get; set; } = true;
 
-private void EditName()
-{
-    if (!ChangeNameBool)
+    private void EditName()
     {
-        EditIcon = "fa fa-floppy-o";
-        IsDisabled = false;
+        if (!ChangeNameBool)
+        {
+            EditIcon = "fa fa-floppy-o";
+            IsDisabled = false;
+        }
+        else
+        {
+            EditIcon = "fa fa-pencil";
+            ChangeCollectionNameController.HandleChangedName(CollectionInfo);
+            IsDisabled = true;
+        }
+        ChangeNameBool = !ChangeNameBool;
     }
-    else
-    {
-        EditIcon = "fa fa-pencil";
-        ChangeCollectionNameController.HandleChangedName(CollectionInfo);
-        IsDisabled = true;
-    }
-    ChangeNameBool = !ChangeNameBool;
-}
 
     private void SaveNotes()
     {
         ChangeComment.HandleNewPictureComment(PicComment);
     }
 
-public bool DeletePictureModal { get; set; }
+    public bool DeletePictureModal { get; set; }
 
-private void DeletePictureDialogShow()
-{
-    DeletePictureModal = !DeletePictureModal;
-}
-
-#region Sidebar
-
-public void CloseSideNav()
-{
-    SidebarVisible = !SidebarVisible;
-}
-
-
-public bool SidebarVisible { get; set; }
-
-private void Sidebar()
-{
-    SidebarVisible = !SidebarVisible;
-}
-
-#region Flag
-
-public string Flag = "fa fa-flag-o";
-
-public void ItemMarked()
-{
-    if (Flag == "fa fa-flag-o")
+    private void DeletePictureDialogShow()
     {
-        Flag = "fa fa-flag-checkered";
-        FlagColor = "red";
-        ChangeCollectionMarking.IsMarked = true;
-        MarkCollectionController.HandleMarking(ChangeCollectionMarking);
+        DeletePictureModal = !DeletePictureModal;
     }
-    else
+
+    #region Sidebar
+
+    public void CloseSideNav()
     {
-        Flag = "fa fa-flag-o";
-        FlagColor = "azure";
-        ChangeCollectionMarking.IsMarked = false;
-        MarkCollectionController.HandleMarking(ChangeCollectionMarking);
+        SidebarVisible = !SidebarVisible;
     }
-}
-
-#endregion
-
-#region DeleteCollection
-
-public bool DeleteCollectionBool { get; set; }
-
-public void DeleteCollectionDialogShow()
-{
-    //SidebarVisible = !SidebarVisible;
-    DeleteCollectionBool = !DeleteCollectionBool;
-}
-
-public void DeleteCollection()
-{
-    DeleteCollectionController.HandleDeleteCollection(CollectionInfo, PatientInfo);
-    NavManager.NavigateTo("/mainPage");
-}
-
-#endregion
-
-#region Notifications
-
-public bool NotificationVisible { get; set; }
-
-public void Notifications() => NotificationVisible = !NotificationVisible;
-
-public bool DaysVisible { get; set; }
-
-public void Days() => DaysVisible = !DaysVisible;
-
-public bool HoursVisible { get; set; }
-
-public void Hours() => HoursVisible = !HoursVisible;
-
-public bool WeeksVisible { get; set; }
-
-public void Weeks() => WeeksVisible = !WeeksVisible;
-
-private string _dayOption { get; set; } = "--Dag--";
-private string _hourOption { get; set; } = "--Time--";
-private string _weekOption { get; set; } = "--Uger--";
-
-public void DaysChanged(ChangeEventArgs dayEvent)
-{
-    _dayOption = dayEvent.Value.ToString();
-    ChangeNotifications.WeekDay = _dayOption;
-    StateHasChanged();
-}
-
-public void HourChanged(ChangeEventArgs hourEvent)
-{
-    _hourOption = hourEvent.Value.ToString();
-    ChangeNotifications.Hour = _hourOption;
-    StateHasChanged();
-}
-
-public void WeeksChanged(ChangeEventArgs weekEvent)
-{
-    _weekOption = weekEvent.Value.ToString();
-    ChangeNotifications.NumberOfWeeks = _weekOption;
-    StateHasChanged();
-}
-
-public void OnChangedNotifications()
-{
-    ChangeFollowUpNotificationsController.HandleChangedNotifications(ChangeNotifications);
-}
 
 
-private List<string> weekdaysList = new List<string>(new string[] { "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag" });
-private List<string> weeksList = new List<string>(new string[] { "1", "2", "4", "6", "8", "12" });
+    public bool SidebarVisible { get; set; }
 
-private List<string> hoursList = new List<string>(new string[]
-{
+    private void Sidebar()
+    {
+        SidebarVisible = !SidebarVisible;
+    }
+
+    #region Flag
+
+    public string Flag = "fa fa-flag-o";
+
+    public void ItemMarked()
+    {
+        if (Flag == "fa fa-flag-o")
+        {
+            Flag = "fa fa-flag-checkered";
+            FlagColor = "red";
+            ChangeCollectionMarking.IsMarked = true;
+            MarkCollectionController.HandleMarking(ChangeCollectionMarking);
+        }
+        else
+        {
+            Flag = "fa fa-flag-o";
+            FlagColor = "azure";
+            ChangeCollectionMarking.IsMarked = false;
+            MarkCollectionController.HandleMarking(ChangeCollectionMarking);
+        }
+    }
+
+    #endregion
+
+    #region DeleteCollection
+
+    public bool DeleteCollectionBool { get; set; }
+
+    public void DeleteCollectionDialogShow()
+    {
+        //SidebarVisible = !SidebarVisible;
+        DeleteCollectionBool = !DeleteCollectionBool;
+    }
+
+    public void DeleteCollection()
+    {
+        DeleteCollectionController.HandleDeleteCollection(CollectionInfo, PatientInfo);
+        NavManager.NavigateTo("/mainPage");
+    }
+
+    #endregion
+
+    #region Notifications
+
+    public bool NotificationVisible { get; set; }
+
+    public void Notifications() => NotificationVisible = !NotificationVisible;
+
+    public bool DaysVisible { get; set; }
+
+    public void Days() => DaysVisible = !DaysVisible;
+
+    public bool HoursVisible { get; set; }
+
+    public void Hours() => HoursVisible = !HoursVisible;
+
+    public bool WeeksVisible { get; set; }
+
+    public void Weeks() => WeeksVisible = !WeeksVisible;
+
+    private string _dayOption { get; set; } = "--Dag--";
+    private string _hourOption { get; set; } = "--Time--";
+    private string _weekOption { get; set; } = "--Uger--";
+
+    public void DaysChanged(ChangeEventArgs dayEvent)
+    {
+        _dayOption = dayEvent.Value.ToString();
+        ChangeNotifications.WeekDay = _dayOption;
+        StateHasChanged();
+    }
+
+    public void HourChanged(ChangeEventArgs hourEvent)
+    {
+        _hourOption = hourEvent.Value.ToString();
+        ChangeNotifications.Hour = _hourOption;
+        StateHasChanged();
+    }
+
+    public void WeeksChanged(ChangeEventArgs weekEvent)
+    {
+        _weekOption = weekEvent.Value.ToString();
+        ChangeNotifications.NumberOfWeeks = _weekOption;
+        StateHasChanged();
+    }
+
+    public void OnChangedNotifications()
+    {
+        ChangeFollowUpNotificationsController.HandleChangedNotifications(ChangeNotifications);
+    }
+
+
+    private List<string> weekdaysList = new List<string>(new string[] { "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag" });
+    private List<string> weeksList = new List<string>(new string[] { "1", "2", "4", "6", "8", "12" });
+
+    private List<string> hoursList = new List<string>(new string[]
+    {
         "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13",
         "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"
-                    });
+                        });
 
-#endregion
+    #endregion
 
-#endregion
+    #endregion
 
-public DateTime FocusedPicDateOfUpload { get; set; }
-public DateTime LatestPicDateOfUpload { get; set; }
-public bool SpecificPictureChosen { get; set; }
+    public DateTime FocusedPicDateOfUpload { get; set; }
+    public DateTime LatestPicDateOfUpload { get; set; }
+    public bool SpecificPictureChosen { get; set; }
 
-private void ShowSpecificPicture(MouseEventArgs e, object pictureId)
-{
-    SpecificPictureChosen = !SpecificPictureChosen;
-    Picture = CollectionInfo.PictureList.Find(x => x.PictureID.Equals(pictureId));
-    FocusedPicDateOfUpload = Picture.DateOfUpload;
-    //TODO hent kommentarer
-    PictureData = PictureDataList.Find(x => x.PictureID.Equals(pictureId));
-    FocusedPic = PictureData.PicData;
-    Picture.PictureID = Convert.ToInt32(pictureId);
-}
-
-#region Find/upload new picture
-
-string status;
-public string imageDataUrl { get; set; } = "";
-public bool ShowUploadedMolePicture { get; set; }
-public bool PictureUploaded { get; set; }
-
-private void ShowUploadedMole()
-{
-    Picture.CollectionID = CollectionInfo.CollectionID;
-    Picture.DateOfUpload = DateTime.Now;
-    byte[] imgByteArray = MS.ToArray();
-    UploadPictureController.UploadPicture(imgByteArray, Picture);
-}
-
-private MemoryStream MS { get; set; }
-
-async Task HandleSelection(IFileListEntry[] files)
-{
-    ShowUploadedMolePicture = !ShowUploadedMolePicture;
-    var file = files.FirstOrDefault();
-    if (file != null)
+    private void ShowSpecificPicture(MouseEventArgs e, object pictureId)
     {
-        var fileType = GetFileType(file.Name);
-        if (fileType == "image")
-        {
-            MS = new MemoryStream();
-            await file.Data.CopyToAsync(MS);
-            //string imageBase64Data = Convert.ToBase64String(ms.ToArray());
-            //imageDataUrl = string.Format("image/png;base64,{0}", imageBase64Data);
-            imageDataUrl = file.Name;
+        SpecificPictureChosen = !SpecificPictureChosen;
+        Picture = CollectionInfo.PictureList.Find(x => x.PictureID.Equals(pictureId));
+        FocusedPicDateOfUpload = Picture.DateOfUpload;
+        //TODO hent kommentarer
+        //PictureData = Pictures[0].Item2.Find(x => x.Item2.PictureID.Equals(pictureId));
+        FocusedPic = PictureData.PicData;
+        Picture.PictureID = Convert.ToInt32(pictureId);
+    }
 
-            using (FileStream newFile = new FileStream("wwwroot\\images\\" + file.Name, FileMode.Create, FileAccess.Write))
+    #region Find/upload new picture
+
+    string status;
+    public string imageDataUrl { get; set; } = "";
+    public bool ShowUploadedMolePicture { get; set; }
+    public bool PictureUploaded { get; set; }
+
+    private void ShowUploadedMole()
+    {
+        Picture.CollectionID = CollectionInfo.CollectionID;
+        Picture.DateOfUpload = DateTime.Now;
+        byte[] imgByteArray = MS.ToArray();
+        UploadPictureController.UploadPicture(imgByteArray, Picture);
+    }
+
+    private MemoryStream MS { get; set; }
+
+    async Task HandleSelection(IFileListEntry[] files)
+    {
+        ShowUploadedMolePicture = !ShowUploadedMolePicture;
+        var file = files.FirstOrDefault();
+        if (file != null)
+        {
+            var fileType = GetFileType(file.Name);
+            if (fileType == "image")
             {
-                MS.WriteTo(newFile);
+                MS = new MemoryStream();
+                await file.Data.CopyToAsync(MS);
+                //string imageBase64Data = Convert.ToBase64String(ms.ToArray());
+                //imageDataUrl = string.Format("image/png;base64,{0}", imageBase64Data);
+                imageDataUrl = file.Name;
+
+                using (FileStream newFile = new FileStream("wwwroot\\images\\" + file.Name, FileMode.Create, FileAccess.Write))
+                {
+                    MS.WriteTo(newFile);
+                }
             }
         }
-    }
-    status = $"Finished loading {file.Size} bytes from {file.Name}";
+        status = $"Finished loading {file.Size} bytes from {file.Name}";
 
-}
-
-private string GetFileType(string name)
-{
-    string result = "";
-    if (name.Contains("jpeg") || name.Contains("jpg") || name.Contains("png") || name.Contains("gif") || name.Contains("jfif"))
-    {
-        result = "image";
     }
 
-    return result;
-}
-
-#endregion
-
-
-private void PointOnPatientModel()
-{
-
-}
-
-private void ShowCollections()
-{
-    Picture.PictureID = 1;
-    ViewCollectionController.HandleCollection(Picture);
-}
-
-private void DeletePicture()
-{
-    imageDataUrl = "";
-    DeletePictureModal = !DeletePictureModal;
-    Picture.PictureID = LatestPicID;
-    DeletePictureController.HandleDeletePicture(Picture);
-}
-
-private void DeleteCollection(Collection collection, PatientInfo patientInfo)
-{
-    collection.CollectionID = CollectionInfo.CollectionID;
-    patientInfo = LogInController.HandlePatientInfo();
-
-    DeleteCollectionController.HandleDeleteCollection(collection, patientInfo);
-}
-
-private void OnInputHandler(ChangeEventArgs e)
-{
-    CollectionInfo.CollectionName = e.Value.ToString();
-}
-
-public byte[] FocusedPic { get; set; }
-public byte[] LatestPic { get; set; }
-public List<PictureData> PictureDataList { get; set; }
-//public Collection ChosenCollection { get; set; }
-//PictureInfo pictureInfo = new PictureInfo();
-public List<Tuple<PictureInfo, PictureData>> Pictures { get; set; }
-public int LatestPicID { get; set; }
-
-
-protected override async Task OnInitializedAsync()
-{
-    Pictures = new List<Tuple<PictureInfo, PictureData>>();
-
-
-
-    //TODO Vi skal have en bool
-    if (CreateNewCollectionController.New)
+    private string GetFileType(string name)
     {
-        CollectionInfo = new Collection();
-        CreateNewCollectionController.New = false;
-    }
-    else
-    {
-        CollectionInfo = ViewCollectionController.SelectedCollection;
-    }
-
-    if (CollectionInfo.PictureList.Count != 0) //(CollectionInfo.PictureList.Count != 0)
-    {
-        foreach (var pic in CollectionInfo.PictureList)
+        string result = "";
+        if (name.Contains("jpeg") || name.Contains("jpg") || name.Contains("png") || name.Contains("gif") || name.Contains("jfif"))
         {
-            //PictureDataList.Add(ViewCollectionController.HandleCollection(pic));
-            //PictureInfoList.Add(pic);
-
-            Pictures.Add(new Tuple<PictureInfo, PictureData>(pic, ViewCollectionController.HandleCollection(pic)));
+            result = "image";
         }
 
-        if (Pictures[0].Item2.PicData != null)
+        return result;
+    }
+
+    #endregion
+
+
+    private void PointOnPatientModel()
+    {
+
+    }
+
+    private void ShowCollections()
+    {
+        Picture.PictureID = 1;
+        ViewCollectionController.HandleCollection(Picture);
+    }
+
+    private void DeletePicture()
+    {
+        imageDataUrl = "";
+        DeletePictureModal = !DeletePictureModal;
+        Picture.PictureID = LatestPicID;
+        DeletePictureController.HandleDeletePicture(Picture);
+    }
+
+    private void DeleteCollection(Collection collection, PatientInfo patientInfo)
+    {
+        collection.CollectionID = CollectionInfo.CollectionID;
+        patientInfo = LogInController.HandlePatientInfo();
+
+        DeleteCollectionController.HandleDeleteCollection(collection, patientInfo);
+    }
+
+    private void OnInputHandler(ChangeEventArgs e)
+    {
+        CollectionInfo.CollectionName = e.Value.ToString();
+    }
+
+    public byte[] FocusedPic { get; set; }
+    public byte[] LatestPic { get; set; }
+    //public List<PictureData> PictureDataList { get; set; }
+    //public Collection ChosenCollection { get; set; }
+    //PictureInfo pictureInfo = new PictureInfo();
+    public List<Tuple<PictureInfo, PictureData>> Pictures { get; set; }
+    public int LatestPicID { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        Pictures = new List<Tuple<PictureInfo, PictureData>>();
+
+        //TODO Vi skal have en bool
+        if (CreateNewCollectionController.New)
         {
-            FocusedPic = Pictures[0].Item2.PicData;
+            CollectionInfo = new Collection();
+            CreateNewCollectionController.New = false;
+        }
+        else
+        {
+            CollectionInfo = ViewCollectionController.SelectedCollection;
         }
 
-        FocusedPicDateOfUpload = CollectionInfo.PictureList[0].DateOfUpload;
-        //TODO kommentarer!
+        if (CollectionInfo.PictureList.Count != 0) //(CollectionInfo.PictureList.Count != 0)
+        {
+            foreach (var pic in CollectionInfo.PictureList)
+            {
+                //PictureDataList.Add(ViewCollectionController.HandleCollection(pic));
+                //PictureInfoList.Add(pic);
 
-        Pictures.Reverse();
+                Pictures.Add(new Tuple<PictureInfo, PictureData>(pic, ViewCollectionController.HandleCollection(pic)));
+            }
 
-        List<PictureInfo> reversedPicInfoList = CollectionInfo.PictureList;
-        reversedPicInfoList.Reverse();
+            if (Pictures[0].Item2.PicData != null)
+            {
+                FocusedPic = Pictures[0].Item2.PicData;
+            }
 
-        LatestPic = Pictures[0].Item2.PicData;
-        LatestPicDateOfUpload = reversedPicInfoList[0].DateOfUpload;
-        LatestPicID = reversedPicInfoList[0].PictureID;
+            FocusedPicDateOfUpload = CollectionInfo.PictureList[0].DateOfUpload;
+            //TODO kommentarer!
+
+            Pictures.Reverse();
+
+            List<PictureInfo> reversedPicInfoList = CollectionInfo.PictureList;
+            reversedPicInfoList.Reverse();
+
+            LatestPic = Pictures[0].Item2.PicData;
+            LatestPicDateOfUpload = reversedPicInfoList[0].DateOfUpload;
+            LatestPicID = reversedPicInfoList[0].PictureID;
 
             //TODO kommentarer
             Picture.PictureID = LatestPicID;
             PicComment =ViewCollectionController.HandlePictureComment(Picture);
 
 
-        //CollectionInfo = new Collection();
+            //CollectionInfo = new Collection();
+        }
     }
-}
 }
