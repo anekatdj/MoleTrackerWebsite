@@ -289,7 +289,8 @@
             _stopWatchTimer.Elapsed += CheckStopWatch_Timer_Tick;
             _stopWatchTimer.Enabled = true;
 
-            LatestPicComment = ViewCollectionController.GetPictureComment(ReversedPicInfoList[0]).Comment;
+            FocusedPicComment = ViewCollectionController.GetPictureComment(FocusedPicInfo).Comment;
+            
         }
     }
     public void CheckStopWatch_Timer_Tick(object sender, EventArgs e)
@@ -307,6 +308,7 @@
             _stopWatch.Reset();
             _stopWatchTimer.Enabled = false;
 
+            FocusedPicComment = ViewCollectionController.GetPictureComment(FocusedPicInfo).Comment;
         }
     }
 
