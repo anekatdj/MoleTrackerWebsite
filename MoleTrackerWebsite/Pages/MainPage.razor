@@ -46,7 +46,7 @@
                         <th>Personlige samlinger</th>
                     </tr>
                 </thead>
-                <tbody  style="cursor:pointer">
+                <tbody style="cursor:pointer">
                     @foreach (Collection collection in Collections)
                     {
                         <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))">
@@ -110,16 +110,16 @@
 
     @if (AddButtonPressed == true)
     {
-    @if (PointClicked == true)
-    {
-        <button style="float: right; margin-right: 7%; margin-top: 1%; border-radius: 28px;background:none" @onclick="AcceptPosition">Godkend</button>
-        <p style="float: right; color: crimson; margin-right: 1%; margin-top: 1%">Vælg placering af modermærke</p>
-    }
-    @if (PointClicked == false)
-    {
-        <button style="float: right; margin-right: 7%; margin-top: 1%; border-radius: 28px;background:none" disabled="@true">Godkend</button>
-        <p style="float: right; color: crimson; margin-right: 1%; margin-top: 1%">Vælg placering af modermærke</p>
-    }
+        @if (PointClicked == true)
+        {
+            <button style="float: right; margin-right: 7%; margin-top: 1%; border-radius: 28px;background:none" @onclick="AcceptPosition">Godkend</button>
+            <p style="float: right; color: crimson; margin-right: 1%; margin-top: 1%">Vælg placering af modermærke</p>
+        }
+        @if (PointClicked == false)
+        {
+            <button style="float: right; margin-right: 7%; margin-top: 1%; border-radius: 28px;background:none" disabled="@true">Godkend</button>
+            <p style="float: right; color: crimson; margin-right: 1%; margin-top: 1%">Vælg placering af modermærke</p>
+        }
     }
 
 
@@ -295,9 +295,11 @@
         {
             Location = Coordinates.Location,
             CollectionName = Coordinates.Collections.CollectionName,
-            PictureList = new List<PictureInfo>()
+            PictureList = new List<PictureInfo>(),
+            PatientID = PatientInfo.PatientID,
+            IsMarked = false
         };
-        CreateNewCollectionController.HandleCreateNewCollection(newCollection);
+        Collection.CollectionID = CreateNewCollectionController.HandleCreateNewCollection(newCollection);
         NavigateToNewCollectionPage();
     }
 
@@ -305,7 +307,7 @@
     {
         var selectedCollection = PatientData.CollectionList.Where(x => x.CollectionID.Equals(collectionId)).ToList();
 
-        if (Convert.ToInt32(collectionId)>0)
+        if (Convert.ToInt32(collectionId) > 0)
         {
             ViewCollectionController.SelectedCollection = selectedCollection[0];
         }

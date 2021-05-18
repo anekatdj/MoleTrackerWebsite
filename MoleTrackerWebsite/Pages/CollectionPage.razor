@@ -260,22 +260,18 @@
 
 @code {
     //TODO Lav popop med fortryd handling efter man er kommet ind på main page og har slettet en collection
-    private List<Collection> collections = new List<Collection>();
-    //private IEnumerable<Collection> collections = new[]
-    //{
-    //    new Collection {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()},
-    //    new Collection {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBody(), PictureList = new List<PictureInfo>()}
-    //};
 
-    public bool SaveDisabled { get; set; } = true;
+    #region Properties til html
+
     public string AddPictureButton = "fa fa-picture-o";
-    public bool DeleteCollectionBool { get; set; }
     public string EditIcon { get; set; } = "fa fa-pencil";
-    public bool ChangeNameBool { get; set; }
-    public bool IsDisabled { get; set; } = true;
     public string FontColor { get; set; }
     public string FlagColor = "azure";
 
+    #endregion
+
+    public bool ChangeNameBool { get; set; }
+    public bool IsDisabled { get; set; } = true;
     private void EditName()
     {
         if (!ChangeNameBool)
@@ -290,11 +286,6 @@
             IsDisabled = true;
         }
         ChangeNameBool = !ChangeNameBool;
-    }
-
-    private void OnInputHandler(ChangeEventArgs e)
-    {
-        CollectionInfo.CollectionName = e.Value.ToString();
     }
 
     private void SaveNotes()
@@ -315,8 +306,8 @@
         SidebarVisible = !SidebarVisible;
     }
 
-    public bool SidebarVisible { get; set; }
 
+    public bool SidebarVisible { get; set; }
     private void Sidebar()
     {
         SidebarVisible = !SidebarVisible;
@@ -325,7 +316,6 @@
     #region Flag
 
     public string Flag = "fa fa-flag-o";
-
     public void ItemMarked()
     {
         if (Flag == "fa fa-flag-o")
@@ -348,6 +338,7 @@
 
     #region DeleteCollection
 
+    public bool DeleteCollectionBool { get; set; }
     public void DeleteCollectionDialogShow()
     {
         //SidebarVisible = !SidebarVisible;
@@ -366,31 +357,19 @@
 
     public bool NotificationVisible { get; set; }
 
-    public void Notifications()
-    {
-        NotificationVisible = !NotificationVisible;
-    }
+    public void Notifications() => NotificationVisible = !NotificationVisible;
 
     public bool DaysVisible { get; set; }
 
-    public void Days()
-    {
-        DaysVisible = !DaysVisible;
-    }
+    public void Days() => DaysVisible = !DaysVisible;
 
     public bool HoursVisible { get; set; }
 
-    public void Hours()
-    {
-        HoursVisible = !HoursVisible;
-    }
+    public void Hours() => HoursVisible = !HoursVisible;
 
     public bool WeeksVisible { get; set; }
 
-    public void Weeks()
-    {
-        WeeksVisible = !WeeksVisible;
-    }
+    public void Weeks() => WeeksVisible = !WeeksVisible;
 
     private string _dayOption { get; set; } = "--Dag--";
     private string _hourOption { get; set; } = "--Time--";
@@ -438,7 +417,7 @@
     private void ShowSpecificPicture(MouseEventArgs e, object pictureId)
     {
         SpecificPictureChosen = !SpecificPictureChosen;
-        Picture = ChosenCollection.PictureList.Find(x => x.PictureID.Equals(pictureId));
+        Picture = CollectionInfo.PictureList.Find(x => x.PictureID.Equals(pictureId));
         FocusedPicDateOfUpload = Picture.DateOfUpload;
         //TODO hent kommentarer
         PictureData = PictureDataList.Find(x => x.PictureID.Equals(pictureId));
@@ -446,12 +425,9 @@
         Picture.PictureID = Convert.ToInt32(pictureId);
     }
 
-
-
     #region Find/upload new picture
 
     string status;
-
     public string imageDataUrl { get; set; } = "";
     public bool ShowUploadedMolePicture { get; set; }
     public bool PictureUploaded { get; set; }
@@ -525,16 +501,21 @@
 
     private void DeleteCollection(Collection collection, PatientInfo patientInfo)
     {
-        collection.CollectionID = ChosenCollection.CollectionID;
+        collection.CollectionID = CollectionInfo.CollectionID;
         patientInfo = LogInController.HandlePatientInfo();
 
         DeleteCollectionController.HandleDeleteCollection(collection, patientInfo);
     }
 
+    private void OnInputHandler(ChangeEventArgs e)
+    {
+        CollectionInfo.CollectionName = e.Value.ToString();
+    }
+
     public byte[] FocusedPic { get; set; }
     public byte[] LatestPic { get; set; }
     public List<PictureData> PictureDataList { get; set; }
-    public Collection ChosenCollection { get; set; }
+    //public Collection ChosenCollection { get; set; }
     //PictureInfo pictureInfo = new PictureInfo();
     public List<Tuple<PictureInfo, PictureData>> Pictures { get; set; }
     public int LatestPicID { get; set; }
@@ -544,13 +525,18 @@
         //PictureDataList = new List<PictureData>();
         //PictureInfoList = new List<PictureInfo>();
         Pictures = new List<Tuple<PictureInfo, PictureData>>();
-        ChosenCollection = ViewCollectionController.SelectedCollection;
-
-        CollectionInfo = ChosenCollection;
+        if (CollectionInfo.CollectionID != 0)
+        {
+            CollectionInfo = ViewCollectionController.SelectedCollection;
+        }
+        else
+        {
+            CollectionInfo = new Collection();
+        }
 
         if (ChosenCollection.PictureList.Count != 0)
         {
-            foreach (var pic in ChosenCollection.PictureList)
+            foreach (var pic in CollectionInfo.PictureList)
             {
                 //PictureDataList.Add(ViewCollectionController.HandleCollection(pic));
                 //PictureInfoList.Add(pic);
@@ -563,14 +549,12 @@
                 FocusedPic = Pictures[0].Item2.PicData;
             }
 
-            FocusedPicDateOfUpload = ChosenCollection.PictureList[0].DateOfUpload;
-            ////TODO kommentarer!
-
-
+            FocusedPicDateOfUpload = CollectionInfo.PictureList[0].DateOfUpload;
+            //TODO kommentarer!
 
             Pictures.Reverse();
 
-            List<PictureInfo> reversedPicInfoList = ChosenCollection.PictureList;
+            List<PictureInfo> reversedPicInfoList = CollectionInfo.PictureList;
             reversedPicInfoList.Reverse();
 
             LatestPic = Pictures[0].Item2.PicData;

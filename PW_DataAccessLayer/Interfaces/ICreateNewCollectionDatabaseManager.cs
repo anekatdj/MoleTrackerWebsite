@@ -1,12 +1,13 @@
 ﻿using DataClasses.Domain.Collections;
+using DataClasses.Domain.MISC;
 using DataClasses.DTO;
 
 namespace PW_DataAccessLayer.Interfaces
 {
     public interface ICreateNewCollectionDatabaseManager
     {
+        public PatientData CurrentPatientData { get; set; }
         CollectionDTO CollectionDTO { get; set; }
-        void GetExistingCollection(Collection collection);
-        void PostNewCollection(Collection collection);
+        int PostNewCollection(Collection collection);
     }
 }
