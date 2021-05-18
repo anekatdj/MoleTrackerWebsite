@@ -13,5 +13,6 @@ namespace PW_BusinessLogicLayer.Interfaces
 
         public PatientData GetPatientData(PatientInfo patientInfoDomain);
         public byte[] HandleSpecificPicture(int pictureID);
+        PictureComment HandlePictureComment(PictureInfo pictureInfo);
     }
 }

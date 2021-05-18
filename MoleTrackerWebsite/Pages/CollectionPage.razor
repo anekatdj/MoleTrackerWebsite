@@ -31,6 +31,7 @@
 @inject NavigationManager NavManager
 @inject ILogInController LogInController
 @inject IDeletePictureController DeletePictureController
+@inject ICreateNewCollectionController CreateNewCollectionController
 
 
 
@@ -291,7 +292,7 @@
 
     private void SaveNotes()
     {
-    //ChangeComment.HandleComment(PicComment); //TODO Skal sættes op når lasse har fikset det
+        //ChangeComment.HandleComment(PicComment); //TODO Skal sættes op når lasse har fikset det
     }
 
     public bool DeletePictureModal { get; set; }
@@ -346,13 +347,13 @@
 
     public void DeleteCollectionDialogShow()
     {
-    //SidebarVisible = !SidebarVisible;
+        //SidebarVisible = !SidebarVisible;
         DeleteCollectionBool = !DeleteCollectionBool;
     }
 
     public void DeleteCollection()
     {
-    //DeleteCollectionController.HandleDeleteCollection();
+        //DeleteCollectionController.HandleDeleteCollection();
         NavManager.NavigateTo("/mainPage");
     }
 
@@ -407,14 +408,14 @@
     }
 
 
-    private List<string> weekdaysList = new List<string>(new string[] {"Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"});
-    private List<string> weeksList = new List<string>(new string[] {"1", "2", "4", "6", "8", "12"});
+    private List<string> weekdaysList = new List<string>(new string[] { "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag" });
+    private List<string> weeksList = new List<string>(new string[] { "1", "2", "4", "6", "8", "12" });
 
     private List<string> hoursList = new List<string>(new string[]
     {
         "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13",
         "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"
-    });
+        });
 
     #endregion
 
@@ -429,7 +430,7 @@
         SpecificPictureChosen = !SpecificPictureChosen;
         Picture = CollectionInfo.PictureList.Find(x => x.PictureID.Equals(pictureId));
         FocusedPicDateOfUpload = Picture.DateOfUpload;
-    //TODO hent kommentarer
+        //TODO hent kommentarer
         PictureData = PictureDataList.Find(x => x.PictureID.Equals(pictureId));
         FocusedPic = PictureData.PicData;
         Picture.PictureID = Convert.ToInt32(pictureId);
@@ -463,8 +464,8 @@
             {
                 MS = new MemoryStream();
                 await file.Data.CopyToAsync(MS);
-    //string imageBase64Data = Convert.ToBase64String(ms.ToArray());
-    //imageDataUrl = string.Format("image/png;base64,{0}", imageBase64Data);
+                //string imageBase64Data = Convert.ToBase64String(ms.ToArray());
+                //imageDataUrl = string.Format("image/png;base64,{0}", imageBase64Data);
                 imageDataUrl = file.Name;
 
                 using (FileStream newFile = new FileStream("wwwroot\\images\\" + file.Name, FileMode.Create, FileAccess.Write))
@@ -531,26 +532,32 @@
     public List<Tuple<PictureInfo, PictureData>> Pictures { get; set; }
     public int LatestPicID { get; set; }
 
+
     protected override async Task OnInitializedAsync()
     {
-    //PictureDataList = new List<PictureData>();
-    //PictureInfoList = new List<PictureInfo>();
+        //PictureDataList = new List<PictureData>();
+        //PictureInfoList = new List<PictureInfo>();
         Pictures = new List<Tuple<PictureInfo, PictureData>>();
-        if (CollectionInfo.CollectionID != 0)
+
+
+
+        //TODO Vi skal have en bool
+        if (CreateNewCollectionController.NewOrOld)
         {
-            CollectionInfo = ViewCollectionController.SelectedCollection;
+            CollectionInfo = new Collection();
+            CreateNewCollectionController.NewOrOld = false;
         }
         else
         {
-            CollectionInfo = new Collection();
+            CollectionInfo = ViewCollectionController.SelectedCollection;
         }
 
-        if (CollectionInfo.PictureList.Count != 0)
+        if (CollectionInfo.PictureList.Count != 0) //(CollectionInfo.PictureList.Count != 0)
         {
             foreach (var pic in CollectionInfo.PictureList)
             {
-    //PictureDataList.Add(ViewCollectionController.HandleCollection(pic));
-    //PictureInfoList.Add(pic);
+                //PictureDataList.Add(ViewCollectionController.HandleCollection(pic));
+                //PictureInfoList.Add(pic);
 
                 Pictures.Add(new Tuple<PictureInfo, PictureData>(pic, ViewCollectionController.HandleCollection(pic)));
             }
@@ -561,7 +568,7 @@
             }
 
             FocusedPicDateOfUpload = CollectionInfo.PictureList[0].DateOfUpload;
-    //TODO kommentarer!
+            //TODO kommentarer!
 
             Pictures.Reverse();
 
@@ -571,7 +578,13 @@
             LatestPic = Pictures[0].Item2.PicData;
             LatestPicDateOfUpload = reversedPicInfoList[0].DateOfUpload;
             LatestPicID = reversedPicInfoList[0].PictureID;
-    //TODO kommentarer
+
+            //TODO kommentarer
+            Picture.PictureID = LatestPicID;
+            PictureComment comment =ViewCollectionController.HandlePictureComment(Picture);
+
+
+    //CollectionInfo = new Collection();
         }
     }
 }

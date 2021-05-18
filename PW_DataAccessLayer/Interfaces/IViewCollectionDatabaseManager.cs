@@ -10,5 +10,6 @@ namespace PW_DataAccessLayer.Interfaces
         PictureData GetCollection(PictureInfo pictureInfo);
         public PatientData GetPatientData(PatientInfo patientInfoDomain);
         byte[] LoadSpecificPicture(int pictureID);
+        PictureComment GetPictureComment(PictureInfo pictureInfo);
     }
 }
