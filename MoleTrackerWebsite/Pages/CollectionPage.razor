@@ -75,7 +75,7 @@
                                     <DataAnnotationsValidator />
                                     <ValidationSummary />
 
-                                    <InputText style="width: 100%; height: 100%; border: none" id="myFocusedCommentInput" border:none @bind-Value="FocusedPicComment"></InputText>
+                                    <InputText style="width: 100%;padding: 20px 10px; line-height: 100%; border: none" id="myFocusedCommentInput" border:none @bind-Value="FocusedPicComment"></InputText>
                                 </EditForm>
 
                             </div>
@@ -93,7 +93,7 @@
                                     <DataAnnotationsValidator />
                                     <ValidationSummary />
 
-                                    <InputText style="width: 100%; height: 100%; border: none " id="myLatestCommentInput" border:none @bind-Value="LatestPicComment"></InputText>
+                                    <InputText  style="width: 100%;padding: 20px 10px; line-height: 100%; border: none" id="myLatestCommentInput" @bind-Value="LatestPicComment"></InputText>
                                 </EditForm>
 
                             </div>
@@ -219,11 +219,6 @@
             LatestPicDateOfUpload = ReversedPicInfoList[0].DateOfUpload;
             LatestPicComment = ViewCollectionController.GetPictureComment(ReversedPicInfoList[0]).Comment;
         }
-
-        //Stub
-        FocusedPicComment = "";
-
-        CommentInput = "";
 
     }
 
