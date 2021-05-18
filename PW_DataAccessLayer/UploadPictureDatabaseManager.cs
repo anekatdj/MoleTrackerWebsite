@@ -24,8 +24,11 @@ namespace PW_DataAccessLayer
             PostPictureDTO NewPostPicture = new PostPictureDTO();
 
             NewPostPicture.Comment = new PictureCommentDTO();
+            //NewPostPicture.Comment.LoginType = "P";
             NewPostPicture.Info = pictureInfo.ToDTO();
+            //NewPostPicture.Info.LoginType = "P";
             NewPostPicture.Data = new PictureDataDTO();
+            //NewPostPicture.Data.LoginType = "P";
 
             NewPostPicture.Data.PictureData = newDataBytes;
 
