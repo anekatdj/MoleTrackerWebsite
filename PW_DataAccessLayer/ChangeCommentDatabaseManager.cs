@@ -23,20 +23,20 @@ namespace PW_DataAccessLayer
         }
 
 
-        public void HandleChangedComment(PictureComment pictureComment)
+        public void PostNewPictureComment(PictureComment editedComment)
         {
             PictureCommentDTO _pictureCommentDTO = new PictureCommentDTO();
 
-            _pictureCommentDTO.Comment = pictureComment.Comment;
-            _pictureCommentDTO.PictureID = pictureComment.PictureID;
+            _pictureCommentDTO.Comment = editedComment.Comment;
+            _pictureCommentDTO.PictureID = editedComment.PictureID;
 
             try
             {
-                _pictureRequestDTO = API.GetObject<PictureRequestDTO, PictureCommentDTO>("GetPictureComment", _pictureCommentDTO);
+                API.PostObject<PictureCommentDTO>("NewPictureComment", _pictureCommentDTO);
             }
-            catch (WebException e) when ((e.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
+            catch (Exception e)
             {
-                Console.WriteLine(e);
+                throw;
             }
         }
     }

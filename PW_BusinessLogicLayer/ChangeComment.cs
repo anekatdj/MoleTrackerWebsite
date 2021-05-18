@@ -17,9 +17,14 @@ namespace PW_BusinessLogicLayer
             _changeCommentDatabaseManager = new ChangeCommentDatabaseManager("");
         }
 
-        public void HandleComment(PictureComment pictureComment)
+        //public void HandleComment(PictureComment pictureComment)
+        //{
+        //    _changeCommentDatabaseManager.HandleChangedComment(pictureComment);
+        //}
+
+        public void HandleNewPictureComment(PictureComment editedComment)
         {
-            _changeCommentDatabaseManager.HandleChangedComment(pictureComment);
+            _changeCommentDatabaseManager.PostNewPictureComment(editedComment);
         }
     }
 }

@@ -9,6 +9,7 @@
 @using PW_BusinessLogicLayer
 @using PW_BusinessLogicLayer.Interfaces
 @using PW_DataAccessLayer.Interfaces
+@using System.Globalization
 
 <link href="css/CSSStyles.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -231,7 +232,8 @@
                     {
                         <tr>
                             <td>
-                                @item.Item1.DateOfUpload
+                                @item.Item1.DateOfUpload.ToLocalTime().ToString("dd MMM yyyy HH:mm",
+                                    CultureInfo.CreateSpecificCulture("da-DA"))
                                 <img src="data:image;base64,@System.Convert.ToBase64String(@item.Item2.PicData)" width="100" height="100" />
                             </td>
                         </tr>
@@ -250,7 +252,7 @@
 <div class="row">
     <div class="col">
         <div style="float: left; margin-top: 3%;">
-            <textarea class="textarea" style="overflow-y: visible; overflow-x: hidden; max-height: 80%; width: 150%" @bind="PicComment.Comment" placeholder="Indtast noter her..." />
+            <textarea class="textarea" style="overflow-y: visible; overflow-x: hidden; max-height: 80%; width: 150%" @bind="PicComment.Comment" placeholder="@PicComment" /> @*placeholder="Indtast noter her..."*@
             <button class="btn btn-primary rounded-pill" @onclick="SaveNotes">Gem noter</button>
         </div>
     </div>
@@ -291,10 +293,11 @@ private void EditName()
     ChangeNameBool = !ChangeNameBool;
 }
 
-private void SaveNotes()
-{
+    private void SaveNotes()
+    {
+        ChangeComment.HandleNewPictureComment(PicComment);
     //ChangeComment.HandleComment(PicComment); //TODO Skal sættes op når lasse har fikset det
-}
+    }
 
 public bool DeletePictureModal { get; set; }
 
@@ -578,9 +581,9 @@ protected override async Task OnInitializedAsync()
         LatestPicDateOfUpload = reversedPicInfoList[0].DateOfUpload;
         LatestPicID = reversedPicInfoList[0].PictureID;
 
-        //TODO kommentarer
-        Picture.PictureID = LatestPicID;
-        PictureComment comment = ViewCollectionController.HandlePictureComment(Picture);
+            //TODO kommentarer
+            Picture.PictureID = LatestPicID;
+            PicComment =ViewCollectionController.HandlePictureComment(Picture);
 
 
         //CollectionInfo = new Collection();

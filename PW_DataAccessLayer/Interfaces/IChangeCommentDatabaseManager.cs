@@ -4,6 +4,7 @@ namespace PW_DataAccessLayer.Interfaces
 {
     public interface IChangeCommentDatabaseManager
     {
-        public void HandleChangedComment(PictureComment pictureComment);
+        //public void HandleChangedComment(PictureComment pictureComment);
+        void PostNewPictureComment(PictureComment editedComment);
     }
 }
