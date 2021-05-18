@@ -6,6 +6,7 @@
 @using PW_BusinessLogicLayer.Interfaces
 
 @inject PatientInfo PatientInfo
+@inject LogInInfo LogInInfo
 @inject ILogInController LogInController
 
 <div>
@@ -14,7 +15,7 @@
     <div class="row mb-3">
         <label for="colFormLabel" class="col-sm-2 col-form-label">Navn</label>
         <div class="col">
-            <input disabled="@IsDisabled" type="text" class="form-control" placeholder=@PatientInfo.Name aria-label="First name">
+            <textarea disabled="@IsDisabled" type="text" class="form-control" placeholder=@PatientInfo.Name aria-label="First name"></textarea>
         </div>
     </div>
     <div class="row mb-3">
@@ -67,6 +68,7 @@
 
 @code{
     //Edit and save personal information
+    //TODO ændr oplysninger på API
     public string TxtType = "Redigér";
     public bool IsDisabled = true;
 
@@ -88,7 +90,7 @@
     //Run this when page is loaded
     public void DisplayPatientInfo()
     {
-        //PatientInfo = LogInController.HandlePatientInfo();
+        PatientInfo = LogInController.HandlePatientInfo();
     }
 
     Task StartupTask()
@@ -102,74 +104,3 @@
         await StartupTask();
     }
 }
-
-
-
-@*<div class="row">
-        <div class="col-sm-3">
-            <p>Navn</p>
-        </div>
-        <div class="col-sm-4">
-            <p>@name</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-3">
-            <p>Fødselsdato</p>
-        </div>
-        <div class="col-sm-4">
-            <p>@birthdate</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-3">
-            <p>Køn</p>
-        </div>
-        <div class="col-sm-4">
-            <p>@gender</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-3">
-            <p>Adgangskode</p>
-        </div>
-        <div class="col-sm-4">
-            <p>@password</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-3">
-            <p>E-mail</p>
-        </div>
-        <div class="col-sm-4">
-            <p>@email</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-3">
-            <p>CPR-nummer</p>
-        </div>
-        <div class="col-sm-4">
-            <p>@cpr</p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-3">
-            <button class="btn btn-success">Ændr oplysninger</button>
-        </div>
-    </div>
-
-    @code {
-        private string name = "Laura Birch";
-        private string birthdate ="20. juli 1998";
-        private string gender = "Kvinde";
-        private string password = "*********";
-        private string email = "laura.birch@hotmail.dk";
-        private string cpr = "200798-xxxx";
-    }*@

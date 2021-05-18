@@ -12,7 +12,6 @@ namespace PW_BusinessLogicLayer
 
         public LogInController()
         {
-            //AK leger
             logInDatabaseManager = new LogInDatabaseManager("");
         }
 

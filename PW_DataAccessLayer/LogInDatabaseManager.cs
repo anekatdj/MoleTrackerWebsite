@@ -46,17 +46,13 @@ namespace PW_DataAccessLayer
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
-            
+
+            return false;
+
         }
         
         public PatientInfo GetPatientInfo()
         {
-            //TODO Måske skal den laves om?
-
             patientInfo.Name = patientInfoDTO.Name;
             patientInfo.PatientID = patientInfoDTO.PatientID;
             patientInfo.PhoneNumber = patientInfoDTO.PhoneNumber;

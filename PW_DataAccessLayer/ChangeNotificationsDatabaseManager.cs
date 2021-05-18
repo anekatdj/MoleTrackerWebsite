@@ -16,7 +16,7 @@ namespace PW_DataAccessLayer
             API = APIFactory.GetAPI(APIType);
         }
 
-        public void PostChangedNotifications(ChangeNotifications _changeNotifications) //TODO Skal det her være void?
+        public void PostChangedNotifications(ChangeNotifications _changeNotifications)
         {
             //ChangeNotificationsDTO _changeNotificationsDTO = new ChangeNotificationsDTO();
 

@@ -11,7 +11,7 @@ namespace PW_DataAccessLayer
     {
         private readonly IAPIService API;
 
-        public ChangeCollectionNameDatabaseManager(string APIType) //TODO implementer i resten
+        public ChangeCollectionNameDatabaseManager(string APIType)
         {
             API = APIFactory.GetAPI(APIType);
         }

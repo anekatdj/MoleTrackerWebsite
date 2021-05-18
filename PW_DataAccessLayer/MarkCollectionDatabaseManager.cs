@@ -19,7 +19,7 @@ namespace PW_DataAccessLayer
             //API = new StubApiService();
         }
 
-        public void PostMarkedCollection(ChangeCollectionMarking _changeCollectionMarking) //TODO Skal det her være void?
+        public void PostMarkedCollection(ChangeCollectionMarking _changeCollectionMarking)
         {
             ChangeCollectionMarkingDTO _changeCollectionMarkingDTO = new ChangeCollectionMarkingDTO();
 
