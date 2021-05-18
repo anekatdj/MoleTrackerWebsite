@@ -16,7 +16,7 @@ namespace PW_BusinessLogicLayer
 
         public ViewCollectionController()
         {
-            viewCollectionDatabaseManager = new ViewCollectionDatabaseManager();
+            viewCollectionDatabaseManager = new ViewCollectionDatabaseManager("");
         }
 
         public PictureData HandleCollection(PictureInfo pictureInfo)

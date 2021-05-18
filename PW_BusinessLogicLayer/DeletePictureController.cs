@@ -13,7 +13,7 @@ namespace PW_BusinessLogicLayer
 
         public DeletePictureController()
         {
-            deletePictureDatabaseManager = new DeletePictureDatabaseManager();
+            deletePictureDatabaseManager = new DeletePictureDatabaseManager("");
         }
 
         public void HandleDeletePicture(PictureInfo pictureInfo)

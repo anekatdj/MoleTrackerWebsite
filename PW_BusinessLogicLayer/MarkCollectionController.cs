@@ -10,7 +10,7 @@ namespace PW_BusinessLogicLayer
 
         public MarkCollectionController()
         {
-            _markCollectionDatabaseManager = new MarkCollectionDatabaseManager();
+            _markCollectionDatabaseManager = new MarkCollectionDatabaseManager("");
         }
         public void HandleMarking(ChangeCollectionMarking _changeCollectionMarking)
         {

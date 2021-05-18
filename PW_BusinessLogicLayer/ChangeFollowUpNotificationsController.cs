@@ -11,7 +11,7 @@ namespace PW_BusinessLogicLayer
 
         public ChangeFollowUpNotificationsController()
         {
-            _changeNotificationsDatabaseManager = new ChangeNotificationsDatabaseManager();
+            _changeNotificationsDatabaseManager = new ChangeNotificationsDatabaseManager("");
         }
 
         public void HandleChangedNotifications(ChangeNotifications changeNotifications)
