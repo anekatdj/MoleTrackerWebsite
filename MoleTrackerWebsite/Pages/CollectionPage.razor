@@ -9,6 +9,7 @@
 @using PW_BusinessLogicLayer
 @using PW_BusinessLogicLayer.Interfaces
 @using PW_DataAccessLayer.Interfaces
+@using System.Globalization
 
 <link href="css/CSSStyles.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -231,7 +232,8 @@
                     {
                         <tr>
                             <td>
-                                @item.Item1.DateOfUpload
+                                @item.Item1.DateOfUpload.ToLocalTime().ToString("dd MMM yyyy HH:mm",
+                                    CultureInfo.CreateSpecificCulture("da-DA"))
                                 <img src="data:image;base64,@System.Convert.ToBase64String(@item.Item2.PicData)" width="100" height="100" />
                             </td>
                         </tr>
