@@ -12,6 +12,7 @@ namespace DataClasses.Domain
         public List<PictureInfoDomain> PictureList { get; set; }
         public string CollectionName { get; set; }
         public LocationOnBodyDomain Location { get; set; }
+        public bool IsMarked { get; set; }
 
         public CollectionDomain()
         {
@@ -47,7 +48,8 @@ namespace DataClasses.Domain
                 CollectionID = CollectionID,
                 CollectionName = CollectionName,
                 PictureList = list,
-                Location = Location.ToDTO(bodyPart)
+                Location = Location.ToDTO(bodyPart),
+                IsMarked = IsMarked
             };
             return collectionDTO;
         }

@@ -15,7 +15,7 @@
 @inject NavigationManager NavManager
 @inject SessionInfoDomain SesInfo
 @inject CoordinatesLocalization Coordinates
-@inject IJSRuntime JS;
+@inject IJSRuntime JS
 
 @layout MainLayout
 
@@ -35,7 +35,7 @@
                     <tr>
                         <th>Modermærker</th>
                     </tr>
-                    @foreach (var collection in CollectionList)
+                    @foreach (var collection in SortedCollectionList)
                     {
                         <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))" style="cursor: pointer">
                             <td>
@@ -56,11 +56,16 @@
             @if (AddButtonPressed == true)
             {
                 <img class="cursor" id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" /> @*onmousewheel = "@MouseWheel"*@
+                <div class="cursor" @onclick="GetCoordinates" style="width: @(_pointRadius * 2)px; height: @(_pointRadius * 2)px; top: @(YPoint - _pointRadius)px; left: @(XPoint - _pointRadius)px; background-color: red; position: fixed; border-radius: @(_pointRadius)px"></div>
             }
             else
             {
                 <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" /> @*onmousewheel = "@MouseWheel"*@
-                <div class="cursor" @onclick="GetCoordinates" style="width: @(_pointRadius * 2)px; height: @(_pointRadius * 2)px; top: @(YPoint - _pointRadius)px; left: @(XPoint - _pointRadius)px; background-color: red; position: fixed; border-radius: @(_pointRadius)px"></div>
+
+            }
+            @foreach (var item in CollectionList)
+            {
+                <div class="cursor" style="width: @(_pointRadius * 2)px; height: @(_pointRadius * 2)px; top: @(item.Location.yCoordinate - _pointRadius)px; left: @(item.Location.xCoordinate - _pointRadius)px; background-color: red; position: fixed; border-radius: @(_pointRadius)px"></div>
             }
             <button style="float: right" class="@Arrow" @onclick="TurnAroundModel"></button>
 
@@ -100,6 +105,7 @@
     private PatientInfoDomain patientInfo;
     public PatientDataDomain PatientData { get; set; }
     public List<CollectionDomain> CollectionList { get; set; }
+    public  List<CollectionDomain> SortedCollectionList { get; set; }
     public string NameOfPatient { get; set; }
     public List<PictureDataDomain> PicDataList { get; set; }
 
@@ -118,7 +124,7 @@
 
     private IEnumerable<CollectionDomain> collections = new[]
     {
-        new CollectionDomain {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()},
+        new CollectionDomain() {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()},
         new CollectionDomain() {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()},
         new CollectionDomain() {CollectionID = 1, CollectionName = "Venstre fod", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()},
         new CollectionDomain() {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()}
@@ -224,6 +230,12 @@
         BackOrFront();
     }
 
+    private async Task PinOnPatientModel()
+    {
+        var result = await JS.InvokeAsync<BoundingClientRect>("PictureClickFind", new object[] { "PatientModel" });
+
+    }
+
     private void BackOrFront()
     {
         GetGender();
@@ -290,11 +302,11 @@
         {
             Location = Coordinates.LocationOnBody,
             CollectionName = Coordinates.Collection.CollectionName,
-            PictureList = new List<PictureInfoDomain>()
+            PictureList = new List<PictureInfoDomain>(),
+            PatientID = patientInfo.PatientID,
+            IsMarked = true
         };
         CreateCollectionController.AddNewCollection(newCollectionDomain);
-        //CollectionList.Add(newCollectionDomain);
-        NavManager.NavigateTo("/PatientPage");
     }
 
     private void NavigateToCollectionPage(MouseEventArgs e, object collectionId)
@@ -348,6 +360,13 @@
         PatientData = SelectPatientController.GetPatientData(patientInfo);
 
         CollectionList = PatientData.CollectionList;
+        SortedCollectionList = new List<CollectionDomain>();
+        var sorted = from item in CollectionList orderby item.IsMarked descending select item;
+        foreach (var item in sorted)
+        {
+            SortedCollectionList.Add(item);
+        }
+
         NameOfPatient = patientInfo.Name;
 
         DisplayPatientModel();
