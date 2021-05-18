@@ -6,7 +6,7 @@ using PW_DataAccessLayer.Interfaces;
 
 namespace PW_DataAccessLayer
 {
-    class DeletePictureDatabaseManager : IDeletePictureDatabaseManager
+    public class DeletePictureDatabaseManager : IDeletePictureDatabaseManager
     {
         private IAPIService API;
 

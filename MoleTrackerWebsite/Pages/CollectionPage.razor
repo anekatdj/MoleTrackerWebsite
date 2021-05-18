@@ -30,6 +30,7 @@
 @inject IViewCollectionController ViewCollectionController
 @inject NavigationManager NavManager
 @inject ILogInController LogInController
+@inject IDeletePictureController DeletePictureController
 
 
 
@@ -441,6 +442,7 @@
         //TODO hent kommentarer
         PictureData = PictureDataList.Find(x => x.PictureID.Equals(pictureId));
         FocusedPic = PictureData.PicData;
+        Picture.PictureID = Convert.ToInt32(pictureId);
     }
 
 
@@ -516,6 +518,7 @@
     {
         imageDataUrl = "";
         DeletePictureModal = !DeletePictureModal;
+        DeletePictureController.HandleDeletePicture(Picture);
     }
 
     private void DeleteCollection(Collection collection, PatientInfo patientInfo)
