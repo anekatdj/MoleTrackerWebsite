@@ -222,15 +222,17 @@
                     </tr>
                 </thead>
                 <tbody style="cursor: pointer">
-                    @foreach (var item in PictureDataList)
+
+                    @foreach (var item in Pictures)
                     {
                         <tr>
-                            <td @onclick="@((e) => ShowSpecificPhoto(e, item.PictureID))">
-                                @Picture.DateOfUpload
-                                <img src="data:image;base64,@System.Convert.ToBase64String(@item.PicData)" width="100" height="100" />
+                            <td>
+                                @item.Item1.DateOfUpload
+                                <img src="data:image;base64,@System.Convert.ToBase64String(@item.Item2.PicData)" width="100" height="100" />
                             </td>
                         </tr>
                     }
+
                 </tbody>
             </table>
 
@@ -553,17 +555,28 @@
     public List<PictureData> PictureDataList { get; set; }
     public Collection ChosenCollection { get; set; } = null;
     PictureInfo pictureInfo = new PictureInfo();
+    public List<PictureInfo> PictureInfoList { get; set; }
+    public List<Tuple<PictureInfo, PictureData>> Pictures { get; set; }
+    public PictureData PictureData { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        PictureDataList = new List<PictureData>();
-
+        //PictureDataList = new List<PictureData>();
+        //PictureInfoList = new List<PictureInfo>();
+        Pictures = new List<Tuple<PictureInfo, PictureData>>();
         ChosenCollection = ViewCollectionController.SelectedCollection;
 
-        foreach (var pic in ChosenCollection.PictureList)
+        CollectionInfo = ChosenCollection;
+
+        if (ChosenCollection != null)
         {
-            PictureDataList.Add(ViewCollectionController.HandleCollection(pic));
-        }
+            foreach (var pic in ChosenCollection.PictureList)
+            {
+                //PictureDataList.Add(ViewCollectionController.HandleCollection(pic));
+                //PictureInfoList.Add(pic);
+
+                Pictures.Add(new Tuple<PictureInfo, PictureData>(pic, ViewCollectionController.HandleCollection(pic)));
+            }
 
         FocusedPic = PictureDataList[0].PicData;
         FocusedPicDateOfUpload = ChosenCollection.PictureList[0].DateOfUpload;
@@ -577,6 +590,8 @@
         LatestPic = PictureDataList[0].PicData;
         LatestPicDateOfUpload = reversedPicInfoList[0].DateOfUpload;
         //TODO kommentarer
+            Pictures.Reverse();
+        }
     }
 
 }
