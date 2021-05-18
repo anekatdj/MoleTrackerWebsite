@@ -29,9 +29,9 @@ namespace PW_BusinessLogicLayer
             _createNewCollectionDatabaseManager.PostNewCollection(collection);
         }
 
-        public void HandleLoadCollection(Collection collection)
-        {
-            _createNewCollectionDatabaseManager.GetExistingCollection(collection);
-        }
+        //public void HandleLoadCollection(Collection collection)
+        //{
+        //    _createNewCollectionDatabaseManager.GetExistingCollection(collection);
+        //}
     }
 }

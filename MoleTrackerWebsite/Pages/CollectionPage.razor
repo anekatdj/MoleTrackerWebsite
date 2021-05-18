@@ -424,7 +424,7 @@
         pictureInfo.CollectionID = CollectionInfo.CollectionID;
         pictureInfo.DateOfUpload = DateTime.Now;
         byte[] imgByteArray = MS.ToArray();
-        UploadPictureController.UploadPicture(imgByteArray, Picture);
+        UploadPictureController.UploadPicture(imgByteArray, pictureInfo);
         PictureUploaded = true;
     }
 
@@ -513,6 +513,8 @@
 
                 Pictures.Add(new Tuple<PictureInfo, PictureData>(pic, ViewCollectionController.HandleCollection(pic)));
             }
+
+            
 
             Pictures.Reverse();
         }

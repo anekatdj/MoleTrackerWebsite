@@ -4,6 +4,7 @@ namespace PW_BusinessLogicLayer
 {
     public class DeletePictureController : IDeletePictureController
     {
+        
 
     }
 }
