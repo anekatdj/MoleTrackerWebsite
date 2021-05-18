@@ -10,6 +10,6 @@ namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
         CollectionDomain SelectedCollection { get; set; }
         PictureDataDomain GetPictureData(PictureInfoDomain pictureInfo);
         PictureCommentDomain GetPictureComment(PictureInfoDomain pictureInfo);
-        //void PostNewPictureComment(object newCommentInput);
+        void PostNewPictureComment(PictureCommentDomain editedComment);
     }
 }

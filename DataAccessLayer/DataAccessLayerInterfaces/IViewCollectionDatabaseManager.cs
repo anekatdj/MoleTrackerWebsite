@@ -9,5 +9,6 @@ namespace DataAccessLayer.DataAccessLayerInterfaces
     {
         PictureDataDomain GetPictureData(PictureInfoDomain pictureInfoDomain);
         PictureCommentDomain GetPictureComment(PictureInfoDomain pictureInfo);
+        void PostNewPictureComment(PictureCommentDomain editedComment);
     }
 }
