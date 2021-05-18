@@ -12,8 +12,6 @@ namespace DataAccessLayer
     {
         private ChangeCollectionNameDTO changeCollectionNameDTO;
         public IAPIService API { get; set; }
-        public LoginInfoDTO NewLogin { get; set; }
-
 
         public ChangeCollectionNameDatabaseManager(string stub)
         {
