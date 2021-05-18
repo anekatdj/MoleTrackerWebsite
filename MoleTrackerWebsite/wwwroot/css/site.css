@@ -205,8 +205,9 @@ app {
     .table2 td {
         width: 50%
     }
-    .table2 td InputText {
+    .table td InputText {
         width: 100%;
+        /*border: none*/
     }
     }
 
