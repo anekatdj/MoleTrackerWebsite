@@ -4,6 +4,7 @@ namespace PW_BusinessLogicLayer.Interfaces
 {
     public interface IChangeComment
     {
-        public void HandleComment(PictureComment pictureComment);
+        //public void HandleComment(PictureComment pictureComment);
+        void HandleNewPictureComment(PictureComment editedComment);
     }
 }
