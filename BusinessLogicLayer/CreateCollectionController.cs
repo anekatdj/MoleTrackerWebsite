@@ -13,7 +13,7 @@ namespace BusinessLogicLayer
         private ICreateCollectionDatabaseManager createCollectionDatabaseManager;
         public CreateCollectionController()
         {
-            createCollectionDatabaseManager = new CreateCollectionDatabaseManager();
+            createCollectionDatabaseManager = new CreateCollectionDatabaseManager("");
         }
         public void AddNewCollection(CollectionDomain collection)
         {

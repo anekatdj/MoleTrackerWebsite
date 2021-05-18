@@ -12,9 +12,9 @@ namespace DataAccessLayer
     {
         private IAPIService API;
 
-        public CreateCollectionDatabaseManager()
+        public CreateCollectionDatabaseManager(string stub)
         {
-            API = new StubApiService();
+            API = APIFactory.GetAPI(stub);
         }
 
         public void AddNewCollection(CollectionDomain collection)
