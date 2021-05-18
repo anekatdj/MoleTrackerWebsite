@@ -18,75 +18,115 @@
     <h4 style="font-style: oblique">
         @ChosenCollection.CollectionName
     </h4>
+    @if (ChosenCollection.PictureList.Count == 0 || ChosenCollection.PictureList == null)
+    {
+        <h3>
+            Der er endnu ikke uploaded billeder til denne samling.
+        </h3>
+    }
     <table>
         <tr>
-            @if(ChosenCollection.PictureList.Count != 0)
+            @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
             {
-            @foreach (var item in PicDataList)
-            {
-                <td @onclick="@((e) => ShowPicture(e, item.PictureID))">
-                    <img src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" width="100" height="100"/>
-                </td>
+                @foreach (var item in PicDataList)
+                {
+                    <td @onclick="@((e) => ShowPicture(e, item.PictureID))">
+                        <img src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" width="100" height="100"/>
+                    </td>
+                }
             }
-            }
-        </tr>
+            </tr>
     </table>
 </div>
 <div>
     <table class="table">
+    @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+    {
         <th>@FocusedPicDateOfUpload</th>
         <th>@LatestPicDateOfUpload</th>
-        <tr>
-            <td style="width:50%;">
-                <img style="width: 100%; " src="data:image;base64,@System.Convert.ToBase64String(FocusedPic)" />
-            </td>
-            <td style="width:50%">
-                <img style="width: 100%; " src="data:image;base64,@System.Convert.ToBase64String(LatestPic)" />
-            </td>
-        </tr>
+    }
+    <tr>
+    @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+    {
+        <td style="width: 50%;">
+            <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(FocusedPic)"/>
+        </td>
+        <td style="width: 50%">
+            <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(LatestPic)"/>
+        </td>
+    }
+    </tr>
         <tr>
             <td colspan="2">
                 <table id="t1" class="table2">
                     <td style="text-align: left; vertical-align: top; padding: 5px; height: 200px">
+                    @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+                    {
+                        <div style="font-weight: bold">
+                            Note:
+                        </div>
+                        <div>
+
+                            <EditForm Model="ViewCollectionController">
+
+                                <DataAnnotationsValidator/>
+                                <ValidationSummary/>
+
+                                <InputText style="width: 100%;" id="myFocusedCommentInput" border:none @bind-Value="FocusedPicComment"></InputText>
+                            </EditForm>
+
+                        </div>
+                    }
+                    </td>
+                    <td style="text-align: left; vertical-align: top; padding: 5px; height: 200px">
+                    @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+                    {
                         <div style="font-weight: bold">
                             Note:
                         </div>
                         <div>
                             <EditForm Model="ViewCollectionController">
 
-                                <DataAnnotationsValidator />
-                                <ValidationSummary />
-                                @*@FocusedPicComment*@
-                            <InputText id="myCommentInput" border:none @bind-Value="FocusedPicComment"></InputText>
+                                <DataAnnotationsValidator/>
+                                <ValidationSummary/>
+
+                                <InputText style="width: 100%;" id="myLatestCommentInput" border:none @bind-Value="LatestPicComment"></InputText>
                             </EditForm>
+
                         </div>
-                    </td>
-                    <td style="text-align: left; vertical-align: top; padding: 5px; height: 200px">
-                        <div style="font-weight: bold">
-                            Note:
-                        </div>
-                        <div>
-                            @LatestPicComment
-                        </div>
+                    }
                     </td>
                 </table>
             </td>
         </tr>
         <tr>
             <td>
-                <button class="editbtn">Rediger note</button> 
-                <button class="editbtn" @onclick="SaveNewComment">Gem note</button>
-                @if (CommentJustSaved)
+            @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+            {
+                <button class="editbtn">Rediger note</button>
+                <button class="editbtn" @onclick="SaveNewFocusedComment">Gem note</button>
+                @if (FocusedCommentJustSaved)
                 {
                     <div>
-                Noten er gemt!
+                        Noten er gemt!
                     </div>
                 }
+            }
             </td>
             <td>
+            @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+            {
                 <button class="editbtn">Rediger note</button>
-                <button class="editbtn">Gem note</button>
+                <button class="editbtn" @onclick="SaveNewLatestComment">Gem note</button>
+                @if (LatestCommentJustSaved)
+                {
+                    <div>
+                        Noten er gemt!
+                    </div>
+                }
+            }
             </td>
+
         </tr>
 
     </table>
@@ -108,7 +148,9 @@
     public string CommentInput { get; set; }
     public List<PictureInfoDomain> ReversedPicInfoList { get; set; }
     public PictureInfoDomain FocusedPicInfo { get; set; }
-    public bool CommentJustSaved { get; set; }
+    public PictureInfoDomain LatestPicInfo { get; set; }
+    public bool FocusedCommentJustSaved { get; set; }
+    public bool LatestCommentJustSaved { get; set; }
     private Stopwatch _stopWatch;
     private Timer _stopWatchTimer;
 
@@ -152,25 +194,28 @@
         PicDataList = new List<PictureDataDomain>();
 
         ChosenCollection = ViewCollectionController.SelectedCollection;
-
-        foreach (var pic in ChosenCollection.PictureList)
+        if (ChosenCollection.PictureList != null && ChosenCollection.PictureList.Count != 0)
         {
-            PicDataList.Add(ViewCollectionController.GetPictureData(pic));
+            foreach (var pic in ChosenCollection.PictureList)
+            {
+                PicDataList.Add(ViewCollectionController.GetPictureData(pic));
+            }
+
+            FocusedPic = PicDataList[0].PictureData;
+            FocusedPicDateOfUpload = ChosenCollection.PictureList[0].DateOfUpload;
+            FocusedPicComment = ViewCollectionController.GetPictureComment(ChosenCollection.PictureList[0]).Comment;
+            FocusedPicInfo = ChosenCollection.PictureList[0];
+            PicDataList.Reverse();
+
+            ReversedPicInfoList = ChosenCollection.PictureList;
+            ReversedPicInfoList.Reverse();
+
+            LatestPic = PicDataList[0].PictureData;
+            LatestPicInfo = ReversedPicInfoList[0];
+            LatestPicDateOfUpload = ReversedPicInfoList[0].DateOfUpload;
+            LatestPicComment = ViewCollectionController.GetPictureComment(ReversedPicInfoList[0]).Comment; 
         }
-
-        FocusedPic = PicDataList[0].PictureData;
-        FocusedPicDateOfUpload = ChosenCollection.PictureList[0].DateOfUpload;
-        FocusedPicComment = ViewCollectionController.GetPictureComment(ChosenCollection.PictureList[0]).Comment;
-
-        PicDataList.Reverse();
-
-        ReversedPicInfoList = ChosenCollection.PictureList;
-        ReversedPicInfoList.Reverse();
-
-        LatestPic = PicDataList[0].PictureData;
-        LatestPicDateOfUpload = ReversedPicInfoList[0].DateOfUpload;
-        LatestPicComment = ViewCollectionController.GetPictureComment(ReversedPicInfoList[0]).Comment;
-
+      
         //Stub
         FocusedPicComment = "";
 
@@ -178,49 +223,87 @@
 
     }
 
+
     private void ShowPicture(MouseEventArgs e, int pictureId)
     {
-        FocusedPicInfo = ChosenCollection.PictureList.Find(x => x.PictureID.Equals(pictureId));
-        FocusedPicDateOfUpload = FocusedPicInfo.DateOfUpload;
-        FocusedPicComment = ViewCollectionController.GetPictureComment(FocusedPicInfo).Comment;
-        PictureDataDomain focusedPicture = PicDataList.Find(x => x.PictureID.Equals(pictureId));
+        if (ChosenCollection.PictureList != null && ChosenCollection.PictureList.Count != 0)
+        {
+            FocusedPicInfo = ChosenCollection.PictureList.Find(x => x.PictureID.Equals(pictureId));
+            FocusedPicDateOfUpload = FocusedPicInfo.DateOfUpload;
+            FocusedPicComment = ViewCollectionController.GetPictureComment(FocusedPicInfo).Comment;
+            PictureDataDomain focusedPicture = PicDataList.Find(x => x.PictureID.Equals(pictureId));
 
-        FocusedPic = focusedPicture.PictureData;
+            FocusedPic = focusedPicture.PictureData;
+        }
     }
 
 
 
-    private void SaveNewComment()
+    private void SaveNewFocusedComment()
     {
+        if (ChosenCollection.PictureList != null && ChosenCollection.PictureList.Count != 0)
+        {
+            XmlDocument doc = new XmlDocument();
 
-        XmlDocument doc = new XmlDocument();
+            var input = doc.GetElementById("myFocusedCommentInput");
 
-        var input = doc.GetElementById("myCommentInput");
+            PictureCommentDomain editedComment = new PictureCommentDomain();
 
-        PictureCommentDomain editedComment = new PictureCommentDomain();
-        editedComment.Comment = FocusedPicComment;
-        editedComment.PictureID = FocusedPicInfo.PictureID;
+            editedComment.Comment = FocusedPicComment;
+            editedComment.PictureID = FocusedPicInfo.PictureID;
 
-        ViewCollectionController.PostNewPictureComment(editedComment);
-        CommentJustSaved = true;
-        StateHasChanged();
-        _stopWatch = new Stopwatch();
-        _stopWatch.Start();
 
-        _stopWatchTimer = new Timer();
-        _stopWatchTimer.Interval = 1000;
-        _stopWatchTimer.Elapsed += CheckStopWatch_Timer_Tick;
-        _stopWatchTimer.Enabled = true;
+            ViewCollectionController.PostNewPictureComment(editedComment);
+            FocusedCommentJustSaved = true;
+            StateHasChanged();
+            _stopWatch = new Stopwatch();
+            _stopWatch.Start();
 
-        LatestPicComment = ViewCollectionController.GetPictureComment(ReversedPicInfoList[0]).Comment;
+            _stopWatchTimer = new Timer();
+            _stopWatchTimer.Interval = 1000;
+            _stopWatchTimer.Elapsed += CheckStopWatch_Timer_Tick;
+            _stopWatchTimer.Enabled = true;
 
+            LatestPicComment = ViewCollectionController.GetPictureComment(ReversedPicInfoList[0]).Comment;
+        }
+    }
+    private void SaveNewLatestComment()
+    {
+        if (ChosenCollection.PictureList != null && ChosenCollection.PictureList.Count != 0)
+        {
+            XmlDocument doc = new XmlDocument();
+
+            var input = doc.GetElementById("myLatestCommentInput");
+
+            PictureCommentDomain editedComment = new PictureCommentDomain();
+            editedComment.Comment = LatestPicComment;
+            editedComment.PictureID = LatestPicInfo.PictureID;
+
+            ViewCollectionController.PostNewPictureComment(editedComment);
+            LatestCommentJustSaved = true;
+            StateHasChanged();
+            _stopWatch = new Stopwatch();
+            _stopWatch.Start();
+
+            _stopWatchTimer = new Timer();
+            _stopWatchTimer.Interval = 1000;
+            _stopWatchTimer.Elapsed += CheckStopWatch_Timer_Tick;
+            _stopWatchTimer.Enabled = true;
+
+            LatestPicComment = ViewCollectionController.GetPictureComment(ReversedPicInfoList[0]).Comment;
+        }
     }
     public void CheckStopWatch_Timer_Tick(object sender, EventArgs e)
     {
         if (_stopWatch.Elapsed.TotalSeconds >= 3)
         {
-            CommentJustSaved = false;
-    //CommentJustSaved = !CommentJustSaved;
+            InvokeAsync((() =>
+            {
+                FocusedCommentJustSaved = false;
+                LatestCommentJustSaved = false;
+                StateHasChanged();
+            }));
+
             _stopWatch.Stop();
             _stopWatch.Reset();
             _stopWatchTimer.Enabled = false;
