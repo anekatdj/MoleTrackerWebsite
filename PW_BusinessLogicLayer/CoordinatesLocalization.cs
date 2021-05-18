@@ -30,6 +30,7 @@ namespace PW_BusinessLogicLayer
                     Debug.WriteLine("Pande");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
                     Location.BodyParts = LocationOnBody.BodyPart.Pande;
+                    Location.Orientations = LocationOnBody.Orientation.Ingen;
 
                     PointClicked = true;
                 }
@@ -38,6 +39,7 @@ namespace PW_BusinessLogicLayer
                     Debug.WriteLine("Kind");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
                     Location.BodyParts = LocationOnBody.BodyPart.Kind;
+                    Location.Orientations = LocationOnBody.Orientation.Ingen;
 
                     PointClicked = true;
                 }
@@ -46,6 +48,7 @@ namespace PW_BusinessLogicLayer
                     Debug.WriteLine("Næse");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
                     Location.BodyParts = LocationOnBody.BodyPart.Næse;
+                    Location.Orientations = LocationOnBody.Orientation.Ingen;
 
                     PointClicked = true;
                 }
@@ -54,6 +57,7 @@ namespace PW_BusinessLogicLayer
                     Debug.WriteLine("Læber");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
                     Location.BodyParts = LocationOnBody.BodyPart.Læber;
+                    Location.Orientations = LocationOnBody.Orientation.Ingen;
 
                     PointClicked = true;
                 }
@@ -62,6 +66,7 @@ namespace PW_BusinessLogicLayer
                     Debug.WriteLine("Hage");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
                     Location.BodyParts = LocationOnBody.BodyPart.Hage;
+                    Location.Orientations = LocationOnBody.Orientation.Ingen;
 
                     PointClicked = true;
                 }
@@ -70,6 +75,7 @@ namespace PW_BusinessLogicLayer
                     Debug.WriteLine("Øre");
                     Debug.WriteLine("Koordinater: {0}, {1}", X, Y);
                     Location.BodyParts = LocationOnBody.BodyPart.Øre;
+                    Location.Orientations = LocationOnBody.Orientation.Højre;
 
                     PointClicked = true;
                 }

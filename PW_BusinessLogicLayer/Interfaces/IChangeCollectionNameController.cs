@@ -4,6 +4,6 @@ namespace PW_BusinessLogicLayer.Interfaces
 {
     public interface IChangeCollectionNameController
     {
-        public void HandleChangedName(ChangeCollectionName changeCollectionName);
+        public void HandleChangedName(Collection collection);
     }
 }

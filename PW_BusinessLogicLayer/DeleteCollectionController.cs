@@ -9,7 +9,7 @@ namespace PW_BusinessLogicLayer
     {
         public void HandleDeleteCollection(Collection collection, PatientInfo patientInfo)
         {
-            DeleteCollectionDatabaseManager deleteCollection = new DeleteCollectionDatabaseManager();
+            DeleteCollectionDatabaseManager deleteCollection = new DeleteCollectionDatabaseManager("");
 
             deleteCollection.DeleteCollection(collection, patientInfo);
         }

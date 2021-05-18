@@ -18,18 +18,16 @@ namespace PW_DataAccessLayer
 
         private IAPIService API;
 
-        public CreateNewCollectionDatabaseManager()
+        public CreateNewCollectionDatabaseManager(string APIType)
         {
-            //API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
-            //API = new StubApiService();
-            API = APIFactory.GetAPI("");
+            API = APIFactory.GetAPI(APIType);
             CollectionDTO = new CollectionDTO();
         }
 
         public int PostNewCollection(Collection collection)
         {
             CollectionDTO collectionDTO = collection.ToDTO(collection.Location.BodyParts);
-
+            collectionDTO.Location.BodyPartSide = "";
             try
             {
                 string ID = API.PostObject<CollectionDTO>("NewCollection", collectionDTO);

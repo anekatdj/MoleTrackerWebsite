@@ -11,12 +11,12 @@ namespace PW_BusinessLogicLayer
 
         public ChangeCollectionNameController()
         {
-            _changeCollectionNameDatabaseManager = new ChangeCollectionNameDatabaseManager();
+            _changeCollectionNameDatabaseManager = new ChangeCollectionNameDatabaseManager("");
         }
 
-        public void HandleChangedName(ChangeCollectionName changeCollectionName)
+        public void HandleChangedName(Collection collection)
         {
-            _changeCollectionNameDatabaseManager.PostChangedCollectionName(changeCollectionName);
+            _changeCollectionNameDatabaseManager.PostChangedCollectionName(collection);
         }
     }
 }

@@ -11,13 +11,13 @@ namespace PW_BusinessLogicLayer
 {
     public class CreateNewCollectionController : ICreateNewCollectionController
     {
-        public bool NewOrOld { get; set; } = false;
+        public bool New { get; set; } = false;
         private ICreateNewCollectionDatabaseManager _createNewCollectionDatabaseManager;
         private PatientData _patientData;
 
         public CreateNewCollectionController()
         {
-            _createNewCollectionDatabaseManager = new CreateNewCollectionDatabaseManager();
+            _createNewCollectionDatabaseManager = new CreateNewCollectionDatabaseManager("");
             _patientData = new PatientData();
         }
 

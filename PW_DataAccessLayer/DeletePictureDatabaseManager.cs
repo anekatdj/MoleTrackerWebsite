@@ -10,9 +10,9 @@ namespace PW_DataAccessLayer
     {
         private IAPIService API;
 
-        public DeletePictureDatabaseManager()
+        public DeletePictureDatabaseManager(string APIType)
         {
-            API = APIFactory.GetAPI("");
+            API = APIFactory.GetAPI(APIType);
         }
 
         public void DeletePicture(PictureInfo pictureInfo)

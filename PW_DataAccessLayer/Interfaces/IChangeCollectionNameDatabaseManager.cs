@@ -4,6 +4,6 @@ namespace PW_DataAccessLayer.Interfaces
 {
     public interface IChangeCollectionNameDatabaseManager
     {
-        public void PostChangedCollectionName(ChangeCollectionName _changeCollectionName);
+        public void PostChangedCollectionName(Collection collection);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using APIWebServiesConnector;
+using DataAccessLayer;
 using DataClasses.Domain.Collections;
 using DataClasses.DTO;
 using PW_DataAccessLayer.Interfaces;
@@ -11,9 +12,9 @@ namespace PW_DataAccessLayer
         private IAPIService API;
         //public PatientDataDTO CurrentPatientData { get; set; }
 
-        public MarkCollectionDatabaseManager()
+        public MarkCollectionDatabaseManager(string APIType)
         {
-            API = new ApiService(APIWebServiesConnector.APIStringFabrics.APIStringFabric.GetDeveloperAPIString());
+            API = APIFactory.GetAPI(APIType);
 
             //API = new StubApiService();
         }

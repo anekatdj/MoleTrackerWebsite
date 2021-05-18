@@ -14,10 +14,10 @@ namespace PW_DataAccessLayer
         PictureRequestDTO _pictureRequestDTO;
         private IAPIService API;
 
-        public ChangeCommentDatabaseManager()
+        public ChangeCommentDatabaseManager(string APIType)
         {
-            API = APIFactory.GetAPI("");
-
+            API = APIFactory.GetAPI(APIType);
+            
             //API = new StubApiService();
             _pictureRequestDTO = new PictureRequestDTO();
         }

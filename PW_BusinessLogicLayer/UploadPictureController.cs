@@ -13,7 +13,7 @@ namespace PW_BusinessLogicLayer
 
         public UploadPictureController()
         {
-            _uploadPictureDatabaseManager = new UploadPictureDatabaseManager(collection);
+            _uploadPictureDatabaseManager = new UploadPictureDatabaseManager("", collection);
         }
 
         public void UploadPicture(byte[] newDataBytes, PictureInfo pictureInfo)
