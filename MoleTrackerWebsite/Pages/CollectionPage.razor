@@ -415,7 +415,7 @@
     private void ShowSpecificPicture(MouseEventArgs e, object pictureId)
     {
         SpecificPictureChosen = !SpecificPictureChosen;
-        Picture = ChosenCollection.PictureList.Find(x => x.PictureID.Equals(pictureId));
+        Picture = CollectionInfo.PictureList.Find(x => x.PictureID.Equals(pictureId));
         FocusedPicDateOfUpload = Picture.DateOfUpload;
         //TODO hent kommentarer
         PictureData = PictureDataList.Find(x => x.PictureID.Equals(pictureId));
@@ -496,7 +496,7 @@
 
     private void DeleteCollection(Collection collection, PatientInfo patientInfo)
     {
-        collection.CollectionID = ChosenCollection.CollectionID;
+        collection.CollectionID = CollectionInfo.CollectionID;
         patientInfo = LogInController.HandlePatientInfo();
 
         DeleteCollectionController.HandleDeleteCollection(collection, patientInfo);
@@ -510,7 +510,7 @@
     public byte[] FocusedPic { get; set; }
     public byte[] LatestPic { get; set; }
     public List<PictureData> PictureDataList { get; set; }
-    public Collection ChosenCollection { get; set; }
+    //public Collection ChosenCollection { get; set; }
     //PictureInfo pictureInfo = new PictureInfo();
     public List<Tuple<PictureInfo, PictureData>> Pictures { get; set; }
 
@@ -519,13 +519,18 @@
         //PictureDataList = new List<PictureData>();
         //PictureInfoList = new List<PictureInfo>();
         Pictures = new List<Tuple<PictureInfo, PictureData>>();
-        ChosenCollection = ViewCollectionController.SelectedCollection;
-
-        CollectionInfo = ChosenCollection;
-
-        if (ChosenCollection != null)
+        if (CollectionInfo.CollectionID != 0)
         {
-            foreach (var pic in ChosenCollection.PictureList)
+            CollectionInfo = ViewCollectionController.SelectedCollection;
+        }
+        else
+        {
+            CollectionInfo = new Collection();
+        }
+
+        if (CollectionInfo != null)
+        {
+            foreach (var pic in CollectionInfo.PictureList)
             {
                 //PictureDataList.Add(ViewCollectionController.HandleCollection(pic));
                 //PictureInfoList.Add(pic);
@@ -535,12 +540,12 @@
 
             FocusedPic = Pictures[0].Item2.PicData;
 
-            FocusedPicDateOfUpload = ChosenCollection.PictureList[0].DateOfUpload;
+            FocusedPicDateOfUpload = CollectionInfo.PictureList[0].DateOfUpload;
             //TODO kommentarer!
 
             Pictures.Reverse();
 
-            List<PictureInfo> reversedPicInfoList = ChosenCollection.PictureList;
+            List<PictureInfo> reversedPicInfoList = CollectionInfo.PictureList;
             reversedPicInfoList.Reverse();
 
             LatestPic = Pictures[0].Item2.PicData;
