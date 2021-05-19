@@ -54,7 +54,11 @@ namespace DataClasses.Domain.Picture
             Balle,
             Baglår,
             Knæhase,
-            Læg
+            Læg,
+            Ben,
+            Arm,
+            Hoved,
+            Overkrop
         }
 
         public LocationOnBodyDTO ToDTO(LocationOnBody.BodyPart bodyPart)

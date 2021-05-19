@@ -1,4 +1,5 @@
-﻿using DataClasses.Domain.Collections;
+﻿using System.Drawing;
+using DataClasses.Domain.Collections;
 using DataClasses.Domain.Picture;
 
 namespace PW_BusinessLogicLayer.Interfaces
@@ -7,9 +8,10 @@ namespace PW_BusinessLogicLayer.Interfaces
     {
         public LocationOnBody Location { get; set; }
         public Collection Collections { get; set; }
+        public Bitmap ImgColorMaleBack { get; set; }
         public bool LocalizePointFemaleFront(bool PointClicked, int X, int Y);
         public bool LocalizePointFemaleBack(bool PointClicked, int X, int Y);
-        public bool LocalizePointMaleFront(bool PointClicked);
-        public bool LocalizePointMaleBack(bool PointClicked);
+        public bool LocalizePointMaleFront(bool PointClicked, int X, int Y);
+        public bool LocalizePointMaleBack(bool PointClicked, int X, int Y);
     }
 }

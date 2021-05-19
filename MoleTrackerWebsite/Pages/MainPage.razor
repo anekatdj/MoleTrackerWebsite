@@ -299,19 +299,64 @@
     {
         if (AddButtonPressed == true)
         {
-            PointClicked = Coordinates.LocalizePointMaleFront(PointClicked); //eventuelt være true
+            PointClicked = Coordinates.LocalizePointMaleFront(PointClicked, X,Y); //eventuelt være true
         }
     }
+
 
     private void HandleLocationMaleBack()
     {
         if (AddButtonPressed == true)
         {
+            //Color pixel = Coordinates.ImgColorMaleBack.GetPixel(X*3,Y*3);
 
-            PointClicked = Coordinates.LocalizePointMaleBack(true);
-            Color pixel = imgColorMaleFront.GetPixel(X, Y);
+            //if (pixel.Name == "ff1302fa")
+            //{
+            //    Debug.WriteLine("Venstre hånd");
+            //}else if (pixel.Name == "ff02f3fa")
+            //{
+            //    Debug.WriteLine("Venstre overarm");
+            //}
+            //else if (pixel.Name == "ff03f94a")
+            //{
+            //    Debug.WriteLine("Venstre ben");
+            //}
+            //else if (pixel.Name == "ffef03f9")
+            //{
+            //    Debug.WriteLine("Højre hånd");
+            //}
+            //else if (pixel.Name == "ff6a0c4f")
+            //{
+            //    Debug.WriteLine("Højre overarm");
+            //}
+            //else if (pixel.Name == "fff9c803")
+            //{
+            //    Debug.WriteLine("Højre ben");
+            //}
+            //else if (pixel.Name == "fffa0202")
+            //{
+            //    Debug.WriteLine("Overkrop");
+            //}
+            //else if (pixel.Name == "ff245122")
+            //{
+            //    Debug.WriteLine("Hoved");
+            //}
+
+
+            //var color_ = System.Drawing.ColorTranslator.FromHtml("#1302fa"); 
+            //Color color = pixel;
+            PointClicked = Coordinates.LocalizePointMaleBack(true,X,Y);
+
         }
     }
+    //    Højre hånd: 1302fa
+    //    Højre overarm: 02f3fa
+    //    Højre ben: 03f94a
+    //    Venstre hånd: ef03f9
+    //    Venstre overarm: 6a0c4f
+    //    venstre ben: f9c803
+    //    overkrop: fa0202
+    //    Hoved: 245122
 
     private void AcceptPosition()
     {
@@ -375,7 +420,7 @@
         return Task.CompletedTask;
     }
 
-    Bitmap imgColorMaleFront { get; set; }
+    //public Bitmap ImgColorMaleBack { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -392,7 +437,7 @@
         await StartupTask();
 
 
-        imgColorMaleFront = new Bitmap(@"C:\Users\aneka\source\repos\MoleTrackerWebsite\MoleTrackerWebsite\wwwroot\Images\ColorMaleFront.png");
+        Coordinates.ImgColorMaleBack = new Bitmap(@"C:\Users\aneka\source\repos\MoleTrackerWebsite\MoleTrackerWebsite\wwwroot\Images\ColorMaleFront.png");
 
 
     }

@@ -13,6 +13,7 @@ namespace PW_BusinessLogicLayer
     {
         public LocationOnBody Location { get; set; }
         public Collection Collections { get; set; }
+        public Bitmap ImgColorMaleBack { get; set; }
 
         public CoordinatesLocalization(LocationOnBody locationOnBody, Collection collection)
         {
@@ -394,20 +395,120 @@ namespace PW_BusinessLogicLayer
 
         #region MaleFront
 
-        public bool LocalizePointMaleFront(bool PointClicked)
+        public bool LocalizePointMaleFront(bool PointClicked,int X, int Y)
         {
+            Color pixel = ImgColorMaleBack.GetPixel(X * 3, Y * 3);
 
+            if (pixel.Name == "ff1302fa")
+            {
+                Debug.WriteLine("Højre hånd");
+                Location.BodyParts = LocationOnBody.BodyPart.Håndflade;
+                Location.Orientations = LocationOnBody.Orientation.Ingen;
+            }
+            else if (pixel.Name == "ff02f3fa")
+            {
+                Debug.WriteLine("Højre overarm");
+                Location.BodyParts = LocationOnBody.BodyPart.Arm;
+                Location.Orientations = LocationOnBody.Orientation.Ingen;
+            }
+            else if (pixel.Name == "ff03f94a")
+            {
+                Debug.WriteLine("Højre ben");
+                Location.BodyParts = LocationOnBody.BodyPart.Ben;
+                Location.Orientations = LocationOnBody.Orientation.Ingen;
+            }
+            else if (pixel.Name == "ffef03f9")
+            {
+                Debug.WriteLine("Venstre hånd");
+                Location.BodyParts = LocationOnBody.BodyPart.Håndflade;
+                Location.Orientations = LocationOnBody.Orientation.Ingen;
+            }
+            else if (pixel.Name == "ff6a0c4f")
+            {
+                Debug.WriteLine("Venstre overarm");
+                Location.BodyParts = LocationOnBody.BodyPart.Arm;
+                Location.Orientations = LocationOnBody.Orientation.Ingen;
+            }
+            else if (pixel.Name == "fff9c803")
+            {
+                Debug.WriteLine("Venstre ben");
+                Location.BodyParts = LocationOnBody.BodyPart.Ben;
+                Location.Orientations = LocationOnBody.Orientation.Ingen;
+            }
+            else if (pixel.Name == "fffa0202")
+            {
+                Debug.WriteLine("Overkrop");
+                Location.BodyParts = LocationOnBody.BodyPart.Overkrop;
+                Location.Orientations = LocationOnBody.Orientation.Ingen;
+            }
+            else if (pixel.Name == "ff245122")
+            {
+                Debug.WriteLine("Hoved");
+                Location.BodyParts = LocationOnBody.BodyPart.Hoved;
+                Location.Orientations = LocationOnBody.Orientation.Ingen;
+            }
 
-            return PointClicked;
+            return PointClicked=true;
         }
 
         #endregion
 
-        #region MyRegion
+        #region MaleBack
 
-        public bool LocalizePointMaleBack(bool PointClicked)
+        public bool LocalizePointMaleBack(bool PointClicked, int X, int Y)
         {
-            return PointClicked;
+            Color pixel = ImgColorMaleBack.GetPixel(X * 3, Y * 3);
+
+            if (pixel.Name == "ff1302fa")
+            {
+                Debug.WriteLine("Venstre hånd");
+                Location.BodyParts = LocationOnBody.BodyPart.Håndryg;
+                Location.Orientations = LocationOnBody.Orientation.Ingen;
+            }
+            else if (pixel.Name == "ff02f3fa")
+            {
+                Debug.WriteLine("Venstre overarm");
+                Location.BodyParts = LocationOnBody.BodyPart.Arm;
+                Location.Orientations = LocationOnBody.Orientation.Ingen;
+            }
+            else if (pixel.Name == "ff03f94a")
+            {
+                Debug.WriteLine("Venstre ben");
+                Location.BodyParts = LocationOnBody.BodyPart.Ben;
+                Location.Orientations = LocationOnBody.Orientation.Ingen;
+            }
+            else if (pixel.Name == "ffef03f9")
+            {
+                Debug.WriteLine("Højre hånd");
+                Location.BodyParts = LocationOnBody.BodyPart.Håndryg;
+                Location.Orientations = LocationOnBody.Orientation.Ingen;
+            }
+            else if (pixel.Name == "ff6a0c4f")
+            {
+                Debug.WriteLine("Højre overarm");
+                Location.BodyParts = LocationOnBody.BodyPart.Arm;
+                Location.Orientations = LocationOnBody.Orientation.Ingen;
+            }
+            else if (pixel.Name == "fff9c803")
+            {
+                Debug.WriteLine("Højre ben");
+                Location.BodyParts = LocationOnBody.BodyPart.Ben;
+                Location.Orientations = LocationOnBody.Orientation.Ingen;
+            }
+            else if (pixel.Name == "fffa0202")
+            {
+                Debug.WriteLine("Overkrop");
+                Location.BodyParts = LocationOnBody.BodyPart.Ryg;
+                Location.Orientations = LocationOnBody.Orientation.Ingen;
+            }
+            else if (pixel.Name == "ff245122")
+            {
+                Debug.WriteLine("Hoved");
+                Location.BodyParts = LocationOnBody.BodyPart.Baghoved;
+                Location.Orientations = LocationOnBody.Orientation.Ingen;
+            }
+
+            return PointClicked = true;
         }
 
         #endregion
