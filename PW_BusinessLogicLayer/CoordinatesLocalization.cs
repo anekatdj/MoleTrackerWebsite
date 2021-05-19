@@ -5,6 +5,7 @@ using System.Text;
 using DataClasses.Domain.Collections;
 using DataClasses.Domain.Picture;
 using PW_BusinessLogicLayer.Interfaces;
+using System.Drawing;
 
 namespace PW_BusinessLogicLayer
 {
@@ -385,7 +386,7 @@ namespace PW_BusinessLogicLayer
 
         public bool LocalizePointMaleFront(bool PointClicked)
         {
-            return PointClicked;
+            return PointClicked=true;
         }
 
         #endregion
@@ -398,5 +399,10 @@ namespace PW_BusinessLogicLayer
         }
 
         #endregion
+
+        public void GetBodyPart(int x, int y)
+        {
+            Bitmap img = new Bitmap("");
+        }
     }
 }

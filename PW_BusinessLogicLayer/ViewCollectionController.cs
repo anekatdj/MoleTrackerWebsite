@@ -6,6 +6,7 @@ using DataClasses.Domain.MISC;
 using PW_BusinessLogicLayer.Interfaces;
 using PW_DataAccessLayer;
 using PW_DataAccessLayer.Interfaces;
+using System.Drawing;
 
 namespace PW_BusinessLogicLayer
 {
