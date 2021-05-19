@@ -34,13 +34,13 @@
 @inject ILogInController LogInController
 @inject IDeletePictureController DeletePictureController
 @inject ICreateNewCollectionController CreateNewCollectionController
-
-
+@inject ICoordinatesLocalization Coordinates
+@*@CollectionInfo.CollectionName*@
 
 <div class="row">
 
     <div class="col">
-        <input style="width: 45%; height: 45%; margin-left: 35%; font-size: 24pt" disabled="@IsDisabled" type="text" @oninput="OnInputHandler" placeholder="@CollectionInfo.CollectionName" class="form-control" />
+        <input style="width: 45%; height: 45%; margin-left: 35%; font-size: 24pt" disabled="@IsDisabled" type="text" @oninput="OnInputHandler" placeholder="@CollectionName" class="form-control" />
 
         <button class="iconfields" @onclick="EditName">
             <i class="@EditIcon"></i>
@@ -423,7 +423,7 @@
     {
         "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13",
         "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"
-                            });
+                                });
 
     #endregion
 
@@ -539,7 +539,7 @@
     //PictureInfo pictureInfo = new PictureInfo();
     public List<Tuple<PictureInfo, PictureData>> Pictures { get; set; }
     public int LatestPicID { get; set; }
-
+    public string CollectionName { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -551,11 +551,13 @@
         {
             CollectionInfo = new Collection();
             CreateNewCollectionController.New = false;
+            CollectionName = Coordinates.Collections.CollectionName;
         }
         else
         {
             CollectionInfo = ViewCollectionController.SelectedCollection;
             ViewCollectionController.GetCollectionFromDB(CollectionInfo);
+            CollectionName = CollectionInfo.CollectionName;
         }
 
 

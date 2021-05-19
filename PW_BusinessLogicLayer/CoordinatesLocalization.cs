@@ -447,7 +447,7 @@ namespace PW_BusinessLogicLayer
                 Location.BodyParts = LocationOnBody.BodyPart.Hoved;
                 Location.Orientations = LocationOnBody.Orientation.Ingen;
             }
-
+            Collections.CollectionName = Location.BodyParts.ToString();
             return PointClicked=true;
         }
 
@@ -507,7 +507,7 @@ namespace PW_BusinessLogicLayer
                 Location.BodyParts = LocationOnBody.BodyPart.Baghoved;
                 Location.Orientations = LocationOnBody.Orientation.Ingen;
             }
-
+            Collections.CollectionName = Location.BodyParts.ToString();
             return PointClicked = true;
         }
 
