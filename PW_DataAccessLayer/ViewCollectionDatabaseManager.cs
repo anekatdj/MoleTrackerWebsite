@@ -29,8 +29,6 @@ namespace PW_DataAccessLayer
             CollectionDTO CollectionDTO = new CollectionDTO();
             collectionRequestDTO.CollectionID = collection.CollectionID;
 
-            //collectionRequestDTO.PatientID = CurrentPatientInfo.PatientID;
-
             try
             {
                 CollectionDTO = API.GetObject<CollectionDTO, CollectionRequestDTO>("GetCollection", collectionRequestDTO);
@@ -43,7 +41,7 @@ namespace PW_DataAccessLayer
             collection = DTOConverter.CollectionToDomain(CollectionDTO);
         }
 
-        public PictureData GetPictures(PictureInfo pictureInfo) //PatientInfo patientInfo
+        public PictureData GetPictures(PictureInfo pictureInfo)
         {
             PictureDataDTO pictureDataDTO = new PictureDataDTO();
             PictureRequestDTO pictureRequestDTO = new PictureRequestDTO() {PictureID = pictureInfo.PictureID};

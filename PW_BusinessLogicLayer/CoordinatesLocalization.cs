@@ -203,7 +203,6 @@ namespace PW_BusinessLogicLayer
 
         #endregion
 
-
         #region FemaleBack
         public bool LocalizePointFemaleBack(bool PointClicked, int X, int Y)
         {
@@ -377,6 +376,24 @@ namespace PW_BusinessLogicLayer
             }
 
             Collections.CollectionName = Location.BodyParts.ToString();
+            return PointClicked;
+        }
+
+        #endregion
+
+        #region MaleFront
+
+        public bool LocalizePointMaleFront(bool PointClicked)
+        {
+            return PointClicked;
+        }
+
+        #endregion
+
+        #region MyRegion
+
+        public bool LocalizePointMaleBack(bool PointClicked)
+        {
             return PointClicked;
         }
 

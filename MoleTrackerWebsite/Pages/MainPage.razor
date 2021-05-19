@@ -268,7 +268,14 @@
 
         else if (Gender == "B")
         {
-
+            if (FrontOrBack == "/Images/MaleFrontCrop.png")
+            {
+                HandleLocationMaleFront();
+            }
+            else
+            {
+                HandleLocationMaleBack();
+            }
         }
     }
 
@@ -285,6 +292,22 @@
         if (AddButtonPressed == true)
         {
             PointClicked = Coordinates.LocalizePointFemaleBack(PointClicked, X, Y);
+        }
+    }
+
+    private void HandleLocationMaleFront()
+    {
+        if (AddButtonPressed == true)
+        {
+            PointClicked = Coordinates.LocalizePointMaleFront(PointClicked);
+        }
+    }
+
+    private void HandleLocationMaleBack()
+    {
+        if (AddButtonPressed == true)
+        {
+            PointClicked = Coordinates.LocalizePointMaleBack(PointClicked);
         }
     }
 
