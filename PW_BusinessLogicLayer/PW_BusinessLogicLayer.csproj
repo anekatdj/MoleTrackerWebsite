@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0-preview.3.21201.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DTO\DataClasses.csproj" />
     <ProjectReference Include="..\PW_DataAccessLayer\PW_DataAccessLayer.csproj" />
   </ItemGroup>
