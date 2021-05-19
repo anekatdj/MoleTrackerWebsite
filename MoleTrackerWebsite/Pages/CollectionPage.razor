@@ -555,8 +555,9 @@
         else
         {
             CollectionInfo = ViewCollectionController.SelectedCollection;
+            ViewCollectionController.GetCollectionFromDB(CollectionInfo);
         }
-        ViewCollectionController.GetCollectionFromDB(CollectionInfo);
+
 
         if (CollectionInfo.IsMarked == true)
         {

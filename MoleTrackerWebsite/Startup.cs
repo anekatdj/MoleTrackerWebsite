@@ -51,7 +51,7 @@ namespace MoleTrackerWebsite
             services.AddSingleton<SessionInfo>();
             services.AddSingleton<PatientInfo>();
             services.AddSingleton<Collection>();
-            services.AddSingleton<DoctorInfo>();
+            services.AddSingleton<DoctorContactInfo>();
             services.AddSingleton<LocationOnBody>();
             services.AddSingleton<IChangeComment, ChangeComment>();
             services.AddSingleton<ICoordinatesLocalization, CoordinatesLocalization>();
