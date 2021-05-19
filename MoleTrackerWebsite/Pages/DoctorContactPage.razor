@@ -1,6 +1,6 @@
 ﻿@page "/doctorinformation"
 @using DataClasses.Domain.MISC
-@inject DoctorInfo DoctorInfo
+@inject DoctorContactInfo DoctorContactInfo
 
 
 
@@ -12,25 +12,25 @@
     <div class="row mb-3">
         <label for="colFormLabel" class="col-sm-2 col-form-label">Lægepraksis</label>
         <div class="col">
-            <input disabled="@true" type="text" class="form-control" placeholder=@DoctorInfo.MedicalPracticeName aria-label="First name">
+            <input disabled="@true" type="text" class="form-control" placeholder=@DoctorContactInfo.MedicalPracticeName aria-label="First name">
         </div>
     </div>
     <div class="row mb-3">
         <label for="colFormLabel" class="col-sm-2 col-form-label">Træffetider</label>
         <div class="col-sm-10">
-            <input disabled="@true" type="text" class="form-control" id="colFormLabel" placeholder=@DoctorInfo.OpeningHours>
+            <input disabled="@true" type="text" class="form-control" id="colFormLabel" placeholder=@DoctorContactInfo.OpeningHours>
         </div>
     </div>
     <div class="row mb-3">
         <label for="colFormLabel" class="col-sm-2 col-form-label">Adresse</label>
         <div class="col-sm-10">
-            <input disabled="@true" type="text" class="form-control" id="colFormLabel" placeholder=@DoctorInfo.Adress>
+            <input disabled="@true" type="text" class="form-control" id="colFormLabel" placeholder=@DoctorContactInfo.Adress>
         </div>
     </div>
     <div class="row mb-3">
         <label for="colFormLabel" class="col-sm-2 col-form-label">Telefon</label>
         <div class="col-sm-10">
-            <input disabled="@true" type="password" class="form-control" id="colFormLabel" placeholder=@DoctorInfo.PhoneNumber>
+            <input disabled="@true" type="password" class="form-control" id="colFormLabel" placeholder=@DoctorContactInfo.PhoneNumber>
         </div>
     </div>
     <div class="row mb-3 ">

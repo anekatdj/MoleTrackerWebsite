@@ -61,9 +61,9 @@ namespace PW_DataAccessLayer
             return pictureDataDomain;
         }
 
-        public static DoctorInfo DoctorInfoToDomain(DoctorInfoDTO doctorInfoDTO)
+        public static DoctorContactInfo DoctorInfoToDomain(DoctorInfoDTO doctorInfoDTO)
         {
-            DoctorInfo doctorInfoDomain = new DoctorInfo()
+            DoctorContactInfo doctorInfoDomain = new DoctorContactInfo()
             {
                 DoctorContactID = doctorInfoDTO.DoctorID
             };
@@ -138,9 +138,9 @@ namespace PW_DataAccessLayer
         //    return medicalPracticePatientsDomain;
         //}
 
-        public static DoctorInfo DoctorContactInfoToDomain(DoctorContactInfoDTO doctorContactInfoDTO)
+        public static DoctorContactInfo DoctorContactInfoToDomain(DoctorContactInfoDTO doctorContactInfoDTO)
         {
-            DoctorInfo doctorContactInfoDomain = new DoctorInfo()
+            DoctorContactInfo doctorContactInfoDomain = new DoctorContactInfo()
             {
                 DoctorContactID = doctorContactInfoDTO.DoctorContactID,
                 MedicalPracticeID = doctorContactInfoDTO.MedicalPracticeID,
