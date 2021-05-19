@@ -19,9 +19,9 @@ namespace PW_BusinessLogicLayer
             viewCollectionDatabaseManager = new ViewCollectionDatabaseManager("");
         }
 
-        public void GetCollectionFromDB()
+        public void GetCollectionFromDB(Collection collection)
         {
-            viewCollectionDatabaseManager.GetExistingCollection(SelectedCollection);
+            viewCollectionDatabaseManager.GetExistingCollection(collection);
         }
 
         public PictureData HandleCollection(PictureInfo pictureInfo)

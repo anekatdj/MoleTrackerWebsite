@@ -381,10 +381,22 @@ namespace PW_BusinessLogicLayer
 
         #endregion
 
+
+        //    Højre hånd: 1302fa
+        //    Højre overarm: 02f3fa
+        //    Højre ben: 03f94a
+        //    Venstre hånd: ef03f9
+        //    Venstre overarm: 6a0c4f
+        //    venstre ben: f9c803
+        //    overkrop: fa0202
+        //    Hoved: 245122
+
         #region MaleFront
 
         public bool LocalizePointMaleFront(bool PointClicked)
         {
+
+
             return PointClicked;
         }
 

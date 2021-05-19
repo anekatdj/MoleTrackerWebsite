@@ -542,7 +542,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        ViewCollectionController.GetCollectionFromDB();
         PictureDataList = new List<PictureData>();
         Pictures = new List<Tuple<PictureInfo, PictureData>>();
 
@@ -556,6 +555,7 @@
         {
             CollectionInfo = ViewCollectionController.SelectedCollection;
         }
+        ViewCollectionController.GetCollectionFromDB(CollectionInfo);
 
         if (CollectionInfo.IsMarked == true)
         {
