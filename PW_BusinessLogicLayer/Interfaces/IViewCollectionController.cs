@@ -8,10 +8,10 @@ namespace PW_BusinessLogicLayer.Interfaces
 {
     public interface IViewCollectionController
     {
-        public Collection SelectedCollection { get; set; }
+        Collection SelectedCollection { get; set; }
         PictureData HandleCollection(PictureInfo pictureInfo);
-
-        public PatientData GetPatientData(PatientInfo patientInfoDomain);
+        void GetCollectionFromDB();
+        PatientData GetPatientData(PatientInfo patientInfoDomain);
         public byte[] HandleSpecificPicture(int pictureID);
         PictureComment HandlePictureComment(PictureInfo pictureInfo);
     }

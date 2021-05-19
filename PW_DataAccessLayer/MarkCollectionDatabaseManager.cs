@@ -10,13 +10,10 @@ namespace PW_DataAccessLayer
     public class MarkCollectionDatabaseManager : IMarkCollectionDatabaseManager
     {
         private IAPIService API;
-        //public PatientDataDTO CurrentPatientData { get; set; }
 
         public MarkCollectionDatabaseManager(string APIType)
         {
             API = APIFactory.GetAPI(APIType);
-
-            //API = new StubApiService();
         }
 
         public void PostMarkedCollection(ChangeCollectionMarking _changeCollectionMarking)
@@ -28,21 +25,12 @@ namespace PW_DataAccessLayer
 
             try
             {
-                string ID = API.PostObject<ChangeCollectionMarkingDTO>("PutNewCollectionMark", _changeCollectionMarkingDTO);
+                string ID = API.PostObject<ChangeCollectionMarkingDTO>("ChangeCollectionMarking", _changeCollectionMarkingDTO);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
         }
-
-        //public void UpdateCollection(CollectionDTO UpdatedCollection)
-        //{
-        //    CollectionDTO OldCollectionDTO = CurrentPatientData.CollectionList.First(i => i.CollectionID == UpdatedCollection.CollectionID);
-
-        //    int indexPosition = CurrentPatientData.CollectionList.IndexOf(OldCollectionDTO);
-
-        //    CurrentPatientData.CollectionList[indexPosition] = UpdatedCollection;
-        //}
     }
 }

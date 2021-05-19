@@ -9,5 +9,7 @@ namespace PW_BusinessLogicLayer.Interfaces
         public Collection Collections { get; set; }
         public bool LocalizePointFemaleFront(bool PointClicked, int X, int Y);
         public bool LocalizePointFemaleBack(bool PointClicked, int X, int Y);
+        public bool LocalizePointMaleFront(bool PointClicked);
+        public bool LocalizePointMaleBack(bool PointClicked);
     }
 }

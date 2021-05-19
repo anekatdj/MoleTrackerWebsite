@@ -23,7 +23,9 @@ namespace PW_DataAccessLayer
                 CollectionID = collectionDTO.CollectionID,
                 CollectionName = collectionDTO.CollectionName,
                 PictureList = list,
-                Location = LocationOnBodyToDomain(collectionDTO.Location)
+                Location = LocationOnBodyToDomain(collectionDTO.Location),
+                IsMarked = collectionDTO.IsMarked,
+                PatientID = collectionDTO.PatientID
             };
             return collectionDomain;
         }
