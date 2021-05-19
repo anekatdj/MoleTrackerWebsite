@@ -10,7 +10,7 @@ namespace PW_BusinessLogicLayer.Interfaces
     {
         Collection SelectedCollection { get; set; }
         PictureData HandleCollection(PictureInfo pictureInfo);
-        void GetCollectionFromDB();
+        void GetCollectionFromDB(Collection collection);
         PatientData GetPatientData(PatientInfo patientInfoDomain);
         public byte[] HandleSpecificPicture(int pictureID);
         PictureComment HandlePictureComment(PictureInfo pictureInfo);
