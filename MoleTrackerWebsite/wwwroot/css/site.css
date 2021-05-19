@@ -43,8 +43,8 @@ app {
         }
 
 .main .top-row a:first-child {
-    overflow: hidden;
-    text-overflow: ellipsis;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
 }
 
 .sidebar {
@@ -182,14 +182,15 @@ app {
         display: block;
     }
     .table {
-        width: 80%
+        width: 80%;
+        border: none;
     }
     #t1 td {
         table-layout: fixed;
         width: 200px;
         height: 300px;
         word-wrap: break-word;
-        overflow: hidden;
+        /*overflow: hidden;*/
         border: 2px solid black;
         border-radius: 20px;
         /*border-collapse: collapse;*/
@@ -197,6 +198,7 @@ app {
     }
     .table2 {
         width: 100%;
+        border: none;
     }
     .editbtn {
         border-radius: 10px;
