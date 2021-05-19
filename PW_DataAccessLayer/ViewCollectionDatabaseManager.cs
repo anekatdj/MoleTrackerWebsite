@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using APIWebServiesConnector;
 using DataClasses.Domain.Collections;
 using DataClasses.Domain.Login;
@@ -15,13 +16,34 @@ namespace PW_DataAccessLayer
     {
 
         private IAPIService API;
+        public PatientData CurrentPatientData { get; set; }
 
         public ViewCollectionDatabaseManager(string APIType)
         {
             API= APIFactory.GetAPI(APIType);
         }
 
-        public PictureData GetCollection(PictureInfo pictureInfo) //PatientInfo patientInfo
+        public void GetExistingCollection(Collection collection)
+        {
+            CollectionRequestDTO collectionRequestDTO = new CollectionRequestDTO();
+            CollectionDTO CollectionDTO = new CollectionDTO();
+            collectionRequestDTO.CollectionID = collection.CollectionID;
+
+            //collectionRequestDTO.PatientID = CurrentPatientInfo.PatientID;
+
+            try
+            {
+                CollectionDTO = API.GetObject<CollectionDTO, CollectionRequestDTO>("GetCollection", collectionRequestDTO);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            collection = DTOConverter.CollectionToDomain(CollectionDTO);
+        }
+
+        public PictureData GetPictures(PictureInfo pictureInfo) //PatientInfo patientInfo
         {
             PictureDataDTO pictureDataDTO = new PictureDataDTO();
             PictureRequestDTO pictureRequestDTO = new PictureRequestDTO() {PictureID = pictureInfo.PictureID};
@@ -48,7 +70,6 @@ namespace PW_DataAccessLayer
             PictureDataDTO PictureFromApi = API.GetObject<PictureDataDTO, PictureRequestDTO>("GetPictureData", PictureRequest);
 
             return PictureFromApi.PictureData;
-
         }
 
         public PatientData GetPatientData(PatientInfo patientInfoDomain)

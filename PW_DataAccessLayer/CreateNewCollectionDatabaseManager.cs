@@ -14,7 +14,6 @@ namespace PW_DataAccessLayer
     public class CreateNewCollectionDatabaseManager : ICreateNewCollectionDatabaseManager
     {
         public  CollectionDTO CollectionDTO { get; set; }
-        public PatientData CurrentPatientData { get; set; }
 
         private readonly IAPIService API;
 
@@ -40,48 +39,5 @@ namespace PW_DataAccessLayer
 
             return collection.CollectionID;
         }
-
-        //TODO til mark collection
-        public void UpdateCollection(Collection UpdatedCollection)
-        {
-            Collection OldCollectionDTO = CurrentPatientData.CollectionList.First(
-                i => i.CollectionID == UpdatedCollection.CollectionID);
-
-            int indexPosition = CurrentPatientData.CollectionList.IndexOf(OldCollectionDTO);
-
-            CurrentPatientData.CollectionList[indexPosition] = UpdatedCollection;
-        }
-
-
-        //public void GetExistingCollection(Collection collection)
-        //{
-        //    CollectionRequestDTO collectionRequestDTO = new CollectionRequestDTO();
-
-        //    collectionRequestDTO.CollectionID = collection.CollectionID;
-
-        //    collectionRequestDTO.PatientID = CurrentPatientInfo.PatientID;
-
-        //    try
-        //    {
-        //        CollectionDTO = API.GetObject<CollectionDTO, CollectionRequestDTO>("GetCollection", collectionRequestDTO);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //    }
-
-        //    collection.CollectionID = CollectionDTO.CollectionID;
-        //    collection.CollectionName = CollectionDTO.CollectionName;
-        //    //collection.Location = CollectionDTO.Location;
-        //    //collection.PictureList = CollectionDTO.PictureList;
-        //    ////foreach (var picture in collectionDTO.PictureList)
-        //    ////{
-        //    ////    collection.PictureList.Add(picture);
-        //    ////}
-
-        //    ////collection.Location = collectionDTO.Location;
-
-        //    //return collection;
-        //}
     }
 }

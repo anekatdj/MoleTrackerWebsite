@@ -330,7 +330,9 @@
         {
             Flag = "fa fa-flag-checkered";
             FlagColor = "red";
-            ChangeCollectionMarking.IsMarked = true;
+            ChangeCollectionMarking.IsMarked = !ChangeCollectionMarking.IsMarked;
+            ViewCollectionController.SelectedCollection.IsMarked = ChangeCollectionMarking.IsMarked;
+            ChangeCollectionMarking.CollectionID = CollectionInfo.CollectionID;
             MarkCollectionController.HandleMarking(ChangeCollectionMarking);
         }
         else
@@ -338,6 +340,8 @@
             Flag = "fa fa-flag-o";
             FlagColor = "azure";
             ChangeCollectionMarking.IsMarked = false;
+            ViewCollectionController.SelectedCollection.IsMarked = ChangeCollectionMarking.IsMarked;
+            ChangeCollectionMarking.CollectionID = CollectionInfo.CollectionID;
             MarkCollectionController.HandleMarking(ChangeCollectionMarking);
         }
     }
@@ -434,7 +438,7 @@
         Picture = CollectionInfo.PictureList.Find(x => x.PictureID.Equals(pictureId));
         FocusedPicDateOfUpload = Picture.DateOfUpload;
         //TODO hent kommentarer
-        //PictureData = Pictures[0].Item2.Find(x => x.Item2.PictureID.Equals(pictureId));
+        PictureData = PictureDataList.Find(x => x.PictureID.Equals(pictureId));
         FocusedPic = PictureData.PicData;
         Picture.PictureID = Convert.ToInt32(pictureId);
     }
@@ -529,7 +533,7 @@
 
     public byte[] FocusedPic { get; set; }
     public byte[] LatestPic { get; set; }
-    //public List<PictureData> PictureDataList { get; set; }
+    public List<PictureData> PictureDataList { get; set; }
     //public Collection ChosenCollection { get; set; }
     //PictureInfo pictureInfo = new PictureInfo();
     public List<Tuple<PictureInfo, PictureData>> Pictures { get; set; }
@@ -538,6 +542,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        ViewCollectionController.GetCollectionFromDB();
+        PictureDataList = new List<PictureData>();
         Pictures = new List<Tuple<PictureInfo, PictureData>>();
 
         //TODO Vi skal have en bool
@@ -551,11 +557,23 @@
             CollectionInfo = ViewCollectionController.SelectedCollection;
         }
 
+        if (CollectionInfo.IsMarked == true)
+        {
+            Flag = "fa fa-flag-checkered";
+            FlagColor = "red";
+        }
+        else
+        {
+            Flag = "fa fa-flag-o";
+            FlagColor = "azure";
+        }
+
+
         if (CollectionInfo.PictureList.Count != 0) //(CollectionInfo.PictureList.Count != 0)
         {
             foreach (var pic in CollectionInfo.PictureList)
             {
-                //PictureDataList.Add(ViewCollectionController.HandleCollection(pic));
+                PictureDataList.Add(ViewCollectionController.HandleCollection(pic));
                 //PictureInfoList.Add(pic);
 
                 Pictures.Add(new Tuple<PictureInfo, PictureData>(pic, ViewCollectionController.HandleCollection(pic)));
