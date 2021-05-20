@@ -13,9 +13,98 @@
 
 @inject IViewCollectionController ViewCollectionController
 @inject NavigationManager NavManager
-@inject IJSRuntime JsRuntime;
+@inject IJSRuntime JsRuntime
+@*@inject ChangeCollectionMark ChangeCollectionMarking*@
+@inject ChangeCollectionNameDomain ChangeCollectionName
+@inject ChangeNotificationsDomain ChangeNotifications;
+
+@* Flyout med marker samling, ændr navn og ændr notifikation *@
+<div class="col" style="float: right">
+    <button class="fa fa-ellipsis-h ellipsisSideBar iconfields" @onclick="Sidebar"></button> @*onclick="Sidebar"*@
+    @*Denne skal flyve ind fra siden over det eksisterende på siden*@
+    @if (SidebarVisible) //class="td"
+    {
+        <div id="mySidenav" class="sidenav">
+            <button class="fas fa-arrow-right closebtn" @onclick="CloseSideNav"></button>
+            <h2 style="color: azure">Indstillinger</h2>
+            <div style="color: azure; margin-left: 5%; margin-bottom: 4%; cursor: pointer" @onclick="ItemMarked">
+                <span class="@Flag" style="transform: scaleX(-1);color:@FlagColor"></span>
+                Markér samling
+            </div>
+
+            <div style="color: azure; margin-left: 5%; margin-bottom: 4%; cursor: pointer" @onclick="DeleteCollectionDialogShow">
+                <span class="fa fa-trash-o"></span>
+                Slet samling
+            </div>
+
+            @if (DeleteCollectionBool)
+            {
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <p class="modal-title" id="titleLabel">Ønsker du at slette denne samling?</p>
+                        </div>
+                        <div class="modal-body">
+                            <button class="iconfieldsWithText" style="margin-right: 1%" @onclick="DeleteCollection">
+                                <i class="fa fa-check" style="color:forestgreen"></i>
+                                Ja
+                            </button>
+                            <button class="iconfieldsWithText" @onclick="DeleteCollectionDialogShow">
+                                <i class="fa fa-close" style="color:red"></i>
+                                Nej
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="dropdown-toggle" style="color: azure; margin-left: 5%; cursor: pointer" @onclick="Notifications">
+                <span class="fa fa-clock-o"></span>
+                Ændr follow-up notifikationer
+            </div>
+            @if (NotificationVisible)
+            {
+                <div style="color: azure; width: 50%; margin-left: 5%; margin-bottom: 5%">
+                    <label>Dag: </label>
+                    <select class="form-control" @onchange="DaysChanged">
+                        <option value="">@_dayOption</option>
+                        @foreach (var day in weekdaysList)
+                        {
+                            <option value="@day">@day</option>
+                        }
+                    </select>
+                </div>
 
 
+                <div style="color: azure; width: 35%; margin-left: 5%; margin-bottom: 5%">
+                    <label>Klokken: </label>
+                    <select class="form-control" @onchange="HourChanged">
+                        <option>@_hourOption</option>
+                        @foreach (var hour in hoursList)
+                        {
+                            <option value="@hour">@hour.00</option>
+                        }
+                    </select>
+                </div>
+
+
+                <div style="color: azure; width: 40%; margin-left: 5%; margin-bottom: 5%">
+                    <label>Antal uger: </label>
+                    <select class="form-control" @onchange="WeeksChanged">
+                        <option>@_weekOption</option>
+                        @foreach (var week in weeksList)
+                        {
+                            <option value="@week">Hver @week. uge</option>
+                        }
+                    </select>
+                </div>
+
+                <div>
+                    <button class="btn btn-primary rounded-pill" style="margin-left: 5%" @onclick="OnChangedNotifications">Gem</button>
+                </div>
+            }
+        </div>
+    }
+</div>
 
 <div>
     <h3>
@@ -27,32 +116,32 @@
             Der er endnu ikke uploaded billeder til denne samling.
         </h4>
     }
-    <table  class="table" >
+    <table class="table">
 
         @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
         {
-        <div style="overflow-x:scroll">
-            <tr>
-                @foreach (var info in ChosenCollection.PictureList)
-                {
+            <div style="overflow-x:scroll">
+                <tr>
+                    @foreach (var info in ChosenCollection.PictureList)
+                    {
 
-                    <td>
-                        <div style="transform: rotate(0deg); width: 20%;padding: 5%">
-                            @info.DateOfUpload
-                        </div>
-                    </td>
-                }
-            </tr>
-            <tr>
-                @foreach (var item in PicDataList)
-                {
+                        <td>
+                            <div style="transform: rotate(0deg); width: 20%;padding: 5%">
+                                @info.DateOfUpload
+                            </div>
+                        </td>
+                    }
+                </tr>
+                <tr>
+                    @foreach (var item in PicDataList)
+                    {
 
-                    <td @onclick="@((e) => ShowPicture(e, item.PictureID))">
-                        <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" />
-                    </td>
-                }
-            </tr>
-        </div>
+                        <td @onclick="@((e) => ShowPicture(e, item.PictureID))">
+                            <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" />
+                        </td>
+                    }
+                </tr>
+            </div>
 
 
         }
@@ -340,4 +429,134 @@
         await JsRuntime.InvokeVoidAsync("focusInput", "myLatestCommentInput");
     }
 
+    #region sidebar
+
+    //public string AddPictureButton = "fa fa-picture-o";
+    public string EditIcon { get; set; } = "fa fa-pencil";
+    public string FontColor { get; set; }
+    public string FlagColor = "azure";
+
+    public bool ChangeNameBool { get; set; }
+    public bool IsDisabled { get; set; } = true;
+
+    public void CloseSideNav()
+    {
+        SidebarVisible = !SidebarVisible;
+    }
+
+
+    public bool SidebarVisible { get; set; }
+
+    private void Sidebar()
+    {
+        SidebarVisible = !SidebarVisible;
+    }
+
+    #region Flag
+
+    public string Flag = "fa fa-flag-o";
+
+    public void ItemMarked()
+    {
+        if (Flag == "fa fa-flag-o")
+        {
+            Flag = "fa fa-flag-checkered";
+            FlagColor = "red";
+            ChangeCollectionMarking.IsMarked = !ChangeCollectionMarking.IsMarked;
+            ViewCollectionController.SelectedCollection.IsMarked = ChangeCollectionMarking.IsMarked;
+            ChangeCollectionMarking.CollectionID = CollectionInfo.CollectionID;
+            MarkCollectionController.HandleMarking(ChangeCollectionMarking);
+        }
+        else
+        {
+            Flag = "fa fa-flag-o";
+            FlagColor = "azure";
+            ChangeCollectionMarking.IsMarked = false;
+            ViewCollectionController.SelectedCollection.IsMarked = ChangeCollectionMarking.IsMarked;
+            ChangeCollectionMarking.CollectionID = CollectionInfo.CollectionID;
+            MarkCollectionController.HandleMarking(ChangeCollectionMarking);
+        }
+    }
+
+    #endregion 
+
+    #region DeleteCollection
+
+    public bool DeleteCollectionBool { get; set; }
+
+    public void DeleteCollectionDialogShow()
+    {
+        //SidebarVisible = !SidebarVisible;
+        DeleteCollectionBool = !DeleteCollectionBool;
+    }
+
+    public void DeleteCollection()
+    {
+        DeleteCollectionController.HandleDeleteCollection(CollectionInfo, PatientInfo);
+        NavManager.NavigateTo("/mainPage");
+    }
+
+    #endregion
+
+    #region Notifications
+
+    public bool NotificationVisible { get; set; }
+
+    public void Notifications() => NotificationVisible = !NotificationVisible;
+
+    public bool DaysVisible { get; set; }
+
+    public void Days() => DaysVisible = !DaysVisible;
+
+    public bool HoursVisible { get; set; }
+
+    public void Hours() => HoursVisible = !HoursVisible;
+
+    public bool WeeksVisible { get; set; }
+
+    public void Weeks() => WeeksVisible = !WeeksVisible;
+
+    private string _dayOption { get; set; } = "--Dag--";
+    private string _hourOption { get; set; } = "--Time--";
+    private string _weekOption { get; set; } = "--Uger--";
+
+    public void DaysChanged(ChangeEventArgs dayEvent)
+    {
+        _dayOption = dayEvent.Value.ToString();
+        ChangeNotifications.WeekDay = _dayOption;
+        StateHasChanged();
+    }
+
+    public void HourChanged(ChangeEventArgs hourEvent)
+    {
+        _hourOption = hourEvent.Value.ToString();
+        ChangeNotifications.Hour = _hourOption;
+        StateHasChanged();
+    }
+
+    public void WeeksChanged(ChangeEventArgs weekEvent)
+    {
+        _weekOption = weekEvent.Value.ToString();
+        ChangeNotifications.NumberOfWeeks = _weekOption;
+        StateHasChanged();
+    }
+
+    public void OnChangedNotifications()
+    {
+        ChangeFollowUpNotificationsController.HandleChangedNotifications(ChangeNotifications);
+    }
+
+
+    private List<string> weekdaysList = new List<string>(new string[] { "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag" });
+    private List<string> weeksList = new List<string>(new string[] { "1", "2", "4", "6", "8", "12" });
+
+    private List<string> hoursList = new List<string>(new string[]
+    {
+        "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13",
+        "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"
+                                    });
+
+    #endregion
+
+    #endregion
 }
