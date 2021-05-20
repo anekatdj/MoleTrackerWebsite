@@ -191,24 +191,6 @@
     }
 
 
-    //Zoom forsøg - virker ikke helt med event
-    //https://stackoverflow.com/questions/54222913/scrollable-image-stack-using-blazor-component/54227687
-
-    int imgNumber = 0;
-    string img => $"/Images/FemaleBackCrop {imgNumber}.png";
-    string img2 => $"/Images/pin.png";
-
-    public class WheelEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs { public int DeltaY { get; } }
-
-    Task MouseWheel(WheelEventArgs args)
-    {
-        imgNumber += Math.Sign(args.DeltaY);
-        if (imgNumber == 43) imgNumber = 0;
-        if (imgNumber == -1) imgNumber = 42;
-        return Task.CompletedTask;
-    }
-
-
     #region Coordinates
 
     private void ChoosePoint()
@@ -279,6 +261,7 @@
         }
     }
 
+    #region Handle Location on patient
     private void HandleLocationFemaleFront()
     {
         if (AddButtonPressed == true)
@@ -299,27 +282,18 @@
     {
         if (AddButtonPressed == true)
         {
-            PointClicked = Coordinates.LocalizePointMaleFront(PointClicked, X,Y); //eventuelt være true
+            PointClicked = Coordinates.LocalizePointMaleFront(PointClicked, X,Y);
         }
     }
-
 
     private void HandleLocationMaleBack()
     {
         if (AddButtonPressed == true)
         {
             PointClicked = Coordinates.LocalizePointMaleBack(true,X,Y);
-
         }
     }
-    //    Højre hånd: 1302fa
-    //    Højre overarm: 02f3fa
-    //    Højre ben: 03f94a
-    //    Venstre hånd: ef03f9
-    //    Venstre overarm: 6a0c4f
-    //    venstre ben: f9c803
-    //    overkrop: fa0202
-    //    Hoved: 245122
+    #endregion
 
     private void AcceptPosition()
     {

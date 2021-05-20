@@ -26,8 +26,9 @@ namespace DataClasses.Domain.Picture
 
         public enum BodyPart
         {
-            Pande,
+            
             Kind,
+            Pande,
             Næse,
             Læber,
             Hage,

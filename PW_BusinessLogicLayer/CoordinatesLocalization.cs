@@ -200,6 +200,9 @@ namespace PW_BusinessLogicLayer
             }
 
             Collections.CollectionName = Location.BodyParts.ToString();
+            Location.IsFrontFacing = true;
+            Location.xCoordinate = Convert.ToInt32(X * 10000 / 212);
+            Location.yCoordinate = (int)(Y * 10000 / 477);
             return PointClicked;
         }
 
@@ -378,6 +381,10 @@ namespace PW_BusinessLogicLayer
             }
 
             Collections.CollectionName = Location.BodyParts.ToString();
+            Location.IsFrontFacing = false;
+            Location.xCoordinate = Convert.ToInt32(X * 10000 / 212);
+            Location.yCoordinate = (int)(Y * 10000 / 477);
+
             return PointClicked;
         }
 
@@ -448,6 +455,10 @@ namespace PW_BusinessLogicLayer
                 Location.Orientations = LocationOnBody.Orientation.Ingen;
             }
             Collections.CollectionName = Location.BodyParts.ToString();
+            Location.IsFrontFacing = true;
+            Location.xCoordinate = Convert.ToInt32(X * 10000 / 270);
+            Location.yCoordinate = (int)(Y * 10000 / 520);
+
             return PointClicked=true;
         }
 
@@ -508,14 +519,15 @@ namespace PW_BusinessLogicLayer
                 Location.Orientations = LocationOnBody.Orientation.Ingen;
             }
             Collections.CollectionName = Location.BodyParts.ToString();
+            Location.IsFrontFacing = false;
+
+            Location.xCoordinate = Convert.ToInt32(X * 10000 / 270);
+            Location.yCoordinate = (int) (Y * 10000 / 520);
+
             return PointClicked = true;
         }
 
         #endregion
 
-        public void GetBodyPart(int x, int y)
-        {
-            Bitmap img = new Bitmap("");
-        }
     }
 }
