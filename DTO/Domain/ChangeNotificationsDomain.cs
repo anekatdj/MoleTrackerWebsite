@@ -5,7 +5,7 @@ using DataClasses.DTO;
 
 namespace DataClasses.Domain
 {
-    public class ChangeNotifications : SessionInfoDomain
+    public class ChangeNotificationsDomain : SessionInfoDomain
     {
         public int CollectionID { get; set; }
         public TimeSpan NotificationTimeInterval { get; set; } //TODO Skal vi ikke lave tre (tisdpunkt, ugedag, antal uger mellem noti?)
