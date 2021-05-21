@@ -62,12 +62,30 @@
 
     <div class="col">
         <div style="width: 70%;">
+            @*AK er i gang med at indlæse punkter på patienten lige her*@
+
+            @if (ExistingPoints)
+            {
+
+                foreach (var item in NewCoordinateXY)
+                {
+                    if (IsFrontFacing==item.Item3)
+                    {
+                        <div style="width: @(_pointRadius * 2)px; height: @(_pointRadius * 2)px; top: @(item.Item2 - _pointRadius)px; left: @(item.Item1 - _pointRadius)px; background-color: dodgerblue; position: fixed; border-radius: @(_pointRadius)px"></div>
+                    }
+                }
+            }
+            
+            
+
+
             @if (AddButtonPressed == true)
             {
 
                 <img class="cursor" id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" />
 
                 <div class="cursor" @onclick="GetCoordinates" style="width: @(_pointRadius * 2)px; height: @(_pointRadius * 2)px; top: @(YPoint - _pointRadius)px; left: @(XPoint - _pointRadius)px; background-color: red; position: fixed; border-radius: @(_pointRadius)px"></div>
+
 
 
                 //TODO kan eventuelt bruges senere til at klikke på et modermærke
@@ -89,8 +107,8 @@
 
             }
 
-            <button style="float: right;font-size:20px" class="@Arrow iconfields" @onclick="TurnAroundModel"></button>
-
+            <button style="float: right; font-size: 20px" class="@Arrow iconfields" @onclick="TurnAroundModel"></button>
+            <button @onclick="Transform">TEST AF LOAD PRIKKER</button>
         </div>
     </div>
 
@@ -153,6 +171,8 @@
 
     #endregion
 
+    #region Turn around model and get gender
+    public bool IsFrontFacing { get; set; } = true;
 
     public void TurnAroundModel()
     {
@@ -164,10 +184,13 @@
             if (this.FrontOrBack == "/Images/FemaleBackCrop.png")
             {
                 this.FrontOrBack = "/Images/FemaleFrontcrop.png";
+                IsFrontFacing = !IsFrontFacing;
+
             }
             else
             {
                 this.FrontOrBack = "/Images/FemaleBackCrop.png";
+                IsFrontFacing = !IsFrontFacing;
             }
         }
 
@@ -176,10 +199,12 @@
             if (this.FrontOrBack == "/Images/MaleBackCrop.png")
             {
                 this.FrontOrBack = "/Images/MaleFrontCrop.png";
+                IsFrontFacing = !IsFrontFacing;
             }
             else
             {
                 this.FrontOrBack = "/Images/MaleBackCrop.png";
+                IsFrontFacing = !IsFrontFacing;
             }
         }
     }
@@ -189,7 +214,7 @@
         //PatientInfo = LogInController.HandlePatientInfo();
         Gender = PatientInfo.Gender;
     }
-
+    #endregion
 
     #region Coordinates
 
@@ -219,11 +244,16 @@
     public int XPoint { get; set; }
     public int YPoint { get; set; }
 
+    public double ResultLeft{ get; set; }
+
     private async Task GetCoordinates(MouseEventArgs e) //Før var det en void
     {
         var result = await JS.InvokeAsync<BoundingClientRect>("PictureClickFind", new object[] { "PatientModel" });
         X = Convert.ToInt32(e.ClientX - result.Left);
         Y = Convert.ToInt32(e.ClientY - result.Top);
+
+        //ResultLeft = result.Left;
+        //var x = 154 + ResultLeft;
 
         //var scroll = await JS.InvokeAsync<int>("GetWindowYScroll");
         XPoint = (int)e.ClientX;
@@ -231,6 +261,25 @@
 
         BackOrFront();
     }
+
+    private List<Tuple<int, int,bool>> NewCoordinateXY;
+    public bool ExistingPoints { get; set; }
+    async Task Transform()
+    {
+        var result = await JS.InvokeAsync<BoundingClientRect>("PictureClickFind", new object[] { "PatientModel" });
+
+        NewCoordinateXY = new List<Tuple<int, int,bool>>();
+        foreach (var item in CoordinateXY)
+        {
+            NewCoordinateXY.Add(new Tuple<int, int,bool>(item.Item1+Convert.ToInt32(result.Left), item.Item2+Convert.ToInt32(result.Top),item.Item3));
+        }
+        ExistingPoints = !ExistingPoints;
+
+        //var x = 131 + result.Left;
+        //var y = 45 + result.Top;
+    }
+
+
 
     private void BackOrFront()
     {
@@ -282,7 +331,7 @@
     {
         if (AddButtonPressed == true)
         {
-            PointClicked = Coordinates.LocalizePointMaleFront(PointClicked, X,Y);
+            PointClicked = Coordinates.LocalizePointMaleFront(PointClicked, X, Y);
         }
     }
 
@@ -290,7 +339,7 @@
     {
         if (AddButtonPressed == true)
         {
-            PointClicked = Coordinates.LocalizePointMaleBack(true,X,Y);
+            PointClicked = Coordinates.LocalizePointMaleBack(true, X, Y);
         }
     }
     #endregion
@@ -357,7 +406,7 @@
         return Task.CompletedTask;
     }
 
-    //public Bitmap ImgColorMaleBack { get; set; }
+    //public BoundingClientRect Result { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -369,18 +418,39 @@
         //ViewCollectionController.HandleSpecificPicture(17);
 
         Collections = PatientData.CollectionList;
-        //CreateNewCollectionController.HandleLoadCollection(Collection);
+
+        CoordinateXY = new List<Tuple<int, int,bool>>();
+
+        if (PatientInfo.Gender == "B")
+        {
+            foreach (var item in Collections)
+            {
+                CoordinateXY.Add(new Tuple<int, int, bool>((item.Location.xCoordinate * 270 / 10000), (item.Location.yCoordinate * 520 / 10000), item.Location.IsFrontFacing));
+
+            }
+        }
+        else
+        {
+            foreach (var item in Collections)
+            {
+                CoordinateXY.Add(new Tuple<int, int, bool>((item.Location.xCoordinate * 212 / 10000), (item.Location.yCoordinate * 477 / 10000), item.Location.IsFrontFacing));
+
+            }
+        }
+
         DisplayPatientModel();
         await StartupTask();
-
+        // await Transform();
 
         Coordinates.ImgColorMaleBack = new Bitmap(@"wwwroot\\Images\ColorMaleFront.png");
 
 
     }
 
+    private List<Tuple<int, int,bool>> CoordinateXY;
 
 
     #endregion
+
 }
 
