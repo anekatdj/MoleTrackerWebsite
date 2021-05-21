@@ -6,6 +6,7 @@ using DataClasses.Domain.Collections;
 using DataClasses.Domain.Picture;
 using PW_BusinessLogicLayer.Interfaces;
 using System.Drawing;
+using DataClasses.Domain.MISC;
 
 namespace PW_BusinessLogicLayer
 {
@@ -14,6 +15,7 @@ namespace PW_BusinessLogicLayer
         public LocationOnBody Location { get; set; }
         public Collection Collections { get; set; }
         public Bitmap ImgColorMaleBack { get; set; }
+        public PatientData PatientData{ get; set; }
 
         public CoordinatesLocalization(LocationOnBody locationOnBody, Collection collection)
         {
@@ -201,6 +203,19 @@ namespace PW_BusinessLogicLayer
 
             Collections.CollectionName = Location.BodyParts.ToString();
             Location.IsFrontFacing = true;
+
+            //Same name
+            var _incrementNumberInName = 0;
+            foreach (var item in PatientData.CollectionList)
+            {
+                if (item.CollectionName.Contains(Collections.CollectionName))
+                {
+                    _incrementNumberInName++;
+                    Debug.WriteLine("Vi er ens");
+                }
+            }
+            Collections.CollectionName += _incrementNumberInName.ToString();
+
             Location.xCoordinate = Convert.ToInt32(X * 10000 / 212);
             Location.yCoordinate = (int)(Y * 10000 / 477);
             return PointClicked;
@@ -382,6 +397,19 @@ namespace PW_BusinessLogicLayer
 
             Collections.CollectionName = Location.BodyParts.ToString();
             Location.IsFrontFacing = false;
+
+            //Same name
+            var _incrementNumberInName = 0;
+            foreach (var item in PatientData.CollectionList)
+            {
+                if (item.CollectionName.Contains(Collections.CollectionName))
+                {
+                    _incrementNumberInName++;
+                    Debug.WriteLine("Vi er ens");
+                }
+            }
+            Collections.CollectionName += _incrementNumberInName.ToString();
+
             Location.xCoordinate = Convert.ToInt32(X * 10000 / 212);
             Location.yCoordinate = (int)(Y * 10000 / 477);
 
@@ -455,6 +483,19 @@ namespace PW_BusinessLogicLayer
                 Location.Orientations = LocationOnBody.Orientation.Ingen;
             }
             Collections.CollectionName = Location.BodyParts.ToString();
+
+            //Same name
+            var _incrementNumberInName = 0;
+            foreach (var item in PatientData.CollectionList)
+            {
+                if (item.CollectionName.Contains(Collections.CollectionName))
+                {
+                    _incrementNumberInName++;
+                    Debug.WriteLine("Vi er ens");
+                }
+            }
+            Collections.CollectionName += _incrementNumberInName.ToString();
+
             Location.IsFrontFacing = true;
             Location.xCoordinate = Convert.ToInt32(X * 10000 / 270);
             Location.yCoordinate = (int)(Y * 10000 / 520);
@@ -520,6 +561,18 @@ namespace PW_BusinessLogicLayer
             }
             Collections.CollectionName = Location.BodyParts.ToString();
             Location.IsFrontFacing = false;
+
+            //Same name
+            var _incrementNumberInName = 0;
+            foreach (var item in PatientData.CollectionList)
+            {
+                if (item.CollectionName.Contains(Collections.CollectionName))
+                {
+                    _incrementNumberInName++;
+                    Debug.WriteLine("Vi er ens");
+                }
+            }
+            Collections.CollectionName += _incrementNumberInName.ToString();
 
             Location.xCoordinate = Convert.ToInt32(X * 10000 / 270);
             Location.yCoordinate = (int) (Y * 10000 / 520);
