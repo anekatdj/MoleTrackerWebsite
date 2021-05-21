@@ -10,7 +10,7 @@ using NUnit.Framework;
 using TestContext = Bunit.TestContext;
 
 
-namespace MoleTrackerWebsite_PW.UnitTests
+namespace MoleTrackerWebsite_PW.UnitTests.PresentationLayer
 {
     public class UT_LogInPage
     {

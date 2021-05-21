@@ -21,62 +21,63 @@
 
 
 
+<div class="page-background-class">
+    <div class="wrapper fadeInDown" style="margin-top: 10%">
+        <div id="formContent">
 
-<div class="wrapper fadeInDown" style="margin-top: 10%">
-    <div id="formContent">
+            <h1>Mole Tracker</h1>
+            <h2 style="margin-top:1%">Patient Login</h2>
+            <div>
+                <EditForm Model="@LoginInfo" OnValidSubmit="HandleValidSubmit">
 
-        <h1>Mole Tracker</h1>
-        <h2 style="margin-top:1%">Patient Login</h2>
-        <div>
-            <EditForm Model="@LoginInfo" OnValidSubmit="HandleValidSubmit">
-
-                <DataAnnotationsValidator />
-                <ValidationSummary />
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
 
 
-                <div style="margin-left:-22%"><b>CPR-nummer</b></div>
+                    <div style="margin-left:-22%"><b>CPR-nummer</b></div>
 
                 <div style="margin-bottom: 3%">
                     <InputText id="Name" placeholder="DDMMÅÅ-XXXX" @bind-Value="LoginInfo.Username" style="border-radius: 5px;" />
                 </div>
 
-                <div style="margin-left:-30%"><b>Kodeord</b></div>
+                    <div style="margin-left:-30%"><b>Kodeord</b></div>
 
-                <div style="margin-left:5%">
+                    <div style="margin-left:5%">
 
-                    <InputText id="Password" @bind-Value="LoginInfo.Password" type="@TxtType" placeholder="Adgangskode" style="border-radius: 5px" />
+                        <InputText id="Password" @bind-Value="LoginInfo.Password" type="@TxtType" placeholder="Adgangskode" style="border-radius: 5px" />
 
-                    <span class="@Eye" @onclick="ShowPassword"></span>
+                        <span class="@Eye" @onclick="ShowPassword"></span>
 
-                </div>
+                    </div>
 
-                <button id="Login" style="background-color: forestgreen; border-radius: 8px; color: white; margin-top: 5%; margin-bottom: 3%;" type="submit">Log på</button>
+                    <button id="Login" style="background-color: forestgreen; border-radius: 8px; color: white; margin-top: 5%; margin-bottom: 3%;" type="submit">Log på</button>
 
-            </EditForm>
-        </div>
-        <div>
-            <input type="checkbox" />
-            <label>Husk mig</label>
-
-        </div>
-        @if (LoginFailed)
-        {
-            <div>
-                <span style="margin: 100px; color: red;">
-                    Login ugyldigt, prøv igen.
-                </span>
+                </EditForm>
             </div>
-            @foreach (var error in Errors)
+            <div>
+                <input type="checkbox" />
+                <label>Husk mig</label>
+
+            </div>
+            @if (LoginFailed)
             {
                 <div>
                     <span style="margin: 100px; color: red;">
-                        @error
+                        Login ugyldigt, prøv igen.
                     </span>
                 </div>
+                @foreach (var error in Errors)
+                {
+                    <div>
+                        <span style="margin: 100px; color: red;">
+                            @error
+                        </span>
+                    </div>
+                }
             }
-        }
+        </div>
+
     </div>
-    
 </div>
 
 

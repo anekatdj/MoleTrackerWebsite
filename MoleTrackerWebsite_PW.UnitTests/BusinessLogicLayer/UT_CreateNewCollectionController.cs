@@ -6,7 +6,7 @@ using NUnit.Framework;
 using PW_BusinessLogicLayer;
 using PW_DataAccessLayer.Interfaces;
 
-namespace MoleTrackerWebsite_PW.UnitTests
+namespace MoleTrackerWebsite_PW.UnitTests.BusinessLogicLayer
 {
     [TestFixture]
     public class UT_CreateNewCollectionController
@@ -26,13 +26,13 @@ namespace MoleTrackerWebsite_PW.UnitTests
         [Test]
         public void HandleNewCollection_ReturnsPostNewCollectionInDatabaseManager()
         {
-            //collection.Location = new LocationOnBody();
-            //collection.CollectionName = "testnavn";
-            //collection.CollectionID = 1;
-            //collection.IsMarked = false;
-            //collection.PatientID = 2;
-            //collection.PictureList = new List<PictureInfo>();
-            //_uut.HandleCreateNewCollection(collection).Returns(_createNewCollectionDatabaseManager.PostNewCollection(collection));
+            collection.Location = new LocationOnBody();
+            collection.CollectionName = "testnavn";
+            collection.CollectionID = 1;
+            collection.IsMarked = false;
+            collection.PatientID = 2;
+            collection.PictureList = new List<PictureInfo>();
+            _uut.HandleCreateNewCollection(collection).Returns(_createNewCollectionDatabaseManager.PostNewCollection(collection));
         }
     }
 }
