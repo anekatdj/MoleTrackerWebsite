@@ -69,14 +69,31 @@
 
                 foreach (var item in NewCoordinateXY)
                 {
-                    if (IsFrontFacing==item.Item3)
+                    if (IsFrontFacing == item.Item3)
                     {
                         <div style="width: @(_pointRadius * 2)px; height: @(_pointRadius * 2)px; top: @(item.Item2 - _pointRadius)px; left: @(item.Item1 - _pointRadius)px; background-color: dodgerblue; position: fixed; border-radius: @(_pointRadius)px"></div>
+
                     }
                 }
+                //foreach (var item in CoordinateXY)
+                //{
+                //    if (IsFrontFacing == item.Item3)
+                //    {
+                        <div>
+                            <map name="patientModel">
+                                @foreach (var item in CoordinateXY)
+                                {
+                                if (IsFrontFacing == item.Item3)
+                                {
+                                    <area shape="circle" style="cursor: pointer" coords="@item.Item1, @item.Item2,10" @onclick="@((e)=>NavigateToCollectionPage(e,item.Item4))" /> //@onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))"
+                                    }
+                                }
+                            </map>
+                        </div>
+                    
             }
-            
-            
+
+
 
 
             @if (AddButtonPressed == true)
@@ -89,7 +106,7 @@
 
 
                 //TODO kan eventuelt bruges senere til at klikke på et modermærke
-                @*<map name="patientModel">
+                @*<map name="patientModel" cursor="pointer">
                         <area shape="circle" style="fill:blue" coords="19,20,30" />
                     </map>
 
@@ -98,12 +115,10 @@
             }
             else
             {
-                <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" usemap="#patientModel" /> @*onmousewheel="@MouseWheel"*@
+                <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" alt="usemap" usemap="#patientModel" /> @*onmousewheel="@MouseWheel"*@
 
 
-                @*<map name="patientModel">
-                        <area shape="circle" coords="126, 344,30" />
-                    </map>*@
+
 
             }
 
@@ -141,7 +156,6 @@
             <p style="float: right; color: crimson; margin-right: 1%; margin-top: 1%">Vælg placering af modermærke</p>
         }
     }
-
 
 
 </div>
@@ -247,7 +261,7 @@
     public int XPoint { get; set; }
     public int YPoint { get; set; }
 
-    public double ResultLeft{ get; set; }
+    public double ResultLeft { get; set; }
 
     private async Task GetCoordinates(MouseEventArgs e) //Før var det en void
     {
@@ -265,16 +279,16 @@
         BackOrFront();
     }
 
-    private List<Tuple<int, int,bool>> NewCoordinateXY;
+    private List<Tuple<int, int, bool>> NewCoordinateXY;
     public bool ExistingPoints { get; set; }
     async Task Transform()
     {
         var result = await JS.InvokeAsync<BoundingClientRect>("PictureClickFind", new object[] { "PatientModel" });
 
-        NewCoordinateXY = new List<Tuple<int, int,bool>>();
+        NewCoordinateXY = new List<Tuple<int, int, bool>>();
         foreach (var item in CoordinateXY)
         {
-            NewCoordinateXY.Add(new Tuple<int, int,bool>(item.Item1+Convert.ToInt32(result.Left), item.Item2+Convert.ToInt32(result.Top),item.Item3));
+            NewCoordinateXY.Add(new Tuple<int, int, bool>(item.Item1 + Convert.ToInt32(result.Left), item.Item2 + Convert.ToInt32(result.Top), item.Item3));
         }
         ExistingPoints = !ExistingPoints;
 
@@ -422,13 +436,13 @@
 
         Collections = PatientData.CollectionList;
 
-        CoordinateXY = new List<Tuple<int, int,bool>>();
+        CoordinateXY = new List<Tuple<int, int, bool,int>>();
 
         if (PatientInfo.Gender == "B")
         {
             foreach (var item in Collections)
             {
-                CoordinateXY.Add(new Tuple<int, int, bool>((item.Location.xCoordinate * 270 / 10000), (item.Location.yCoordinate * 520 / 10000), item.Location.IsFrontFacing));
+                CoordinateXY.Add(new Tuple<int, int, bool,int>((item.Location.xCoordinate * 270 / 10000), (item.Location.yCoordinate * 520 / 10000), item.Location.IsFrontFacing,item.CollectionID));
 
             }
         }
@@ -436,7 +450,7 @@
         {
             foreach (var item in Collections)
             {
-                CoordinateXY.Add(new Tuple<int, int, bool>((item.Location.xCoordinate * 212 / 10000), (item.Location.yCoordinate * 477 / 10000), item.Location.IsFrontFacing));
+                CoordinateXY.Add(new Tuple<int, int, bool,int>((item.Location.xCoordinate * 212 / 10000), (item.Location.yCoordinate * 477 / 10000), item.Location.IsFrontFacing,item.CollectionID));
 
             }
         }
@@ -450,7 +464,7 @@
 
     }
 
-    private List<Tuple<int, int,bool>> CoordinateXY;
+    private List<Tuple<int, int, bool,int>> CoordinateXY;
 
 
     #endregion
