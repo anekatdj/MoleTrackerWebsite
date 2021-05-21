@@ -198,11 +198,17 @@ app {
         border-left: 2px solid #ccd2ff;
         border-top: 2px solid #ccd2ff;
     }
+    #SmallDates td:hover {
+        background-color: lightgrey;
+    }
 
     #SmallPics {
         border-right: 2px solid #ccd2ff;
         border-left: 2px solid #ccd2ff;
         border-bottom: 2px solid #ccd2ff;
+    }
+    #SmallPics td:hover {
+        background-color: lightgrey;
     }
 
     #t1 td {
@@ -225,7 +231,8 @@ app {
 
     .editbtn {
         border-radius: 10px;
-        color: #0366d6;
+        color: black;
+        background-color: yellow
     }
 
     .table2 td {

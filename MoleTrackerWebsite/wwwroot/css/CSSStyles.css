@@ -109,17 +109,16 @@ a {
     color: #5165ff;
 }
 
-table {
-    /*border-collapse: collapse;*/
+.tablePatientPages {
+    border-collapse: collapse;
 }
 
 td {
     position: relative;
 }
 
-/*tr:hover,
-tr:focus {
-    background: #f2f3ff;
+.table-striped .trPatient tr:hover{
+    background-color: blueviolet;
     outline: none;
 }
 
@@ -130,7 +129,7 @@ td > a:first-child {
     color: inherit;
     z-index: 0;
 }
-*/
+
     &:focus{
     outline: 0;
     }
