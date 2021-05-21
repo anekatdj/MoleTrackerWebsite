@@ -409,15 +409,15 @@ input[type=text] {
 .sidenav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
-    font-size: 25px;
-    color: #818181;
+    font-size: 35px;
+    color: black;
     display: block;
     transition: 0.3s;
 }
 
     /* When you mouse over the navigation links, change their color */
     .sidenav a:hover {
-        color: #f1f1f1;
+        color: grey;
     }
 
 /* Position and style the close button (top right corner) */
@@ -428,7 +428,7 @@ input[type=text] {
     margin-left: 2%;
     background: none;
     border: none;
-    color: white;
+    color: yellow;
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
@@ -468,7 +468,7 @@ input[type=text] {
         width: 20%; /* Equal width (5 icons with 20% width each = 100%) */
         padding: 12px 0; /* Some top and bottom padding */
         transition: all 0.3s ease; /* Add transition for hover effects */
-        color: white; /* White text color */
+        color: black; /* Black text color */
         font-size: 36px; /* Increased font size */
     }
 
@@ -568,7 +568,7 @@ input[type=text] {
 }
 
 html {
-    background-color: #56baed;
+    /*background-color: #56baed;*/
 }
 
 body {

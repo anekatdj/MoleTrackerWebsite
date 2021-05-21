@@ -18,18 +18,23 @@ namespace DataAccessLayer
             API = APIFactory.GetAPI(stub);
         }
 
-        public void ChangeCollectionName(ChangeCollectionNameDomain changeCollectionName)
+        public void PostChangedCollectionName(CollectionDomain collectionInfo)
         {
-            changeCollectionNameDTO = changeCollectionName.ToDTO();
+            ChangeCollectionNameDTO _changeCollectionNameDTO = new ChangeCollectionNameDTO();
+
+            _changeCollectionNameDTO.CollectionID = collectionInfo.CollectionID;
+            _changeCollectionNameDTO.CollectionName = collectionInfo.CollectionName;
+
             try
             {
-                var result = API.PostObject<ChangeCollectionNameDTO>("ChangeCollectionName", changeCollectionNameDTO);
+                API.PostObject<ChangeCollectionNameDTO>("ChangeCollectionName", _changeCollectionNameDTO);
             }
             catch (Exception e)
             {
+                Console.WriteLine(e);
                 throw;
             }
-
         }
+
     }
 }

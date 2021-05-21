@@ -8,6 +8,6 @@ namespace DataAccessLayer.DataAccessLayerInterfaces
 {
     public interface IChangeCollectionNameDatabaseManager
     {
-        void ChangeCollectionName(ChangeCollectionNameDomain changeCollectionName);
+        void PostChangedCollectionName(CollectionDomain collectionInfo);
     }
 }

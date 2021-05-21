@@ -7,6 +7,6 @@ namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
 {
     public interface IChangeCollectionNameController
     {
-        void ChangeCollectionName(ChangeCollectionNameDomain changeCollectionName);
+         void HandleChangedName(CollectionDomain collectionInfo);
     }
 }
