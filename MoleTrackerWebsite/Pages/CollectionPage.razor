@@ -58,7 +58,7 @@
                         {
 
                             <td id="SmallPics" @onclick="@((e) => ShowPicture(e, item.PictureID))">
-                                <img style="width: 300px;" src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" />
+                                <img style="width: 150px;" src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" />
                             </td>
                         }
                     </tr>
@@ -156,7 +156,7 @@
             </table>
         </div>
 
-        <td rowspan="5" colspan="1" valign="top" style="background-color: rgb(240, 237, 110)">
+        <td rowspan="5" colspan="1" valign="top" style="background-color: @FlyOutButtonColor">
             @* Flyout med marker samling, ændr navn og ændr notifikation *@
             <div class="col" style="float: right">
                 <button class="fa fa-ellipsis-h ellipsisSideBar iconfields" @onclick="Sidebar"></button> @*onclick="Sidebar"*@
@@ -236,233 +236,244 @@
 
 @code {
 
-    private CollectionDomain collection;
-    private PatientDataDomain patientData;
-    public string NameOfPatient { get; set; }
-    public List<PictureDataDomain> PicDataList { get; set; }
-    public byte[] FocusedPic { get; set; }
-    public byte[] LatestPic { get; set; }
-    public string FocusedPicComment { get; set; }
-    public string LatestPicComment { get; set; }
-    public DateTime FocusedPicDateOfUpload { get; set; }
-    public DateTime LatestPicDateOfUpload { get; set; }
-    public CollectionDomain ChosenCollection { get; set; }
-    public string CommentInput { get; set; }
-    public List<PictureInfoDomain> ReversedPicInfoList { get; set; }
-    public PictureInfoDomain FocusedPicInfo { get; set; }
-    public PictureInfoDomain LatestPicInfo { get; set; }
-    public bool FocusedCommentJustSaved { get; set; }
-    public bool LatestCommentJustSaved { get; set; }
-    private Stopwatch _stopWatch;
-    private Timer _stopWatchTimer;
-    private ElementReference _latestCommentField;
-    public string CollectionName { get; set; }
+            private CollectionDomain collection;
+            private PatientDataDomain patientData;
+            public string NameOfPatient { get; set; }
+            public List<PictureDataDomain> PicDataList { get; set; }
+            public byte[] FocusedPic { get; set; }
+            public byte[] LatestPic { get; set; }
+            public string FocusedPicComment { get; set; }
+            public string LatestPicComment { get; set; }
+            public DateTime FocusedPicDateOfUpload { get; set; }
+            public DateTime LatestPicDateOfUpload { get; set; }
+            public CollectionDomain ChosenCollection { get; set; }
+            public string CommentInput { get; set; }
+            public List<PictureInfoDomain> ReversedPicInfoList { get; set; }
+            public PictureInfoDomain FocusedPicInfo { get; set; }
+            public PictureInfoDomain LatestPicInfo { get; set; }
+            public bool FocusedCommentJustSaved { get; set; }
+            public bool LatestCommentJustSaved { get; set; }
+            private Stopwatch _stopWatch;
+            private Timer _stopWatchTimer;
+            private ElementReference _latestCommentField;
+            public string CollectionName { get; set; }
 
-    protected override async Task OnInitializedAsync()
-    {
-        #region Stubbet billeder
-
-        //STUB!!
-        //    PictureDataDomain picture1 = new PictureDataDomain();
-        //    PictureDataDomain picture2 = new PictureDataDomain();
-        //    PictureDataDomain picture3 = new PictureDataDomain();
-
-        //    var filePath = @"MoleOne.jpg";
-
-        //    byte[] picByteArray1 = ReadAllBytes(filePath);
-        //    byte[] picByteArray2 = ReadAllBytes(@"MoleTwo.jpg");
-        //    byte[] picByteArray3 = ReadAllBytes(@"MoleThree.jpg");
-
-        //    picture1.PictureData = picByteArray1;
-        //    picture1.PictureID = 1;
-        //    picture2.PictureData = picByteArray2;
-        //    picture2.PictureID = 2;
-        //    picture3.PictureData = picByteArray3;
-        //    picture3.PictureID = 3;
-
-        //    PicDataList.Add(picture1);
-        //    PicDataList.Add(picture1);
-        //    PicDataList.Add(picture1);
-        //    PicDataList.Add(picture1);
-        //    PicDataList.Add(picture2);
-        //    PicDataList.Add(picture2);
-        //    PicDataList.Add(picture2);
-        //    PicDataList.Add(picture2);
-        //    PicDataList.Add(picture3);
-        //    PicDataList.Add(picture3);
-        //    PicDataList.Add(picture3);
-        //    PicDataList.Add(picture3);
-
-        #endregion
-
-        PicDataList = new List<PictureDataDomain>();
-
-        ChosenCollection = ViewCollectionController.SelectedCollection;
-        CollectionName = ChosenCollection.CollectionName;
-
-        if (ChosenCollection.PictureList != null && ChosenCollection.PictureList.Count != 0)
-        {
-            foreach (var pic in ChosenCollection.PictureList)
+            protected override async Task OnInitializedAsync()
             {
-                PicDataList.Add(ViewCollectionController.GetPictureData(pic));
+                #region Stubbet billeder
+
+                //STUB!!
+                //    PictureDataDomain picture1 = new PictureDataDomain();
+                //    PictureDataDomain picture2 = new PictureDataDomain();
+                //    PictureDataDomain picture3 = new PictureDataDomain();
+
+                //    var filePath = @"MoleOne.jpg";
+
+                //    byte[] picByteArray1 = ReadAllBytes(filePath);
+                //    byte[] picByteArray2 = ReadAllBytes(@"MoleTwo.jpg");
+                //    byte[] picByteArray3 = ReadAllBytes(@"MoleThree.jpg");
+
+                //    picture1.PictureData = picByteArray1;
+                //    picture1.PictureID = 1;
+                //    picture2.PictureData = picByteArray2;
+                //    picture2.PictureID = 2;
+                //    picture3.PictureData = picByteArray3;
+                //    picture3.PictureID = 3;
+
+                //    PicDataList.Add(picture1);
+                //    PicDataList.Add(picture1);
+                //    PicDataList.Add(picture1);
+                //    PicDataList.Add(picture1);
+                //    PicDataList.Add(picture2);
+                //    PicDataList.Add(picture2);
+                //    PicDataList.Add(picture2);
+                //    PicDataList.Add(picture2);
+                //    PicDataList.Add(picture3);
+                //    PicDataList.Add(picture3);
+                //    PicDataList.Add(picture3);
+                //    PicDataList.Add(picture3);
+
+                #endregion
+
+                PicDataList = new List<PictureDataDomain>();
+
+                ChosenCollection = ViewCollectionController.SelectedCollection;
+                CollectionName = ChosenCollection.CollectionName;
+
+                if (ChosenCollection.PictureList != null && ChosenCollection.PictureList.Count != 0)
+                {
+                    foreach (var pic in ChosenCollection.PictureList)
+                    {
+                        PicDataList.Add(ViewCollectionController.GetPictureData(pic));
+                    }
+
+                    FocusedPic = PicDataList[0].PictureData;
+                    FocusedPicDateOfUpload = ChosenCollection.PictureList[0].DateOfUpload;
+                    FocusedPicComment = ViewCollectionController.GetPictureComment(ChosenCollection.PictureList[0]).Comment;
+                    FocusedPicInfo = ChosenCollection.PictureList[0];
+                    PicDataList.Reverse();
+
+                    ReversedPicInfoList = ChosenCollection.PictureList;
+                    ReversedPicInfoList.Reverse();
+
+                    LatestPic = PicDataList[0].PictureData;
+                    LatestPicInfo = ReversedPicInfoList[0];
+                    LatestPicDateOfUpload = ReversedPicInfoList[0].DateOfUpload;
+                    LatestPicComment = ViewCollectionController.GetPictureComment(ReversedPicInfoList[0]).Comment;
+                }
+
             }
 
-            FocusedPic = PicDataList[0].PictureData;
-            FocusedPicDateOfUpload = ChosenCollection.PictureList[0].DateOfUpload;
-            FocusedPicComment = ViewCollectionController.GetPictureComment(ChosenCollection.PictureList[0]).Comment;
-            FocusedPicInfo = ChosenCollection.PictureList[0];
-            PicDataList.Reverse();
 
-            ReversedPicInfoList = ChosenCollection.PictureList;
-            ReversedPicInfoList.Reverse();
-
-            LatestPic = PicDataList[0].PictureData;
-            LatestPicInfo = ReversedPicInfoList[0];
-            LatestPicDateOfUpload = ReversedPicInfoList[0].DateOfUpload;
-            LatestPicComment = ViewCollectionController.GetPictureComment(ReversedPicInfoList[0]).Comment;
-        }
-
-    }
-
-
-    private void ShowPicture(MouseEventArgs e, int pictureId)
-    {
-        if (ChosenCollection.PictureList != null && ChosenCollection.PictureList.Count != 0)
-        {
-            FocusedPicInfo = ChosenCollection.PictureList.Find(x => x.PictureID.Equals(pictureId));
-            FocusedPicDateOfUpload = FocusedPicInfo.DateOfUpload;
-            FocusedPicComment = ViewCollectionController.GetPictureComment(FocusedPicInfo).Comment;
-            PictureDataDomain focusedPicture = PicDataList.Find(x => x.PictureID.Equals(pictureId));
-
-            FocusedPic = focusedPicture.PictureData;
-        }
-    }
-
-
-
-    private void SaveNewFocusedComment()
-    {
-        if (ChosenCollection.PictureList != null && ChosenCollection.PictureList.Count != 0)
-        {
-            XmlDocument doc = new XmlDocument();
-
-            var input = doc.GetElementById("myFocusedCommentInput");
-
-            PictureCommentDomain editedComment = new PictureCommentDomain();
-
-            editedComment.Comment = FocusedPicComment;
-            editedComment.PictureID = FocusedPicInfo.PictureID;
-
-
-            ViewCollectionController.PostNewPictureComment(editedComment);
-            FocusedCommentJustSaved = true;
-            StateHasChanged();
-            _stopWatch = new Stopwatch();
-            _stopWatch.Start();
-
-            _stopWatchTimer = new Timer();
-            _stopWatchTimer.Interval = 1000;
-            _stopWatchTimer.Elapsed += CheckStopWatch_Timer_Tick;
-            _stopWatchTimer.Enabled = true;
-
-            LatestPicComment = ViewCollectionController.GetPictureComment(ReversedPicInfoList[0]).Comment;
-        }
-    }
-    private void SaveNewLatestComment()
-    {
-        if (ChosenCollection.PictureList != null && ChosenCollection.PictureList.Count != 0)
-        {
-            XmlDocument doc = new XmlDocument();
-
-            var input = doc.GetElementById("myLatestCommentInput");
-
-            PictureCommentDomain editedComment = new PictureCommentDomain();
-            editedComment.Comment = LatestPicComment;
-            editedComment.PictureID = LatestPicInfo.PictureID;
-
-            ViewCollectionController.PostNewPictureComment(editedComment);
-            LatestCommentJustSaved = true;
-            StateHasChanged();
-            _stopWatch = new Stopwatch();
-            _stopWatch.Start();
-
-            _stopWatchTimer = new Timer();
-            _stopWatchTimer.Interval = 1000;
-            _stopWatchTimer.Elapsed += CheckStopWatch_Timer_Tick;
-            _stopWatchTimer.Enabled = true;
-
-            FocusedPicComment = ViewCollectionController.GetPictureComment(FocusedPicInfo).Comment;
-
-        }
-    }
-    public void CheckStopWatch_Timer_Tick(object sender, EventArgs e)
-    {
-        if (_stopWatch.Elapsed.TotalSeconds >= 3)
-        {
-            InvokeAsync((() =>
+            private void ShowPicture(MouseEventArgs e, int pictureId)
             {
-                FocusedCommentJustSaved = false;
-                LatestCommentJustSaved = false;
-                StateHasChanged();
-            }));
+                if (ChosenCollection.PictureList != null && ChosenCollection.PictureList.Count != 0)
+                {
+                    FocusedPicInfo = ChosenCollection.PictureList.Find(x => x.PictureID.Equals(pictureId));
+                    FocusedPicDateOfUpload = FocusedPicInfo.DateOfUpload;
+                    FocusedPicComment = ViewCollectionController.GetPictureComment(FocusedPicInfo).Comment;
+                    PictureDataDomain focusedPicture = PicDataList.Find(x => x.PictureID.Equals(pictureId));
 
-            _stopWatch.Stop();
-            _stopWatch.Reset();
-            _stopWatchTimer.Enabled = false;
+                    FocusedPic = focusedPicture.PictureData;
+                }
+            }
 
-            FocusedPicComment = ViewCollectionController.GetPictureComment(FocusedPicInfo).Comment;
+
+
+            private void SaveNewFocusedComment()
+            {
+                if (ChosenCollection.PictureList != null && ChosenCollection.PictureList.Count != 0)
+                {
+                    XmlDocument doc = new XmlDocument();
+
+                    var input = doc.GetElementById("myFocusedCommentInput");
+
+                    PictureCommentDomain editedComment = new PictureCommentDomain();
+
+                    editedComment.Comment = FocusedPicComment;
+                    editedComment.PictureID = FocusedPicInfo.PictureID;
+
+
+                    ViewCollectionController.PostNewPictureComment(editedComment);
+                    FocusedCommentJustSaved = true;
+                    StateHasChanged();
+                    _stopWatch = new Stopwatch();
+                    _stopWatch.Start();
+
+                    _stopWatchTimer = new Timer();
+                    _stopWatchTimer.Interval = 1000;
+                    _stopWatchTimer.Elapsed += CheckStopWatch_Timer_Tick;
+                    _stopWatchTimer.Enabled = true;
+
+                    LatestPicComment = ViewCollectionController.GetPictureComment(ReversedPicInfoList[0]).Comment;
+                }
+            }
+            private void SaveNewLatestComment()
+            {
+                if (ChosenCollection.PictureList != null && ChosenCollection.PictureList.Count != 0)
+                {
+                    XmlDocument doc = new XmlDocument();
+
+                    var input = doc.GetElementById("myLatestCommentInput");
+
+                    PictureCommentDomain editedComment = new PictureCommentDomain();
+                    editedComment.Comment = LatestPicComment;
+                    editedComment.PictureID = LatestPicInfo.PictureID;
+
+                    ViewCollectionController.PostNewPictureComment(editedComment);
+                    LatestCommentJustSaved = true;
+                    StateHasChanged();
+                    _stopWatch = new Stopwatch();
+                    _stopWatch.Start();
+
+                    _stopWatchTimer = new Timer();
+                    _stopWatchTimer.Interval = 1000;
+                    _stopWatchTimer.Elapsed += CheckStopWatch_Timer_Tick;
+                    _stopWatchTimer.Enabled = true;
+
+                    FocusedPicComment = ViewCollectionController.GetPictureComment(FocusedPicInfo).Comment;
+
+                }
+            }
+            public void CheckStopWatch_Timer_Tick(object sender, EventArgs e)
+            {
+                if (_stopWatch.Elapsed.TotalSeconds >= 3)
+                {
+                    InvokeAsync((() =>
+                    {
+                        FocusedCommentJustSaved = false;
+                        LatestCommentJustSaved = false;
+                        StateHasChanged();
+                    }));
+
+                    _stopWatch.Stop();
+                    _stopWatch.Reset();
+                    _stopWatchTimer.Enabled = false;
+
+                    FocusedPicComment = ViewCollectionController.GetPictureComment(FocusedPicInfo).Comment;
+                }
+            }
+
+
+            public async Task FocusFocusedComment()
+            {
+                await JsRuntime.InvokeVoidAsync("focusInput", "myFocusedCommentInput");
+            }
+            public async Task FocusLatestComment()
+            {
+                await JsRuntime.InvokeVoidAsync("focusInput", "myLatestCommentInput");
+            }
+            public async Task FocusNameInput()
+            {
+                await JsRuntime.InvokeVoidAsync("focusInput", "myNameInput");
+            }
+            public bool ChangeNameBool { get; set; }
+            public bool IsDisabled { get; set; } = true;
+
+            private void EditName()
+            {
+                if (!ChangeNameBool)
+                {
+                    EditIcon = "fa fa-floppy-o";
+                    IsDisabled = false;
+                }
+                else
+                {
+                    EditIcon = "fa fa-pencil";
+                    ChangeCollectionNameController.HandleChangedName(ChosenCollection);
+                    IsDisabled = true;
+                }
+                ChangeNameBool = !ChangeNameBool;
+            }
+
+            private void OnInputHandler(ChangeEventArgs e)
+            {
+                ChosenCollection.CollectionName = e.Value.ToString();
+            }
+            #region sidebar
+
+            //public string AddPictureButton = "fa fa-picture-o";
+            public string EditIcon { get; set; } = "fa fa-pencil";
+            public string FontColor { get; set; }
+            public string FlagColor = "lightgray";
+            public string FlyOutButtonColor = "rgb(255, 255, 255)";
+
+
+            public bool SidebarVisible { get; set; }
+
+            private void Sidebar()
+            {
+                if (!SidebarVisible)
+                {
+                    SidebarVisible = true;
+                    FlyOutButtonColor = "rgb(240, 237, 110)";
+                }
+                else
+                {
+                    SidebarVisible = false;
+                    FlyOutButtonColor ="rgb(255, 255, 255)";
         }
-    }
 
-
-    public async Task FocusFocusedComment()
-    {
-        await JsRuntime.InvokeVoidAsync("focusInput", "myFocusedCommentInput");
-    }
-    public async Task FocusLatestComment()
-    {
-        await JsRuntime.InvokeVoidAsync("focusInput", "myLatestCommentInput");
-    }
-    public async Task FocusNameInput()
-    {
-        await JsRuntime.InvokeVoidAsync("focusInput", "myNameInput");
-    }
-    public bool ChangeNameBool { get; set; }
-    public bool IsDisabled { get; set; } = true;
-
-    private void EditName()
-    {
-        if (!ChangeNameBool)
-        {
-            EditIcon = "fa fa-floppy-o";
-            IsDisabled = false;
-        }
-        else
-        {
-            EditIcon = "fa fa-pencil";
-            ChangeCollectionNameController.HandleChangedName(ChosenCollection);
-            IsDisabled = true;
-        }
-        ChangeNameBool = !ChangeNameBool;
-    }
-
-    private void OnInputHandler(ChangeEventArgs e)
-    {
-        ChosenCollection.CollectionName = e.Value.ToString();
-    }
-    #region sidebar
-
-    //public string AddPictureButton = "fa fa-picture-o";
-    public string EditIcon { get; set; } = "fa fa-pencil";
-    public string FontColor { get; set; }
-    public string FlagColor = "lightgray";
-
-
-    public bool SidebarVisible { get; set; }
-
-    private void Sidebar()
-    {
-        SidebarVisible = !SidebarVisible;
     }
 
     #region Flag

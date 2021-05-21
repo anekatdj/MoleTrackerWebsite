@@ -188,6 +188,10 @@ app {
         width: 100%;
         border: none;
     }
+    td {
+        padding: 2px;
+        margin: auto;
+    }
 
     #SmallDates {
         border-right: 2px solid #ccd2ff;
