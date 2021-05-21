@@ -182,7 +182,7 @@ app {
         display: block;
     }
     .table {
-        width: 80%;
+        width: 100%;
         border: none;
     }
     #t1 td {
@@ -211,5 +211,6 @@ app {
         width: 100%;
         /*border: none*/
     }
+
     }
 

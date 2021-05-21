@@ -15,236 +15,216 @@
 @inject NavigationManager NavManager
 @inject IJSRuntime JsRuntime
 @inject IMarkCollectionController MarkCollectionController
-@inject IChangeCommentController ChangeCommentController
 @inject IChangeCollectionNameController ChangeCollectionNameController
-@inject IChangeFollowUpNotificationsController ChangeFollowUpNotificationsController
+@*@inject IChangeFollowUpNotificationsController ChangeFollowUpNotificationsController*@
 @inject CollectionDomain CollectionInfo
 @inject ChangeCollectionMarkingDomain ChangeCollectionMarking
 @inject ChangeCollectionNameDomain ChangeCollectionName
 @inject ChangeNotificationsDomain ChangeNotifications;
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/CSSStyles.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+
 @* Flyout med marker samling, ændr navn og ændr notifikation *@
-<div class="col" style="float: right">
-    <button class="fa fa-ellipsis-h ellipsisSideBar iconfields" @onclick="Sidebar"></button> @*onclick="Sidebar"*@
-    @*Denne skal flyve ind fra siden over det eksisterende på siden*@
-    @if (SidebarVisible) //class="td"
-    {
-        <div id="mySidenav" class="sidenav">
-            <button class="fas fa-arrow-right closebtn" @onclick="CloseSideNav"></button>
-            <h2 style="color: azure">Indstillinger</h2>
-            <div style="color: azure; margin-left: 5%; margin-bottom: 4%; cursor: pointer" @onclick="ItemMarked">
-                <span class="@Flag" style="transform: scaleX(-1);color:@FlagColor"></span>
-                Markér samling
-            </div>
 
-            <div style="color: azure; margin-left: 5%; margin-bottom: 4%; cursor: pointer" @onclick="DeleteCollectionDialogShow">
-                <span class="fa fa-trash-o"></span>
-                Slet samling
-            </div>
-
-            @if (DeleteCollectionBool)
-            {
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <p class="modal-title" id="titleLabel">Ønsker du at slette denne samling?</p>
-                        </div>
-                        <div class="modal-body">
-                            <button class="iconfieldsWithText" style="margin-right: 1%" @onclick="DeleteCollection">
-                                <i class="fa fa-check" style="color:forestgreen"></i>
-                                Ja
-                            </button>
-                            <button class="iconfieldsWithText" @onclick="DeleteCollectionDialogShow">
-                                <i class="fa fa-close" style="color:red"></i>
-                                Nej
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            }
-            <div class="dropdown-toggle" style="color: azure; margin-left: 5%; cursor: pointer" @onclick="Notifications">
-                <span class="fa fa-clock-o"></span>
-                Ændr follow-up notifikationer
-            </div>
-            @if (NotificationVisible)
-            {
-                <div style="color: azure; width: 50%; margin-left: 5%; margin-bottom: 5%">
-                    <label>Dag: </label>
-                    <select class="form-control" @onchange="DaysChanged">
-                        <option value="">@_dayOption</option>
-                        @foreach (var day in weekdaysList)
-                        {
-                            <option value="@day">@day</option>
-                        }
-                    </select>
-                </div>
-
-
-                <div style="color: azure; width: 35%; margin-left: 5%; margin-bottom: 5%">
-                    <label>Klokken: </label>
-                    <select class="form-control" @onchange="HourChanged">
-                        <option>@_hourOption</option>
-                        @foreach (var hour in hoursList)
-                        {
-                            <option value="@hour">@hour.00</option>
-                        }
-                    </select>
-                </div>
-
-
-                <div style="color: azure; width: 40%; margin-left: 5%; margin-bottom: 5%">
-                    <label>Antal uger: </label>
-                    <select class="form-control" @onchange="WeeksChanged">
-                        <option>@_weekOption</option>
-                        @foreach (var week in weeksList)
-                        {
-                            <option value="@week">Hver @week. uge</option>
-                        }
-                    </select>
-                </div>
-
-                <div>
-                    <button class="btn btn-primary rounded-pill" style="margin-left: 5%" @onclick="OnChangedNotifications">Gem</button>
-                </div>
-            }
-        </div>
-    }
-</div>
-
-<div>
-    <h3>
-        @ChosenCollection.CollectionName
-    </h3>
-    @if (ChosenCollection.PictureList.Count == 0 || ChosenCollection.PictureList == null)
-    {
-        <h4 style="color: red">
-            Der er endnu ikke uploaded billeder til denne samling.
-        </h4>
-    }
-    <table class="table">
-
-        @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+<table>
+    <div>
+        <h3>
+            @ChosenCollection.CollectionName
+        </h3>
+        @if (ChosenCollection.PictureList.Count == 0 || ChosenCollection.PictureList == null)
         {
-            <div style="overflow-x:scroll">
-                <tr>
-                    @foreach (var info in ChosenCollection.PictureList)
-                    {
-
-                        <td>
-                            <div style="transform: rotate(0deg); width: 20%;padding: 5%">
-                                @info.DateOfUpload
-                            </div>
-                        </td>
-                    }
-                </tr>
-                <tr>
-                    @foreach (var item in PicDataList)
-                    {
-
-                        <td @onclick="@((e) => ShowPicture(e, item.PictureID))">
-                            <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" />
-                        </td>
-                    }
-                </tr>
-            </div>
-
-
+            <h4 style="color: red">
+                Der er endnu ikke uploaded billeder til denne samling.
+            </h4>
         }
+        <table class="table">
 
-    </table>
-</div>
-<div>
-    <table class="table">
-        @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
-        {
-            <th>@FocusedPicDateOfUpload</th>
-            <th>@LatestPicDateOfUpload</th>
-        }
-        <tr>
             @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
             {
-                <td style="width: 50%;">
-                    <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(FocusedPic)" />
-                </td>
-                <td style="width: 50%">
-                    <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(LatestPic)" />
-                </td>
+                <div style="overflow-x:scroll">
+                    <tr>
+                        @foreach (var info in ChosenCollection.PictureList)
+                        {
+
+                            <td>
+                                <div style="transform: rotate(0deg); width: 20%;padding: 5%">
+                                    @info.DateOfUpload
+                                </div>
+                            </td>
+                        }
+                    </tr>
+                    <tr>
+                        @foreach (var item in PicDataList)
+                        {
+
+                            <td @onclick="@((e) => ShowPicture(e, item.PictureID))">
+                                <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" />
+                            </td>
+                        }
+                    </tr>
+                </div>
+
+
             }
-        </tr>
-        <tr>
-            <td colspan="2">
-                <table id="t1" class="table2">
-                    <td style="text-align: left; vertical-align: top; padding: 5px; height: 200px">
-                        @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
-                        {
-                            <div style="font-weight: bold">
-                                Note:
-                            </div>
-                            <div>
 
-                                <EditForm Model="ViewCollectionController">
-
-                                    <DataAnnotationsValidator />
-                                    <ValidationSummary />
-
-                                    <InputText style="width: 100%;padding: 20px 10px; line-height: 200%; border: none" id="myFocusedCommentInput" border:none @bind-Value="FocusedPicComment"></InputText>
-                                </EditForm>
-
-                            </div>
-                        }
-                    </td>
-                    <td style="text-align: left; vertical-align: top; padding: 5px; height: 200px">
-                        @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
-                        {
-                            <div style="font-weight: bold">
-                                Note:
-                            </div>
-                            <div>
-                                <EditForm Model="ViewCollectionController">
-
-                                    <DataAnnotationsValidator />
-                                    <ValidationSummary />
-
-                                    <InputText style="width: 100%;padding: 20px 10px; line-height: 200%; border: none" id="myLatestCommentInput" @bind-Value="LatestPicComment"></InputText>
-                                </EditForm>
-
-                            </div>
-                        }
-                    </td>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
+        </table>
+    </div>
+    <div>
+        <table class="table">
+            @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+            {
+                <th>@FocusedPicDateOfUpload</th>
+                <th>@LatestPicDateOfUpload</th>
+            }
+            <tr>
                 @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
                 {
-                    <button class="editbtn" @onclick="FocusFocusedComment">Rediger note</button>
-                    <button class="editbtn" @onclick="SaveNewFocusedComment">Gem note</button>
-                    @if (FocusedCommentJustSaved)
-                    {
-                        <div>
-                            Noten er gemt!
-                        </div>
-                    }
+                    <td style="width: 50%;">
+                        <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(FocusedPic)" />
+                    </td>
+                    <td style="width: 50%">
+                        <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(LatestPic)" />
+                    </td>
                 }
-            </td>
-            <td>
-                @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
-                {
-                    <button class="editbtn" @onclick="FocusLatestComment">Rediger note</button>
-                    <button class="editbtn" @onclick="SaveNewLatestComment">Gem note</button>
-                    @if (LatestCommentJustSaved)
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table id="t1" class="table2">
+                        <td style="text-align: left; vertical-align: top; padding: 5px; height: 200px">
+                            @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+                            {
+                                <div style="font-weight: bold">
+                                    Note:
+                                </div>
+                                <div>
+
+                                    <EditForm Model="ViewCollectionController">
+
+                                        <DataAnnotationsValidator />
+                                        <ValidationSummary />
+
+                                        <InputText style="width: 100%;padding: 20px 10px; line-height: 200%; border: none" id="myFocusedCommentInput" border:none @bind-Value="FocusedPicComment"></InputText>
+                                    </EditForm>
+
+                                </div>
+                            }
+                        </td>
+                        <td style="text-align: left; vertical-align: top; padding: 5px; height: 200px">
+                            @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+                            {
+                                <div style="font-weight: bold">
+                                    Note:
+                                </div>
+                                <div>
+                                    <EditForm Model="ViewCollectionController">
+
+                                        <DataAnnotationsValidator />
+                                        <ValidationSummary />
+
+                                        <InputText style="width: 100%;padding: 20px 10px; line-height: 200%; border: none" id="myLatestCommentInput" @bind-Value="LatestPicComment"></InputText>
+                                    </EditForm>
+
+                                </div>
+                            }
+                        </td>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
                     {
-                        <div>
-                            Noten er gemt!
-                        </div>
+                        <button class="editbtn" @onclick="FocusFocusedComment">Rediger note</button>
+                        <button class="editbtn" @onclick="SaveNewFocusedComment">Gem note</button>
+                        @if (FocusedCommentJustSaved)
+                        {
+                            <div>
+                                Noten er gemt!
+                            </div>
+                        }
                     }
-                }
-            </td>
+                </td>
+                <td>
+                    @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+                    {
+                        <button class="editbtn" @onclick="FocusLatestComment">Rediger note</button>
+                        <button class="editbtn" @onclick="SaveNewLatestComment">Gem note</button>
+                        @if (LatestCommentJustSaved)
+                        {
+                            <div>
+                                Noten er gemt!
+                            </div>
+                        }
+                    }
+                </td>
+                <td rowspan="5">
+                    <div class="col" style="float: right">
+                        <button class="fa fa-ellipsis-h ellipsisSideBar iconfields" @onclick="Sidebar"></button> @*onclick="Sidebar"*@
+                        @*Denne skal flyve ind fra siden over det eksisterende på siden*@
+                        @if (SidebarVisible) //class="td"
+                        {
+                            <div id="mySidenav" class="sidenav">
+                                <button class="fas fa-arrow-right closebtn" @onclick="CloseSideNav"></button>
+                                <h2 style="color: azure">Indstillinger</h2>
+                                <div style="color: azure; margin-left: 5%; margin-bottom: 4%; cursor: pointer" @onclick="ItemMarked">
+                                    <span class="@Flag" style="transform: scaleX(-1);color:@FlagColor"></span>
+                                    Markér samling
+                                </div>
+                                <div class="dropdown-toggle" style="color: azure; margin-left: 5%; cursor: pointer" @onclick="Notifications">
+                                    <span class="fa fa-clock-o"></span>
+                                    Ændr follow-up notifikationer
+                                </div>
+                                @if (NotificationVisible)
+                                {
+                                    <div style="color: azure; width: 50%; margin-left: 5%; margin-bottom: 5%">
+                                        <label>Dag: </label>
+                                        <select class="form-control" @onchange="DaysChanged">
+                                            <option value="">@_dayOption</option>
+                                            @foreach (var day in weekdaysList)
+                                            {
+                                                <option value="@day">@day</option>
+                                            }
+                                        </select>
+                                    </div>
 
-        </tr>
 
-    </table>
-</div>
+                                    <div style="color: azure; width: 35%; margin-left: 5%; margin-bottom: 5%">
+                                        <label>Klokken: </label>
+                                        <select class="form-control" @onchange="HourChanged">
+                                            <option>@_hourOption</option>
+                                            @foreach (var hour in hoursList)
+                                            {
+                                                <option value="@hour">@hour.00</option>
+                                            }
+                                        </select>
+                                    </div>
+
+
+                                    <div style="color: azure; width: 40%; margin-left: 5%; margin-bottom: 5%">
+                                        <label>Antal uger: </label>
+                                        <select class="form-control" @onchange="WeeksChanged">
+                                            <option>@_weekOption</option>
+                                            @foreach (var week in weeksList)
+                                            {
+                                                <option value="@week">Hver @week. uge</option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <button class="btn btn-primary rounded-pill" style="margin-left: 5%" @onclick="OnChangedNotifications">Gem</button>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</table>
 
 @code {
 
@@ -484,23 +464,6 @@
 
     #endregion
 
-    #region DeleteCollection
-
-    public bool DeleteCollectionBool { get; set; }
-
-    public void DeleteCollectionDialogShow()
-    {
-        //SidebarVisible = !SidebarVisible;
-        DeleteCollectionBool = !DeleteCollectionBool;
-    }
-
-    public void DeleteCollection()
-    {
-        DeleteCollectionController.HandleDeleteCollection(CollectionInfo, PatientInfo);
-        NavManager.NavigateTo("/mainPage");
-    }
-
-    #endregion
 
     #region Notifications
 
@@ -547,7 +510,7 @@
 
     public void OnChangedNotifications()
     {
-        ChangeFollowUpNotificationsController.HandleChangedNotifications(ChangeNotifications);
+        //ChangeFollowUpNotificationsController.HandleChangedNotifications(ChangeNotifications);
     }
 
 
@@ -563,4 +526,7 @@
     #endregion
 
     #endregion
+
+
+
 }

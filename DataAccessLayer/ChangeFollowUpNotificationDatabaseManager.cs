@@ -20,7 +20,7 @@ namespace DataAccessLayer
 
         public void ChangeFollowUpNotification(ChangeNotificationsDomain changeNotificationsDomain)
         {
-            changeNotificationsDTO = changeNotificationsDomain.ToDTO();
+            //changeNotificationsDTO = changeNotificationsDomain.ToDTO();
             try
             {
                 var result = API.PostObject<ChangeNotificationsDTO>("ChangeNotificationInterval", changeNotificationsDTO);
