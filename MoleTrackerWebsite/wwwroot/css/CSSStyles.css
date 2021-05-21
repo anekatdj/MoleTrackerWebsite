@@ -35,7 +35,7 @@
 /* BASIC */
 
 html {
-    background-color: rgb(240, 237, 110);
+    /*background-color: rgb(240, 237, 110);*/
 }
 
 body {
@@ -109,7 +109,7 @@ a {
     color: #5165ff;
 }
 
-table {
+/*table {
     border-collapse: collapse;
 }
 
@@ -131,7 +131,7 @@ td > a:first-child {
     color: inherit;
     z-index: 0;
 }
-
+*/
     &:focus{
     outline: 0;
     }
@@ -389,17 +389,17 @@ input[type=text] {
 }
 
 #myUL li a:hover:not(.header) {
-    background-color: #eee; /* Add a hover effect to all links, except for headers */
+    background-color: yellow; /* Add a hover effect to all links, except for headers */
 }
 ﻿ /* The side navigation menu */
 .sidenav {
     height: 100%; /* 100% Full-height */
-    width: 20%; /* 0 width - change this with JavaScript */
+    width: 25%; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     right: 0;
-    background-color: #25a9f5; /* Blue*/
+    background-color: yellow; /* yellow*/
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
@@ -417,19 +417,8 @@ input[type=text] {
 
     /* When you mouse over the navigation links, change their color */
     .sidenav a:hover {
-        color: grey;
+        color: yellow;
     }
-
-/* Position and style the close button (top right corner) */
-.sidenav .closebtn {
-    position: absolute;
-    top: 2%;
-    font-size: 36px;
-    margin-left: 2%;
-    background: none;
-    border: none;
-    color: yellow;
-}
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
@@ -438,15 +427,16 @@ input[type=text] {
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
+/*@media screen and (max-height: 450px) {
     .sidenav {
         padding-top: 15px;
+        background-color: yellow
     }
 
         .sidenav a {
             font-size: 18px;
         }
-}
+}*/
 
 
 .ellipsisSideBar {
