@@ -9,7 +9,7 @@ using NUnit.Framework;
 using PW_BusinessLogicLayer;
 using PW_DataAccessLayer.Interfaces;
 
-namespace MoleTrackerWebsite_PW.UnitTests
+namespace MoleTrackerWebsite_PW.UnitTests.BusinessLogicLayer
 { 
     public class UT_LoginController
     {

@@ -6,36 +6,37 @@
 
 <link href="css/CSSStyles.css" rel="stylesheet" />
 
+<div class="page-background-class">
+    <div class="wrapper fadeInDown" style="margin-top: 10%">
+        <div id="formContent">
+            <h1>LoginPortal</h1>
+            <div>
+                <button id="PatLogInButton" @onclick="NavigateToPatientLogInPage" style="background-color: cornflowerblue;
+                                                                                                                  color: white;
+                                                                                                                  border-radius: 8px;
+                                                                                                                  font-size: 20px;
+                                                                                                                  margin-bottom: 1%;
+                                                                                                                  margin-top: 5%"
+                        type="submit">
+                    Patient Login
+                </button>
+            </div>
 
-<div class="wrapper fadeInDown" style="margin-top: 10%">
-    <div id="formContent">
-        <h1>LoginPortal</h1>
-        <div>
-            <button id="PatLogInButton" @onclick="NavigateToPatientLogInPage" style="background-color: cornflowerblue;
-                                                                color: white;
-                                                                border-radius: 8px;
-                                                                font-size: 20px;
-                                                                margin-bottom: 1%;
-                                                                margin-top: 5%"
-                     type="submit">
-                Patient Login
-            </button>
-        </div>
-        
-        <div>
-            <button id="MedLogInButton" @onclick="NavigateToMedLogInPage" style="background-color: firebrick;
-                                                            color: white;
-                                                            border-radius: 8px;
-                                                            font-size: 20px;
-                                                            margin-bottom: 5%;
-                                                            margin-top: 5%"
-                     type="submit">
-                Medical Login
-            </button>
+            <div>
+                <button id="MedLogInButton" @onclick="NavigateToMedLogInPage" style="background-color: firebrick;
+                                                                                                                                                                         color: white;
+                                                                                                                                                                         border-radius: 8px;
+                                                                                                                                                                         font-size: 20px;
+                                                                                                                                                                         margin-bottom: 5%;
+                                                                                                                                                                         margin-top: 5%"
+                        type="submit">
+                    Medical Login
+                </button>
+            </div>
+
         </div>
 
     </div>
-
 </div>
 
 @code {
