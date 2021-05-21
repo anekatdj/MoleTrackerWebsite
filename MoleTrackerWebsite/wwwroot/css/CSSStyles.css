@@ -24,7 +24,7 @@
 }
 
 .tabelcontainer {
-    overflow: scroll;
+    /*overflow: scroll;*/
 }
 
 .cursor {
@@ -90,7 +90,7 @@ h2 {
 
 #formFooter {
     background-color: #f6f6f6;
-    border-top: 1px solid #dce8f1;
+    /*border-top: 1px solid #dce8f1;*/
     padding: 25px;
     text-align: center;
     -webkit-border-radius: 0 0 10px 10px;
@@ -109,16 +109,15 @@ a {
     color: #5165ff;
 }
 
-/*table {
-    border-collapse: collapse;
+table {
+    /*border-collapse: collapse;*/
 }
 
 td {
-    border: 2px solid #ccd2ff;
     position: relative;
 }
 
-tr:hover,
+/*tr:hover,
 tr:focus {
     background: #f2f3ff;
     outline: none;
@@ -146,7 +145,7 @@ h2.inactive {
 
 h2.active {
     color: #0d0d0d;
-    border-bottom: 2px solid #5fbae9;
+    /*border-bottom: 2px solid #5fbae9;*/
 }
 
 
@@ -516,7 +515,7 @@ input[type=text] {
 }
 
 .tabelcontainer {
-    overflow: scroll;
+    /*overflow: scroll;*/
 }
 
 .cursor {
@@ -552,9 +551,9 @@ input[type=text] {
     border: none;
     padding: 5px;
     font: 24px/36px sans-serif;
-    width: 200px;
-    height: 200px;
-    overflow: scroll;
+    /*width: 200px;
+    height: 200px;*/
+ /*   overflow: scroll;*/
 }
 
 html {
@@ -613,7 +612,7 @@ h2 {
 
 #formFooter {
     background-color: #f6f6f6;
-    border-top: 1px solid #dce8f1;
+    /*border-top: 1px solid #dce8f1;*/
     padding: 25px;
     text-align: center;
     -webkit-border-radius: 0 0 10px 10px;

@@ -2,6 +2,7 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    width: 100%;
 }
 
 a, .btn-link {
@@ -31,7 +32,7 @@ app {
     flex: 1;
 }
 
-.main .top-row {
+    .main .top-row {
         background-color: rgb(240, 237, 110);
         border-bottom: 1px solid rgb(240, 237, 110);
         justify-content: flex-end;
@@ -42,13 +43,14 @@ app {
             margin-left: 1.5rem;
         }
 
-.main .top-row a:first-child {
-    /*overflow: hidden;*/
-    /*text-overflow: ellipsis;*/
-}
+        .main .top-row a:first-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(240, 237, 110) 0%, #edf2b8 70%);}
+    background-image: linear-gradient(180deg, rgb(240, 237, 110) 0%, #edf2b8 70%);
+}
 
     .sidebar .top-row {
         background-color: rgba(239, 234, 64, 0.4);
@@ -129,12 +131,12 @@ app {
     z-index: 1000;
 }
 
-#blazor-error-ui .dismiss {
-    cursor: pointer;
-    position: absolute;
-    right: 0.75rem;
-    top: 0.5rem;
-}
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
 
 @media (max-width: 767.98px) {
     .main .top-row:not(.auth) {
@@ -173,17 +175,32 @@ app {
     }
 
     .navbar-toggler {
-        display: none;
+        border-top: 1px solid display: none;
     }
 
     .sidebar .collapse {
         /* Never collapse the sidebar for wide screens */
         display: block;
     }
-    .table {
+
+    .tableSmallPics {
+        table-layout: fixed;
         width: 100%;
         border: none;
     }
+
+    #SmallDates {
+        border-right: 2px solid #ccd2ff;
+        border-left: 2px solid #ccd2ff;
+        border-top: 2px solid #ccd2ff;
+    }
+
+    #SmallPics {
+        border-right: 2px solid #ccd2ff;
+        border-left: 2px solid #ccd2ff;
+        border-bottom: 2px solid #ccd2ff;
+    }
+
     #t1 td {
         table-layout: fixed;
         width: 200px;
@@ -195,21 +212,35 @@ app {
         /*border-collapse: collapse;*/
         padding: 30px 30px;
     }
+
     .table2 {
+        table-layout: fixed;
         width: 100%;
         border: none;
     }
+
     .editbtn {
         border-radius: 10px;
         color: #0366d6;
     }
+
     .table2 td {
-        width: 50%
+        width: 50%;
+        border: none;
     }
+
     .table td InputText {
         width: 100%;
         /*border: none*/
     }
 
+    .tableLargePics {
+        table-layout: fixed;
+        width: 100%;
     }
 
+    th, td {
+        border: none;
+    }
+
+}

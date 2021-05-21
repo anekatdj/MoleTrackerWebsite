@@ -37,7 +37,7 @@
                 Der er endnu ikke uploaded billeder til denne samling.
             </h4>
         }
-        <table class="table">
+        <table class="tableSmallPics">
 
             @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
             {
@@ -46,8 +46,8 @@
                         @foreach (var info in ChosenCollection.PictureList)
                         {
 
-                            <td>
-                                <div style="transform: rotate(0deg); width: 20%; padding: 5%">
+                            <td id="SmallDates">
+                                <div style="transform: rotate(0deg); padding: 5%">
                                     @info.DateOfUpload
                                 </div>
                             </td>
@@ -57,8 +57,8 @@
                         @foreach (var item in PicDataList)
                         {
 
-                            <td @onclick="@((e) => ShowPicture(e, item.PictureID))">
-                                <img style="width: 100px;" src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" />
+                            <td id="SmallPics" @onclick="@((e) => ShowPicture(e, item.PictureID))">
+                                <img style="width: 300px;" src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" />
                             </td>
                         }
                     </tr>
@@ -69,7 +69,7 @@
 
         </table>
         <div>
-            <table class="table">
+            <table class="tableLargePics">
                 @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
                 {
                     <th>@FocusedPicDateOfUpload</th>
@@ -195,7 +195,7 @@
 
 
                             <div style="        color: darkblue;
-        width: 35%;
+        width: 50%;
         margin-left: 5%;
         margin-bottom: 5%">
                                 <label>Klokken: </label>
@@ -210,7 +210,7 @@
 
 
                             <div style="        color: darkblue;
-        width: 40%;
+        width: 50%;
         margin-left: 5%;
         margin-bottom: 5%">
                                 <label>Antal uger: </label>
