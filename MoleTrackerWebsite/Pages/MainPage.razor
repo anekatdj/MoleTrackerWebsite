@@ -62,8 +62,6 @@
 
     <div class="col">
         <div style="width: 70%;">
-            @*AK er i gang med at indlæse punkter på patienten lige her*@
-
             @if (ExistingPoints)
             {
 
@@ -75,22 +73,19 @@
 
                     }
                 }
-                //foreach (var item in CoordinateXY)
-                //{
-                //    if (IsFrontFacing == item.Item3)
-                //    {
-                        <div>
-                            <map name="patientModel">
-                                @foreach (var item in CoordinateXY)
-                                {
-                                if (IsFrontFacing == item.Item3)
-                                {
-                                    <area shape="circle" style="cursor: pointer" coords="@item.Item1, @item.Item2,10" @onclick="@((e)=>NavigateToCollectionPage(e,item.Item4))" /> 
-                                    }
-                                }
-                            </map>
-                        </div>
-                    
+                <div>
+                    <map name="patientModel">
+                        @foreach (var item in CoordinateXY)
+                        {
+                            if (IsFrontFacing == item.Item3)
+                            {
+                                <area shape="circle" style="cursor: pointer" coords="@item.Item1, @item.Item2,10" @onclick="@((e)=>NavigateToCollectionPage(e,item.Item4))" />
+
+                            }
+                        }
+                    </map>
+                </div>
+
             }
 
 
@@ -105,7 +100,7 @@
             }
             else
             {
-                <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" alt="usemap" usemap="#patientModel" /> 
+                <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" alt="usemap" usemap="#patientModel" />
 
 
 
@@ -421,13 +416,13 @@
 
         Collections = PatientData.CollectionList;
 
-        CoordinateXY = new List<Tuple<int, int, bool,int>>();
+        CoordinateXY = new List<Tuple<int, int, bool, int>>();
 
         if (PatientInfo.Gender == "B")
         {
             foreach (var item in Collections)
             {
-                CoordinateXY.Add(new Tuple<int, int, bool,int>((item.Location.xCoordinate * 270 / 10000), (item.Location.yCoordinate * 520 / 10000), item.Location.IsFrontFacing,item.CollectionID));
+                CoordinateXY.Add(new Tuple<int, int, bool, int>((item.Location.xCoordinate * 270 / 10000), (item.Location.yCoordinate * 520 / 10000), item.Location.IsFrontFacing, item.CollectionID));
 
             }
         }
@@ -435,7 +430,7 @@
         {
             foreach (var item in Collections)
             {
-                CoordinateXY.Add(new Tuple<int, int, bool,int>((item.Location.xCoordinate * 212 / 10000), (item.Location.yCoordinate * 477 / 10000), item.Location.IsFrontFacing,item.CollectionID));
+                CoordinateXY.Add(new Tuple<int, int, bool, int>((item.Location.xCoordinate * 212 / 10000), (item.Location.yCoordinate * 477 / 10000), item.Location.IsFrontFacing, item.CollectionID));
 
             }
         }
@@ -448,7 +443,7 @@
 
     }
 
-    private List<Tuple<int, int, bool,int>> CoordinateXY;
+    private List<Tuple<int, int, bool, int>> CoordinateXY;
 
 
     #endregion
