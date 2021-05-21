@@ -15,7 +15,7 @@ namespace PW_BusinessLogicLayer
         public LocationOnBody Location { get; set; }
         public Collection Collections { get; set; }
         public Bitmap ImgColorMaleBack { get; set; }
-        public PatientData PatientData{ get; set; }
+        public PatientData PatientData { get; set; }
 
         public CoordinatesLocalization(LocationOnBody locationOnBody, Collection collection)
         {
@@ -214,7 +214,10 @@ namespace PW_BusinessLogicLayer
                     Debug.WriteLine("Vi er ens");
                 }
             }
-            Collections.CollectionName += _incrementNumberInName.ToString();
+            if (_incrementNumberInName > 0)
+            {
+                Collections.CollectionName += _incrementNumberInName.ToString();
+            }
 
             Location.xCoordinate = Convert.ToInt32(X * 10000 / 212);
             Location.yCoordinate = (int)(Y * 10000 / 477);
@@ -408,7 +411,10 @@ namespace PW_BusinessLogicLayer
                     Debug.WriteLine("Vi er ens");
                 }
             }
-            Collections.CollectionName += _incrementNumberInName.ToString();
+            if (_incrementNumberInName > 0)
+            {
+                Collections.CollectionName += _incrementNumberInName.ToString();
+            }
 
             Location.xCoordinate = Convert.ToInt32(X * 10000 / 212);
             Location.yCoordinate = (int)(Y * 10000 / 477);
@@ -430,7 +436,7 @@ namespace PW_BusinessLogicLayer
 
         #region MaleFront
 
-        public bool LocalizePointMaleFront(bool PointClicked,int X, int Y)
+        public bool LocalizePointMaleFront(bool PointClicked, int X, int Y)
         {
             Color pixel = ImgColorMaleBack.GetPixel(X * 3, Y * 3);
 
@@ -494,13 +500,16 @@ namespace PW_BusinessLogicLayer
                     Debug.WriteLine("Vi er ens");
                 }
             }
-            Collections.CollectionName += _incrementNumberInName.ToString();
+            if (_incrementNumberInName > 0)
+            {
+                Collections.CollectionName += _incrementNumberInName.ToString();
+            }
 
             Location.IsFrontFacing = true;
             Location.xCoordinate = Convert.ToInt32(X * 10000 / 270);
             Location.yCoordinate = (int)(Y * 10000 / 520);
 
-            return PointClicked=true;
+            return PointClicked = true;
         }
 
         #endregion
@@ -572,10 +581,13 @@ namespace PW_BusinessLogicLayer
                     Debug.WriteLine("Vi er ens");
                 }
             }
-            Collections.CollectionName += _incrementNumberInName.ToString();
+            if (_incrementNumberInName > 0)
+            {
+                Collections.CollectionName += _incrementNumberInName.ToString();
+            }
 
             Location.xCoordinate = Convert.ToInt32(X * 10000 / 270);
-            Location.yCoordinate = (int) (Y * 10000 / 520);
+            Location.yCoordinate = (int)(Y * 10000 / 520);
 
             return PointClicked = true;
         }
