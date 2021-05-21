@@ -56,8 +56,10 @@ namespace DataClasses.Domain.Picture
             Baglår,
             Knæhase,
             Læg,
-            Ben,
-            Arm,
+            Venstre_ben,
+            Højre_ben,
+            Venstre_arm,
+            Højre_arm,
             Hoved,
             Overkrop
         }

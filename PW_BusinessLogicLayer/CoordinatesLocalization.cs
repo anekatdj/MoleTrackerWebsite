@@ -415,13 +415,13 @@ namespace PW_BusinessLogicLayer
             else if (pixel.Name == "ff02f3fa")
             {
                 Debug.WriteLine("Højre overarm");
-                Location.BodyParts = LocationOnBody.BodyPart.Arm;
+                Location.BodyParts = LocationOnBody.BodyPart.Højre_arm;
                 Location.Orientations = LocationOnBody.Orientation.Ingen;
             }
             else if (pixel.Name == "ff03f94a")
             {
                 Debug.WriteLine("Højre ben");
-                Location.BodyParts = LocationOnBody.BodyPart.Ben;
+                Location.BodyParts = LocationOnBody.BodyPart.Højre_ben;
                 Location.Orientations = LocationOnBody.Orientation.Ingen;
             }
             else if (pixel.Name == "ffef03f9")
@@ -433,13 +433,13 @@ namespace PW_BusinessLogicLayer
             else if (pixel.Name == "ff6a0c4f")
             {
                 Debug.WriteLine("Venstre overarm");
-                Location.BodyParts = LocationOnBody.BodyPart.Arm;
+                Location.BodyParts = LocationOnBody.BodyPart.Venstre_arm;
                 Location.Orientations = LocationOnBody.Orientation.Ingen;
             }
             else if (pixel.Name == "fff9c803")
             {
                 Debug.WriteLine("Venstre ben");
-                Location.BodyParts = LocationOnBody.BodyPart.Ben;
+                Location.BodyParts = LocationOnBody.BodyPart.Venstre_ben;
                 Location.Orientations = LocationOnBody.Orientation.Ingen;
             }
             else if (pixel.Name == "fffa0202")
@@ -479,13 +479,13 @@ namespace PW_BusinessLogicLayer
             else if (pixel.Name == "ff02f3fa")
             {
                 Debug.WriteLine("Venstre overarm");
-                Location.BodyParts = LocationOnBody.BodyPart.Arm;
+                Location.BodyParts = LocationOnBody.BodyPart.Venstre_arm;
                 Location.Orientations = LocationOnBody.Orientation.Ingen;
             }
             else if (pixel.Name == "ff03f94a")
             {
                 Debug.WriteLine("Venstre ben");
-                Location.BodyParts = LocationOnBody.BodyPart.Ben;
+                Location.BodyParts = LocationOnBody.BodyPart.Venstre_ben;
                 Location.Orientations = LocationOnBody.Orientation.Ingen;
             }
             else if (pixel.Name == "ffef03f9")
@@ -497,13 +497,13 @@ namespace PW_BusinessLogicLayer
             else if (pixel.Name == "ff6a0c4f")
             {
                 Debug.WriteLine("Højre overarm");
-                Location.BodyParts = LocationOnBody.BodyPart.Arm;
+                Location.BodyParts = LocationOnBody.BodyPart.Højre_arm;
                 Location.Orientations = LocationOnBody.Orientation.Ingen;
             }
             else if (pixel.Name == "fff9c803")
             {
                 Debug.WriteLine("Højre ben");
-                Location.BodyParts = LocationOnBody.BodyPart.Ben;
+                Location.BodyParts = LocationOnBody.BodyPart.Højre_ben;
                 Location.Orientations = LocationOnBody.Orientation.Ingen;
             }
             else if (pixel.Name == "fffa0202")
