@@ -85,7 +85,7 @@
                                 {
                                 if (IsFrontFacing == item.Item3)
                                 {
-                                    <area shape="circle" style="cursor: pointer" coords="@item.Item1, @item.Item2,10" @onclick="@((e)=>NavigateToCollectionPage(e,item.Item4))" /> //@onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))"
+                                    <area shape="circle" style="cursor: pointer" coords="@item.Item1, @item.Item2,10" @onclick="@((e)=>NavigateToCollectionPage(e,item.Item4))" /> 
                                     }
                                 }
                             </map>
@@ -102,20 +102,10 @@
                 <img class="cursor" id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" />
 
                 <div class="cursor" @onclick="GetCoordinates" style="width: @(_pointRadius * 2)px; height: @(_pointRadius * 2)px; top: @(YPoint - _pointRadius)px; left: @(XPoint - _pointRadius)px; background-color: red; position: fixed; border-radius: @(_pointRadius)px"></div>
-
-
-
-                //TODO kan eventuelt bruges senere til at klikke på et modermærke
-                @*<map name="patientModel" cursor="pointer">
-                        <area shape="circle" style="fill:blue" coords="19,20,30" />
-                    </map>
-
-                    <div style="width: 20px;height:30px; background-color: orange; top:300px "></div>*@
-
             }
             else
             {
-                <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" alt="usemap" usemap="#patientModel" /> @*onmousewheel="@MouseWheel"*@
+                <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" alt="usemap" usemap="#patientModel" /> 
 
 
 
@@ -291,9 +281,6 @@
             NewCoordinateXY.Add(new Tuple<int, int, bool>(item.Item1 + Convert.ToInt32(result.Left), item.Item2 + Convert.ToInt32(result.Top), item.Item3));
         }
         ExistingPoints = !ExistingPoints;
-
-        //var x = 131 + result.Left;
-        //var y = 45 + result.Top;
     }
 
 
@@ -423,8 +410,6 @@
         return Task.CompletedTask;
     }
 
-    //public BoundingClientRect Result { get; set; }
-
     protected override async Task OnInitializedAsync()
     {
 
@@ -457,7 +442,6 @@
 
         DisplayPatientModel();
         await StartupTask();
-        // await Transform();
 
         Coordinates.ImgColorMaleBack = new Bitmap(@"wwwroot\\Images\ColorMaleFront.png");
 
