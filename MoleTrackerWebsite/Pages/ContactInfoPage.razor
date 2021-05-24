@@ -10,11 +10,10 @@
 @using BusinessLogicLayer.BusinessLogicLayerInterfaces
 
 @*@inject PatientDataDomain PatientData*@
-@inject MedicalPracticePatientsDomain MedicalPracticePatients
-@inject ISelectPatientController SelectPatientController
 @inject ILoadPatientsController LoadPatientsController
 @inject ILogInController LogInController
 @inject NavigationManager NavManager;
+@inject ManageContactInformationController ManageContactInformationController
 @*<h3>PatientOverviewPage</h3>*@
 
 @layout MainLayout
@@ -24,10 +23,40 @@
 <h2>Kontaktoplysninger</h2>
 
 
+<div>
+    <h3>Kontakt din læge</h3>
+    <hr />
 
-<div class="wrapper fadeInDown" style="margin-top: 10%">
-    <div id="formContent">
-        
+    <div class="row mb-3">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Lægepraksis</label>
+        <div class="col">
+            <input disabled="@true" type="text" class="form-control" placeholder=@doctorContactInfoDomain.MedicalPracticeName aria-label="First name">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Træffetider</label>
+        <div class="col-sm-10">
+            <input disabled="@true" type="text" class="form-control" id="colFormLabel" placeholder=@doctorContactInfoDomain.OpeningHours>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Adresse</label>
+        <div class="col-sm-10">
+            <input disabled="@true" type="text" class="form-control" id="colFormLabel" placeholder=@doctorContactInfoDomain.Address>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Telefon</label>
+        <div class="col-sm-10">
+            <input disabled="@true" type="password" class="form-control" id="colFormLabel" placeholder=@doctorContactInfoDomain.PhoneNumber>
+        </div>
+    </div>
+    <div class="row mb-3 ">
+        <label for="colFormLabel" class="col-sm-2 col-form-label">Hjemmeside</label>
+        <div class="col-sm-10">
+            <input disabled="@true" type="text" class="form-control" id="colFormLabel" placeholder="https://www.google.dk/">
+            @*<a href="#" class="text-decoration-none">https://www.google.dk/</a>*@
+        </div>
     </div>
 </div>
 
@@ -35,10 +64,17 @@
 @code {
 
     private DoctorInfoDomain doctorInfo;
+    private DoctorContactInfoRequestDomain doctorContactInfoRequestDomain;
+    private DoctorContactInfoDomain doctorContactInfoDomain;
 
     protected override async Task OnInitializedAsync()
     {
         doctorInfo = LogInController.DoctorInfo;
+        doctorContactInfoRequestDomain = new DoctorContactInfoRequestDomain()
+        {
+            DoctorContactID = doctorInfo.DoctorID
+        };
+        doctorContactInfoDomain = ManageContactInformationController.GetDoctorInfo(doctorContactInfoRequestDomain);
     }
 
 }

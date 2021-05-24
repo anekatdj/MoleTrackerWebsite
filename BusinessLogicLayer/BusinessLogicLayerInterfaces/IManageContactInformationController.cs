@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using DataClasses.Domain;
-using DataClasses.DTO;
 
-namespace DataAccessLayer.DataAccessLayerInterfaces
+namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
 {
-    public interface IManageContactInformationDatabaseManager
+    public interface IManageContactInformationController
     {
         DoctorContactInfoDomain GetDoctorInfo(DoctorContactInfoRequestDomain doctorContactInfoRequestDomain);
     }
