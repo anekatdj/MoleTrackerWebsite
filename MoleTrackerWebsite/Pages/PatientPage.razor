@@ -65,15 +65,14 @@
             }
             @if (PinOnPatientModel)
             {
-                @foreach (var item in SortedCollectionList)
+                @foreach (var item in PinCollectionList)
                 {
-
-                    <div class="cursor" style="width: @(_pointRadius * 2)px; height: @(_pointRadius * 2)px; top: @(ScreenCoordinates.Top + item.Location.yCoordinate - _pointRadius)px; left: @(ScreenCoordinates.Left + item.Location.xCoordinate - _pointRadius)px; background-color: red; position: fixed; border-radius: @(_pointRadius)px"></div>
+                    <div class="cursor" style="width: @(_pointRadius * 2)px; height: @(_pointRadius * 2)px; top: @(Convert.ToInt32(ScreenCoordinates.Top) + item.Location.yCoordinate - _pointRadius)px; left: @(ScreenCoordinates.Left + item.Location.xCoordinate - _pointRadius)px; background-color: red; position: fixed; border-radius: @(_pointRadius)px"></div>
                 }
             }
             <button style="float: right" class="@Arrow" @onclick="TurnAroundModel"></button>
+            <button style="float: right; margin-right: 2px" class="@ShowPinButton" @onclick="ShowPinOnPatientModel"></button>
         </div>
-        <button style="float: right" class="@ShowPinButton" @onclick="ShowPinOnPatientModel"></button>
     </div>
 </div>
 
@@ -110,6 +109,7 @@
     public PatientDataDomain PatientData { get; set; }
     public List<CollectionDomain> CollectionList { get; set; }
     public List<CollectionDomain> SortedCollectionList { get; set; }
+    public List<CollectionDomain> PinCollectionList { get; set; }
     public string NameOfPatient { get; set; }
     public List<PictureDataDomain> PicDataList { get; set; }
 
@@ -130,6 +130,7 @@
     public int YPercentile { get; set; }
     public BoundingClientRect ScreenCoordinates { get; set; }
     public bool PinOnPatientModel { get; set; }
+    public bool FrontFaceing { get; set; }
 
     private IEnumerable<CollectionDomain> collections = new[]
     {
@@ -144,14 +145,18 @@
     {
         GetGender();
 
+        PinCollectionList = SortedCollectionList.Where(x => x.Location.IsFrontFacing.Equals(FrontFaceing)).ToList();
+
         if (Gender == "Kvinde" || SelectPatientController.BirthDataCalcFailed == true)
         {
             if (this.FrontOrBack == "/css/Pictures/FemaleBack.png")
             {
+                FrontFaceing = true;
                 this.FrontOrBack = "/css/Pictures/FemaleFront.png";
             }
             else
             {
+                FrontFaceing = false;
                 this.FrontOrBack = "/css/Pictures/FemaleBack.png";
             }
         }
@@ -160,10 +165,12 @@
         {
             if (this.FrontOrBack == "/css/Pictures/MaleBack.png")
             {
+                FrontFaceing = true;
                 this.FrontOrBack = "/css/Pictures/MaleFront.png";
             }
             else
             {
+                FrontFaceing = false;
                 this.FrontOrBack = "/css/Pictures/MaleBack.png";
             }
         }
@@ -290,6 +297,8 @@
     {
         ScreenCoordinates = await JS.InvokeAsync<BoundingClientRect>("PictureClickFind", new object[] { "PatientModel" });
 
+        PinCollectionList = SortedCollectionList.Where(x => x.Location.IsFrontFacing.Equals(FrontFaceing)).ToList();
+
         if (PinOnPatientModel)
         {
             PinOnPatientModel = false;
@@ -373,6 +382,8 @@
         newCollectionDomain.Location.xCoordinate = XPercentile;
         newCollectionDomain.Location.yCoordinate = YPercentile;
         CreateCollectionController.AddNewCollection(newCollectionDomain);
+        SortedCollectionList.Add(newCollectionDomain);
+        AddButtonPressed = false;
     }
 
     private void NavigateToCollectionPage(MouseEventArgs e, object collectionId)
@@ -440,6 +451,7 @@
         //{
         //    SortedCollectionList.Add(item);
         //}
+
         foreach (var item in SortedCollectionList)
         {
             item.Location.xCoordinate = XCoordinatesOnScreen(item.Location.xCoordinate);
