@@ -141,29 +141,29 @@
     {
         @if (PointClicked == true)
         {
-            <div class="float-container" style="float: right">
+            <div class="float-container" style="float: right; margin-top: 1%;">
                 <div class="float-child" style="width: 63%">
-                    <p style="color: crimson;">Vælg placering af modermærke</p>
+                    <p>Vælg placering af modermærke</p>
                 </div>
                 <div class="float-child" style="width: 24%">
-                    <button style="border-radius: 28px;background:none" @onclick="AcceptPosition">Godkend</button>
+                    <button style="border-radius: 28px; background: forestgreen; color: white; border: none" @onclick="AcceptPosition">Godkend</button>
                 </div>
                 <div class="float-child" style="width: 5%">
-                    <button style="border-radius: 28px" @onclick="RegretNewCollection">Fortryd</button>
+                    <button style="border-radius: 28px; background: crimson; color: white; border: none" @onclick="RegretNewCollection">Fortryd</button>
                 </div>
             </div>
         }
         @if (PointClicked == false)
         {
-            <div class="float-container" style="float: right">
+            <div class="float-container" style="float: right; margin-top: 1%;">
                 <div class="float-child" style="width: 63%">
-                    <p style="color: crimson;">Vælg placering af modermærke</p>
+                    <p>Vælg placering af modermærke</p>
                 </div>
                 <div class="float-child" style="width: 24%">
-                    <button style="border-radius: 28px; background: none" disabled="@true">Godkend</button>
+                    <button style="border-radius: 28px; background: forestgreen; opacity: 0.2; color: white; border: none" disabled="@true">Godkend</button>
                 </div>
                 <div class="float-child" style="width: 5%">
-                    <button style="border-radius: 28px" @onclick="RegretNewCollection">Fortryd</button>
+                    <button style="border-radius: 28px; background: crimson; color: white; border: none" @onclick="RegretNewCollection">Fortryd</button>
                 </div>
             </div>
         }
