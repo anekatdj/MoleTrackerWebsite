@@ -119,7 +119,7 @@
             <button style="float: right; font-size: 20px" class="@Arrow iconfields" @onclick="TurnAroundModel"></button>
             <button class="iconfieldsWithText" @onclick="Transform">
                 Vis modermærker
-                <i class="fas fa-map-pin"></i>
+                <i class="fas fa-map-pin" style="color: cornflowerblue"></i>
             </button>
         </div>
     </div>
@@ -134,20 +134,38 @@
     @if (AddButtonPressed == false)
     {
         <button style="float: right; margin-right: 7%; margin-top: 1%; border-radius: 28px;background:none;" class="@AddCollectionButton" @onclick="ChoosePoint"></button>
-        <label style="float: right; margin-right: 1%; margin-top: 1%">Klik her for at tilføje en ny samling</label>
+        <label style="float: right; color: cornflowerblue; margin-right: 1%; margin-top: 1%">Klik her for at tilføje en ny samling</label>
     }
 
     @if (AddButtonPressed == true)
     {
         @if (PointClicked == true)
         {
-            <button style="float: right; margin-right: 7%; margin-top: 1%; border-radius: 28px;background:none" @onclick="AcceptPosition">Godkend</button>
-            <p style="float: right; color: crimson; margin-right: 1%; margin-top: 1%">Vælg placering af modermærke</p>
+            <div class="float-container" style="float: right">
+                <div class="float-child" style="width: 63%">
+                    <p style="color: crimson;">Vælg placering af modermærke</p>
+                </div>
+                <div class="float-child" style="width: 24%">
+                    <button style="border-radius: 28px;background:none" @onclick="AcceptPosition">Godkend</button>
+                </div>
+                <div class="float-child" style="width: 5%">
+                    <button style="border-radius: 28px" @onclick="RegretNewCollection">Fortryd</button>
+                </div>
+            </div>
         }
         @if (PointClicked == false)
         {
-            <button style="float: right; margin-right: 7%; margin-top: 1%; border-radius: 28px;background:none" disabled="@true">Godkend</button>
-            <p style="float: right; color: crimson; margin-right: 1%; margin-top: 1%">Vælg placering af modermærke</p>
+            <div class="float-container" style="float: right">
+                <div class="float-child" style="width: 63%">
+                    <p style="color: crimson;">Vælg placering af modermærke</p>
+                </div>
+                <div class="float-child" style="width: 24%">
+                    <button style="border-radius: 28px; background: none" disabled="@true">Godkend</button>
+                </div>
+                <div class="float-child" style="width: 5%">
+                    <button style="border-radius: 28px" @onclick="RegretNewCollection">Fortryd</button>
+                </div>
+            </div>
         }
     }
 
@@ -233,6 +251,11 @@
     {
         //NewPinAdded = "pin.png";
         AddButtonPressed = true;
+    }
+
+    private void RegretNewCollection()
+    {
+        AddButtonPressed = false;
     }
 
     //Klasse til skærmmål
