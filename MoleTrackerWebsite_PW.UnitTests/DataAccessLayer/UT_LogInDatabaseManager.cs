@@ -21,14 +21,18 @@ namespace MoleTrackerWebsite_PW.UnitTests.DataAccessLayer
         }
 
         [Test]
-        public void ValidateLogin_ReturnsNull()
+        public void ValidateLogin_ReturnsPatientInfo()
         {
             var loginInfo = new LogInInfo();
-            loginInfo.Username = "121212-1004";
-            loginInfo.Password = "password";
+            loginInfo.Username = "ak";
+            loginInfo.Password = "121212";
 
             var patientInfo = new PatientInfoDTO();
-            API.GetObject<PatientInfoDTO, LoginInfoDTO>("PatientLogin", Arg.Any<LoginInfoDTO>()).Returns(patientInfo);
+            //patientInfo.PatientID = 2;
+            //API.GetObject<PatientInfoDTO, LoginInfoDTO>("PatientLogin", Arg.Any<LoginInfoDTO>()).Returns(patientInfo);
+
+            var returnValue = _uut.ValidateLogin(loginInfo);
+            Assert.That(returnValue, Is.Not.Null);
         }
     }
 }
