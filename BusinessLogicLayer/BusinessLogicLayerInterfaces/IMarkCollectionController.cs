@@ -5,8 +5,8 @@ using DataClasses.Domain;
 
 namespace BusinessLogicLayer.BusinessLogicLayerInterfaces
 {
-    public interface IChangeCollectionNameController
+    public interface IMarkCollectionController
     {
-         void HandleChangedName(CollectionDomain collectionInfo);
+        void HandleMarking(ChangeCollectionMarkingDomain _changeCollectionMarking);
     }
 }

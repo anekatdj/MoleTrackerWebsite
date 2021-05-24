@@ -6,8 +6,8 @@ using DataClasses.DTO;
 
 namespace DataAccessLayer.DataAccessLayerInterfaces
 {
-    public interface IChangeCollectionNameDatabaseManager
+    public interface IManageContactInformationDatabaseManager
     {
-        void PostChangedCollectionName(CollectionDomain collectionInfo);
+        DoctorInfoDomain GetDoctorInfo(DoctorContactInfoRequestDTO doctorContactInfoRequestDTO);
     }
 }

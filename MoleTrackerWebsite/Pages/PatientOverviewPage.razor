@@ -28,19 +28,21 @@
             <ValidationSummary />
             <h2>Patientoversigt</h2>
             <InputText id="myInput" @bind-Value="SearchInput" @onkeyup="SearchFunction" placeholder="Søg efter patient" />
-            <table id="patientTable" class="table table-striped">
+            <table id="patientTable"class="table table-striped">
                 <tbody>
                 <tr class="header">
-                    <th style="width: 40%;">Navn</th>
-                    <th style="width: 60%;">CPR-Nummer</th>
+                    <th style="width: 40%; font-size: 100%">Navn</th>
+                    <th style="        width: 60%;
+        font-size: 100%
+">CPR-Nummer</th>
                 </tr>
                 @foreach (var item in FilteredPatientList)
                 {
-                    <tr @onclick="@((e) => NavigateToSpecificPatientPage(e, item.CPR))" style="cursor: pointer">
-                        <td>
+                    <tr class="trPatient" @onclick="@((e) => NavigateToSpecificPatientPage(e, item.CPR))" style="cursor: pointer">
+                        <td style="font-size: 100%;">
                             @item.Name
                         </td>
-                        <td>
+                        <td style="font-size: 100%">
                             @item.CPR
                         </td>
                     </tr>

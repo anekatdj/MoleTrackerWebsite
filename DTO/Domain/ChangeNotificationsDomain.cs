@@ -5,19 +5,13 @@ using DataClasses.DTO;
 
 namespace DataClasses.Domain
 {
-    public class ChangeNotificationsDomain
+    public class ChangeNotificationsDomain : SessionInfoDomain
     {
         public int CollectionID { get; set; }
-        public string NotificationTimeInterval { get; set; }
-        //TODO Outcomment
-        public ChangeNotificationsDTO ToDTO()
-        {
-            ChangeNotificationsDTO changeNotifications = new ChangeNotificationsDTO()
-            {
-                CollectionID = CollectionID,
-                //NotificationTimeInterval = NotificationTimeInterval
-            };
-            return changeNotifications;
-        }
+        public TimeSpan NotificationTimeInterval { get; set; } //TODO Skal vi ikke lave tre (tisdpunkt, ugedag, antal uger mellem noti?)
+
+        public string Hour { get; set; }
+        public string WeekDay { get; set; }
+        public string NumberOfWeeks { get; set; }
     }
 }

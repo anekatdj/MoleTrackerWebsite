@@ -1,14 +1,44 @@
 ﻿@page "/ContactInfoPage"
 
-@*<link href="css/styles.css" rel="stylesheet" />*@
+@using Microsoft.AspNetCore.Mvc.Diagnostics
+@using DataClasses.Domain
+@using System.Reflection.Metadata
+@using System.Xml;
+@using System.Xml.Linq
+@using System.Xml.XPath
+@using BusinessLogicLayer
+@using BusinessLogicLayer.BusinessLogicLayerInterfaces
+
+@*@inject PatientDataDomain PatientData*@
+@inject MedicalPracticePatientsDomain MedicalPracticePatients
+@inject ISelectPatientController SelectPatientController
+@inject ILoadPatientsController LoadPatientsController
+@inject ILogInController LogInController
+@inject NavigationManager NavManager;
+@*<h3>PatientOverviewPage</h3>*@
+
+@layout MainLayout
+
+<link href="css/styles.css" rel="stylesheet" />
 
 <h2>Kontaktoplysninger</h2>
 
+
+
+<div class="wrapper fadeInDown" style="margin-top: 10%">
+    <div id="formContent">
+        
+    </div>
+</div>
+
+
 @code {
-   
+
+    private DoctorInfoDomain doctorInfo;
 
     protected override async Task OnInitializedAsync()
     {
+        doctorInfo = LogInController.DoctorInfo;
     }
 
 }
