@@ -47,14 +47,28 @@
                         <th>Personlige samlinger</th>
                     </tr>
                 </thead>
-                <tbody style="cursor:pointer">
-                    @foreach (Collection collection in Collections)
-                    {
-                        <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))">
-                            <td>@collection.CollectionName</td>
-                        </tr>
-                    }
-                </tbody>
+                @if (Loading)
+                {
+                    <tbody style="cursor:wait">
+                        @foreach (Collection collection in Collections)
+                        {
+                            <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))">
+                                <td>@collection.CollectionName</td>
+                            </tr>
+                        }
+                    </tbody>
+                }
+                else
+                {
+                    <tbody style="cursor:pointer">
+                        @foreach (Collection collection in Collections)
+                        {
+                            <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))">
+                                <td>@collection.CollectionName</td>
+                            </tr>
+                        }
+                    </tbody>
+                }
             </table>
         </div>
     </div>
@@ -349,8 +363,10 @@
         NavigateToNewCollectionPage();
     }
 
+    private bool Loading { get; set; }
     private void NavigateToCollectionPage(MouseEventArgs e, object collectionId)
     {
+        Loading = true;
         var selectedCollection = PatientData.CollectionList.Where(x => x.CollectionID.Equals(collectionId)).ToList();
 
         if (Convert.ToInt32(collectionId) > 0)
