@@ -15,9 +15,9 @@ namespace BusinessLogicLayer
         {
             changeCollectionNameDatabaseManager = new ChangeCollectionNameDatabaseManager("");
         }
-        public void ChangeCollectionName(ChangeCollectionNameDomain changeCollectionName)
+        public void HandleChangedName(CollectionDomain collectionInfo)
         {
-            changeCollectionNameDatabaseManager.ChangeCollectionName(changeCollectionName);
+            changeCollectionNameDatabaseManager.PostChangedCollectionName(collectionInfo);
         }
     }
 }

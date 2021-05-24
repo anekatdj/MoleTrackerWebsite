@@ -81,7 +81,8 @@ h1 {
 }
 
 h2 {
-	color: #ee1010;
+	color: black;
+    font-style: italic;
 	font: 700 2.25rem/2.75rem "Raleway", sans-serif;
 }
 
@@ -2180,5 +2181,12 @@ a:hover.back-to-top {
 		margin-left: 1.75rem;
 	}
 	/* end of extra pages */
+
+/*B prøve med tabel*/
+
+    .trPatient tr:hover{
+        background-color: blueviolet;
+        outline: none;
+    }
 }
 /* end of min-width width 1200px */
