@@ -56,5 +56,18 @@ namespace DataAccessLayer
             PictureCommentDomain pictureCommentDomain = DTOConverter.PictureCommentToDomain(pictureCommentDTO);
             return pictureCommentDomain;
         }
+
+        public void PostNewPictureComment(PictureCommentDomain editedComment)
+        {
+            PictureCommentDTO pictureCommentDTO = editedComment.ToDTO();
+            try
+            {
+                API.PostObject<PictureCommentDTO>("NewPictureComment", pictureCommentDTO);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
     }
 }

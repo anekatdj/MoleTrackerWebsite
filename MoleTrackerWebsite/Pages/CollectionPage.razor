@@ -9,188 +9,564 @@
 @using System.IO
 @using System.Reflection.Metadata
 @using System.Xml
+@using System.Timers
 
 @inject IViewCollectionController ViewCollectionController
-@inject NavigationManager NavManager;
+@inject NavigationManager NavManager
+@inject IJSRuntime JsRuntime
+@inject IMarkCollectionController MarkCollectionController
+@inject IChangeCollectionNameController ChangeCollectionNameController
+@*@inject IChangeFollowUpNotificationsController ChangeFollowUpNotificationsController*@
+@inject ChangeCollectionMarkingDomain ChangeCollectionMarking
+@inject ChangeCollectionNameDomain ChangeCollectionName
+@inject ChangeNotificationsDomain ChangeNotifications;
 
-<div style="width:80%;overflow-x:scroll">
-    <h4 style="font-style: oblique">
-        @ChosenCollection.CollectionName
-    </h4>
-    <table>
-        <tr>
-            @if(ChosenCollection.PictureList.Count != 0)
+@layout MainLayout
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="css/CSSStyles.css" rel="stylesheet" />
+<link href="css/site.css" rel="stylesheet" />
+
+<table>
+    <tr>
+        <h3>
+            @ChosenCollection.CollectionName
+        </h3>
+        @if (ChosenCollection.PictureList.Count == 0 || ChosenCollection.PictureList == null)
+        {
+            <h4 style="color: red">
+                Der er endnu ikke uploaded billeder til denne samling.
+            </h4>
+        }
+        <table class="tableSmallPics">
+
+            @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
             {
-            @foreach (var item in PicDataList)
-            {
-                <td @onclick="@((e) => ShowPicture(e, item.PictureID))">
-                    <img src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" width="100" height="100"/>
-                </td>
+                <div style="overflow-x: scroll">
+                    <tr>
+                        @foreach (var info in ChosenCollection.PictureList)
+                        {
+
+                            <td id="SmallDates">
+                                <div style="transform: rotate(0deg); padding: 5%">
+                                    @info.DateOfUpload
+                                </div>
+                            </td>
+                        }
+                    </tr>
+                    <tr>
+                        @foreach (var item in PicDataList)
+                        {
+
+                            <td id="SmallPics" @onclick="@((e) => ShowPicture(e, item.PictureID))">
+                                <img style="width: 150px;" src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" />
+                            </td>
+                        }
+                    </tr>
+                </div>
+
+
             }
-            }
-        </tr>
-    </table>
-</div>
-<div>
-    <table class="table">
-        <th>@FocusedPicDateOfUpload</th>
-        <th>@LatestPicDateOfUpload</th>
-        <tr>
-            <td style="width:50%;">
-                <img style="width: 100%; " src="data:image;base64,@System.Convert.ToBase64String(FocusedPic)" />
-            </td>
-            <td style="width:50%">
-                <img style="width: 100%; " src="data:image;base64,@System.Convert.ToBase64String(LatestPic)" />
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <table id="t1" class="table2">
-                    <td style="text-align: left; vertical-align: top; padding: 5px; height: 200px">
-                        <div style="font-weight: bold">
-                            Note:
+
+        </table>
+        <div>
+            <table class="tableLargePics">
+                @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+                {
+                    <th>@FocusedPicDateOfUpload</th>
+                    <th>@LatestPicDateOfUpload</th>
+                }
+                <tr>
+                    @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+                    {
+                        <td style="width: 50%;">
+                            <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(FocusedPic)" />
+                        </td>
+                        <td style="width: 50%">
+                            <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(LatestPic)" />
+                        </td>
+                    }
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <table id="t1" class="table2">
+                            <td style="text-align: left; vertical-align: top; padding: 5px; height: 200px">
+                                @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+                                {
+                                    <div style="font-weight: bold">
+                                        Note:
+                                    </div>
+                                    <div>
+                                        <EditForm Model="ViewCollectionController">
+                                            <DataAnnotationsValidator />
+                                            <ValidationSummary />
+                                            <InputText style="width: 100%; padding: 20px 10px; line-height: 200%; border: none" id="myFocusedCommentInput" border:none @bind-Value="FocusedPicComment"></InputText>
+                                        </EditForm>
+                                    </div>
+                                }
+                            </td>
+                            <td style="text-align: left; vertical-align: top; padding: 5px; height: 200px">
+                                @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+                                {
+                                    <div style="font-weight: bold">
+                                        Note:
+                                    </div>
+                                    <div>
+                                        <EditForm Model="ViewCollectionController">
+
+                                            <DataAnnotationsValidator />
+                                            <ValidationSummary />
+
+                                            <InputText style="width: 100%; padding: 20px 10px; line-height: 200%; border: none" id="myLatestCommentInput" @bind-Value="LatestPicComment"></InputText>
+                                        </EditForm>
+
+                                    </div>
+                                }
+                            </td>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+                        {
+                            <button class="editbtn" @onclick="FocusFocusedComment">Rediger note</button>
+                            <button class="editbtn" @onclick="SaveNewFocusedComment">Gem note</button>
+                            @if (FocusedCommentJustSaved)
+                            {
+                                <div>
+                                    Noten er gemt!
+                                </div>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
+                        {
+                            <button class="editbtn" @onclick="FocusLatestComment">Rediger note</button>
+                            <button class="editbtn" @onclick="SaveNewLatestComment">Gem note</button>
+                            @if (LatestCommentJustSaved)
+                            {
+                                <div>
+                                    Noten er gemt!
+                                </div>
+                            }
+                        }
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <td rowspan="5" colspan="1" valign="top" style="background-color: @FlyOutButtonColor">
+            @* Flyout med marker samling, ændr navn og ændr notifikation *@
+            <div class="col" style="float: right">
+                <button class="fa fa-ellipsis-h ellipsisSideBar iconfields" @onclick="Sidebar"></button> @*onclick="Sidebar"*@
+                @*Denne skal flyve ind fra siden over det eksisterende på siden*@
+                @if (SidebarVisible) //class="td"
+                {
+                    <div id="mySidenav" class="sidenav">
+                        <h2 style="color: black">Indstillinger</h2>
+                        <div style="color: darkblue; margin-left: 5%; margin-bottom: 4%; cursor: pointer" @onclick="ItemMarked">
+                            <span class="@Flag" style="transform: scaleX(-1); color: @FlagColor"></span>
+                            Markér samling
                         </div>
                         <div>
-                            <EditForm Model="ViewCollectionController">
+                            <button class="iconfields" style="margin-left: 2%; margin-bottom: 4%; cursor: pointer" @onclick="EditName">
+                                <i class="@EditIcon"></i>
+                            </button>
+                            <input id="myNameInput" style="width: 70%; height: 45%; margin-left: 5%; margin-right: 1%; font-size: 10pt" disabled="@IsDisabled" type="text" @oninput="OnInputHandler" placeholder="@ChosenCollection.CollectionName" class="form-control" />
 
-                                <DataAnnotationsValidator />
-                                <ValidationSummary />
-                                @FocusedPicComment
-                            <InputText id="myCommentInput" border:none @bind-Value="CommentInput"> @FocusedPicComment</InputText>
-                            </EditForm>
                         </div>
-                    </td>
-                    <td style="text-align: left; vertical-align: top; padding: 5px; height: 200px">
-                        <div style="font-weight: bold">
-                            Note:
+                        <div class="dropdown-toggle" style=" color: darkblue;margin-left: 5%;cursor: pointer" @onclick="Notifications">
+                            <span class="fa fa-clock-o"></span>
+                            Ændr follow-up notifikationer
                         </div>
-                        <div>
-                            @LatestPicComment
-                        </div>
-                    </td>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button class="editbtn" @onclick="@(EditComment)">Rediger note</button> 
-                <button class="editbtn">Gem note</button>
-            </td>
-            <td>
-                <button class="editbtn">Rediger note</button>
-                <button class="editbtn">Gem note</button>
-            </td>
-        </tr>
+                        @if (NotificationVisible)
+                        {
+                            <div style="        color: darkblue; width: 50%; margin-left: 5%; margin-bottom: 5%">
+                                <label>Dag: </label>
+                                <select class="form-control" @onchange="DaysChanged">
+                                    <option value="">@_dayOption</option>
+                                    @foreach (var day in weekdaysList)
+                                    {
+                                        <option value="@day">@day</option>
+                                    }
+                                </select>
+                            </div>
 
-    </table>
-</div>
+
+                            <div style="        color: darkblue;
+        width: 50%;
+        margin-left: 5%;
+        margin-bottom: 5%">
+                                <label>Klokken: </label>
+                                <select class="form-control" @onchange="HourChanged">
+                                    <option>@_hourOption</option>
+                                    @foreach (var hour in hoursList)
+                                    {
+                                        <option value="@hour">@hour.00</option>
+                                    }
+                                </select>
+                            </div>
+
+
+                            <div style="        color: darkblue;
+        width: 50%;
+        margin-left: 5%;
+        margin-bottom: 5%">
+                                <label>Antal uger: </label>
+                                <select class="form-control" @onchange="WeeksChanged">
+                                    <option>@_weekOption</option>
+                                    @foreach (var week in weeksList)
+                                    {
+                                        <option value="@week">Hver @week. uge</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <div>
+                                <button class="btn btn-primary rounded-pill" style="margin-left: 5%" @onclick="OnChangedNotifications">Gem</button>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </td>
+    </tr>
+</table>
 
 @code {
 
-    private CollectionDomain collection;
-    private PatientDataDomain patientData;
-    public string NameOfPatient { get; set; }
-    public List<PictureDataDomain> PicDataList { get; set; }
-    public byte[] FocusedPic { get; set; }
-    public byte[] LatestPic { get; set; }
-    public string FocusedPicComment { get; set; }
-    public string LatestPicComment { get; set; }
-    public DateTime FocusedPicDateOfUpload { get; set; }
-    public DateTime LatestPicDateOfUpload { get; set; }
-    public CollectionDomain ChosenCollection { get; set; }
-    public string CommentInput { get; set; }
+            private CollectionDomain collection;
+            private PatientDataDomain patientData;
+            public string NameOfPatient { get; set; }
+            public List<PictureDataDomain> PicDataList { get; set; }
+            public byte[] FocusedPic { get; set; }
+            public byte[] LatestPic { get; set; }
+            public string FocusedPicComment { get; set; }
+            public string LatestPicComment { get; set; }
+            public DateTime FocusedPicDateOfUpload { get; set; }
+            public DateTime LatestPicDateOfUpload { get; set; }
+            public CollectionDomain ChosenCollection { get; set; }
+            public string CommentInput { get; set; }
+            public List<PictureInfoDomain> ReversedPicInfoList { get; set; }
+            public PictureInfoDomain FocusedPicInfo { get; set; }
+            public PictureInfoDomain LatestPicInfo { get; set; }
+            public bool FocusedCommentJustSaved { get; set; }
+            public bool LatestCommentJustSaved { get; set; }
+            private Stopwatch _stopWatch;
+            private Timer _stopWatchTimer;
+            private ElementReference _latestCommentField;
+            public string CollectionName { get; set; }
+
+            protected override async Task OnInitializedAsync()
+            {
+                #region Stubbet billeder
+
+                //STUB!!
+                //    PictureDataDomain picture1 = new PictureDataDomain();
+                //    PictureDataDomain picture2 = new PictureDataDomain();
+                //    PictureDataDomain picture3 = new PictureDataDomain();
+
+                //    var filePath = @"MoleOne.jpg";
+
+                //    byte[] picByteArray1 = ReadAllBytes(filePath);
+                //    byte[] picByteArray2 = ReadAllBytes(@"MoleTwo.jpg");
+                //    byte[] picByteArray3 = ReadAllBytes(@"MoleThree.jpg");
+
+                //    picture1.PictureData = picByteArray1;
+                //    picture1.PictureID = 1;
+                //    picture2.PictureData = picByteArray2;
+                //    picture2.PictureID = 2;
+                //    picture3.PictureData = picByteArray3;
+                //    picture3.PictureID = 3;
+
+                //    PicDataList.Add(picture1);
+                //    PicDataList.Add(picture1);
+                //    PicDataList.Add(picture1);
+                //    PicDataList.Add(picture1);
+                //    PicDataList.Add(picture2);
+                //    PicDataList.Add(picture2);
+                //    PicDataList.Add(picture2);
+                //    PicDataList.Add(picture2);
+                //    PicDataList.Add(picture3);
+                //    PicDataList.Add(picture3);
+                //    PicDataList.Add(picture3);
+                //    PicDataList.Add(picture3);
+
+                #endregion
+
+                PicDataList = new List<PictureDataDomain>();
+
+                ChosenCollection = ViewCollectionController.SelectedCollection;
+                CollectionName = ChosenCollection.CollectionName;
+
+                if (ChosenCollection.PictureList != null && ChosenCollection.PictureList.Count != 0)
+                {
+                    foreach (var pic in ChosenCollection.PictureList)
+                    {
+                        PicDataList.Add(ViewCollectionController.GetPictureData(pic));
+                    }
+
+                    FocusedPic = PicDataList[0].PictureData;
+                    FocusedPicDateOfUpload = ChosenCollection.PictureList[0].DateOfUpload;
+                    FocusedPicComment = ViewCollectionController.GetPictureComment(ChosenCollection.PictureList[0]).Comment;
+                    FocusedPicInfo = ChosenCollection.PictureList[0];
+                    PicDataList.Reverse();
+
+                    ReversedPicInfoList = ChosenCollection.PictureList;
+                    ReversedPicInfoList.Reverse();
+
+                    LatestPic = PicDataList[0].PictureData;
+                    LatestPicInfo = ReversedPicInfoList[0];
+                    LatestPicDateOfUpload = ReversedPicInfoList[0].DateOfUpload;
+                    LatestPicComment = ViewCollectionController.GetPictureComment(ReversedPicInfoList[0]).Comment;
+                }
+
+            }
 
 
-    protected override async Task OnInitializedAsync()
-    {
-        #region Stubbet billeder
+            private void ShowPicture(MouseEventArgs e, int pictureId)
+            {
+                if (ChosenCollection.PictureList != null && ChosenCollection.PictureList.Count != 0)
+                {
+                    FocusedPicInfo = ChosenCollection.PictureList.Find(x => x.PictureID.Equals(pictureId));
+                    FocusedPicDateOfUpload = FocusedPicInfo.DateOfUpload;
+                    FocusedPicComment = ViewCollectionController.GetPictureComment(FocusedPicInfo).Comment;
+                    PictureDataDomain focusedPicture = PicDataList.Find(x => x.PictureID.Equals(pictureId));
 
-        //STUB!!
-        //    PictureDataDomain picture1 = new PictureDataDomain();
-        //    PictureDataDomain picture2 = new PictureDataDomain();
-        //    PictureDataDomain picture3 = new PictureDataDomain();
+                    FocusedPic = focusedPicture.PictureData;
+                }
+            }
 
-        //    var filePath = @"MoleOne.jpg";
 
-        //    byte[] picByteArray1 = ReadAllBytes(filePath);
-        //    byte[] picByteArray2 = ReadAllBytes(@"MoleTwo.jpg");
-        //    byte[] picByteArray3 = ReadAllBytes(@"MoleThree.jpg");
 
-        //    picture1.PictureData = picByteArray1;
-        //    picture1.PictureID = 1;
-        //    picture2.PictureData = picByteArray2;
-        //    picture2.PictureID = 2;
-        //    picture3.PictureData = picByteArray3;
-        //    picture3.PictureID = 3;
+            private void SaveNewFocusedComment()
+            {
+                if (ChosenCollection.PictureList != null && ChosenCollection.PictureList.Count != 0)
+                {
+                    XmlDocument doc = new XmlDocument();
 
-        //    PicDataList.Add(picture1);
-        //    PicDataList.Add(picture1);
-        //    PicDataList.Add(picture1);
-        //    PicDataList.Add(picture1);
-        //    PicDataList.Add(picture2);
-        //    PicDataList.Add(picture2);
-        //    PicDataList.Add(picture2);
-        //    PicDataList.Add(picture2);
-        //    PicDataList.Add(picture3);
-        //    PicDataList.Add(picture3);
-        //    PicDataList.Add(picture3);
-        //    PicDataList.Add(picture3);
+                    var input = doc.GetElementById("myFocusedCommentInput");
 
-        #endregion
+                    PictureCommentDomain editedComment = new PictureCommentDomain();
 
-        PicDataList = new List<PictureDataDomain>();
+                    editedComment.Comment = FocusedPicComment;
+                    editedComment.PictureID = FocusedPicInfo.PictureID;
 
-        ChosenCollection = ViewCollectionController.SelectedCollection;
 
-        foreach (var pic in ChosenCollection.PictureList)
-        {
-            PicDataList.Add(ViewCollectionController.GetPictureData(pic));
+                    ViewCollectionController.PostNewPictureComment(editedComment);
+                    FocusedCommentJustSaved = true;
+                    StateHasChanged();
+                    _stopWatch = new Stopwatch();
+                    _stopWatch.Start();
+
+                    _stopWatchTimer = new Timer();
+                    _stopWatchTimer.Interval = 1000;
+                    _stopWatchTimer.Elapsed += CheckStopWatch_Timer_Tick;
+                    _stopWatchTimer.Enabled = true;
+
+                    LatestPicComment = ViewCollectionController.GetPictureComment(ReversedPicInfoList[0]).Comment;
+                }
+            }
+            private void SaveNewLatestComment()
+            {
+                if (ChosenCollection.PictureList != null && ChosenCollection.PictureList.Count != 0)
+                {
+                    XmlDocument doc = new XmlDocument();
+
+                    var input = doc.GetElementById("myLatestCommentInput");
+
+                    PictureCommentDomain editedComment = new PictureCommentDomain();
+                    editedComment.Comment = LatestPicComment;
+                    editedComment.PictureID = LatestPicInfo.PictureID;
+
+                    ViewCollectionController.PostNewPictureComment(editedComment);
+                    LatestCommentJustSaved = true;
+                    StateHasChanged();
+                    _stopWatch = new Stopwatch();
+                    _stopWatch.Start();
+
+                    _stopWatchTimer = new Timer();
+                    _stopWatchTimer.Interval = 1000;
+                    _stopWatchTimer.Elapsed += CheckStopWatch_Timer_Tick;
+                    _stopWatchTimer.Enabled = true;
+
+                    FocusedPicComment = ViewCollectionController.GetPictureComment(FocusedPicInfo).Comment;
+
+                }
+            }
+            public void CheckStopWatch_Timer_Tick(object sender, EventArgs e)
+            {
+                if (_stopWatch.Elapsed.TotalSeconds >= 3)
+                {
+                    InvokeAsync((() =>
+                    {
+                        FocusedCommentJustSaved = false;
+                        LatestCommentJustSaved = false;
+                        StateHasChanged();
+                    }));
+
+                    _stopWatch.Stop();
+                    _stopWatch.Reset();
+                    _stopWatchTimer.Enabled = false;
+
+                    FocusedPicComment = ViewCollectionController.GetPictureComment(FocusedPicInfo).Comment;
+                }
+            }
+
+
+            public async Task FocusFocusedComment()
+            {
+                await JsRuntime.InvokeVoidAsync("focusInput", "myFocusedCommentInput");
+            }
+            public async Task FocusLatestComment()
+            {
+                await JsRuntime.InvokeVoidAsync("focusInput", "myLatestCommentInput");
+            }
+            public async Task FocusNameInput()
+            {
+                await JsRuntime.InvokeVoidAsync("focusInput", "myNameInput");
+            }
+            public bool ChangeNameBool { get; set; }
+            public bool IsDisabled { get; set; } = true;
+
+            private void EditName()
+            {
+                if (!ChangeNameBool)
+                {
+                    EditIcon = "fa fa-floppy-o";
+                    IsDisabled = false;
+                }
+                else
+                {
+                    EditIcon = "fa fa-pencil";
+                    ChangeCollectionNameController.HandleChangedName(ChosenCollection);
+                    IsDisabled = true;
+                }
+                ChangeNameBool = !ChangeNameBool;
+            }
+
+            private void OnInputHandler(ChangeEventArgs e)
+            {
+                ChosenCollection.CollectionName = e.Value.ToString();
+            }
+            #region sidebar
+
+            //public string AddPictureButton = "fa fa-picture-o";
+            public string EditIcon { get; set; } = "fa fa-pencil";
+            public string FontColor { get; set; }
+            public string FlagColor = "lightgray";
+            public string FlyOutButtonColor = "rgb(255, 255, 255)";
+
+
+            public bool SidebarVisible { get; set; }
+
+            private void Sidebar()
+            {
+                if (!SidebarVisible)
+                {
+                    SidebarVisible = true;
+                    FlyOutButtonColor = "rgb(240, 237, 110)";
+                }
+                else
+                {
+                    SidebarVisible = false;
+                    FlyOutButtonColor ="rgb(255, 255, 255)";
         }
 
-        FocusedPic = PicDataList[0].PictureData;
-        FocusedPicDateOfUpload = ChosenCollection.PictureList[0].DateOfUpload;
-        FocusedPicComment = ViewCollectionController.GetPictureComment(ChosenCollection.PictureList[0]).Comment;
-
-        PicDataList.Reverse();
-
-        List<PictureInfoDomain> reversedPicInfoList = ChosenCollection.PictureList;
-        reversedPicInfoList.Reverse();
-
-        LatestPic = PicDataList[0].PictureData;
-        LatestPicDateOfUpload = reversedPicInfoList[0].DateOfUpload;
-        LatestPicComment = ViewCollectionController.GetPictureComment(reversedPicInfoList[0]).Comment;
-
-        //Stub
-        FocusedPicComment = "Katten ser sund og rask ud";
-
-        CommentInput = "";
-
     }
 
-    private void ShowPicture(MouseEventArgs e, int pictureId)
+    #region Flag
+
+    public string Flag = "fa fa-flag-o";
+
+    public void ItemMarked()
     {
-        PictureInfoDomain focusedPicInfo = ChosenCollection.PictureList.Find(x => x.PictureID.Equals(pictureId));
-        FocusedPicDateOfUpload = focusedPicInfo.DateOfUpload;
-        FocusedPicComment = ViewCollectionController.GetPictureComment(focusedPicInfo).Comment;
-        PictureDataDomain focusedPicture = PicDataList.Find(x => x.PictureID.Equals(pictureId));
-
-        FocusedPic = focusedPicture.PictureData;
+        if (Flag == "fa fa-flag-o")
+        {
+            Flag = "fa fa-flag-checkered";
+            FlagColor = "red";
+            ChangeCollectionMarking.IsMarked = !ChangeCollectionMarking.IsMarked;
+            ViewCollectionController.SelectedCollection.IsMarked = ChangeCollectionMarking.IsMarked;
+            ChangeCollectionMarking.CollectionID = ChosenCollection.CollectionID;
+            MarkCollectionController.HandleMarking(ChangeCollectionMarking);
+        }
+        else
+        {
+            Flag = "fa fa-flag-o";
+            FlagColor = "lightgray";
+            ChangeCollectionMarking.IsMarked = false;
+            ViewCollectionController.SelectedCollection.IsMarked = ChangeCollectionMarking.IsMarked;
+            ChangeCollectionMarking.CollectionID = ChosenCollection.CollectionID;
+            MarkCollectionController.HandleMarking(ChangeCollectionMarking);
+        }
     }
 
-    private void EditComment(MouseEventArgs e)
+    #endregion
+
+
+    #region Notifications
+
+    public bool NotificationVisible { get; set; }
+
+    public void Notifications() => NotificationVisible = !NotificationVisible;
+
+    public bool DaysVisible { get; set; }
+
+    public void Days() => DaysVisible = !DaysVisible;
+
+    public bool HoursVisible { get; set; }
+
+    public void Hours() => HoursVisible = !HoursVisible;
+
+    public bool WeeksVisible { get; set; }
+
+    public void Weeks() => WeeksVisible = !WeeksVisible;
+
+    private string _dayOption { get; set; } = "--Dag--";
+    private string _hourOption { get; set; } = "--Time--";
+    private string _weekOption { get; set; } = "--Uger--";
+
+    public void DaysChanged(ChangeEventArgs dayEvent)
     {
-        
+        _dayOption = dayEvent.Value.ToString();
+        ChangeNotifications.WeekDay = _dayOption;
+        StateHasChanged();
     }
 
-    private void SaveNewComment()
+    public void HourChanged(ChangeEventArgs hourEvent)
     {
-
-        XmlDocument doc = new XmlDocument();
-
-        var newComment = doc.GetElementById("CommentInput").Value;
-
-        //ViewCollectionController.PostNewPictureComment(NewCommentInput);
+        _hourOption = hourEvent.Value.ToString();
+        ChangeNotifications.Hour = _hourOption;
+        StateHasChanged();
     }
+
+    public void WeeksChanged(ChangeEventArgs weekEvent)
+    {
+        _weekOption = weekEvent.Value.ToString();
+        ChangeNotifications.NumberOfWeeks = _weekOption;
+        StateHasChanged();
+    }
+
+    public void OnChangedNotifications()
+    {
+        //ChangeFollowUpNotificationsController.HandleChangedNotifications(ChangeNotifications);
+    }
+
+
+    private List<string> weekdaysList = new List<string>(new string[] { "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag" });
+    private List<string> weeksList = new List<string>(new string[] { "1", "2", "4", "6", "8", "12" });
+
+    private List<string> hoursList = new List<string>(new string[]
+    {
+        "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13",
+        "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"
+                                                        });
+
+    #endregion
+
+    #endregion
+
 
 
 }

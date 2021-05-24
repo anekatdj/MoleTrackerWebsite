@@ -60,7 +60,7 @@ namespace MedWebNUnitTest.BusinessLogicLayerTests
 
             //Act
 
-            uut.GetPatientInfo(patientInfo);
+            //uut.GetPatientInfo(patientInfo);
 
             //Assert
             db.Received(1).GetPatientInfo(patientInfo);

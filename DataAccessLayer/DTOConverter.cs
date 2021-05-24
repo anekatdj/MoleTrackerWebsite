@@ -23,9 +23,20 @@ namespace DataAccessLayer
                 CollectionID = collectionDTO.CollectionID,
                 CollectionName = collectionDTO.CollectionName,
                 PictureList = list,
-                Location = LocationOnBodyToDomain(collectionDTO.Location)
+                Location = LocationOnBodyToDomain(collectionDTO.Location),
+                IsMarked = collectionDTO.IsMarked
             };
             return collectionDomain;
+        }
+
+        public static ChangeCollectionNameDomain ChangeCollectionNameToDomain(ChangeCollectionNameDTO changeCollectionNameDTO)
+        {
+            ChangeCollectionNameDomain changeCollectionNameDomain = new ChangeCollectionNameDomain()
+            {
+                CollectionID = changeCollectionNameDTO.CollectionID,
+                CollectionName = changeCollectionNameDTO.CollectionName
+            };
+            return changeCollectionNameDomain;
         }
         public static LocationOnBodyDomain LocationOnBodyToDomain(LocationOnBodyDTO locationOnBodyDTO)
         {

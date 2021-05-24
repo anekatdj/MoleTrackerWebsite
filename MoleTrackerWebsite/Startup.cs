@@ -38,6 +38,12 @@ namespace MoleTrackerWebsite
             services.AddSingleton<MedicalPracticePatientsDomain>();
             services.AddSingleton<PatientDataDomain>();
             services.AddSingleton<SessionInfoDomain>();
+            services.AddSingleton<ChangeCollectionMarkingDomain>();
+            services.AddSingleton<ChangeCollectionNameDomain>();
+            services.AddSingleton<ChangeNotificationsDomain>();
+            services.AddSingleton<CollectionDomain>();
+            services.AddSingleton<IChangeCollectionNameController, ChangeCollectionNameController>();
+            services.AddSingleton<IMarkCollectionController, MarkCollectionController>();
             services.AddSingleton<ILogInController, LogInController>();
             services.AddSingleton<ILoadPatientsController, LoadPatientsController>();
             services.AddSingleton<ISelectPatientController, SelectPatientController>();
