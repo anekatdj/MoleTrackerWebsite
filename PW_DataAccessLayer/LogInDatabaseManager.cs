@@ -15,6 +15,8 @@ namespace PW_DataAccessLayer
         private IAPIService API;
         private PatientInfo patientInfo;
 
+        public bool LoginFailed { get; set; }
+
         public LogInDatabaseManager(string APIType)
         {
             API = APIFactory.GetAPI(APIType);
@@ -26,7 +28,7 @@ namespace PW_DataAccessLayer
         {
             LoginInfoDTO loginInfoDTO = new LoginInfoDTO();
 
-            
+
             loginInfoDTO.Username = loginInfo.Username;
             loginInfoDTO.Password = loginInfo.Password;
 
@@ -34,23 +36,16 @@ namespace PW_DataAccessLayer
             {
                 patientInfoDTO = API.GetObject<PatientInfoDTO, LoginInfoDTO>("PatientLogin", loginInfoDTO);
                 patientInfo = DTOConverter.PatientInfoToDomain(patientInfoDTO);
+                return true;
             }
-            catch (WebException e) when ((e.Response as HttpWebResponse)?.StatusCode==HttpStatusCode.NotFound)
+            catch 
             {
-                Console.WriteLine(e);
-
+                LoginFailed = true;
                 return false;
             }
 
-            if (patientInfoDTO.CPR != null)
-            {
-                return true;
-            }
-
-            return false;
-
         }
-        
+
         public PatientInfo GetPatientInfo()
         {
             patientInfo.Name = patientInfoDTO.Name;

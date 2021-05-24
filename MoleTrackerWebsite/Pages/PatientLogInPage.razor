@@ -48,7 +48,14 @@
 
                     </div>
 
-                    <button id="Login" style="border-radius: 5px; color: white; margin-top: 5%; margin-bottom: 3%; padding: 2px 75px; border-style: none; background-color: cornflowerblue;" type="submit">Log på</button>
+                    @if (IsLoggingIn && !LoginFailed)
+                    {
+                        <button style="border-radius: 5px; color: white; margin-top: 5%; margin-bottom: 3%; padding: 2px 75px; border-style: none; background-color: cornflowerblue;" disabled="disabled"><span class="spinning">Logger på...</span></button>
+                    }
+                    else
+                    {
+                        <button id="Login" style="border-radius: 5px; color: white; margin-top: 5%; margin-bottom: 3%; padding: 2px 75px; border-style: none; background-color: cornflowerblue;" type="submit">Log på</button>
+                    }
 
                 </EditForm>
             </div>
@@ -83,10 +90,13 @@
 @code {
     private List<string> Errors = new List<string>();
     private bool LoginFailed;
+    public bool IsLoggingIn{ get; set; }
 
     //Login function
     private void HandleValidSubmit()
     {
+        IsLoggingIn = true;
+        LoginFailed = LogInController.LoginFailed;
         if (LogInController.HandleLogin(LoginInfo))
         {
             LoginFailed = false;

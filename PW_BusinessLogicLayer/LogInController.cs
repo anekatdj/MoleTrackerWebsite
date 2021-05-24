@@ -9,6 +9,7 @@ namespace PW_BusinessLogicLayer
     public class LogInController : ILogInController
     {
         private ILogInDatabaseManager logInDatabaseManager;
+        public bool LoginFailed { get; set; }
 
         public LogInController()
         {
@@ -17,6 +18,7 @@ namespace PW_BusinessLogicLayer
 
         public bool HandleLogin(LogInInfo loginInfo)
         {
+            LoginFailed = logInDatabaseManager.LoginFailed;
             return logInDatabaseManager.ValidateLogin(loginInfo);
             //return true;
         }
