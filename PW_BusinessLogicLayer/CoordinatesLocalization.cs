@@ -415,7 +415,7 @@ namespace PW_BusinessLogicLayer
             {
                 Collections.CollectionName += _incrementNumberInName.ToString();
             }
-
+            int lars = Convert.ToInt32(Convert.ToDouble(X) * 10000 / 212);
             Location.xCoordinate = Convert.ToInt32(X * 10000 / 212);
             Location.yCoordinate = (int)(Y * 10000 / 477);
 

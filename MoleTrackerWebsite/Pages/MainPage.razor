@@ -80,7 +80,6 @@
                             if (IsFrontFacing == item.Item3)
                             {
                                 <area shape="circle" style="cursor: pointer" coords="@item.Item1, @item.Item2,10" @onclick="@((e)=>NavigateToCollectionPage(e,item.Item4))" />
-
                             }
                         }
                     </map>
@@ -101,10 +100,6 @@
             else
             {
                 <img id="PatientModel" src="@FrontOrBack" style="float: right; width: @Width; height: @Height;" @onclick="GetCoordinates" alt="usemap" usemap="#patientModel" />
-
-
-
-
             }
 
             <button style="float: right; font-size: 20px" class="@Arrow iconfields" @onclick="TurnAroundModel"></button>
@@ -254,12 +249,8 @@
         X = Convert.ToInt32(e.ClientX - result.Left);
         Y = Convert.ToInt32(e.ClientY - result.Top);
 
-        //ResultLeft = result.Left;
-        //var x = 154 + ResultLeft;
-
-        //var scroll = await JS.InvokeAsync<int>("GetWindowYScroll");
         XPoint = (int)e.ClientX;
-        YPoint = (int)e.ClientY; // + scroll
+        YPoint = (int)e.ClientY;
 
         BackOrFront();
     }
@@ -395,7 +386,12 @@
         else if (Gender == "B")
         {
             FrontOrBack = "/Images/MaleFrontCrop.png";
-            Width = "270px";
+            if (FrontOrBack == "/Images/MaleFrontCrop.png")
+            {
+                Width = "270px";
+                Height = "520px";
+            }
+            Width = "276px";
             Height = "520px";
         }
     }

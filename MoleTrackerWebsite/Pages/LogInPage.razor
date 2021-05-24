@@ -5,31 +5,40 @@
 @inject NavigationManager NavManager
 
 <link href="css/CSSStyles.css" rel="stylesheet" />
+<link href="css/BackgroundColor.css" rel="stylesheet" />
 
 <div class="page-background-class">
     <div class="wrapper fadeInDown" style="margin-top: 10%">
         <div id="formContent">
-            <h1>LoginPortal</h1>
+            <h1>Vælg login</h1>
             <div>
-                <button id="PatLogInButton" @onclick="NavigateToPatientLogInPage" style="background-color: cornflowerblue;
-                                                                                                                  color: white;
-                                                                                                                  border-radius: 8px;
-                                                                                                                  font-size: 20px;
-                                                                                                                  margin-bottom: 1%;
-                                                                                                                  margin-top: 5%"
+                <button id="PatLogInButton" @onclick="NavigateToPatientLogInPage" style="        background-color: cornflowerblue;
+        color: white;
+        border-radius: 8px;
+        font-size: 20px;
+        margin-bottom: 1%;
+        margin-top: 5%;
+        padding: 3px 50px;
+        border-style: none;
+"
                         type="submit">
+                    <i class="fas fa-user"></i>
                     Patient Login
                 </button>
             </div>
 
             <div>
-                <button id="MedLogInButton" @onclick="NavigateToMedLogInPage" style="background-color: firebrick;
-                                                                                                                                                                         color: white;
-                                                                                                                                                                         border-radius: 8px;
-                                                                                                                                                                         font-size: 20px;
-                                                                                                                                                                         margin-bottom: 5%;
-                                                                                                                                                                         margin-top: 5%"
+                <button id="MedLogInButton" @onclick="NavigateToMedLogInPage" style="        background-color: firebrick;
+        color: white;
+        border-radius: 8px;
+        font-size: 20px;
+        margin-bottom: 5%;
+        margin-top: 5%;
+        padding: 3px 50px;
+        border-style: none;
+"
                         type="submit">
+                    <i class="fas fa-user-md"></i>
                     Medical Login
                 </button>
             </div>

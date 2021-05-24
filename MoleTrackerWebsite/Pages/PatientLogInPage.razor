@@ -15,10 +15,8 @@
 
 
 <link href="css/CSSStyles.css" rel="stylesheet" />
+<link href="css/BackgroundColor.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" /> @*EYE*@
-
-
-
 
 
 <div class="page-background-class">
@@ -26,7 +24,7 @@
         <div id="formContent">
 
             <h1>Mole Tracker</h1>
-            <h2 style="margin-top:1%">Patient Login</h2>
+            <h2 style="margin-top: 1%">Patient Login</h2>
             <div>
                 <EditForm Model="@LoginInfo" OnValidSubmit="HandleValidSubmit">
 
@@ -34,23 +32,23 @@
                     <ValidationSummary />
 
 
-                    <div style="margin-left:-22%"><b>CPR-nummer</b></div>
+                    <div style="margin-left: -22%"><b>CPR-nummer</b></div>
 
                     <div style="margin-bottom: 3%">
-                        <InputText id="Name" placeholder="DDMMÅÅ-XXXX" @bind-Value="LoginInfo.Username" style="border-radius: 5px" />
+                        <InputText id="Name" placeholder="DDMMÅÅ-XXXX" @bind-Value="LoginInfo.Username" style="border-radius: 5px; border-style: none; background-color: lightgray" />
                     </div>
 
-                    <div style="margin-left:-30%"><b>Kodeord</b></div>
+                    <div style="margin-left: -30%"><b>Kodeord</b></div>
 
-                    <div style="margin-left:5%">
+                    <div style="margin-left: 5%">
 
-                        <InputText id="Password" @bind-Value="LoginInfo.Password" type="@TxtType" placeholder="Adgangskode" style="border-radius: 5px" />
+                        <InputText id="Password" @bind-Value="LoginInfo.Password" type="@TxtType" placeholder="Adgangskode" style="border-radius: 5px; border-style: none; background-color: lightgray" />
 
                         <span class="@Eye" @onclick="ShowPassword"></span>
 
                     </div>
 
-                    <button id="Login" style="background-color: forestgreen; border-radius: 8px; color: white; margin-top: 5%; margin-bottom: 3%;" type="submit">Log på</button>
+                    <button id="Login" style="border-radius: 5px; color: white; margin-top: 5%; margin-bottom: 3%; padding: 2px 75px; border-style: none; background-color: cornflowerblue;" type="submit">Log på</button>
 
                 </EditForm>
             </div>
@@ -79,6 +77,7 @@
 
     </div>
 </div>
+
 
 
 @code {
@@ -132,7 +131,7 @@
     //
     protected void RememberMe()
     {
-        
+
     }
 }
 
