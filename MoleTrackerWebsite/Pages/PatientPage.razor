@@ -70,7 +70,7 @@
                     <div class="cursor" style="width: @(_pointRadius * 2)px; height: @(_pointRadius * 2)px; top: @(Convert.ToInt32(ScreenCoordinates.Top) + item.Location.yCoordinate - _pointRadius)px; left: @(Convert.ToInt32(ScreenCoordinates.Left) + item.Location.xCoordinate - _pointRadius)px; background-color: red; position: fixed; border-radius: @(_pointRadius)px"></div>
                 }
             }
-            <button style="float: right" class="@Arrow" @onclick="TurnAroundModel"></button>
+            <button style="float: right; height: 50px; width: 50px" class="@Arrow" @onclick="TurnAroundModel"></button>
             <button style="float: right; margin-right: 2px" class="@ShowPinButton" @onclick="ShowPinOnPatientModel"> Vis modermærker på patientmodel</button>
         </div>
     </div>
@@ -79,7 +79,7 @@
 <div class="col align-self-end">
     @if (AddButtonPressed == false)
     {
-        <button style="float: right; border-radius: 28px;" class="@AddCollectionButton" @onclick="ChoosePoint"></button>
+        <button style="float: right; border-radius: 28px; height: 50px; width: 50px" class="@AddCollectionButton" @onclick="ChoosePoint"></button>
         <label style="float: right; margin-right: 1%">Klik her for at tilføje en ny samling</label>
     }
 
@@ -87,12 +87,12 @@
     {
         @if (PointClicked == true)
         {
-            <button style="float: right; border-radius: 28px;" @onclick="AcceptPosition">Godkend</button>
+            <button style="float: right; border-radius: 28px; height: 50px" @onclick="AcceptPosition">Godkend</button>
             <p style="float: right; color: crimson; margin-right: 15px">Vælg placering af modermærke</p>
         }
         @if (PointClicked == false)
         {
-            <button style="float: right; border-radius: 28px;" disabled="@true">Godkend</button>
+            <button style="float: right; border-radius: 28px; height: 50px" disabled="@true">Godkend</button>
             <p style="float: right; color: crimson; margin-right: 15px">Vælg placering af modermærke</p>
         }
     }
