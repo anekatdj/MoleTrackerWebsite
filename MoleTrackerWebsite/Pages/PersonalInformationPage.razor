@@ -104,23 +104,25 @@
 
             string year = "";
 
-            for (int i = 0; i < 2; i++)
+            if (cPRArray.Count()==11)
             {
-                date = date + cPRArray[i];
-            }
-            for (int i = 2; i < 4; i++)
-            {
-                month = month + cPRArray[i];
-            }
-            for (int i = 4; i < 6; i++)
-            {
-                year = year + cPRArray[i];
-            }
-            month = GetMonthOfBirth(month);
-            year = GetYearOfBirth(year);
+                for (int i = 0; i < 2; i++)
+                {
+                    date = date + cPRArray[i];
+                }
+                for (int i = 2; i < 4; i++)
+                {
+                    month = month + cPRArray[i];
+                }
+                for (int i = 4; i < 6; i++)
+                {
+                    year = year + cPRArray[i];
+                }
+                month = GetMonthOfBirth(month);
+                year = GetYearOfBirth(year);
 
-            DateOfBirth = date + ". " + month + " " + year;
-
+                DateOfBirth = date + ". " + month + " " + year;
+            }
         }
 
         private string GetYearOfBirth(string year)
