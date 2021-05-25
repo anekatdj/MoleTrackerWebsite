@@ -20,6 +20,7 @@ namespace PW_DataAccessLayer
             DoctorContactInfoDTO _doctorInfoDTO = new DoctorContactInfoDTO();
             _doctorInfoDTO = API.GetObject<DoctorContactInfoDTO, DoctorContactInfoRequestDTO>("GetMedicalPracticeContactInfo", _doctorContactInfoRequestDTO);
             DTOConverter.DoctorContactInfoToDomain(_doctorInfoDTO);
+            //hej ak
         }
     }
 }
