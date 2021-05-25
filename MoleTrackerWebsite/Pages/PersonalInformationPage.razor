@@ -23,7 +23,7 @@
         <div class="row mb-3">
             <label for="colFormLabel" class="col-sm-2 col-form-label">Fødselsdag</label>
             <div class="col-sm-10">
-                <input disabled="@IsDisabled" type="text" class="form-control" id="colFormLabel" placeholder="01 Januar 1900">
+                <input disabled="@IsDisabled" type="text" class="form-control" id="colFormLabel" placeholder=@DateOfBirth>
             </div>
         </div>
         <div class="row mb-3">
@@ -89,10 +89,120 @@
             }
         }
 
+        public string DateOfBirth { get; set; }
+
         //Run this when page is loaded
         public void DisplayPatientInfo()
         {
             PatientInfo = LogInController.HandlePatientInfo();
+
+            var cPRArray = PatientInfo.CPR.ToCharArray();
+
+            string date = "";
+
+            string month = "";
+
+            string year = "";
+
+            for (int i = 0; i < 2; i++)
+            {
+                date = date + cPRArray[i];
+            }
+            for (int i = 2; i < 4; i++)
+            {
+                month = month + cPRArray[i];
+            }
+            for (int i = 4; i < 6; i++)
+            {
+                year = year + cPRArray[i];
+            }
+            month = GetMonthOfBirth(month);
+            year = GetYearOfBirth(year);
+
+            DateOfBirth = date + ". " + month + " " + year;
+
+        }
+
+        private string GetYearOfBirth(string year)
+        {
+            int yearNo = Convert.ToInt16(year);
+
+            var currentYear = DateTime.Now.Year.ToString();
+            var currentYearArray = currentYear.ToCharArray();
+
+            var currentYear2 = "";
+
+            for (int i = 2; i < 4; i++)
+            {
+                currentYear2 = currentYear2 + currentYearArray[i];
+            }
+
+            int currentYearNo = Convert.ToInt16(currentYear2);
+
+            if (yearNo > currentYearNo)
+            {
+                year = "19" + year;
+            }
+            else if (yearNo <= currentYearNo)
+            {
+                year = "20" + year;
+            }
+            return year;
+        }
+
+        private string GetMonthOfBirth(string month)
+        {
+
+            if (month == "01")
+            {
+                month = "januar";
+            }
+            else if (month == "02")
+            {
+                month = "februar";
+            }
+            else if (month == "03")
+            {
+                month = "marts";
+            }
+            else if (month == "04")
+            {
+                month = "april";
+            }
+            else if (month == "05")
+            {
+                month = "maj";
+            }
+            else if (month == "06")
+            {
+                month = "juni";
+            }
+            else if (month == "07")
+            {
+                month = "juli";
+            }
+            else if (month == "08")
+            {
+                month = "august";
+            }
+            else if (month == "09")
+            {
+                month = "september";
+            }
+            else if (month == "10")
+            {
+                month = "oktober";
+            }
+            else if (month == "11")
+            {
+                month = "november";
+            }
+            else if (month == "12")
+            {
+                month = "december";
+            }
+
+            return month;
         }
 
         Task StartupTask()
