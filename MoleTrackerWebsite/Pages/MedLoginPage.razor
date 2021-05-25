@@ -82,7 +82,6 @@
     private List<string> Errors = new List<string>();
     public LoginInfoDomain LogInInfo { get; set; }
     public bool LoginFailed { get; set; } = false;
-    private int errorCounter = 0;
     private bool showPassword;
     public  ILogInController LoginControllerProp { get; set; }
     public  NavigationManager NavManagerProp { get; set; }
@@ -116,9 +115,8 @@
         {
             LoginFailed = true;
 
-            errorCounter++;
 
-            Errors.Add("fejl nr: " + errorCounter);
+            Errors.Add("Login er ugyldigt");
         }
     }
 
