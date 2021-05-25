@@ -24,6 +24,11 @@ namespace PW_DataAccessLayer
             patientInfo = new PatientInfo();
         }
 
+        /// <summary>
+        /// Test
+        /// </summary>
+        /// <param name="loginInfo"></param>
+        /// <returns></returns>
         public bool ValidateLogin(LogInInfo loginInfo)
         {
             LoginInfoDTO loginInfoDTO = new LoginInfoDTO();
