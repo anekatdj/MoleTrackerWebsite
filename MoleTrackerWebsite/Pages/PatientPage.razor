@@ -349,6 +349,8 @@
         newCollectionDomain.Location.xCoordinate = XPercentile;
         newCollectionDomain.Location.yCoordinate = YPercentile;
         CreateCollectionController.AddNewCollection(newCollectionDomain);
+        newCollectionDomain.Location.xCoordinate = XCoordinatesOnScreen(newCollectionDomain.Location.xCoordinate);
+        newCollectionDomain.Location.yCoordinate = YCoordinatesOnScreen(newCollectionDomain.Location.yCoordinate);
         SortedCollectionList.Add(newCollectionDomain);
         PinCollectionList = SortedCollectionList.Where(x => x.Location.IsFrontFacing.Equals(FrontFaceing)).ToList();
         AddButtonPressed = false;
