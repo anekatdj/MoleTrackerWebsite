@@ -347,6 +347,7 @@
             PatientID = patientInfo.PatientID,
             IsMarked = true
         };
+        newCollectionDomain.Location.IsFrontFacing = FrontFaceing;
         newCollectionDomain.Location.xCoordinate = XPercentile;
         newCollectionDomain.Location.yCoordinate = YPercentile;
         CreateCollectionController.AddNewCollection(newCollectionDomain);
