@@ -79,7 +79,6 @@
 
 
 @code {
-    private List<string> Errors = new List<string>();
     public LoginInfoDomain LogInInfo { get; set; }
     public bool LoginFailed { get; set; } = false;
     private bool showPassword;
@@ -115,8 +114,6 @@
         {
             LoginFailed = true;
 
-
-            Errors.Add("Login er ugyldigt");
         }
     }
 
