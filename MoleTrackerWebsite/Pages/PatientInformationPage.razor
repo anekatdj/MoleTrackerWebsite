@@ -77,7 +77,10 @@
 
     protected override async Task OnInitializedAsync()
     {
+        SelectPatientController.BirthDataCalcFailed = false;
+
         DateOfBirth = "";
+
         SelectPatientController.HandlePatientInfo();
 
         patientInfo = SelectPatientController.SelectedPatient;
