@@ -44,4 +44,21 @@
 
 @code {
 
+    //Run this when page is loaded
+    public void DisplayDoctorContactInfo()
+    {
+        
+    }
+
+    Task StartupTask()
+    {
+        return Task.CompletedTask;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        DisplayDoctorContactInfo();
+        await StartupTask();
+    }
+
 }
