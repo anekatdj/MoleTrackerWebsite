@@ -112,8 +112,6 @@
     public List<CollectionDomain> PinCollectionList { get; set; }
     public string NameOfPatient { get; set; }
     public List<PictureDataDomain> PicDataList { get; set; }
-
-    //private LocationOnBodyDomain.BodyPart bodyPart;
     public string FrontOrBack = "/css/Pictures/MaleFront.png";
     public string Arrow = "fa fa-refresh";
     public string AddCollectionButton = "fa fa-plus";
@@ -131,15 +129,6 @@
     public BoundingClientRect ScreenCoordinates { get; set; }
     public bool PinOnPatientModel { get; set; }
     public bool FrontFaceing { get; set; }
-
-    private IEnumerable<CollectionDomain> collections = new[]
-    {
-        new CollectionDomain() {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()},
-        new CollectionDomain() {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()},
-        new CollectionDomain() {CollectionID = 1, CollectionName = "Venstre fod", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()},
-        new CollectionDomain() {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()}
-    };
-
 
     public void TurnAroundModel()
     {
@@ -181,8 +170,6 @@
 
     public void GetGender()
     {
-        //PatientInfo = LogInController.HandlePatientInfo();
-        //Gender = PatientInfoDomain.Gender;
         SelectPatientController.HandlePatientInfo();
         Gender = SelectPatientController.SelectedPatient.Gender;
     }
@@ -363,7 +350,10 @@
         newCollectionDomain.Location.xCoordinate = XPercentile;
         newCollectionDomain.Location.yCoordinate = YPercentile;
         CreateCollectionController.AddNewCollection(newCollectionDomain);
+        newCollectionDomain.Location.xCoordinate = XCoordinatesOnScreen(newCollectionDomain.Location.xCoordinate);
+        newCollectionDomain.Location.yCoordinate = YCoordinatesOnScreen(newCollectionDomain.Location.yCoordinate);
         SortedCollectionList.Add(newCollectionDomain);
+        PinCollectionList = SortedCollectionList.Where(x => x.Location.IsFrontFacing.Equals(FrontFaceing)).ToList();
         AddButtonPressed = false;
     }
 
