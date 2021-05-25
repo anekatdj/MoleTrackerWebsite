@@ -112,8 +112,6 @@
     public List<CollectionDomain> PinCollectionList { get; set; }
     public string NameOfPatient { get; set; }
     public List<PictureDataDomain> PicDataList { get; set; }
-
-    //private LocationOnBodyDomain.BodyPart bodyPart;
     public string FrontOrBack = "/css/Pictures/MaleFront.png";
     public string Arrow = "fa fa-refresh";
     public string AddCollectionButton = "fa fa-plus";
@@ -131,15 +129,6 @@
     public BoundingClientRect ScreenCoordinates { get; set; }
     public bool PinOnPatientModel { get; set; }
     public bool FrontFaceing { get; set; }
-
-    private IEnumerable<CollectionDomain> collections = new[]
-    {
-        new CollectionDomain() {CollectionID = 1, CollectionName = "Venstre skulder", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()},
-        new CollectionDomain() {CollectionID = 1, CollectionName = "Højre skulder", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()},
-        new CollectionDomain() {CollectionID = 1, CollectionName = "Venstre fod", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()},
-        new CollectionDomain() {CollectionID = 1, CollectionName = "Højre fod", Location = new LocationOnBodyDomain(), PictureList = new List<PictureInfoDomain>()}
-    };
-
 
     public void TurnAroundModel()
     {
@@ -180,31 +169,9 @@
 
     public void GetGender()
     {
-        //PatientInfo = LogInController.HandlePatientInfo();
-        //Gender = PatientInfoDomain.Gender;
         SelectPatientController.HandlePatientInfo();
         Gender = SelectPatientController.SelectedPatient.Gender;
     }
-
-
-
-    //Zoom forsøg - virker ikke helt med event
-    //https://stackoverflow.com/questions/54222913/scrollable-image-stack-using-blazor-component/54227687
-
-    int imgNumber = 0;
-    string img => $"/Images/FemaleBackCrop {imgNumber}.png";
-    string img2 => $"/Images/pin.png";
-
-    public class WheelEventArgs : Microsoft.AspNetCore.Components.Web.MouseEventArgs { public int DeltaY { get; } }
-
-    Task MouseWheel(WheelEventArgs args)
-    {
-        imgNumber += Math.Sign(args.DeltaY);
-        if (imgNumber == 43) imgNumber = 0;
-        if (imgNumber == -1) imgNumber = 42;
-        return Task.CompletedTask;
-    }
-
 
     #region Coordinates
 
@@ -467,63 +434,3 @@
 
     #endregion
 }
-
-@*<div class="col">
-    <EditForm Model="@PatientDataModel">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-        <table>
-            <tbody>
-                <tr>
-                    <th>Modermærker</th>
-                </tr>
-                @foreach (var collection in CollectionList)
-                {
-                    <tr @onclick="@((e) => NavigateToCollectionPage(e, collection.CollectionID))" style="cursor: pointer">
-                        <td>
-                            @collection.CollectionName
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </EditForm>
-    </div>
-    <div class="col">
-        <img src="~/css/Pictures/MaleFront.png" alt="Image not found" width="200" height="400" />
-    </div>*@
-
-@*@code {
-
-        //private PatientInfoDomain patientInfo;
-        //public PatientDataDomain PatientData { get; set; }
-        //public List<CollectionDomain> CollectionList { get; set; }
-        //public string NameOfPatient { get; set; }
-        //public List<PictureDataDomain> PicDataList { get; set; }
-
-        //protected override async Task OnInitializedAsync()
-        //{
-        //    //Bare for ikke at smide exception
-        //    PatientData = new PatientDataDomain();
-        //    CollectionList = PatientData.CollectionList;
-        //    //patientData.CollectionList = new List<CollectionDomain>();
-
-        //    patientInfo = SelectPatientController.SelectedPatient;
-
-        //    NameOfPatient = patientInfo.Name;
-
-        //    //patientData = SelectPatientController.GetPatientData(patientInfo);
-        //}
-
-        //private void NavigateToCollectionPage(MouseEventArgs e, object collectionId)
-        //{
-
-        //    var selectedCollection = PatientData.CollectionList.Where(x => x.CollectionID.Equals(collectionId)).ToList();
-
-        //    ViewCollectionController.SelectedCollection = selectedCollection[0];
-
-        //    NavManager.NavigateTo("/CollectionPage");
-
-        //}
-
-    }*@
