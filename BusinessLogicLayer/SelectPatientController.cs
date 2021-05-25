@@ -30,6 +30,7 @@ namespace BusinessLogicLayer
 
         public void HandlePatientInfo()
         {
+            DateOfBirth = "";
 
             var CPRArray = SelectedPatient.CPR.ToCharArray();
 
