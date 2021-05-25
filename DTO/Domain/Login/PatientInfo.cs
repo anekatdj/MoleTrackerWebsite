@@ -8,7 +8,7 @@ namespace DataClasses.Domain.Login
     public class PatientInfo
     {
         public int PatientID { get; set; }
-
+        public int MedicalPracticeID { get; set; }
         public string CPR { get; set; }
         public string Name { get; set; }
         public string Gender { get; set; }

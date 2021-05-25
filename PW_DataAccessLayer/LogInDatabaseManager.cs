@@ -59,6 +59,7 @@ namespace PW_DataAccessLayer
             patientInfo.Gender = patientInfoDTO.Gender;
             patientInfo.CPR = patientInfoDTO.CPR;
             patientInfo.Email = patientInfoDTO.Email;
+            patientInfo.MedicalPracticeID = patientInfoDTO.clinic;
 
             return patientInfo;
         }
