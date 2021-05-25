@@ -350,6 +350,7 @@
         newCollectionDomain.Location.yCoordinate = YPercentile;
         CreateCollectionController.AddNewCollection(newCollectionDomain);
         SortedCollectionList.Add(newCollectionDomain);
+        PinCollectionList = SortedCollectionList.Where(x => x.Location.IsFrontFacing.Equals(FrontFaceing)).ToList();
         AddButtonPressed = false;
     }
 
