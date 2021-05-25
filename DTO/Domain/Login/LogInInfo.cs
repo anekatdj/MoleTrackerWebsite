@@ -10,7 +10,7 @@ namespace DataClasses.Domain.Login
     {
         [Required]
         [MinLength(1, ErrorMessage = "CPR-nummer er for kort")]
-        [StringLength(10, ErrorMessage = "CPR-nummer er for langt")]
+        [StringLength(11, ErrorMessage = "CPR-nummer er for langt")]
         public string Username { get; set; }
 
         [Required]

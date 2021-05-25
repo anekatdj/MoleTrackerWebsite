@@ -10,6 +10,7 @@
 @using PW_BusinessLogicLayer.Interfaces
 @using PW_DataAccessLayer.Interfaces
 @using System.Globalization
+@using System.Threading
 
 <link href="css/CSSStyles.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -493,7 +494,6 @@
             }
         }
         status = $"Finished loading {file.Size} bytes from {file.Name}";
-
     }
 
     private string GetFileType(string name)
@@ -510,11 +510,6 @@
     #endregion
 
 
-    private void PointOnPatientModel()
-    {
-
-    }
-
     private void ShowCollections()
     {
         Picture.PictureID = 1;
@@ -527,7 +522,7 @@
         DeletePictureModal = !DeletePictureModal;
         Picture.PictureID = LatestPicID;
         DeletePictureController.HandleDeletePicture(Picture);
-        
+        StateHasChanged();
     }
 
     private void DeleteCollection(Collection collection, PatientInfo patientInfo)
