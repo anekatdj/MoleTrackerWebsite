@@ -67,11 +67,11 @@
             {
                 @foreach (var item in PinCollectionList)
                 {
-                    <div class="cursor" style="width: @(_pointRadius * 2)px; height: @(_pointRadius * 2)px; top: @(Convert.ToInt32(ScreenCoordinates.Top) + item.Location.yCoordinate - _pointRadius)px; left: @(ScreenCoordinates.Left + item.Location.xCoordinate - _pointRadius)px; background-color: red; position: fixed; border-radius: @(_pointRadius)px"></div>
+                    <div class="cursor" style="width: @(_pointRadius * 2)px; height: @(_pointRadius * 2)px; top: @(Convert.ToInt32(ScreenCoordinates.Top) + item.Location.yCoordinate - _pointRadius)px; left: @(Convert.ToInt32(ScreenCoordinates.Left) + item.Location.xCoordinate - _pointRadius)px; background-color: red; position: fixed; border-radius: @(_pointRadius)px"></div>
                 }
             }
             <button style="float: right" class="@Arrow" @onclick="TurnAroundModel"></button>
-            <button style="float: right; margin-right: 2px" class="@ShowPinButton" @onclick="ShowPinOnPatientModel"></button>
+            <button style="float: right; margin-right: 2px" class="@ShowPinButton" @onclick="ShowPinOnPatientModel"> Vis modermærker på patientmodel</button>
         </div>
     </div>
 </div>
@@ -115,7 +115,7 @@
     public string FrontOrBack = "/css/Pictures/MaleFront.png";
     public string Arrow = "fa fa-refresh";
     public string AddCollectionButton = "fa fa-plus";
-    public string ShowPinButton = "fa fa-bath";
+    public string ShowPinButton = "fa fa-map-marker";
     public string TurnAround { get; set; }
     public string Gender { get; set; }
     public string Width { get; set; }
@@ -134,7 +134,7 @@
     {
         GetGender();
 
-        PinCollectionList = SortedCollectionList.Where(x => x.Location.IsFrontFacing.Equals(FrontFaceing)).ToList();
+
 
         if (Gender == "Kvinde" || SelectPatientController.BirthDataCalcFailed == true)
         {
@@ -163,6 +163,7 @@
                 this.FrontOrBack = "/css/Pictures/MaleBack.png";
             }
         }
+        PinCollectionList = SortedCollectionList.Where(x => x.Location.IsFrontFacing.Equals(FrontFaceing)).ToList();
     }
 
 
@@ -403,6 +404,7 @@
         patientInfo = SelectPatientController.SelectedPatient;
 
         patientInfo = SelectPatientController.SelectedPatient;
+        FrontFaceing = true;
 
         PatientData = SelectPatientController.GetPatientData(patientInfo);
         GetGender();

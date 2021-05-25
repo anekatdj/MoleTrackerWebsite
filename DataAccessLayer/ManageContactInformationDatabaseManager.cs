@@ -11,7 +11,8 @@ namespace DataAccessLayer
     public class ManageContactInformationDatabaseManager : IManageContactInformationDatabaseManager
     {
 
-        private ChangeNotificationsDTO changeNotificationsDTO;
+        private DoctorContactInfoDomain doctorContactInfoDomain;
+        private DoctorContactInfoDTO doctorContactInfoDTO;
         private DoctorContactInfoRequestDTO doctorContactInfoRequestDTO;
         public IAPIService API { get; set; }
 
@@ -20,24 +21,20 @@ namespace DataAccessLayer
             API = APIFactory.GetAPI(stub);
         }
 
-        public void ChangeFollowUpNotification(ChangeNotificationsDomain changeNotificationsDomain)
+        public DoctorContactInfoDomain GetDoctorInfo(DoctorContactInfoRequestDomain doctorContactInfoRequestDomain)
         {
-            changeNotificationsDTO = changeNotificationsDomain.ToDTO();
+            doctorContactInfoRequestDTO = doctorContactInfoRequestDomain.ToDTO();
             try
             {
-                var result =
-                    API.PostObject<ChangeNotificationsDTO>("ChangeNotificationInterval", changeNotificationsDTO);
+                doctorContactInfoDTO = API.GetObject<DoctorContactInfoDTO, DoctorContactInfoRequestDTO>("GetMedicalPracticeContactInfo", doctorContactInfoRequestDTO);
             }
             catch (Exception e)
             {
                 throw;
             }
-        }
 
-        public DoctorInfoDomain GetDoctorInfo(DoctorContactInfoRequestDTO doctorContactInfoRequestDTO)
-        {
-            
-            throw new NotImplementedException();
+            doctorContactInfoDomain = DTOConverter.DoctorContactInfoToDomain(doctorContactInfoDTO);
+            return doctorContactInfoDomain;
         }
     }
 }
