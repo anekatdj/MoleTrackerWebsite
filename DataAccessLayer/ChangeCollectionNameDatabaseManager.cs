@@ -20,14 +20,14 @@ namespace DataAccessLayer
 
         public void PostChangedCollectionName(CollectionDomain collectionInfo)
         {
-            ChangeCollectionNameDTO _changeCollectionNameDTO = new ChangeCollectionNameDTO();
+            changeCollectionNameDTO = new ChangeCollectionNameDTO();
 
-            _changeCollectionNameDTO.CollectionID = collectionInfo.CollectionID;
-            _changeCollectionNameDTO.CollectionName = collectionInfo.CollectionName;
+            changeCollectionNameDTO.CollectionID = collectionInfo.CollectionID;
+            changeCollectionNameDTO.CollectionName = collectionInfo.CollectionName;
 
             try
             {
-                API.PostObject<ChangeCollectionNameDTO>("ChangeCollectionName", _changeCollectionNameDTO);
+                API.PostObject<ChangeCollectionNameDTO>("ChangeCollectionName", changeCollectionNameDTO);
             }
             catch (Exception e)
             {

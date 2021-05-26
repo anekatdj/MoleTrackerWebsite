@@ -10,7 +10,6 @@ namespace DataClasses.Domain
     {
         public int xCoordinate { get; set; }
         public int yCoordinate { get; set; }
-
         public bool IsFrontFacing { get; set; }
         public string BodyPartSide { get; set; }
         public BodyPart BodyParts { get; set; }

@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Text;
 using DataClasses.DataObjects.DTO;
 using DataClasses.DTO;
-using DataClasses.DTO.MISCDTOS;
-using PatientDataDTO = DataClasses.DTO.MISCDTOS.PatientDataDTO;
 
 namespace DataAccessLayer
 {
@@ -75,7 +73,8 @@ namespace DataAccessLayer
         {
             DoctorInfoDomain doctorInfoDomain = new DoctorInfoDomain()
             {
-                DoctorID = doctorInfoDTO.DoctorID
+                DoctorID = doctorInfoDTO.DoctorID,
+                Clinic = doctorInfoDTO.clinic
             };
             return doctorInfoDomain;
         }
@@ -125,7 +124,7 @@ namespace DataAccessLayer
             {
                 CollectionList = list,
                 PatientInfo = PatientInfoToDomain(patientDataDTO.PatientInfo),
-                PatientID = patientDataDTO.PatientID
+                PatientID = patientDataDTO.patientId
             };
             return patientDataDomain;
         }
