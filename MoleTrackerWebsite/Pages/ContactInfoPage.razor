@@ -72,7 +72,7 @@
         doctorInfo = LogInController.DoctorInfo;
         doctorContactInfoRequestDomain = new DoctorContactInfoRequestDomain()
         {
-            DoctorContactID = 2
+            DoctorContactID = doctorInfo.Clinic
         };
         doctorContactInfoDomain = ManageContactInformationController.GetDoctorInfo(doctorContactInfoRequestDomain);
     }

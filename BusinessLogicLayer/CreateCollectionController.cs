@@ -19,10 +19,5 @@ namespace BusinessLogicLayer
         {
             createCollectionDatabaseManager.AddNewCollection(collection);
         }
-
-        public void SaveNewCollection(CollectionDomain collection)
-        {
-            createCollectionDatabaseManager.SaveNewCollection(collection);
-        }
     }
 }
