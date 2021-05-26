@@ -24,25 +24,28 @@ namespace MoleTrackerWebsite_PW.UnitTests.BusinessLogicLayer
             _uut = new ViewCollectionController();
             _viewCollectionDatabaseManager = Substitute.For<IViewCollectionDatabaseManager>();
             _createNewCollectionDatabaseManager = Substitute.For<ICreateNewCollectionDatabaseManager>();
-            collection = new Collection();
+            collection = Substitute.For<Collection>();
+            //collection = new Collection();
             pictureInfo = new PictureInfo();
 
-            collection.Location = new LocationOnBody();
-            collection.CollectionName = "testnavn";
-            collection.CollectionID = 1;
-            collection.IsMarked = false;
-            collection.PatientID = 2;
-            collection.PictureList = new List<PictureInfo>();
-
-            _createNewCollectionDatabaseManager.PostNewCollection(collection);
+            //collection.Location = new LocationOnBody();
+            //collection.CollectionName = "testnavn";
+            //collection.CollectionID = 1;
+            //collection.IsMarked = false;
+            //collection.PatientID = 1;
+            //collection.PictureList = new List<PictureInfo>();
+            collection.CollectionID = 35;
+            //_createNewCollectionDatabaseManager.PostNewCollection(collection);
         }
 
-        //[Test]
-        //public void GetCollectionFromDB_CallsGetExistingCollection_InViewCollectionDB()
-        //{
-        //    _uut.GetCollectionFromDB(collection);
-        //    _viewCollectionDatabaseManager.Received(1).GetExistingCollection(collection);
-        //}
+        [Test]
+        public void GetCollectionFromDB_CallsGetExistingCollection_InViewCollectionDB()
+        {
+            //_uut.GetCollectionFromDB(collection);
+            //collection.CollectionID = 35;
+            //_uut.GetCollectionFromDB(collection).Returns(_viewCollectionDatabaseManager.GetExistingCollection(collection));
+            ////_viewCollectionDatabaseManager.Received(1).GetExistingCollection(collection);
+        }
 
         //[Test]
         //public void HandleCollection_ReturnsGetPictures_FromViewCollectionDB()
@@ -50,7 +53,7 @@ namespace MoleTrackerWebsite_PW.UnitTests.BusinessLogicLayer
         //    pictureInfo.CollectionID = 1;
         //    pictureInfo.DateOfUpload = DateTime.Now;
         //    pictureInfo.PictureID = 1;
-            
+
         //    _uut.HandleCollection(pictureInfo).Returns(_viewCollectionDatabaseManager.GetPictures(pictureInfo));
         //}
     }
