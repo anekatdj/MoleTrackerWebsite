@@ -30,6 +30,7 @@ namespace BusinessLogicLayer
 
         public void HandlePatientInfo()
         {
+            DateOfBirth = "";
 
             var CPRArray = SelectedPatient.CPR.ToCharArray();
 
@@ -160,11 +161,5 @@ namespace BusinessLogicLayer
 
             return month;
         }
-    
-
-        //public void GetPatientInfo(PatientInfoDomain patientInfo)
-        //{
-        //    SelectPatientDatabaseManager.GetPatientInfo(patientInfo);
-        //}
     }
 }

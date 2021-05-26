@@ -6,8 +6,6 @@ using APIWebServiesConnector;
 using APIWebServiesConnector.APIStringFabrics;
 using DataClasses.Domain;
 using DataClasses.DTO;
-using DataClasses.DTO.MISCDTOS;
-using PatientDataDTO = DataClasses.DTO.MISCDTOS.PatientDataDTO;
 
 namespace DataAccessLayer
 {
@@ -39,25 +37,6 @@ namespace DataAccessLayer
 
             return patientDataDomain;
         }
-        public PatientInfoDomain GetPatientInfo(PatientInfoDomain patientInfoDomain)
-        {
-            PatientInfoDTO patientInfoDTO = new PatientInfoDTO();
-            PatientInfoRequestDTO patientInfoRequestDTO = new PatientInfoRequestDTO() { PatientID = patientInfoDomain.PatientID };
-            try
-            {
-                patientInfoDTO = API.GetObject<PatientInfoDTO, PatientInfoRequestDTO>("GetPatientInfo", patientInfoRequestDTO);
-            }
-            catch (Exception e)
-            {
 
-                throw e;
-            }
-
-            PatientInfoDomain newpatientInfoDomain = DTOConverter.PatientInfoToDomain(patientInfoDTO);
-
-            
-
-            return newpatientInfoDomain;
-        }
     }
 }

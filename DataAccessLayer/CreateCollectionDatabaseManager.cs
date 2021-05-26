@@ -29,19 +29,5 @@ namespace DataAccessLayer
                 throw;
             }
         }
-
-        public void SaveNewCollection(CollectionDomain collection)
-        {
-            CollectionDTO collectionDTO = collection.ToDTO(collection.Location.BodyParts);
-            try
-            {
-                API.PostObject<CollectionDTO>("PostNewCollection", collectionDTO);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
     }
 }

@@ -57,7 +57,6 @@
 @code {
 
     public string SearchInput { get; set; }
-    //public MedicalPracticePatientsDomain MedicalPractice { get; set; }
     public List<PatientInfoDomain> MedicalPracticePatientList { get; set; }
     public List<PatientInfoDomain> FilteredPatientList { get; set; }
     public bool IsDisabled { get; set; }
@@ -65,8 +64,6 @@
     public ILoadPatientsController LoadPatientsControllerProp { get; set; }
 
     public NavigationManager NavManagerProp { get; set; }
-
-    public string LinkToSpecifikPatientPage { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -90,8 +87,6 @@
         XmlDocument doc = new XmlDocument();
 
         var input = doc.GetElementById("myInput");
-
-        //var filter = input.Value.ToUpper();
 
 
         var filter = SearchInput.ToUpper();
