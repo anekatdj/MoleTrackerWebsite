@@ -57,7 +57,7 @@
                         @foreach (var item in PicDataList)
                         {
 
-                            <td id="SmallPics" @onclick="@((e) => ShowPicture(e, item.PictureID))">
+                            <td id="SmallPics" @onclick="@((e) => ShowPicture(e, item.PictureID))" style="cursor: pointer">
                                 <img style="width: 150px;" src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" />
                             </td>
                         }
@@ -129,8 +129,8 @@
                     <td>
                         @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
                         {
-                            <button class="editbtn" @onclick="FocusFocusedComment">Rediger note</button>
-                            <button class="editbtn" @onclick="SaveNewFocusedComment">Gem note</button>
+                            <button class="editbtn" @onclick="FocusFocusedComment" style="cursor: pointer">Rediger note</button>
+                            <button class="editbtn" @onclick="SaveNewFocusedComment" style="cursor: pointer">Gem note</button>
                             @if (FocusedCommentJustSaved)
                             {
                                 <div>
@@ -142,8 +142,8 @@
                     <td>
                         @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
                         {
-                            <button class="editbtn" @onclick="FocusLatestComment">Rediger note</button>
-                            <button class="editbtn" @onclick="SaveNewLatestComment">Gem note</button>
+                            <button class="editbtn" @onclick="FocusLatestComment" style="cursor: pointer">Rediger note</button>
+                            <button class="editbtn" @onclick="SaveNewLatestComment" style="cursor: pointer">Gem note</button>
                             @if (LatestCommentJustSaved)
                             {
                                 <div>
