@@ -13,36 +13,47 @@
 }*@
 
 <link href="css/HomePageStyles.css" rel="stylesheet"/>
+<link href="css/BackgroundColor.css" rel="stylesheet" />
 
-<div class="wrapper fadeInDown body" style="margin-top: 10%">
-    <div style="padding: 20px 50px" id="formContent">
-        <h1>LoginPortal</h1>
-        <div>
-            <button @onclick="NavigateToPatientLogInPage" style="background-color: cornflowerblue;
+<div >
+    <div class="wrapper fadeInDown" style="margin-top: 10%">
+        <div id="formContent">
+            <h1>Vælg login</h1>
+            <div>
+                <button id="PatLogInButton" @onclick="NavigateToPatientLogInPage" style="        background-color: cornflowerblue;
                                                                                                                   color: white;
                                                                                                                   border-radius: 8px;
                                                                                                                   font-size: 20px;
-                                                                                                                  margin-bottom: 10px;
-                                                                                                                  margin-top: 20px"
-                     type="submit">
-                Patientlogin
-            </button>
-        </div>
+                                                                                                                  margin-bottom: 1%;
+                                                                                                                  margin-top: 5%;
+                                                                                                                  padding: 3px 50px;
+                                                                                                                  border-style: none;
+                                                                                                              "
+                        type="submit">
+                    <i class="fa fa-user"></i>
+                    Patient Login
+                </button>
+            </div>
 
-        <div>
-            <button @onclick="NavigateToMedLogInPage" style="background-color: rgb(240, 237, 110);
-                                                                                                                  color: black;
-                                                                                                                  border-radius: 8px;
-                                                                                                                  font-size: 20px;
-                                                                                                                  margin-bottom: 10px;
-                                                                                                                  margin-top: 20px"
-                     type="submit">
-                Lægelogin
-            </button>
+            <div>
+                <button id="MedLogInButton" @onclick="NavigateToMedLogInPage" style="    background-color: #fcd808;
+                                                                                                                                                       color: white;
+                                                                                                                                                       border-radius: 8px;
+                                                                                                                                                       font-size: 20px;
+                                                                                                                                                       margin-bottom: 5%;
+                                                                                                                                                       margin-top: 5%;
+                                                                                                                                                       padding: 3px 50px;
+                                                                                                                                                       border-style: none;
+                                                                                                                                                   "
+                        type="submit">
+                    <i class="fa fa-user-plus"></i>
+                    Medical Login
+                </button>
+            </div>
+
         </div>
 
     </div>
-
 </div>
 
 @code {
