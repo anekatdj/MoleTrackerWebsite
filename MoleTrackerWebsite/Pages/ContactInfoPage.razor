@@ -36,7 +36,10 @@
     <div class="row mb-3">
         <label for="colFormLabel" class="col-sm-2 col-form-label">Træffetider</label>
         <div class="col-sm-10">
-            <input disabled="@true" type="text" class="form-control" id="colFormLabel" placeholder=@OpeningHours>
+            @foreach (string item in doctorContactInfoDomain.OpeningHours)
+            {
+                <input disabled="@true" type="text" class="form-control" id="colFormLabel" placeholder=@item>
+            }
         </div>
     </div>
     <div class="row mb-3">
@@ -66,7 +69,6 @@
     private DoctorInfoDomain doctorInfo;
     private DoctorContactInfoRequestDomain doctorContactInfoRequestDomain;
     private DoctorContactInfoDomain doctorContactInfoDomain;
-    public string OpeningHours { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -76,11 +78,5 @@
             DoctorContactID = doctorInfo.Clinic
         };
          doctorContactInfoDomain = ManageContactInformationController.GetDoctorInfo(doctorContactInfoRequestDomain);
-
-        foreach (string item in doctorContactInfoDomain.OpeningHours)
-        {
-            OpeningHours += item + "\n";
-        }
     }
-
 }
