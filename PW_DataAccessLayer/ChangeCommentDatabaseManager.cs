@@ -17,7 +17,7 @@ namespace PW_DataAccessLayer
         public ChangeCommentDatabaseManager(string APIType)
         {
             API = APIFactory.GetAPI(APIType);
-            
+
             //API = new StubApiService();
             _pictureRequestDTO = new PictureRequestDTO();
         }
@@ -30,14 +30,7 @@ namespace PW_DataAccessLayer
             _pictureCommentDTO.Comment = editedComment.Comment;
             _pictureCommentDTO.PictureID = editedComment.PictureID;
 
-            try
-            {
-                API.PostObject<PictureCommentDTO>("NewPictureComment", _pictureCommentDTO);
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            API.PostObject<PictureCommentDTO>("NewPictureComment", _pictureCommentDTO);
         }
     }
 }

@@ -23,14 +23,7 @@ namespace PW_DataAccessLayer
             _changeCollectionMarkingDTO.CollectionID = _changeCollectionMarking.CollectionID;
             _changeCollectionMarkingDTO.IsMarked = _changeCollectionMarking.IsMarked;
 
-            try
-            {
-                string ID = API.PostObject<ChangeCollectionMarkingDTO>("ChangeCollectionMarking", _changeCollectionMarkingDTO);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            API.PostObject<ChangeCollectionMarkingDTO>("ChangeCollectionMarking", _changeCollectionMarkingDTO);
         }
     }
 }

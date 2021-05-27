@@ -20,7 +20,7 @@ namespace PW_DataAccessLayer
             PictureRequestDTO pictureRequest = new PictureRequestDTO();
             pictureRequest.PictureID = pictureInfo.PictureID;
 
-            string result = API.PostObject<PictureRequestDTO>("DeletePicture", pictureRequest);
+            API.PostObject<PictureRequestDTO>("DeletePicture", pictureRequest);
         }
     }
 }

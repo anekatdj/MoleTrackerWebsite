@@ -31,15 +31,7 @@ namespace PW_DataAccessLayer
 
             NewPostPicture.Comment.Comment = "";
 
-            try
-            {
-                API.PostObject<PostPictureDTO>("NewPicture", NewPostPicture);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw e;
-            }
+            API.PostObject<PostPictureDTO>("NewPicture", NewPostPicture);
         }
     }
 }

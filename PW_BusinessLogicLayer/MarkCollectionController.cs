@@ -1,12 +1,13 @@
 ﻿using DataClasses.Domain.Collections;
 using PW_BusinessLogicLayer.Interfaces;
 using PW_DataAccessLayer;
+using PW_DataAccessLayer.Interfaces;
 
 namespace PW_BusinessLogicLayer
 {
     public class MarkCollectionController : IMarkCollectionController
     {
-        private MarkCollectionDatabaseManager _markCollectionDatabaseManager;
+        private IMarkCollectionDatabaseManager _markCollectionDatabaseManager;
 
         public MarkCollectionController()
         {

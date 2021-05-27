@@ -382,7 +382,7 @@
             PatientID = PatientInfo.PatientID,
             IsMarked = false
         };
-        Collection.CollectionID = CreateNewCollectionController.HandleCreateNewCollection(newCollection);
+        CreateNewCollectionController.HandleCreateNewCollection(newCollection);
         NavigateToNewCollectionPage();
     }
 

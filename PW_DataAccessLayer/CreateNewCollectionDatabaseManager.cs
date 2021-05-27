@@ -13,7 +13,7 @@ namespace PW_DataAccessLayer
 {
     public class CreateNewCollectionDatabaseManager : ICreateNewCollectionDatabaseManager
     {
-        public  CollectionDTO CollectionDTO { get; set; }
+        public CollectionDTO CollectionDTO { get; set; }
 
         private readonly IAPIService API;
 
@@ -23,21 +23,12 @@ namespace PW_DataAccessLayer
             CollectionDTO = new CollectionDTO();
         }
 
-        public int PostNewCollection(Collection collection)
+        public void PostNewCollection(Collection collection)
         {
             CollectionDTO collectionDTO = collection.ToDTO(collection.Location.BodyParts);
             collectionDTO.Location.BodyPartSide = "";
-            try
-            {
-                string ID = API.PostObject<CollectionDTO>("NewCollection", collectionDTO);
-                collection.CollectionID = Convert.ToInt32(ID);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-            return collection.CollectionID;
+            API.PostObject<CollectionDTO>("NewCollection", collectionDTO);
+            collection = DTOConverter.CollectionToDomain(collectionDTO);
         }
     }
 }

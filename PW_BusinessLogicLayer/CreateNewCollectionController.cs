@@ -21,11 +21,11 @@ namespace PW_BusinessLogicLayer
             _patientData = new PatientData();
         }
 
-        public int HandleCreateNewCollection(Collection collection)
+        public void HandleCreateNewCollection(Collection collection)
         {
             //collection.Location = new LocationOnBody();
             //collection.CollectionID = _createNewCollectionDatabaseManager.PostNewCollection(collection);
-            return _createNewCollectionDatabaseManager.PostNewCollection(collection);
+            _createNewCollectionDatabaseManager.PostNewCollection(collection);
             //_createNewCollectionDatabaseManager.CurrentPatientData.CollectionList.Add(collection);
         }
     }

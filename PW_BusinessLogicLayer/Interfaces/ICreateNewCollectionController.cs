@@ -6,7 +6,7 @@ namespace PW_BusinessLogicLayer.Interfaces
     public interface ICreateNewCollectionController
     {
         public bool New { get; set; }
-        int HandleCreateNewCollection(Collection collection);
+        void HandleCreateNewCollection(Collection collection);
         //void HandleLoadCollection(Collection collection);
     }
 }

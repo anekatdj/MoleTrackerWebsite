@@ -7,6 +7,6 @@ namespace PW_DataAccessLayer.Interfaces
     public interface ICreateNewCollectionDatabaseManager
     {
         CollectionDTO CollectionDTO { get; set; }
-        int PostNewCollection(Collection collection);
+        public void PostNewCollection(Collection collection);
     }
 }

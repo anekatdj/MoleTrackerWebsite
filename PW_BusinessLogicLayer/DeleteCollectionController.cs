@@ -2,6 +2,7 @@
 using DataClasses.Domain.Login;
 using PW_BusinessLogicLayer.Interfaces;
 using PW_DataAccessLayer;
+using PW_DataAccessLayer.Interfaces;
 
 namespace PW_BusinessLogicLayer
 {
@@ -9,7 +10,7 @@ namespace PW_BusinessLogicLayer
     {
         public void HandleDeleteCollection(Collection collection, PatientInfo patientInfo)
         {
-            DeleteCollectionDatabaseManager deleteCollection = new DeleteCollectionDatabaseManager("");
+            IDeleteCollectionDatabaseManager deleteCollection = new DeleteCollectionDatabaseManager("");
 
             deleteCollection.DeleteCollection(collection, patientInfo);
         }

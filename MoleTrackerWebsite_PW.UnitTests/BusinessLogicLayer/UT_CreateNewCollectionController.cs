@@ -32,7 +32,7 @@ namespace MoleTrackerWebsite_PW.UnitTests.BusinessLogicLayer
             collection.IsMarked = false;
             collection.PatientID = 2;
             collection.PictureList = new List<PictureInfo>();
-            _uut.HandleCreateNewCollection(collection).Returns(_createNewCollectionDatabaseManager.PostNewCollection(collection));
+            _createNewCollectionDatabaseManager.Received(1).PostNewCollection(collection);
         }
     }
 }

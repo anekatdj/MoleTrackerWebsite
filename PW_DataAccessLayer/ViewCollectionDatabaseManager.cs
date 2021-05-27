@@ -20,7 +20,7 @@ namespace PW_DataAccessLayer
 
         public ViewCollectionDatabaseManager(string APIType)
         {
-            API= APIFactory.GetAPI(APIType);
+            API = APIFactory.GetAPI(APIType);
         }
 
         public void GetExistingCollection(Collection collection)
@@ -44,18 +44,11 @@ namespace PW_DataAccessLayer
         public PictureData GetPictures(PictureInfo pictureInfo)
         {
             PictureDataDTO pictureDataDTO = new PictureDataDTO();
-            PictureRequestDTO pictureRequestDTO = new PictureRequestDTO() {PictureID = pictureInfo.PictureID};
+            PictureRequestDTO pictureRequestDTO = new PictureRequestDTO() { PictureID = pictureInfo.PictureID };
 
-            try
-            {
-                pictureDataDTO = API.GetObject<PictureDataDTO, PictureRequestDTO>("GetPictureData", pictureRequestDTO);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            pictureDataDTO = API.GetObject<PictureDataDTO, PictureRequestDTO>("GetPictureData", pictureRequestDTO);
 
-            PictureData pictureData = DTOConverter.PictureDataToDomain(pictureDataDTO); 
+            PictureData pictureData = DTOConverter.PictureDataToDomain(pictureDataDTO);
 
             return pictureData;
         }

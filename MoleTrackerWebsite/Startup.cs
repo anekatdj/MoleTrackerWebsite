@@ -57,11 +57,11 @@ namespace MoleTrackerWebsite
             services.AddSingleton<ICoordinatesLocalization, CoordinatesLocalization>();
             services.AddSingleton<ILogInController, LogInController>();
             services.AddSingleton<ICreateNewCollectionController, CreateNewCollectionController>();
-            services.AddSingleton<IChangeCollectionNameController, ChangeCollectionNameController>();
             services.AddSingleton<IViewCollectionController, ViewCollectionController>();
             services.AddSingleton<IUploadPictureController, UploadPictureController>();
-            services.AddSingleton<IDeletePictureController, DeletePictureController>();
             services.AddSingleton<IDeleteCollectionController, DeleteCollectionController>();
+            services.AddSingleton<IDeletePictureController, DeletePictureController>();
+            services.AddSingleton<IChangeCollectionNameController, ChangeCollectionNameController>();
             services.AddSingleton<IChangeFollowUpNotificationsController, ChangeFollowUpNotificationsController>();
             services.AddSingleton<IMarkCollectionController, MarkCollectionController>();
             services.AddSingleton<ILoadContactInformationController, LoadContactInformationController>();

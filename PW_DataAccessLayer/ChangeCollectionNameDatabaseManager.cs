@@ -23,7 +23,6 @@ namespace PW_DataAccessLayer
             _changeCollectionNameDTO.CollectionID = collection.CollectionID;
             _changeCollectionNameDTO.CollectionName = collection.CollectionName;
 
-            //TODO lav try-catch ordentligt
             API.PostObject<ChangeCollectionNameDTO>("ChangeCollectionName", _changeCollectionNameDTO);
         }
     }

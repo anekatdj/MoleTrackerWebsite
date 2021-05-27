@@ -22,7 +22,7 @@ namespace PW_DataAccessLayer
             deleteCollectionRequest.CollectionID = collection.CollectionID;
             deleteCollectionRequest.PatientID = patientInfo.PatientID;
 
-            string result = API.PostObject<CollectionRequestDTO>("DeleteCollection", deleteCollectionRequest);
+            API.PostObject<CollectionRequestDTO>("DeleteCollection", deleteCollectionRequest);
         }
     }
 }
