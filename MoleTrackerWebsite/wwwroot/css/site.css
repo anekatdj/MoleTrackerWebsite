@@ -3,6 +3,7 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     width: 100%;
+
 }
 
 a, .btn-link {
@@ -25,6 +26,8 @@ app {
     height: 3.5rem;
     display: flex;
     align-items: center;
+    overflow: hidden;
+    z-index:2;
 }
 
 
@@ -36,6 +39,7 @@ app {
         background-color: rgb(240, 237, 110);
         border-bottom: 1px solid rgb(240, 237, 110);
         justify-content: flex-end;
+        overflow: hidden;
     }
 
         .main .top-row > a, .main .top-row .btn-link {
@@ -194,18 +198,18 @@ app {
     }
 
     #SmallDates {
-        border-right: 2px solid #ccd2ff;
-        border-left: 2px solid #ccd2ff;
-        border-top: 2px solid #ccd2ff;
+        border-right: 1px solid rgb(38, 38, 38);
+        border-left: 1px solid rgb(38, 38, 38);
+        border-top: 1px solid rgb(38, 38, 38);
     }
     #SmallDates td:hover {
         background-color: lightgrey;
     }
 
     #SmallPics {
-        border-right: 2px solid #ccd2ff;
-        border-left: 2px solid #ccd2ff;
-        border-bottom: 2px solid #ccd2ff;
+        border-right: 1px solid rgb(38, 38, 38);
+        border-left: 1px solid rgb(38, 38, 38);
+        border-bottom: 1px solid rgb(38, 38, 38);
     }
     #SmallPics td:hover {
         background-color: lightgrey;
@@ -214,7 +218,7 @@ app {
     #t1 td {
         table-layout: fixed;
         width: 200px;
-        height: 300px;
+        height: 40px;
         word-wrap: break-word;
         /*overflow: hidden;*/
         border: 2px solid black;
@@ -232,7 +236,7 @@ app {
     .editbtn {
         border-radius: 10px;
         color: black;
-        background-color: yellow
+        background-color: rgb(255, 255, 153)
     }
 
     .table2 td {

@@ -37,25 +37,6 @@ namespace DataAccessLayer
 
             return patientDataDomain;
         }
-        public PatientInfoDomain GetPatientInfo(PatientInfoDomain patientInfoDomain)
-        {
-            PatientInfoDTO patientInfoDTO = new PatientInfoDTO();
-            PatientInfoRequestDTO patientInfoRequestDTO = new PatientInfoRequestDTO() { PatientID = patientInfoDomain.PatientID };
-            try
-            {
-                patientInfoDTO = API.GetObject<PatientInfoDTO, PatientInfoRequestDTO>("GetPatientInfo", patientInfoRequestDTO);
-            }
-            catch (Exception e)
-            {
 
-                throw e;
-            }
-
-            PatientInfoDomain newpatientInfoDomain = DTOConverter.PatientInfoToDomain(patientInfoDTO);
-
-            
-
-            return newpatientInfoDomain;
-        }
     }
 }

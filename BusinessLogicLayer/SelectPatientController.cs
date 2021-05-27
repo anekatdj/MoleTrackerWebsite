@@ -161,11 +161,5 @@ namespace BusinessLogicLayer
 
             return month;
         }
-    
-
-        //public void GetPatientInfo(PatientInfoDomain patientInfo)
-        //{
-        //    SelectPatientDatabaseManager.GetPatientInfo(patientInfo);
-        //}
     }
 }

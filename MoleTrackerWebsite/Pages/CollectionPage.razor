@@ -26,7 +26,7 @@
 <link href="css/CSSStyles.css" rel="stylesheet" />
 <link href="css/site.css" rel="stylesheet" />
 
-<table>
+<table style="z-index: 1">
     <tr>
         <h3>
             @ChosenCollection.CollectionName
@@ -47,7 +47,7 @@
                         {
 
                             <td id="SmallDates">
-                                <div style="transform: rotate(0deg); padding: 5%">
+                                <div style="transform: rotate(0deg); padding: 0%; font-size: 10px">
                                     @info.DateOfUpload
                                 </div>
                             </td>
@@ -58,7 +58,7 @@
                         {
 
                             <td id="SmallPics" @onclick="@((e) => ShowPicture(e, item.PictureID))" style="cursor: pointer">
-                                <img style="width: 150px;" src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" />
+                                <img style="width: 80px;" src="data:image;base64,@System.Convert.ToBase64String(@item.PictureData)" />
                             </td>
                         }
                     </tr>
@@ -78,10 +78,10 @@
                 <tr>
                     @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
                     {
-                        <td style="width: 50%;">
+                        <td style="width: 20%;">
                             <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(FocusedPic)" />
                         </td>
-                        <td style="width: 50%">
+                        <td style="width: 20%">
                             <img style="width: 100%;" src="data:image;base64,@System.Convert.ToBase64String(LatestPic)" />
                         </td>
                     }
@@ -89,7 +89,7 @@
                 <tr>
                     <td colspan="2">
                         <table id="t1" class="table2">
-                            <td style="text-align: left; vertical-align: top; padding: 5px; height: 200px">
+                            <td style="text-align: left; vertical-align: top; padding: 5px; height: 50px">
                                 @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
                                 {
                                     <div style="font-weight: bold">
@@ -99,12 +99,12 @@
                                         <EditForm Model="ViewCollectionController">
                                             <DataAnnotationsValidator />
                                             <ValidationSummary />
-                                            <InputText style="width: 100%; padding: 20px 10px; line-height: 200%; border: none" id="myFocusedCommentInput" border:none @bind-Value="FocusedPicComment"></InputText>
+                                            <InputText style="width: 100%; padding: 20px 10px; line-height: 100%; border: none" id="myFocusedCommentInput" border:none @bind-Value="FocusedPicComment"></InputText>
                                         </EditForm>
                                     </div>
                                 }
                             </td>
-                            <td style="text-align: left; vertical-align: top; padding: 5px; height: 200px">
+                            <td style="text-align: left; vertical-align: top; padding: 5px; height: 40px">
                                 @if (ChosenCollection.PictureList.Count != 0 && ChosenCollection.PictureList != null)
                                 {
                                     <div style="font-weight: bold">
@@ -224,7 +224,7 @@
                             </div>
 
                             <div>
-                                <button class="btn btn-primary rounded-pill" style="margin-left: 5%" @onclick="OnChangedNotifications">Gem</button>
+                                <button class="btn btn-primary rounded-pill" style="margin-left: 5%; width: 50%" @onclick="OnChangedNotifications">Gem</button>
                             </div>
                         }
                     </div>
