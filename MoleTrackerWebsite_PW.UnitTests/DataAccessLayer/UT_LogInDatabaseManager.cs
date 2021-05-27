@@ -32,7 +32,7 @@ namespace MoleTrackerWebsite_PW.UnitTests.DataAccessLayer
             //API.GetObject<PatientInfoDTO, LoginInfoDTO>("PatientLogin", Arg.Any<LoginInfoDTO>()).Returns(patientInfo);
 
             var returnValue = _uut.ValidateLogin(loginInfo);
-            Assert.That(returnValue, Is.Not.Null);
+            Assert.That(returnValue, Is.True);
         }
     }
 }
