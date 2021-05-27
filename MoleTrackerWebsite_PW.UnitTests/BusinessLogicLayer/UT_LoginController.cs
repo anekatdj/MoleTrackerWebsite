@@ -64,22 +64,20 @@ namespace MoleTrackerWebsite_PW.UnitTests.BusinessLogicLayer
             Assert.That(_uut.HandleLogin(_logInInfo), Is.EqualTo(false));
         }
 
-        [Test]
+        [Test] //TODO Den var udkommenteret, men failer ikke? 
         public void ValidLogIn_ReturnsPatientInfo()
         {
-            //_logInInfo.Username = "12345";
-            //_logInInfo.Password = "12345";
-            //_uut.HandleLogin(_logInInfo);
+            _logInInfo.Username = "12345";
+            _logInInfo.Password = "12345";
+            _uut.HandleLogin(_logInInfo);
 
-            //Assert.Multiple(() =>
-            //{
-            //    Assert.That(_uut.HandlePatientInfo().CPR, Is.EqualTo(_logInInfo.Username));
-            //    Assert.That(_uut.HandlePatientInfo().Name, Is.EqualTo("Test Bruger 12345"));
-            //    Assert.That(_uut.HandlePatientInfo().Gender, Is.EqualTo("B"));
-            //    Assert.That(_uut.HandlePatientInfo().Email, Is.EqualTo("12345@mail.com"));
-            //});
-                
-
+            Assert.Multiple(() =>
+            {
+                Assert.That(_uut.HandlePatientInfo().CPR, Is.EqualTo(_logInInfo.Username));
+                Assert.That(_uut.HandlePatientInfo().Name, Is.EqualTo("Test Bruger 12345"));
+                Assert.That(_uut.HandlePatientInfo().Gender, Is.EqualTo("B"));
+                Assert.That(_uut.HandlePatientInfo().Email, Is.EqualTo("12345@mail.com"));
+            });
         }
     }
 }
