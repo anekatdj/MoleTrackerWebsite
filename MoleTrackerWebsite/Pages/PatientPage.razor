@@ -67,7 +67,7 @@
             {
                 @foreach (var item in PinCollectionList)
                 {
-                    <div class="cursor" style="width: @(_pointRadius * 2)px; height: @(_pointRadius * 2)px; top: @(Convert.ToInt32(ScreenCoordinates.Top) + item.Location.yCoordinate - _pointRadius)px; left: @(Convert.ToInt32(ScreenCoordinates.Left) + item.Location.xCoordinate - _pointRadius)px; background-color: red; position: fixed; border-radius: @(_pointRadius)px"></div>
+                    <div class="cursor" @onclick="@((e) => NavigateToCollectionPage(e, item.CollectionID))" style="width: @(_pointRadius * 2)px; height: @(_pointRadius * 2)px; top: @(Convert.ToInt32(ScreenCoordinates.Top) + item.Location.yCoordinate - _pointRadius)px; left: @(Convert.ToInt32(ScreenCoordinates.Left) + item.Location.xCoordinate - _pointRadius)px; background-color: red; position: fixed; border-radius: @(_pointRadius)px"></div>
                 }
             }
             <button style="float: right; height: 50px; width: 50px" class="@Arrow" @onclick="TurnAroundModel"></button>
