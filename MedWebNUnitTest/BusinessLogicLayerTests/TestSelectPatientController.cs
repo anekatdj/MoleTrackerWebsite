@@ -41,29 +41,6 @@ namespace MedWebNUnitTest.BusinessLogicLayerTests
             //Assert
             db.Received(1).GetPatientData(patientInfo);
         }
-        [Test]
-        public void DatabaseReceives_GetPatientInfo_Call()
-        {
-            //Arrange
-            SelectPatientController uut = new SelectPatientController();
-            ISelectPatientDatabaseManager db = Substitute.For<ISelectPatientDatabaseManager>();
-            uut.SelectPatientDatabaseManager = db;
 
-            PatientInfoDomain patientInfo = new PatientInfoDomain()
-            {
-                CPR = "121212-1212",
-                Email = "",
-                Name = "Carl",
-                PatientID = 1
-            };
-
-
-            //Act
-
-            //uut.GetPatientInfo(patientInfo);
-
-            //Assert
-            db.Received(1).GetPatientInfo(patientInfo);
-        }
     }
 }
